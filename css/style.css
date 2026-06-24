@@ -95,15 +95,16 @@ header {
     color: var(--text-primary);
 }
 
-/* ----- ГЕРОЙ С ФОТО (МАКСИМАЛЬНО КРУПНО) ----- */
+/* ----- ГЕРОЙ С ФОТО (МАКСИМАЛЬНО КРУПНОЕ И АДАПТИВНОЕ) ----- */
 .hero {
     padding: 2rem 0 3rem;
     text-align: center;
 }
 
 .hero-avatar {
-    width: 600px;
-    height: 620px;
+    width: 100%;
+    max-width: 800px;
+    aspect-ratio: 4 / 5;
     border-radius: 28px;
     overflow: hidden;
     margin: 0 auto 2.5rem;
@@ -114,7 +115,7 @@ header {
 }
 
 .hero-avatar:hover {
-    transform: scale(1.02);
+    transform: scale(1.01);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
 }
 
@@ -337,8 +338,7 @@ footer {
         padding: 1.5rem 0 2rem;
     }
     .hero-avatar {
-        width: 320px;
-        height: 340px;
+        max-width: 400px;
         border-radius: 20px;
         border-width: 4px;
     }
@@ -367,7 +367,6 @@ footer {
 
 @media (max-width: 480px) {
     .hero-avatar {
-        width: 260px;
-        height: 280px;
+        max-width: 300px;
     }
 }
