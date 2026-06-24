@@ -95,19 +95,19 @@ header {
     color: var(--text-primary);
 }
 
-/* ----- ГЕРОЙ С ФОТО (УВЕЛИЧЕННЫЙ) ----- */
+/* ----- ГЕРОЙ С ФОТО (МАКСИМАЛЬНО КРУПНО) ----- */
 .hero {
     padding: 2rem 0 3rem;
     text-align: center;
 }
 
 .hero-avatar {
-    width: 380px;
-    height: 400px;
+    width: 420px;
+    height: 440px;
     border-radius: 28px;
     overflow: hidden;
-    margin: 0 auto 2.2rem;
-    border: 5px solid var(--gold);
+    margin: 0 auto 2.5rem;
+    border: 6px solid var(--gold);
     box-shadow: 0 16px 50px rgba(0, 0, 0, 0.1);
     transition: transform 0.4s ease, box-shadow 0.4s ease;
     background: var(--graphite-deep);
@@ -337,8 +337,8 @@ footer {
         padding: 1.5rem 0 2rem;
     }
     .hero-avatar {
-        width: 260px;
-        height: 280px;
+        width: 280px;
+        height: 300px;
         border-radius: 20px;
         border-width: 4px;
     }
@@ -367,7 +367,7 @@ footer {
 
 @media (max-width: 480px) {
     .hero-avatar {
-        width: 200px;
-        height: 220px;
+        width: 220px;
+        height: 240px;
     }
 }
