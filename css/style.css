@@ -1,18 +1,20 @@
 /* ============================================
-   style.css — Егор Черняков (в стиле knig-grani.ru)
+   style.css — Егор Черняков (со звёздами и цитатами)
    ============================================ */
 
 /* ----- ПЕРЕМЕННЫЕ ----- */
 :root {
     --neon-coral: #ff2e5a;
-    --graphite-deep: #fef9f0;
+    --gold: #d4a843;
+    --rose: #f5a0b0;
+    --graphite-deep: #fdfaf5;
     --graphite-dark: #1e2a3a;
     --text-primary: #111111;
     --text-secondary: #555566;
     --card-bg: #ffffff;
 }
 
-/* ----- СБРОСЫ ----- */
+/* ----- СБРОСЫ И ЗВЁЗДНЫЙ ФОН ----- */
 * {
     margin: 0;
     padding: 0;
@@ -24,6 +26,9 @@ body {
     color: var(--text-primary);
     font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
     line-height: 1.5;
+    /* Лёгкий звёздный паттерн */
+    background-image: radial-gradient(#d4c5b0 1.5px, transparent 1.5px);
+    background-size: 40px 40px;
 }
 
 .container {
@@ -32,10 +37,11 @@ body {
     padding: 0 2rem;
 }
 
-/* ----- ШАПКА ----- */
+/* ----- ШАПКА (с аватаром-кубиком) ----- */
 header {
-    background: var(--graphite-deep);
-    border-bottom: 1px solid var(--neon-coral);
+    background: rgba(253, 250, 245, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(212, 168, 67, 0.2);
     padding: 0.8rem 0;
     position: sticky;
     top: 0;
@@ -49,6 +55,23 @@ header {
     flex-wrap: wrap;
 }
 
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.avatar-icon {
+    font-size: 2rem;
+    line-height: 1;
+    filter: drop-shadow(0 0 6px rgba(212, 168, 67, 0.2));
+    transition: transform 0.4s ease;
+}
+
+.avatar-icon:hover {
+    transform: rotate(15deg) scale(1.05);
+}
+
 .logo a {
     font-size: 1.2rem;
     font-weight: 700;
@@ -58,7 +81,7 @@ header {
 }
 
 .logo a span {
-    color: var(--neon-coral);
+    color: var(--gold);
 }
 
 .nav {
@@ -80,7 +103,7 @@ header {
 
 .nav a:hover,
 .nav a.active {
-    border-bottom-color: var(--neon-coral);
+    border-bottom-color: var(--gold);
     color: var(--text-primary);
 }
 
@@ -98,25 +121,27 @@ header {
 }
 
 .hero h1 span {
-    color: var(--neon-coral);
+    color: var(--gold);
 }
 
 .hero-lead {
     font-size: 1.1rem;
     color: var(--text-secondary);
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.hero-desc {
+.hero-quote {
+    font-style: italic;
     font-size: 0.95rem;
-    color: var(--text-secondary);
-    margin-top: 0.5rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    color: var(--gold);
+    margin-top: 1rem;
+    opacity: 0.8;
+    border-top: 1px solid rgba(212, 168, 67, 0.15);
+    padding-top: 1rem;
+    display: inline-block;
 }
 
 /* ----- СЕКЦИИ ----- */
@@ -128,9 +153,16 @@ header {
 .section-title {
     font-size: 1.8rem;
     font-weight: 600;
-    margin-bottom: 2rem;
+    margin-bottom: 0.5rem;
     color: var(--graphite-dark);
     letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.section-title .icon {
+    font-size: 1.6rem;
 }
 
 .section-title::after {
@@ -138,8 +170,18 @@ header {
     display: block;
     width: 40px;
     height: 3px;
-    background: var(--neon-coral);
+    background: var(--gold);
     margin-top: 0.4rem;
+}
+
+.section-quote {
+    font-style: italic;
+    color: var(--gold);
+    font-size: 0.9rem;
+    margin-bottom: 1.8rem;
+    padding-left: 1.2rem;
+    border-left: 3px solid rgba(212, 168, 67, 0.2);
+    opacity: 0.85;
 }
 
 .section-text {
@@ -185,7 +227,7 @@ header {
 }
 
 .project-card a {
-    color: var(--neon-coral);
+    color: var(--gold);
     text-decoration: none;
     font-weight: 500;
     font-size: 0.9rem;
@@ -197,8 +239,8 @@ header {
 
 .badge {
     display: inline-block;
-    background: rgba(255,46,90,0.06);
-    color: var(--neon-coral);
+    background: rgba(212, 168, 67, 0.08);
+    color: var(--gold);
     padding: 0.2rem 0.8rem;
     border-radius: 20px;
     font-size: 0.7rem;
@@ -206,7 +248,7 @@ header {
     margin-top: 0.5rem;
 }
 
-/* ----- ДОСТИЖЕНИЯ (СПИСОК) ----- */
+/* ----- ДОСТИЖЕНИЯ ----- */
 .achievement-list {
     list-style: none;
     padding: 0;
@@ -222,8 +264,8 @@ header {
 }
 
 .achievement-list li::before {
-    content: "◆";
-    color: var(--neon-coral);
+    content: "✦";
+    color: var(--gold);
     font-weight: bold;
 }
 
@@ -247,9 +289,9 @@ header {
 }
 
 .contacts a:hover {
-    background: var(--neon-coral);
+    background: var(--gold);
     color: #fff;
-    border-color: var(--neon-coral);
+    border-color: var(--gold);
 }
 
 /* ----- ПОДВАЛ ----- */
