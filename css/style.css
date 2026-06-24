@@ -1,5 +1,5 @@
 /* ============================================
-   style.css — Егор Черняков (финальная версия)
+   style.css — Егор Черняков (премиум-версия)
    ============================================ */
 
 /* ----- ПЕРЕМЕННЫЕ ----- */
@@ -11,6 +11,7 @@
     --text-primary: #111111;
     --text-secondary: #555566;
     --card-bg: #ffffff;
+    --quote-bg: rgba(212, 168, 67, 0.05);
 }
 
 /* ----- СБРОСЫ И ЗВЁЗДНЫЙ ФОН ----- */
@@ -95,7 +96,7 @@ header {
     color: var(--text-primary);
 }
 
-/* ----- ГЕРОЙ С ФОТО (МАКСИМАЛЬНО КРУПНОЕ И АДАПТИВНОЕ) ----- */
+/* ----- ГЕРОЙ С ФОТО ----- */
 .hero {
     padding: 2rem 0 3rem;
     text-align: center;
@@ -147,15 +148,18 @@ header {
     margin-right: auto;
 }
 
+/* ----- КРАСИВЫЙ БЛОК ДЛЯ ЦИТАТЫ В ГЕРОЕ ----- */
 .hero-quote {
     font-style: italic;
     font-size: 1.1rem;
     color: var(--gold);
     margin-top: 1.5rem;
-    opacity: 0.8;
+    padding: 1rem 2rem;
     border-top: 1px solid rgba(212, 168, 67, 0.15);
-    padding-top: 1.2rem;
     display: inline-block;
+    background: var(--quote-bg);
+    border-radius: 60px;
+    backdrop-filter: blur(4px);
 }
 
 /* ----- СЕКЦИИ ----- */
@@ -188,14 +192,18 @@ header {
     margin-top: 0.4rem;
 }
 
+/* ----- КРАСИВЫЙ БЛОК ДЛЯ ЦИТАТ ВНУТРИ СЕКЦИЙ ----- */
 .section-quote {
     font-style: italic;
     color: var(--gold);
     font-size: 1rem;
     margin-bottom: 2rem;
-    padding-left: 1.2rem;
-    border-left: 3px solid rgba(212, 168, 67, 0.2);
-    opacity: 0.85;
+    padding: 1.2rem 2rem;
+    background: var(--quote-bg);
+    border-radius: 16px;
+    border-left: 4px solid var(--gold);
+    max-width: 800px;
+    opacity: 0.9;
 }
 
 .section-text {
@@ -205,7 +213,7 @@ header {
     line-height: 1.8;
 }
 
-/* ----- КАРТОЧКИ ПРОЕКТОВ ----- */
+/* ----- КАРТОЧКИ ПРОЕКТОВ (УЛУЧШЕННЫЕ) ----- */
 .grid-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -214,16 +222,17 @@ header {
 
 .project-card {
     background: var(--card-bg);
-    border-radius: 16px;
-    padding: 2rem;
-    border: 1px solid rgba(0,0,0,0.04);
-    transition: all 0.25s ease;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    border-radius: 20px;
+    padding: 2rem 2rem 2.2rem;
+    border: 1px solid rgba(0,0,0,0.03);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
 }
 
 .project-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.05);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+    border-color: rgba(212, 168, 67, 0.15);
 }
 
 .project-card h3 {
@@ -237,7 +246,7 @@ header {
     color: var(--text-secondary);
     font-size: 1rem;
     line-height: 1.7;
-    margin-bottom: 0.8rem;
+    margin-bottom: 1rem;
 }
 
 .project-card a {
@@ -257,55 +266,81 @@ header {
     color: var(--gold);
     padding: 0.2rem 1rem;
     border-radius: 20px;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 600;
     margin-top: 0.5rem;
 }
 
-/* ----- ДОСТИЖЕНИЯ ----- */
+/* ----- ДОСТИЖЕНИЯ (КАРТОЧКИ) ----- */
 .achievement-list {
     list-style: none;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
 }
 
 .achievement-list li {
-    padding: 0.8rem 0;
-    border-bottom: 1px solid rgba(0,0,0,0.03);
+    background: var(--card-bg);
+    padding: 0.8rem 1.5rem;
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,0.02);
     display: flex;
-    gap: 0.5rem;
+    align-items: center;
+    gap: 1rem;
     color: var(--text-secondary);
     font-size: 1rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.01);
+}
+
+.achievement-list li:hover {
+    border-color: rgba(212, 168, 67, 0.1);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.03);
 }
 
 .achievement-list li::before {
     content: "✦";
     color: var(--gold);
     font-weight: bold;
+    font-size: 1.2rem;
+    flex-shrink: 0;
 }
 
-/* ----- КОНТАКТЫ ----- */
+.achievement-list li strong {
+    color: var(--graphite-dark);
+    font-weight: 600;
+}
+
+/* ----- КОНТАКТЫ (С КРУЖКАМИ) ----- */
 .contacts {
     display: flex;
     justify-content: center;
-    gap: 2rem;
+    gap: 1.5rem;
     flex-wrap: wrap;
 }
 
 .contacts a {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
     color: var(--text-secondary);
     text-decoration: none;
-    padding: 0.6rem 1.8rem;
-    border-radius: 30px;
+    padding: 0.6rem 1.6rem;
+    border-radius: 60px;
     background: var(--card-bg);
     border: 1px solid rgba(0,0,0,0.04);
-    transition: 0.2s;
+    transition: all 0.2s ease;
     font-size: 1rem;
+    font-weight: 500;
 }
 
 .contacts a:hover {
     background: var(--gold);
     color: #fff;
     border-color: var(--gold);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(212, 168, 67, 0.15);
 }
 
 /* ----- ПОДВАЛ ----- */
@@ -316,6 +351,12 @@ footer {
     text-align: center;
     color: var(--text-secondary);
     font-size: 0.9rem;
+}
+
+footer .stardust {
+    font-size: 0.9rem;
+    color: var(--gold);
+    letter-spacing: 0.5px;
 }
 
 /* ----- АДАПТИВНОСТЬ ----- */
@@ -350,6 +391,7 @@ footer {
     }
     .hero-quote {
         font-size: 0.95rem;
+        padding: 0.6rem 1.2rem;
     }
     .grid-2 {
         grid-template-columns: 1fr;
@@ -363,10 +405,27 @@ footer {
     .project-card {
         padding: 1.5rem;
     }
+    .achievement-list li {
+        padding: 0.7rem 1rem;
+        font-size: 0.9rem;
+        flex-wrap: wrap;
+    }
+    .contacts a {
+        padding: 0.5rem 1.2rem;
+        font-size: 0.9rem;
+    }
+    .section-quote {
+        padding: 0.8rem 1.2rem;
+        font-size: 0.9rem;
+    }
 }
 
 @media (max-width: 480px) {
     .hero-avatar {
         max-width: 300px;
+    }
+    .contacts a {
+        padding: 0.4rem 1rem;
+        font-size: 0.85rem;
     }
 }
