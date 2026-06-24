@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Егор Черняков | Собираю смыслы, как кубик Рубика</title>
+    <title>Егор Черняков | Главная</title>
     <style>
-        /* --- ЗВЁЗДНЫЙ ФОН И ВОЗДУШНЫЕ СТИЛИ --- */
+        /* --- ОБЩИЕ СТИЛИ ДЛЯ ВСЕХ СТРАНИЦ --- */
         * {
             margin: 0;
             padding: 0;
@@ -17,22 +17,13 @@
             color: #e8edf5;
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
             padding: 2rem 1rem;
-            /* Падающие звёзды — делаем фон живым */
-            background-image: 
-                radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 160px 30px, #ddd, rgba(0,0,0,0));
-            background-size: 200px 200px;
-            background-repeat: repeat;
         }
         .container {
             max-width: 1100px;
+            width: 100%;
             background: rgba(11, 15, 42, 0.65);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
@@ -40,75 +31,69 @@
             padding: 2.8rem 3rem;
             box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,215,0,0.08);
             border: 1px solid rgba(255,215,0,0.08);
+            flex: 1;
         }
-
-        /* --- ШАПКА: КУБИК И ЗВЁЗДЫ --- */
+        /* --- ШАПКА С НАВИГАЦИЕЙ (ОДИНАКОВАЯ ДЛЯ ВСЕХ СТРАНИЦ) --- */
         .header {
             text-align: center;
             padding-bottom: 2rem;
             border-bottom: 1px solid rgba(255,215,0,0.1);
         }
         .avatar {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 1.2rem;
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 1rem;
             background: conic-gradient(from 45deg, #e74c3c, #3498db, #2ecc71, #f1c40f, #e67e22, #e74c3c);
             border-radius: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4rem;
-            box-shadow: 0 0 40px rgba(255,215,0,0.15), 0 12px 40px rgba(0,0,0,0.5);
-            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            font-size: 3.6rem;
+            box-shadow: 0 0 40px rgba(255,215,0,0.15);
+            transition: transform 0.4s ease;
             position: relative;
         }
         .avatar:hover {
-            transform: rotate(15deg) scale(1.05) translateY(-8px);
-            box-shadow: 0 0 60px rgba(255,215,0,0.25);
+            transform: rotate(15deg) scale(1.05);
         }
-        /* Роза и звёзды вокруг аватара */
         .avatar::after {
             content: "🌹✨";
             position: absolute;
             bottom: -18px;
             right: -18px;
-            font-size: 1.8rem;
-            filter: drop-shadow(0 0 12px rgba(255,215,0,0.4));
+            font-size: 1.6rem;
             opacity: 0.8;
+            filter: drop-shadow(0 0 12px rgba(255,215,0,0.3));
         }
         .name {
-            font-size: 2.8rem;
+            font-size: 2.6rem;
             font-weight: 700;
-            letter-spacing: -0.5px;
             background: linear-gradient(135deg, #f5e6a3, #f1c40f);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         .subtitle {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: #b0c4de;
             margin-top: 0.2rem;
         }
         .tagline {
             margin-top: 0.8rem;
             background: rgba(255,215,0,0.08);
-            padding: 0.6rem 2rem;
+            padding: 0.5rem 2rem;
             border-radius: 60px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: #f5e6a3;
             border: 1px solid rgba(255,215,0,0.12);
             display: inline-block;
-            backdrop-filter: blur(4px);
         }
-
-        /* Навигация */
         .nav {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 0.8rem 2.5rem;
-            margin: 2rem 0 0.5rem;
+            margin: 1.8rem 0 0.2rem;
             list-style: none;
             padding: 0;
         }
@@ -121,39 +106,32 @@
             padding-bottom: 0.2rem;
             font-size: 1rem;
         }
-        .nav a:hover {
+        .nav a:hover, .nav a.active {
             border-bottom-color: #f1c40f;
             color: #f5e6a3;
         }
-
-        /* --- СЕКЦИИ С ЦИТАТАМИ --- */
+        /* --- СТИЛИ ДЛЯ КОНТЕНТА --- */
         .section {
-            margin: 3.2rem 0;
+            margin: 3rem 0;
         }
         .section-title {
             font-size: 1.8rem;
             font-weight: 600;
-            margin-bottom: 0.25rem;
             color: #f5e6a3;
+            margin-bottom: 0.25rem;
             display: flex;
             align-items: center;
             gap: 0.8rem;
-        }
-        .section-title span {
-            font-size: 1.6rem;
         }
         .section-quote {
             font-style: italic;
             color: #b8c8e0;
             font-size: 0.95rem;
             margin-bottom: 1.8rem;
-            padding-left: 0.5rem;
-            border-left: 3px solid rgba(255,215,0,0.25);
             padding-left: 1.2rem;
+            border-left: 3px solid rgba(255,215,0,0.25);
             opacity: 0.8;
         }
-
-        /* Карточки проектов */
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -164,7 +142,6 @@
             border-radius: 24px;
             padding: 1.6rem 1.8rem;
             border: 1px solid rgba(255,215,0,0.06);
-            backdrop-filter: blur(4px);
             transition: all 0.25s ease;
         }
         .project-card:hover {
@@ -204,7 +181,6 @@
             border-top: 1px solid rgba(255,255,255,0.02);
             padding-top: 0.6rem;
         }
-
         /* Достижения */
         .achievement-list {
             list-style: none;
@@ -223,8 +199,6 @@
             color: #f1c40f;
             font-size: 0.8rem;
         }
-
-        /* Контакты */
         .contacts {
             display: flex;
             flex-wrap: wrap;
@@ -245,8 +219,6 @@
             border-color: rgba(255,215,0,0.1);
             color: #f5e6a3;
         }
-
-        /* Звёздная подпись внизу */
         .stardust {
             text-align: center;
             margin-top: 2.5rem;
@@ -254,15 +226,6 @@
             color: #6a7a8e;
             letter-spacing: 0.4px;
         }
-        .stardust span {
-            display: inline-block;
-            animation: twinkle 3s infinite alternate;
-        }
-        @keyframes twinkle {
-            0% { opacity: 0.4; transform: scale(0.95); }
-            100% { opacity: 1; transform: scale(1.05); }
-        }
-
         /* Адаптивность */
         @media (max-width: 700px) {
             .container { padding: 1.5rem; }
@@ -278,85 +241,44 @@
         <div class="avatar">🧩</div>
         <div class="name">Егор Черняков</div>
         <div class="subtitle">Библиотекарь • Спидкубер • Методист</div>
-        <div class="tagline">«У каждого человека свои звёзды» ✦ Собираю смыслы, как кубик Рубика</div>
+        <div class="tagline">«У каждого человека свои звёзды»</div>
         <ul class="nav">
-            <li><a href="#about">О себе</a></li>
-            <li><a href="#projects">Проекты</a></li>
-            <li><a href="#achievements">Достижения</a></li>
-            <li><a href="#contacts">Контакты</a></li>
+            <li><a href="index.html" class="active">Главная</a></li>
+            <li><a href="about.html">О себе</a></li>
+            <li><a href="projects.html">Проекты</a></li>
+            <li><a href="achievements.html">Достижения</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
         </ul>
     </header>
 
-    <!-- О СЕБЕ -->
-    <section id="about" class="section">
-        <div class="section-title"><span>🌹</span> О себе</div>
+    <section class="section">
+        <div class="section-title"><span>🌹</span> Добро пожаловать</div>
         <div class="section-quote">«Зорко одно лишь сердце. Самого главного глазами не увидишь»</div>
-        <p style="color: #c8d8e8;">Выпускник СПбГИК (бакалавриат, 2015), работаю в библиотеках уже несколько лет — от Сертоловской до Парголовской. Соединяю традиционные форматы с современными: создаю краеведческие порталы, настольные игры и социальные проекты. Верю, что алгоритмы и смыслы живут рядом — надо только уметь их увидеть.</p>
+        <p style="color: #c8d8e8; font-size: 1.05rem;">Привет! Меня зовут Егор. Я собираю кубик Рубика, придумываю настольные игры и сохраняю истории Парголово. Здесь — мои проекты, смыслы и маленькие звёзды. Смотрите, вдохновляйтесь, ищите своё.</p>
+        <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
+            <a href="projects.html" style="background: rgba(255,215,0,0.12); padding: 0.6rem 2rem; border-radius: 60px; color: #f5e6a3; text-decoration: none; border: 1px solid rgba(255,215,0,0.15);">✨ Проекты</a>
+            <a href="about.html" style="background: rgba(255,255,255,0.02); padding: 0.6rem 2rem; border-radius: 60px; color: #c8d8e8; text-decoration: none; border: 1px solid rgba(255,215,0,0.04);">🦊 О себе</a>
+        </div>
     </section>
 
-    <!-- ПРОЕКТЫ -->
-    <section id="projects" class="section">
-        <div class="section-title"><span>✨</span> Проекты</div>
-        <div class="section-quote">«Ты навсегда в ответе за тех, кого приручил»</div>
+    <section class="section" style="margin-top: 1.5rem;">
+        <div class="section-title"><span>🌟</span> Последние проекты</div>
         <div class="grid-2">
             <div class="project-card">
                 <h3>🎲 «Книжные грани»</h3>
-                <p>Настольная игра-ходилка, объединяющая литературу, логику и спидкубинг. Молодёжь отвечает на вопросы, зарабатывает баллы и поднимается по «Лестнице знаний».</p>
+                <p>Настольная игра-ходилка, объединяющая литературу, логику и спидкубинг.</p>
                 <a href="https://knig-grani.ru" target="_blank">knig-grani.ru</a>
                 <div class="badge">✅ Сделано</div>
-                <div class="quote-mini">«Встал поутру, приведи в порядок свою планету»</div>
             </div>
             <div class="project-card">
                 <h3>🧩 «Кубик добра»</h3>
-                <p>Социальный проект по обучению сборке кубика Рубика для людей с ОВЗ и бойцов в госпиталях. Есть методика, проведены мастер-классы, получена благодарность губернатора.</p>
+                <p>Социальный проект по обучению сборке кубика Рубика для людей с ОВЗ и бойцов.</p>
                 <div class="badge">🤝 Активно</div>
-                <div class="quote-mini">«Любить — значит смотреть в одном направлении»</div>
-            </div>
-            <div class="project-card">
-                <h3>📜 Краеведческий портал Парголово</h3>
-                <p>Цифровой архив: лента времени с 1500 года, карта достопримечательностей, викторина и режим конспектирования.</p>
-                <a href="https://parglbibl.ru" target="_blank">parglbibl.ru</a>
-                <div class="badge">✅ Сделано</div>
-                <div class="quote-mini">«Хотел бы я знать, зачем звёзды светятся... чтобы каждый мог отыскать свою»</div>
-            </div>
-            <div class="project-card">
-                <h3>🇰🇷 Карельский орнамент из 300 кубиков</h3>
-                <p>К Неделе карельской культуры выложил панно из 300 кубиков Рубика по пиксельной схеме в библиотеке Выборгского района.</p>
-                <div class="badge">🎨 Арт-объект</div>
-                <div class="quote-mini">«Самого главного глазами не увидишь»</div>
             </div>
         </div>
     </section>
 
-    <!-- ДОСТИЖЕНИЯ -->
-    <section id="achievements" class="section">
-        <div class="section-title"><span>🌟</span> Достижения</div>
-        <div class="section-quote">«Все взрослые сначала были детьми, только мало кто из них об этом помнит»</div>
-        <ul class="achievement-list">
-            <li><strong>Диплом II степени</strong> — «Лучшая городская библиотека» (Всеволожский район, 2025)</li>
-            <li><strong>Победа в номинации</strong> «Лучший социально-культурный проект» — «Звезда культуры» (2025)</li>
-            <li><strong>Участник межрегиональной конференции</strong> с докладом о Парголово (2026)</li>
-            <li><strong>Благодарность губернатора</strong> Ленинградской области</li>
-            <li><strong>Чемпион Санкт-Петербурга</strong> по пауэрлифтингу среди лиц с ПОДА</li>
-            <li><strong>Участник команды</strong> президентского гранта «Медиалаборатория позитивного контента»</li>
-        </ul>
-    </section>
-
-    <!-- КОНТАКТЫ -->
-    <section id="contacts" class="section" style="text-align:center;">
-        <div class="section-title" style="justify-content:center; border-left: none;"><span>🦊</span> Контакты</div>
-        <div class="section-quote" style="border-left: none; text-align:center;">«Ты навсегда в ответе за тех, кого приручил»</div>
-        <div class="contacts">
-            <a href="mailto:cherniakov-egor@yandex.ru">📧 Почта</a>
-            <a href="https://vk.com/ваш_логин" target="_blank">💬 ВКонтакте</a>
-            <a href="https://t.me/ваш_логин" target="_blank">✈️ Telegram</a>
-            <a href="https://github.com/chernyakov-egor" target="_blank">🐙 GitHub</a>
-        </div>
-    </section>
-
-    <div class="stardust">
-        <span>✦</span> Собрано как кубик Рубика — по алгоритму и с душой <span>✦</span>
-    </div>
+    <div class="stardust">✦ Собрано как кубик Рубика — по алгоритму и с душой ✦</div>
 </div>
 </body>
 </html>
