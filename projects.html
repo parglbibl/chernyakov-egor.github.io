@@ -3,61 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Егор Черняков | Проекты</title>
-    <style>
-        /* Копируем все общие стили из index.html сюда */
-    </style>
+    <title>Егор Черняков · Проекты</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-<div class="container">
-    <header class="header">
-        <div class="avatar">🧩</div>
-        <div class="name">Егор Черняков</div>
-        <div class="subtitle">Библиотекарь • Спидкубер • Методист</div>
-        <div class="tagline">«Ты навсегда в ответе за тех, кого приручил»</div>
+<header>
+    <div class="container header-inner">
+        <div class="logo"><a href="index.html">Егор <span>Черняков</span></a></div>
         <ul class="nav">
             <li><a href="index.html">Главная</a></li>
-            <li><a href="about.html">О себе</a></li>
-            <li><a href="projects.html" class="active">Проекты</a></li>
+            <li><a href="projects.html">Проекты</a></li>
             <li><a href="achievements.html">Достижения</a></li>
             <li><a href="contacts.html">Контакты</a></li>
         </ul>
-    </header>
+    </div>
+</header>
 
-    <section class="section">
-        <div class="section-title"><span>✨</span> Проекты</div>
-        <div class="section-quote">«Встал поутру, приведи в порядок свою планету»</div>
+<section class="hero" style="padding: 3rem 0 2rem;">
+    <div class="container">
+        <h1 style="font-size:2.8rem;">Мои <span>проекты</span></h1>
+        <p class="hero-lead">Что я создаю и чем горжусь</p>
+    </div>
+</section>
+
+<section class="section" style="padding-top: 0;">
+    <div class="container">
         <div class="grid-2">
             <div class="project-card">
                 <h3>🎲 «Книжные грани»</h3>
                 <p>Настольная игра-ходилка, объединяющая литературу, логику и спидкубинг. Молодёжь отвечает на вопросы, зарабатывает баллы и поднимается по «Лестнице знаний».</p>
                 <a href="https://knig-grani.ru" target="_blank">knig-grani.ru</a>
                 <div class="badge">✅ Сделано</div>
-                <div class="quote-mini">«Любить — значит смотреть в одном направлении»</div>
             </div>
             <div class="project-card">
                 <h3>🧩 «Кубик добра»</h3>
                 <p>Социальный проект по обучению сборке кубика Рубика для людей с ОВЗ и бойцов в госпиталях. Есть методика, проведены мастер-классы, получена благодарность губернатора.</p>
                 <div class="badge">🤝 Активно</div>
-                <div class="quote-mini">«Хотел бы я знать, зачем звёзды светятся...»</div>
             </div>
             <div class="project-card">
                 <h3>📜 Краеведческий портал Парголово</h3>
                 <p>Цифровой архив: лента времени с 1500 года, карта достопримечательностей, викторина и режим конспектирования.</p>
                 <a href="https://parglbibl.ru" target="_blank">parglbibl.ru</a>
                 <div class="badge">✅ Сделано</div>
-                <div class="quote-mini">«Самого главного глазами не увидишь»</div>
             </div>
             <div class="project-card">
                 <h3>🇰🇷 Карельский орнамент из 300 кубиков</h3>
                 <p>К Неделе карельской культуры выложил панно из 300 кубиков Рубика по пиксельной схеме в библиотеке Выборгского района.</p>
                 <div class="badge">🎨 Арт-объект</div>
-                <div class="quote-mini">«У каждого человека свои звёзды»</div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <div class="stardust">✦ Собрано как кубик Рубика — по алгоритму и с душой ✦</div>
-</div>
+<footer>
+    <div class="container"><p>© <span id="current-year"></span> Егор Черняков · Сайт-визитка</p></div>
+</footer>
+<script src="js/main.js"></script>
 </body>
 </html>
