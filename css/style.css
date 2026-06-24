@@ -162,6 +162,46 @@ header {
     backdrop-filter: blur(4px);
 }
 
+/* ----- КНОПКИ (ДЛЯ ГИПЕРССЫЛОК) ----- */
+.btn {
+    display: inline-block;
+    padding: 0.7rem 2rem;
+    border-radius: 60px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.btn-primary {
+    background: var(--gold);
+    color: #fff;
+    border-color: var(--gold);
+    box-shadow: 0 4px 16px rgba(212, 168, 67, 0.2);
+}
+
+.btn-primary:hover {
+    background: #b8932a;
+    border-color: #b8932a;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(212, 168, 67, 0.3);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--gold);
+    border-color: var(--gold);
+}
+
+.btn-outline:hover {
+    background: var(--gold);
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(212, 168, 67, 0.2);
+}
+
 /* ----- СЕКЦИИ ----- */
 .section {
     padding: 5rem 0;
@@ -213,7 +253,7 @@ header {
     line-height: 1.8;
 }
 
-/* ----- КАРТОЧКИ ПРОЕКТОВ (УЛУЧШЕННЫЕ) ----- */
+/* ----- КАРТОЧКИ ПРОЕКТОВ ----- */
 .grid-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -312,7 +352,7 @@ header {
     font-weight: 600;
 }
 
-/* ----- КОНТАКТЫ (С КРУЖКАМИ) ----- */
+/* ----- КОНТАКТЫ ----- */
 .contacts {
     display: flex;
     justify-content: center;
