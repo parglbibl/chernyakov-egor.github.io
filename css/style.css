@@ -1,5 +1,5 @@
 /* ============================================
-   style.css — Егор Черняков (полноразмерный)
+   style.css — Егор Черняков (с фото по центру)
    ============================================ */
 
 /* ----- ПЕРЕМЕННЫЕ ----- */
@@ -21,7 +21,7 @@
 }
 
 html {
-    font-size: 16px; /* Базовый размер для всех устройств */
+    font-size: 16px;
 }
 
 body {
@@ -41,7 +41,7 @@ body {
     padding: 0 2rem;
 }
 
-/* ----- ШАПКА (С ФОТО) ----- */
+/* ----- ШАПКА ----- */
 header {
     background: rgba(253, 250, 245, 0.92);
     backdrop-filter: blur(8px);
@@ -58,36 +58,6 @@ header {
     align-items: center;
     flex-wrap: wrap;
     gap: 0.8rem;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-/* ===== АВАТАР (ФОТО) ===== */
-.avatar {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    overflow: hidden;
-    flex-shrink: 0;
-    border: 2px solid var(--gold);
-    box-shadow: 0 0 20px rgba(212, 168, 67, 0.12);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.avatar:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 30px rgba(212, 168, 67, 0.2);
-}
-
-.avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
 }
 
 .logo a {
@@ -125,10 +95,33 @@ header {
     color: var(--text-primary);
 }
 
-/* ----- ГЕРОЙ ----- */
+/* ----- ГЕРОЙ С ФОТО ПО ЦЕНТРУ ----- */
 .hero {
-    padding: 6rem 0 5rem;
+    padding: 4rem 0 5rem;
     text-align: center;
+}
+
+.hero-avatar {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 1.5rem;
+    border: 4px solid var(--gold);
+    box-shadow: 0 0 40px rgba(212, 168, 67, 0.15);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.hero-avatar:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 60px rgba(212, 168, 67, 0.25);
+}
+
+.hero-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .hero h1 {
@@ -334,36 +327,35 @@ footer {
         align-items: center;
         text-align: center;
     }
-    .logo {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-    .avatar {
-        width: 80px;
-        height: 80px;
-    }
     .nav {
         justify-content: center;
         gap: 1.2rem;
         flex-wrap: wrap;
     }
+    .hero {
+        padding: 2.5rem 0 3rem;
+    }
+    .hero-avatar {
+        width: 130px;
+        height: 130px;
+    }
     .hero h1 {
-        font-size: 2.6rem;
+        font-size: 2.4rem;
     }
     .hero-lead {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
     .hero-quote {
-        font-size: 1rem;
+        font-size: 0.95rem;
     }
     .grid-2 {
         grid-template-columns: 1fr;
     }
     .section-title {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
     }
     .section {
-        padding: 3rem 0;
+        padding: 2.5rem 0;
     }
     .project-card {
         padding: 1.5rem;
