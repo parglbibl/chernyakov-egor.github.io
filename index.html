@@ -3,217 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Егор Черняков | Библиотекарь, методист, разработчик</title>
+    <title>Егор Черняков | Спидкубинг и библиотеки</title>
     <style>
-        /* Базовые сбросы и шрифты */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        /* Воздушный фон */
         body {
+            margin: 0;
             font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
-            background: #f4f6f9;
-            color: #1e293b;
-            line-height: 1.6;
+            background: linear-gradient(145deg, #f7f9fc 0%, #e9edf5 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
         }
+        /* Стеклянная карточка */
         .container {
             max-width: 1100px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 48px;
+            padding: 2.5rem 2.8rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08), 0 8px 20px rgba(0, 20, 40, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.5);
         }
-
-        /* Шапка с навигацией */
+        /* --- ШАПКА С КУБИКОМ --- */
         .header {
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            padding: 3rem 0 2rem;
-            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 2rem;
+            border-bottom: 2px dashed rgba(0, 0, 0, 0.05);
         }
+        /* Аватар-кубик с вращением */
         .avatar {
-            font-size: 3.5rem;
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: #dbeafe;
+            width: 110px;
+            height: 110px;
+            background: conic-gradient(from 0deg, #e74c3c, #3498db, #2ecc71, #f1c40f, #e74c3c);
+            border-radius: 20px; /* Кубик не круглый, а с прямыми углами */
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1rem;
-            color: #1e40af;
-            /* Если будет фото, раскомментировать и убрать фон: */
-            /* background-image: url('images/photo.jpg'); */
-            /* background-size: cover; */
+            font-size: 3.8rem;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.2rem;
+            transition: transform 0.4s ease-in-out;
+            color: white;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+        }
+        .avatar:hover {
+            transform: rotate(25deg) scale(1.03);
         }
         .name {
-            font-size: 2.6rem;
+            font-size: 2.8rem;
             font-weight: 700;
-            letter-spacing: -0.5px;
+            letter-spacing: -1px;
+            margin: 0.2rem 0 0.2rem;
         }
         .subtitle {
             font-size: 1.2rem;
-            color: #475569;
-            margin-top: 0.2rem;
+            color: #2c3e50;
+            opacity: 0.7;
+            font-weight: 400;
         }
         .tagline {
             margin-top: 0.8rem;
-            background: #eef2ff;
-            padding: 0.4rem 1.8rem;
-            border-radius: 40px;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 0.5rem 2rem;
+            border-radius: 60px;
             font-size: 0.95rem;
-            color: #1e40af;
-            display: inline-block;
+            border: 1px solid rgba(0,0,0,0.03);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
         }
-
         /* Навигация */
         .nav {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 0.5rem 1.5rem;
-            margin: 1.5rem 0 0;
-            padding: 0;
+            gap: 1.8rem;
+            margin: 2rem 0 0.5rem;
             list-style: none;
+            padding: 0;
         }
         .nav a {
-            color: #334155;
             text-decoration: none;
             font-weight: 500;
-            font-size: 1rem;
+            color: #1e293b;
+            border-bottom: 2px solid transparent;
             transition: 0.2s;
+            padding-bottom: 0.2rem;
         }
         .nav a:hover {
-            color: #1e40af;
+            border-bottom-color: #e67e22; /* Оранжевый как грань кубика */
+            color: #e67e22;
         }
-
-        /* Секции */
-        .section {
-            margin: 3rem 0;
-        }
+        /* --- СЕКЦИИ --- */
         .section-title {
             font-size: 1.8rem;
             font-weight: 600;
             margin-bottom: 1.5rem;
-            border-left: 5px solid #2563eb;
-            padding-left: 1.2rem;
+            padding-left: 1rem;
+            border-left: 6px solid #f1c40f; /* Жёлтая грань */
+            color: #1a2634;
         }
-
-        /* Карточки проектов (сетка) */
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
+            gap: 1.8rem;
         }
+        /* Карточки проектов с цветными границами */
         .project-card {
-            background: #f8fafc;
-            border: 1px solid #e9edf2;
-            border-radius: 16px;
-            padding: 1.5rem 1.5rem 1.8rem;
-            transition: 0.2s;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(4px);
+            border-radius: 24px;
+            padding: 1.5rem 1.8rem;
+            border: 1px solid rgba(255,255,255,0.9);
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
         }
         .project-card:hover {
-            border-color: #b1c5e0;
+            transform: translateY(-4px);
+            border-color: #e67e22;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
         }
         .project-card h3 {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 0.5rem;
         }
-        .project-card .badge {
+        .badge {
             display: inline-block;
             font-size: 0.7rem;
-            background: #dbeafe;
-            color: #1e40af;
-            padding: 0.2rem 0.8rem;
+            background: rgba(0, 0, 0, 0.02);
+            padding: 0.3rem 0.9rem;
             border-radius: 40px;
             margin-top: 0.8rem;
+            border: 1px solid rgba(0,0,0,0.03);
         }
-        .project-card a {
-            color: #2563eb;
-            text-decoration: none;
-        }
-        .project-card a:hover {
-            text-decoration: underline;
-        }
-
         /* Достижения */
         .achievement-list {
             list-style: none;
             padding: 0;
         }
         .achievement-list li {
-            padding: 0.6rem 0;
-            border-bottom: 1px solid #f1f3f5;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.02);
             display: flex;
-            align-items: center;
             gap: 0.5rem;
         }
         .achievement-list li::before {
-            content: "◆";
-            color: #2563eb;
-            font-weight: bold;
-            font-size: 0.9rem;
+            content: "◈";
+            color: #e67e22;
         }
-
         /* Контакты */
         .contacts {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 1rem 2rem;
-            margin-top: 0.5rem;
+            gap: 1rem 1.8rem;
         }
         .contacts a {
-            color: #1e293b;
             text-decoration: none;
-            padding: 0.4rem 1.2rem;
-            border-radius: 40px;
-            background: #f1f4f9;
+            padding: 0.5rem 1.5rem;
+            border-radius: 60px;
+            background: rgba(255,255,255,0.6);
+            border: 1px solid rgba(0,0,0,0.02);
             transition: 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
+            color: #1e293b;
         }
         .contacts a:hover {
-            background: #e2e8f0;
+            background: #f1c40f;
+            color: #1a2634;
         }
-
-        /* Адаптация под телефон */
+        /* Адаптация */
         @media (max-width: 700px) {
-            .grid-2 {
-                grid-template-columns: 1fr;
-            }
-            .header {
-                padding-top: 2rem;
-            }
-            .name {
-                font-size: 2rem;
-            }
-            .container {
-                padding: 1rem 1rem;
-            }
-            .section-title {
-                font-size: 1.5rem;
-            }
-            .nav {
-                gap: 0.3rem 1rem;
-            }
+            .container { padding: 1.5rem; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .name { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
-
 <div class="container">
-
-    <!-- ШАПКА -->
     <header class="header">
-        <div class="avatar">📚</div>
+        <div class="avatar">🧩</div>
         <div class="name">Егор Черняков</div>
-        <div class="subtitle">Библиотекарь • Методист • Разработчик интеллектуальных игр</div>
-        <div class="tagline">Создаю проекты на стыке культуры, образования и технологий</div>
-
-        <!-- Навигация -->
+        <div class="subtitle">Библиотекарь • Спидкубер • Методист</div>
+        <div class="tagline">Собираю проекты, как кубик Рубика — по алгоритму и с душой</div>
         <ul class="nav">
             <li><a href="#about">О себе</a></li>
             <li><a href="#projects">Проекты</a></li>
@@ -222,7 +198,6 @@
         </ul>
     </header>
 
-    <!-- О СЕБЕ -->
     <section id="about" class="section">
         <h2 class="section-title">О себе</h2>
         <p>Выпускник СПбГИК (бакалавриат, 2015), работаю в библиотеках уже несколько лет — от Сертоловской до Парголовской.</p>
@@ -230,66 +205,37 @@
         <p>В 2026 году участвую в президентском гранте «Медиалаборатория позитивного контента». Планирую поступление в магистратуру СПбГИК по направлению «Библиотечно-информационная деятельность».</p>
     </section>
 
-    <!-- ПРОЕКТЫ -->
     <section id="projects" class="section">
         <h2 class="section-title">Проекты</h2>
         <div class="grid-2">
-
-            <div class="project-card">
-                <h3>🎲 «Книжные грани»</h3>
-                <p>Настольная игра-ходилка, объединяющая литературу, логику и спидкубинг. Молодёжь отвечает на вопросы, зарабатывает баллы и поднимается по «Лестнице знаний».</p>
-                <a href="https://knig-grani.ru" target="_blank">knig-grani.ru</a>
-                <div class="badge">✅ Сделано</div>
-            </div>
-
-            <div class="project-card">
-                <h3>🧩 «Кубик добра»</h3>
-                <p>Социальный проект по обучению сборке кубика Рубика для людей с ОВЗ и бойцов в госпиталях. Есть методика, проведены мастер-классы, получена благодарность губернатора.</p>
-                <div class="badge">🤝 Активно</div>
-            </div>
-
-            <div class="project-card">
-                <h3>📜 Краеведческий портал Парголово</h3>
-                <p>Цифровой архив: лента времени с 1500 года, карта достопримечательностей, викторина и режим конспектирования.</p>
-                <a href="https://parglbibl.ru" target="_blank">parglbibl.ru</a>
-                <div class="badge">✅ Сделано</div>
-            </div>
-
-            <div class="project-card">
-                <h3>🇰🇷 Карельский орнамент из 300 кубиков</h3>
-                <p>К Неделе карельской культуры выложил панно из 300 кубиков Рубика по пиксельной схеме в библиотеке Выборгского района.</p>
-                <div class="badge">🎨 Арт-объект</div>
-            </div>
-
+            <div class="project-card"><h3>🎲 «Книжные грани»</h3><p>Настольная игра-ходилка, объединяющая литературу, логику и спидкубинг.</p><a href="https://knig-grani.ru" target="_blank">knig-grani.ru</a><div class="badge">✅ Сделано</div></div>
+            <div class="project-card"><h3>🧩 «Кубик добра»</h3><p>Социальный проект по обучению сборке кубика Рубика для людей с ОВЗ и бойцов в госпиталях.</p><div class="badge">🤝 Активно</div></div>
+            <div class="project-card"><h3>📜 Краеведческий портал Парголово</h3><p>Цифровой архив: лента времени с 1500 года, карта достопримечательностей.</p><a href="https://parglbibl.ru" target="_blank">parglbibl.ru</a><div class="badge">✅ Сделано</div></div>
+            <div class="project-card"><h3>🇰🇷 Карельский орнамент из 300 кубиков</h3><p>Панно из кубиков Рубика по пиксельной схеме в библиотеке Выборгского района.</p><div class="badge">🎨 Арт-объект</div></div>
         </div>
     </section>
 
-    <!-- ДОСТИЖЕНИЯ -->
     <section id="achievements" class="section">
         <h2 class="section-title">Достижения</h2>
         <ul class="achievement-list">
             <li><strong>Диплом II степени</strong> — «Лучшая городская библиотека» (Всеволожский район, 2025)</li>
-            <li><strong>Победа в номинации</strong> «Лучший социально-культурный проект» — «Звезда культуры» (2025)</li>
+            <li><strong>Победа</strong> — «Лучший социально-культурный проект» («Звезда культуры», 2025)</li>
             <li><strong>Участник межрегиональной конференции</strong> с докладом о Парголово (2026)</li>
-            <li><strong>Благодарность губернатора</strong> Ленинградской области за проект «Кубик добра»</li>
-            <li><strong>Чемпион Санкт-Петербурга</strong> по пауэрлифтингу среди лиц с ПОДА</li>
-            <li><strong>Участник команды</strong> президентского гранта «Медиалаборатория позитивного контента» (2026)</li>
+            <li><strong>Благодарность губернатора</strong> Ленинградской области</li>
+            <li><strong>Чемпион Санкт-Петербурга</strong> по пауэрлифтингу</li>
         </ul>
     </section>
 
-    <!-- КОНТАКТЫ -->
-    <section id="contacts" class="section" style="text-align: center;">
-        <h2 class="section-title" style="border-left: none; text-align: center;">Контакты</h2>
+    <section id="contacts" class="section" style="text-align:center;">
+        <h2 class="section-title" style="border-left: none; text-align:center;">Контакты</h2>
         <div class="contacts">
             <a href="mailto:cherniakov-egor@yandex.ru">📧 Почта</a>
             <a href="https://vk.com/ваш_логин" target="_blank">💬 ВКонтакте</a>
             <a href="https://t.me/ваш_логин" target="_blank">✈️ Telegram</a>
             <a href="https://github.com/chernyakov-egor" target="_blank">🐙 GitHub</a>
         </div>
-        <p style="margin-top: 2rem; font-size: 0.9rem; color: #64748b;">Сайт-визитка. Сделано на GitHub Pages</p>
+        <p style="margin-top:2rem; font-size:0.8rem; opacity:0.6;">Собрано как кубик Рубика — по граням и с душой</p>
     </section>
-
 </div>
-
 </body>
 </html>
