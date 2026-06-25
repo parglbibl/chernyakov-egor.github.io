@@ -1,9 +1,9 @@
 /* ============================================
-   style.css — Егор Черняков (с новыми шрифтами)
+   style.css — Егор Черняков (в стиле «Маленького принца»)
    ============================================ */
 
-/* ----- ПОДКЛЮЧЕНИЕ ШРИФТОВ ----- */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Sans+Pro:wght@400;600;700&display=swap');
+/* ----- ПОДКЛЮЧЕНИЕ ШРИФТОВ (книжных, воздушных) ----- */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Nunito:wght@400;600;700&display=swap');
 
 /* ----- ПЕРЕМЕННЫЕ ----- */
 :root {
@@ -31,7 +31,7 @@ html {
 body {
     background: var(--graphite-deep);
     color: var(--text-primary);
-    font-family: 'Source Sans Pro', 'Segoe UI', system-ui, sans-serif;
+    font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif;
     line-height: 1.6;
     background-image: radial-gradient(#d4c5b0 1.5px, transparent 1.5px);
     background-size: 40px 40px;
@@ -66,11 +66,11 @@ header {
 
 .logo a {
     font-size: 1.4rem;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--graphite-dark);
     text-decoration: none;
     letter-spacing: -0.5px;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
 }
 
 .logo a span {
@@ -133,11 +133,11 @@ header {
 
 .hero h1 {
     font-size: 3.8rem;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: -1.5px;
     color: var(--graphite-dark);
     line-height: 1.1;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
 }
 
 .hero h1 span {
@@ -165,7 +165,7 @@ header {
     background: rgba(212, 168, 67, 0.06);
     border-radius: 60px;
     backdrop-filter: blur(4px);
-    font-family: 'Playfair Display', serif;
+    font-family: 'EB Garamond', serif;
 }
 
 /* ----- КНОПКИ ----- */
@@ -179,6 +179,7 @@ header {
     transition: all 0.3s ease;
     cursor: pointer;
     border: 2px solid transparent;
+    font-family: 'Nunito', sans-serif;
 }
 
 .btn-primary {
@@ -223,7 +224,7 @@ header {
     display: flex;
     align-items: center;
     gap: 0.8rem;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
 }
 
 .section-title .icon {
@@ -251,7 +252,7 @@ header {
     border-left: 4px solid #b8932a;
     max-width: 800px;
     opacity: 1;
-    font-family: 'Playfair Display', serif;
+    font-family: 'EB Garamond', serif;
 }
 
 .section-text {
@@ -288,7 +289,7 @@ header {
     font-weight: 600;
     color: var(--graphite-dark);
     margin-bottom: 0.5rem;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
 }
 
 .project-card p {
