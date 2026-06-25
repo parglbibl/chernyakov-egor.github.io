@@ -494,3 +494,76 @@ footer .stardust {
         font-size: 1.6rem;
     }
 }
+
+/* ============================================
+HERO 2.0 — Грани личности
+============================================ */
+
+.hero-layout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 560px;
+}
+
+.hero-avatar {
+    flex: 1;
+    max-width: 460px;
+    margin: 0;
+}
+
+.hero-tag {
+    display: inline-block;
+    padding: .45rem 1rem;
+    border-radius: 40px;
+    background: rgba(212, 168, 67, .08);
+    color: #b8932a;
+    font-size: .9rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.hero-description {
+    margin-top: 1.2rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    font-size: 1.08rem;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.project-card:nth-child(1) {
+    border-left: 6px solid #1e88e5;
+}
+
+.project-card:nth-child(2) {
+    border-left: 6px solid #43a047;
+}
+
+.project-card:nth-child(3) {
+    border-left: 6px solid #e53935;
+}
+
+.project-card:nth-child(4) {
+    border-left: 6px solid #fdd835;
+}
+
+@media (max-width: 900px) {
+    .hero-layout {
+        flex-direction: column;
+        text-align: center;
+    }
+    .hero-buttons {
+        justify-content: center;
+    }
+}
