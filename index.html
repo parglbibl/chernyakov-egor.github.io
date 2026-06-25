@@ -1,160 +1,44 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Егор Черняков · Библиотекарь, педагог, спидкубер</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        /* ===== СТИЛИ ДЛЯ НОВОЙ ГЛАВНОЙ ===== */
-        .hero-layout {
-            display: flex;
-            align-items: center;
-            gap: 4rem;
-            padding: 2rem 0;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        .hero-avatar {
-            flex: 0 0 380px;
-            border-radius: 28px;
-            overflow: hidden;
-            border: 6px solid var(--gold);
-            box-shadow: 0 16px 50px rgba(0, 0, 0, 0.08);
-            background: var(--graphite-deep);
-        }
+<title>Егор Черняков · Грани личности</title>
 
-        .hero-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            aspect-ratio: 4 / 5;
-        }
+<link rel="stylesheet" href="css/style.css">
 
-        .hero-content {
-            flex: 1;
-            text-align: left;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-        .hero-tag {
-            display: inline-block;
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--gold);
-            background: rgba(212, 168, 67, 0.08);
-            padding: 0.3rem 1rem;
-            border-radius: 40px;
-            margin-bottom: 1rem;
-        }
-
-        .hero-content h1 {
-            font-size: 4rem;
-            font-weight: 700;
-            color: var(--graphite-dark);
-            line-height: 1.1;
-            margin-bottom: 0.5rem;
-        }
-
-        .hero-content h1 span {
-            color: var(--gold);
-        }
-
-        .hero-lead {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-        }
-
-        .hero-description {
-            font-size: 1.05rem;
-            color: var(--text-secondary);
-            max-width: 480px;
-            line-height: 1.6;
-            margin-bottom: 1.8rem;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-bottom: 2rem;
-        }
-
-        .hero-quote {
-            font-style: italic;
-            font-size: 1.1rem;
-            color: #b8932a;
-            padding-top: 1rem;
-            border-top: 2px solid rgba(212, 168, 67, 0.15);
-            display: inline-block;
-            font-family: 'EB Garamond', serif;
-        }
-
-        /* Адаптивность */
-        @media (max-width: 900px) {
-            .hero-layout {
-                flex-direction: column;
-                text-align: center;
-                gap: 2rem;
-            }
-            .hero-avatar {
-                flex: 0 0 auto;
-                max-width: 320px;
-                width: 100%;
-            }
-            .hero-description {
-                max-width: 100%;
-                margin-left: auto;
-                margin-right: auto;
-            }
-            .hero-buttons {
-                justify-content: center;
-            }
-            .hero-content h1 {
-                font-size: 2.8rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-avatar {
-                max-width: 240px;
-            }
-            .hero-content h1 {
-                font-size: 2.2rem;
-            }
-            .hero-lead {
-                font-size: 1rem;
-            }
-            .hero-description {
-                font-size: 0.95rem;
-            }
-        }
-    </style>
 </head>
+
 <body>
 
 <header>
     <div class="container header-inner">
-        <div class="logo"><a href="index.html">Егор <span>Черняков</span></a></div>
+
+        <div class="logo">
+            <a href="index.html">
+                Егор <span>Черняков</span>
+            </a>
+        </div>
+
         <ul class="nav">
             <li><a href="index.html" class="active">Главная</a></li>
             <li><a href="projects.html">Проекты</a></li>
             <li><a href="achievements.html">Достижения</a></li>
             <li><a href="contacts.html">Контакты</a></li>
         </ul>
+
     </div>
 </header>
 
 <section class="hero">
+
     <div class="container hero-layout">
 
         <div class="hero-avatar">
-            <img src="images/photo.jpg" alt="Егор Черняков с кубиком Рубика">
+            <img src="images/photo.jpg" alt="Егор Черняков">
         </div>
 
         <div class="hero-content">
@@ -168,22 +52,27 @@
             </h1>
 
             <p class="hero-lead">
-                Библиотекарь • Педагог дополнительного образования • Спидкубер
+                Библиотекарь • Педагог • Спидкубер
             </p>
 
             <p class="hero-description">
-                Соединяю культуру, образование и технологии через проекты,
-                которые помогают людям учиться, общаться и находить новые возможности.
+                Создаю проекты на стыке культуры,
+                образования и технологий.
+                Развиваю библиотечные инициативы,
+                обучаю сборке кубика Рубика,
+                организую мастер-классы и социальные проекты.
             </p>
 
             <div class="hero-buttons">
+
                 <a href="projects.html" class="btn btn-primary">
-                    Проекты
+                    Мои проекты
                 </a>
 
                 <a href="contacts.html" class="btn btn-outline">
                     Связаться
                 </a>
+
             </div>
 
             <div class="hero-quote">
@@ -193,77 +82,245 @@
         </div>
 
     </div>
+
 </section>
 
 <section class="section">
+
     <div class="container">
-        <div class="section-title"><span class="icon">📖</span> О себе</div>
-        <div class="section-quote">«Все взрослые сначала были детьми, только мало кто из них об этом помнит»</div>
-        <p class="section-text"><strong>С 2014 года</strong> увлекаюсь спидкубингом, <strong>с 2015</strong> — обучаю сборке кубика Рубика и других головоломок.</p>
-        <p class="section-text" style="margin-top: 1.2rem;">Работаю в <strong>Парголовской библиотеке</strong>. Более двух лет работал <strong>педагогом дополнительного образования</strong> в школе: вёл спидкубинг, шахматы, 3D-моделирование и прототипирование, легоконструирование, детское чтение. Работал с детьми с ОВЗ.</p>
-        <p class="section-text" style="margin-top: 1.2rem;">Участник VK Fest, создаю мозаики из тысяч кубиков. Разработал настольную игру «Книжные грани». Автор социального проекта «Кубик добра», который вошёл в <strong>Топ-100 лучших библиотечных практик России</strong>.</p>
+
+        <div class="section-title">
+            📖 О себе
+        </div>
+
+        <div class="section-quote">
+            «Все взрослые сначала были детьми,
+            только мало кто из них об этом помнит»
+        </div>
+
+        <p class="section-text">
+            С 2014 года увлекаюсь спидкубингом,
+            а с 2015 года обучаю детей и взрослых
+            сборке кубика Рубика и других головоломок.
+        </p>
+
+        <p class="section-text">
+            Работаю в Парголовской библиотеке.
+            Имею опыт педагогической деятельности,
+            вёл занятия по спидкубингу,
+            шахматам, 3D-моделированию,
+            прототипированию и детскому чтению.
+        </p>
+
+        <p class="section-text">
+            Автор проекта «Кубик добра»,
+            вошедшего в Топ-100 лучших
+            библиотечных практик России.
+        </p>
+
     </div>
+
 </section>
 
 <section class="section">
+
     <div class="container">
-        <div class="section-title"><span class="icon">✨</span> Проекты</div>
-        <div class="section-quote">«Ты навсегда в ответе за тех, кого приручил»</div>
+
+        <div class="section-title">
+            🧩 Мои грани
+        </div>
+
+        <div class="info-grid">
+
+            <div class="info-card">
+                <div class="emoji">📚</div>
+                <h3>Библиотекарь</h3>
+                <p>
+                    Создаю современные
+                    культурные проекты
+                    и работаю с читателями.
+                </p>
+            </div>
+
+            <div class="info-card">
+                <div class="emoji">🎓</div>
+                <h3>Педагог</h3>
+                <p>
+                    Обучаю детей и взрослых,
+                    провожу мастер-классы
+                    и образовательные программы.
+                </p>
+            </div>
+
+            <div class="info-card">
+                <div class="emoji">🧩</div>
+                <h3>Спидкубер</h3>
+                <p>
+                    Популяризирую головоломки,
+                    провожу турниры
+                    и обучающие занятия.
+                </p>
+            </div>
+
+            <div class="info-card">
+                <div class="emoji">🤝</div>
+                <h3>Автор проектов</h3>
+                <p>
+                    Разрабатываю инициативы
+                    в сфере культуры,
+                    образования и инклюзии.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="section-title">
+            🚀 Главные проекты
+        </div>
+
         <div class="grid-2">
-            <div class="project-card">
-                <h3>🎲 «Книжные грани»</h3>
-                <p>Настольная игра-ходилка, объединяющая литературу, логику и спидкубинг.</p>
-                <a href="https://knig-grani.ru" target="_blank">knig-grani.ru</a>
-                <div class="badge">✅ Сделано</div>
+
+            <div class="project-card blue">
+
+                <h3>🎲 Книжные грани</h3>
+
+                <p>
+                    Настольная игра,
+                    объединяющая литературу,
+                    логику и спидкубинг.
+                </p>
+
+                <div class="badge">
+                    Готовый проект
+                </div>
+
             </div>
-            <div class="project-card">
-                <h3>🧩 «Кубик добра»</h3>
-                <p>Социальный проект по обучению сборке кубика Рубика для людей с ОВЗ и бойцов в госпиталях. Признан одной из лучших библиотечных практик России (Топ-100, 99 баллов из 110).</p>
-                <div class="badge">🏆 Топ-100 России</div>
-                <div class="badge">🤝 Активно</div>
+
+            <div class="project-card green">
+
+                <h3>🧩 Кубик добра</h3>
+
+                <p>
+                    Социальный проект
+                    по обучению сборке кубика Рубика
+                    людей с ОВЗ и бойцов в госпиталях.
+                </p>
+
+                <div class="badge">
+                    Топ-100 России
+                </div>
+
+                <div class="badge">
+                    Действующий проект
+                </div>
+
             </div>
+
         </div>
-        <div style="text-align: center; margin-top: 1.5rem;">
-            <a href="projects.html" class="btn btn-primary">Все проекты →</a>
+
+        <div style="text-align:center;margin-top:2rem;">
+
+            <a href="projects.html" class="btn btn-primary">
+                Смотреть все проекты
+            </a>
+
         </div>
+
     </div>
+
 </section>
 
 <section class="section">
+
     <div class="container">
-        <div class="section-title"><span class="icon">🌟</span> Достижения</div>
-        <div class="section-quote">«Зорко одно лишь сердце. Самого главного глазами не увидишь»</div>
-        <ul class="achievement-list" style="max-width: 800px; margin: 0 auto;">
-            <li><strong>Благодарность губернатора</strong> Ленинградской области за проект «Кубик добра»</li>
-            <li><strong>Диплом участника</strong> — «Лучший социально-культурный проект» (конкурс «Звезда культуры»)</li>
-            <li><strong>Автор проекта «Кубик добра»</strong> — Топ-100 лучших практик России (99 баллов из 110)</li>
-            <li><strong>Чемпион Санкт-Петербурга</strong> по пауэрлифтингу среди лиц с ПОДА</li>
-        </ul>
-        <div style="text-align: center; margin-top: 1.5rem;">
-            <a href="achievements.html" class="btn btn-primary">Все достижения →</a>
+
+        <div class="section-title">
+            🌟 Главное достижение
         </div>
+
+        <ul class="achievement-list">
+
+            <li>
+                <strong>Топ-100 лучших библиотечных практик России</strong>
+                — проект «Кубик добра»
+            </li>
+
+            <li>
+                <strong>Благодарность губернатора</strong>
+                Ленинградской области
+            </li>
+
+            <li>
+                <strong>Участник VK Fest</strong>
+                с проектами из кубиков Рубика
+            </li>
+
+            <li>
+                <strong>Чемпион Санкт-Петербурга</strong>
+                по пауэрлифтингу среди лиц с ПОДА
+            </li>
+
+        </ul>
+
     </div>
+
 </section>
 
 <section class="section">
-    <div class="container" style="text-align: center;">
-        <div class="section-title" style="border-left: none; text-align: center; justify-content: center;"><span class="icon">📬</span> Контакты</div>
-        <div class="section-quote" style="border-left: none; text-align: center;">«Любить — значит смотреть в одном направлении»</div>
-        <div class="contacts">
-            <a href="mailto:cherniakov-egor@yandex.ru">📧 Почта</a>
-            <a href="tel:+79214089944">📞 Телефон</a>
-            <a href="https://vk.ru/che_egor" target="_blank">💬 ВКонтакте</a>
+
+    <div class="container">
+
+        <div class="section-title">
+            📬 Контакты
         </div>
+
+        <div class="contacts">
+
+            <a href="mailto:cherniakov-egor@yandex.ru">
+                📧 Почта
+            </a>
+
+            <a href="tel:+79214089944">
+                📞 Телефон
+            </a>
+
+            <a href="https://vk.ru/che_egor" target="_blank">
+                💬 ВКонтакте
+            </a>
+
+        </div>
+
     </div>
+
 </section>
 
 <footer>
+
     <div class="container">
-        <p class="stardust">✦ Собрано как кубик Рубика — по алгоритму и с душой ✦</p>
-        <p style="margin-top: 0.5rem;">© <span id="current-year"></span> Егор Черняков · Сайт-визитка</p>
+
+        <p class="stardust">
+            ✦ Собрано как кубик Рубика —
+            по алгоритму и с душой ✦
+        </p>
+
+        <p>
+            © <span id="current-year"></span>
+            Егор Черняков
+        </p>
+
     </div>
+
 </footer>
 
 <script src="js/main.js"></script>
+
 </body>
 </html>
