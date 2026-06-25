@@ -11,7 +11,7 @@
     --text-primary: #111111;
     --text-secondary: #555566;
     --card-bg: #ffffff;
-    --quote-bg: rgba(212, 168, 67, 0.05);
+    --quote-bg: rgba(212, 168, 67, 0.06);
 }
 
 /* ----- СБРОСЫ И ЗВЁЗДНЫЙ ФОН ----- */
@@ -152,17 +152,17 @@ header {
 .hero-quote {
     font-style: italic;
     font-size: 1.1rem;
-    color: var(--gold);
+    color: #b8932a;
     margin-top: 1.5rem;
     padding: 1rem 2rem;
-    border-top: 1px solid rgba(212, 168, 67, 0.15);
+    border-top: 2px solid rgba(212, 168, 67, 0.25);
     display: inline-block;
-    background: var(--quote-bg);
+    background: rgba(212, 168, 67, 0.06);
     border-radius: 60px;
     backdrop-filter: blur(4px);
 }
 
-/* ----- КНОПКИ (ДЛЯ ГИПЕРССЫЛОК) ----- */
+/* ----- КНОПКИ ----- */
 .btn {
     display: inline-block;
     padding: 0.7rem 2rem;
@@ -235,15 +235,15 @@ header {
 /* ----- КРАСИВЫЙ БЛОК ДЛЯ ЦИТАТ ВНУТРИ СЕКЦИЙ ----- */
 .section-quote {
     font-style: italic;
-    color: var(--gold);
-    font-size: 1rem;
+    color: #b8932a;
+    font-size: 1.05rem;
     margin-bottom: 2rem;
     padding: 1.2rem 2rem;
-    background: var(--quote-bg);
+    background: rgba(212, 168, 67, 0.06);
     border-radius: 16px;
-    border-left: 4px solid var(--gold);
+    border-left: 4px solid #b8932a;
     max-width: 800px;
-    opacity: 0.9;
+    opacity: 1;
 }
 
 .section-text {
@@ -311,7 +311,7 @@ header {
     margin-top: 0.5rem;
 }
 
-/* ----- ДОСТИЖЕНИЯ (КАРТОЧКИ) ----- */
+/* ----- ДОСТИЖЕНИЯ ----- */
 .achievement-list {
     list-style: none;
     padding: 0;
