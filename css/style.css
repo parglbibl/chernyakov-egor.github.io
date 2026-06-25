@@ -1,6 +1,9 @@
 /* ============================================
-   style.css — Егор Черняков (премиум-версия)
+   style.css — Егор Черняков (с новыми шрифтами)
    ============================================ */
+
+/* ----- ПОДКЛЮЧЕНИЕ ШРИФТОВ ----- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Sans+Pro:wght@400;600;700&display=swap');
 
 /* ----- ПЕРЕМЕННЫЕ ----- */
 :root {
@@ -28,7 +31,7 @@ html {
 body {
     background: var(--graphite-deep);
     color: var(--text-primary);
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    font-family: 'Source Sans Pro', 'Segoe UI', system-ui, sans-serif;
     line-height: 1.6;
     background-image: radial-gradient(#d4c5b0 1.5px, transparent 1.5px);
     background-size: 40px 40px;
@@ -67,6 +70,7 @@ header {
     color: var(--graphite-dark);
     text-decoration: none;
     letter-spacing: -0.5px;
+    font-family: 'Playfair Display', serif;
 }
 
 .logo a span {
@@ -133,6 +137,7 @@ header {
     letter-spacing: -1.5px;
     color: var(--graphite-dark);
     line-height: 1.1;
+    font-family: 'Playfair Display', serif;
 }
 
 .hero h1 span {
@@ -160,6 +165,7 @@ header {
     background: rgba(212, 168, 67, 0.06);
     border-radius: 60px;
     backdrop-filter: blur(4px);
+    font-family: 'Playfair Display', serif;
 }
 
 /* ----- КНОПКИ ----- */
@@ -217,6 +223,7 @@ header {
     display: flex;
     align-items: center;
     gap: 0.8rem;
+    font-family: 'Playfair Display', serif;
 }
 
 .section-title .icon {
@@ -244,6 +251,7 @@ header {
     border-left: 4px solid #b8932a;
     max-width: 800px;
     opacity: 1;
+    font-family: 'Playfair Display', serif;
 }
 
 .section-text {
@@ -280,6 +288,7 @@ header {
     font-weight: 600;
     color: var(--graphite-dark);
     margin-bottom: 0.5rem;
+    font-family: 'Playfair Display', serif;
 }
 
 .project-card p {
