@@ -9,6 +9,110 @@
     <meta name="description" content="Социальные, образовательные и культурные проекты Егора Чернякова." />
 
     <link rel="stylesheet" href="css/style.css" />
+
+    <style>
+        /* ===== ЛАЙТБОКС (исправленный для мобильных) ===== */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.88);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 1000px;
+            width: 100%;
+            max-height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .lightbox-content img {
+            max-width: 95%;
+            max-height: 85vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 12px;
+        }
+
+        .lightbox-content .caption {
+            margin-top: 12px;
+            text-align: center;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 500;
+            opacity: 0.9;
+            padding: 8px 16px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            max-width: 90%;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            font-size: 2.8rem;
+            color: #fff;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: 0.2s;
+            z-index: 10;
+        }
+
+        .close-btn:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .lightbox-overlay {
+                padding: 10px;
+            }
+            .lightbox-content img {
+                max-height: 80vh;
+                border-radius: 8px;
+            }
+            .lightbox-content .caption {
+                font-size: 0.9rem;
+                padding: 6px 12px;
+            }
+            .close-btn {
+                top: -40px;
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .lightbox-content img {
+                max-height: 75vh;
+                max-width: 98%;
+            }
+            .lightbox-content .caption {
+                font-size: 0.8rem;
+                padding: 4px 10px;
+            }
+            .close-btn {
+                top: -35px;
+                font-size: 1.8rem;
+                right: 0;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -148,6 +252,93 @@
             <p>© <span id="current-year"></span> Егор Черняков</p>
         </div>
     </footer>
+
+    <script>
+        // =====================================
+        // ГАЛЕРЕЯ И ЛАЙТБОКС (исправленный)
+        // =====================================
+
+        document.addEventListener("DOMContentLoaded", function() {
+
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            if (galleryItems.length === 0) return;
+
+            // Создаём лайтбокс
+            let overlay = document.querySelector('.lightbox-overlay');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.className = 'lightbox-overlay';
+                overlay.innerHTML = `
+                    <div class="lightbox-content">
+                        <span class="close-btn">&times;</span>
+                        <img src="" alt="Увеличенное фото">
+                        <div class="caption"></div>
+                    </div>
+                `;
+                document.body.appendChild(overlay);
+            }
+
+            const lightboxImg = overlay.querySelector('img');
+            const caption = overlay.querySelector('.caption');
+            const closeBtn = overlay.querySelector('.close-btn');
+
+            function getCaption(item) {
+                return item.getAttribute('data-caption') || 'Мозаика из кубиков Рубика';
+            }
+
+            function openLightbox(src, captionText) {
+                lightboxImg.src = src;
+                caption.textContent = captionText;
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            function handleGalleryClick(e) {
+                const item = e.currentTarget;
+                const img = item.querySelector('img');
+                const captionText = getCaption(item);
+
+                if (img && img.src && !img.src.includes('undefined')) {
+                    openLightbox(img.src, captionText);
+                } else {
+                    alert('🖼 Фото пока не загружено!');
+                }
+            }
+
+            galleryItems.forEach(function(item) {
+                item.addEventListener('click', handleGalleryClick);
+                item.addEventListener('touchstart', handleGalleryClick, { passive: true });
+            });
+
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeLightbox);
+                closeBtn.addEventListener('touchstart', closeLightbox, { passive: true });
+            }
+
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) {
+                    closeLightbox();
+                }
+            });
+            overlay.addEventListener('touchstart', function(e) {
+                if (e.target === overlay) {
+                    closeLightbox();
+                }
+            }, { passive: true });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                }
+            });
+
+        });
+    </script>
 
     <script src="js/main.js"></script>
 </body>
