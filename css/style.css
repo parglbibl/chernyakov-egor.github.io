@@ -1,34 +1,48 @@
 /* ==========================================
-   ГРАНИ ЛИЧНОСТИ
-   Егор Черняков
+   ЕГОР ЧЕРНЯКОВ
+   Финальная версия сайта
+   Концепция:
+   Кубик Рубика × Маленький принц
 ========================================== */
+
+/* ===== ШРИФТЫ ===== */
 
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Nunito:wght@300;400;600;700&display=swap');
 
-:root{
+/* ===== ПЕРЕМЕННЫЕ ===== */
 
-    --bg:#0f1724;
-    --bg-light:#172233;
+:root {
 
-    --text:#f5f1e8;
-    --text-soft:#cfd6df;
+    --bg: #fbfaf6;
 
-    --gold:#d4a843;
+    --white: #ffffff;
 
-    --blue:#3b82f6;
-    --green:#22c55e;
-    --red:#ef4444;
-    --yellow:#facc15;
+    --dark: #1f2937;
 
-    --card:#1b2738;
+    --text: #4b5563;
+
+    --gold: #d4a843;
+
+    --gold-dark: #b88b2d;
+
+    --blue: #0051ba;
+
+    --green: #009e60;
+
+    --yellow: #ffd500;
+
+    --red: #c41e3a;
 
     --shadow:
-        0 10px 30px rgba(0,0,0,.25);
+        0 10px 35px rgba(0,0,0,.06);
 
-    --radius:22px;
+    --radius: 24px;
+
+    --transition: .3s ease;
+
 }
 
-/* ========================= */
+/* ===== RESET ===== */
 
 *{
     margin:0;
@@ -42,21 +56,20 @@ html{
 
 body{
 
+    background:var(--bg);
+
+    color:var(--dark);
+
     font-family:'Nunito',sans-serif;
-
-    background:
-        radial-gradient(circle at top,#22304a 0%,#0f1724 60%);
-
-    color:var(--text);
 
     line-height:1.8;
 
-    min-height:100vh;
+    overflow-x:hidden;
+
+    position:relative;
 }
 
-/* ========================= */
-/* ЗВЁЗДЫ */
-/* ========================= */
+/* ===== ЗВЁЗДНЫЙ ФОН ===== */
 
 body::before{
 
@@ -66,37 +79,32 @@ body::before{
 
     inset:0;
 
-    background-image:
-        radial-gradient(#ffffff 1px,transparent 1px),
-        radial-gradient(#ffffff 1px,transparent 1px);
-
-    background-size:
-        120px 120px,
-        180px 180px;
-
-    background-position:
-        0 0,
-        60px 60px;
-
-    opacity:.15;
-
     pointer-events:none;
+
+    opacity:.18;
+
+    background-image:
+    radial-gradient(circle,#d4a843 1px,transparent 1px);
+
+    background-size:40px 40px;
 
     z-index:-1;
 }
 
-/* ========================= */
+/* ===== ОБЩИЙ КОНТЕЙНЕР ===== */
 
 .container{
 
-    width:min(1200px,92%);
+    width:100%;
+
+    max-width:1200px;
 
     margin:auto;
+
+    padding:0 24px;
 }
 
-/* ========================= */
-/* HEADER */
-/* ========================= */
+/* ===== HEADER ===== */
 
 header{
 
@@ -104,14 +112,13 @@ header{
 
     top:0;
 
-    z-index:1000;
+    z-index:999;
 
-    backdrop-filter:blur(14px);
+    backdrop-filter:blur(10px);
 
-    background:rgba(15,23,36,.85);
+    background:rgba(251,250,246,.92);
 
-    border-bottom:
-        1px solid rgba(255,255,255,.06);
+    border-bottom:1px solid rgba(212,168,67,.15);
 }
 
 .header-inner{
@@ -122,18 +129,18 @@ header{
 
     align-items:center;
 
-    padding:18px 0;
+    min-height:82px;
 }
+
+/* ===== ЛОГО ===== */
 
 .logo a{
 
-    color:white;
-
     text-decoration:none;
 
-    font-family:
-        'Cormorant Garamond',
-        serif;
+    color:var(--dark);
+
+    font-family:'Cormorant Garamond',serif;
 
     font-size:2rem;
 
@@ -145,101 +152,109 @@ header{
     color:var(--gold);
 }
 
-/* ========================= */
-/* MENU */
-/* ========================= */
+/* ===== НАВИГАЦИЯ ===== */
 
 .nav{
+
+    list-style:none;
 
     display:flex;
 
     gap:2rem;
-
-    list-style:none;
 }
 
 .nav a{
 
     text-decoration:none;
 
-    color:var(--text-soft);
+    color:var(--text);
 
-    transition:.3s;
-}
+    font-weight:600;
 
-.nav a:hover,
-.nav a.active{
-
-    color:white;
-}
-
-.nav a.active{
+    transition:var(--transition);
 
     position:relative;
 }
 
-.nav a.active::after{
+.nav a::after{
 
     content:"";
 
     position:absolute;
 
     left:0;
-    right:0;
 
     bottom:-8px;
+
+    width:0;
 
     height:2px;
 
     background:var(--gold);
+
+    transition:var(--transition);
 }
 
-/* ========================= */
-/* HERO */
-/* ========================= */
-
-.hero{
-
-    text-align:center;
-
-    padding:70px 0;
-}
-
-.hero-avatar{
-
-    width:min(420px,90%);
-
-    margin:auto;
-
-    border-radius:32px;
-
-    overflow:hidden;
-
-    border:4px solid var(--gold);
-
-    box-shadow:var(--shadow);
-
-    background:#fff;
-}
-
-.hero-avatar img{
-
-    display:block;
+.nav a:hover::after,
+.nav a.active::after{
 
     width:100%;
 }
 
+.nav a:hover,
+.nav a.active{
+
+    color:var(--dark);
+}
+
+/* ===== HERO ===== */
+
+.hero{
+
+    padding:80px 0 50px;
+
+    text-align:center;
+}
+
+.hero-avatar{
+
+    width:100%;
+
+    max-width:650px;
+
+    margin:auto;
+
+    border-radius:30px;
+
+    overflow:hidden;
+
+    border:6px solid var(--gold);
+
+    box-shadow:var(--shadow);
+
+    background:white;
+}
+
+.hero-avatar img{
+
+    width:100%;
+
+    display:block;
+
+    object-fit:cover;
+}
+
 .hero h1{
 
-    margin-top:2rem;
+    margin-top:40px;
 
-    font-size:4rem;
+    font-size:4.4rem;
 
     line-height:1.1;
 
-    font-family:
-        'Cormorant Garamond',
-        serif;
+    font-family:'Cormorant Garamond',serif;
+
+    font-weight:700;
 }
 
 .hero h1 span{
@@ -249,655 +264,34 @@ header{
 
 .hero-lead{
 
-    margin-top:1rem;
+    margin:25px auto;
 
-    color:var(--text-soft);
+    max-width:760px;
 
-    font-size:1.25rem;
+    color:var(--text);
+
+    font-size:1.3rem;
 }
+
+/* ===== ЦИТАТА ===== */
 
 .hero-quote{
 
-    margin-top:2rem;
-
     display:inline-block;
 
-    padding:12px 24px;
-
-    border-radius:999px;
-
-    background:
-        rgba(212,168,67,.12);
-
-    color:var(--gold);
-
-    font-style:italic;
-}
-
-/* ========================= */
-/* SECTION */
-/* ========================= */
-
-.section{
-
-    padding:80px 0;
-}
-
-.section-title{
-
-    font-family:
-        'Cormorant Garamond',
-        serif;
-
-    font-size:3rem;
-
-    margin-bottom:20px;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-}
-
-.section-title span{
-
-    font-size:2.2rem;
-}
-
-.section-quote{
-
-    max-width:900px;
-
-    margin-bottom:30px;
-
-    padding:20px 25px;
-
-    border-left:4px solid var(--gold);
-
-    background:
-        rgba(212,168,67,.08);
-
-    border-radius:16px;
-
-    color:var(--gold);
-
-    font-style:italic;
-
-    font-size:1.15rem;
-}
-
-.section-text{
-
-    color:var(--text-soft);
-
-    max-width:900px;
-
-    margin-bottom:18px;
-
-    font-size:1.1rem;
-}
-
-/* ========================= */
-/* INFO GRID */
-/* ========================= */
-
-.info-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    gap:24px;
-
-    margin-top:40px;
-}
-
-.info-card{
-
-    background:var(--card);
-
-    border-radius:var(--radius);
-
-    padding:28px;
-
-    text-align:center;
-
-    box-shadow:var(--shadow);
-
-    transition:.3s;
-}
-
-.info-card:hover{
-
-    transform:
-        translateY(-8px);
-}
-
-.info-card .emoji{
-
-    font-size:2.5rem;
-
-    margin-bottom:14px;
-}
-
-.info-card h3{
-
-    margin-bottom:10px;
-
-    color:white;
-
-    font-size:1.4rem;
-}
-
-.info-card p{
-
-    color:var(--text-soft);
-
-    font-size:.95rem;
-}
-
-/* ========================= */
-/* PROJECT GRID */
-/* ========================= */
-
-.grid-2{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
-    gap:30px;
-}
-
-.project-card{
-
-    background:var(--card);
-
-    border-radius:var(--radius);
-
-    padding:30px;
-
-    box-shadow:var(--shadow);
-
-    transition:.35s;
-
-    position:relative;
-
-    overflow:hidden;
-}
-
-.project-card:hover{
-
-    transform:
-        translateY(-8px);
-}
-
-.project-card h3{
-
-    font-size:1.7rem;
-
-    margin-bottom:15px;
-
-    color:white;
-
-    font-family:
-        'Cormorant Garamond',
-        serif;
-}
-
-.project-card p{
-
-    color:var(--text-soft);
-
-    margin-bottom:18px;
-}
-
-.project-card a{
-
-    color:var(--gold);
-
-    text-decoration:none;
-
-    font-weight:700;
-}
-
-.project-card a:hover{
-
-    text-decoration:underline;
-}
-
-/* ========================= */
-/* ГРАНИ КУБИКА */
-/* ========================= */
-
-.project-card:nth-child(1){
-
-    border-top:
-        5px solid var(--blue);
-}
-
-.project-card:nth-child(2){
-
-    border-top:
-        5px solid var(--green);
-}
-
-.project-card:nth-child(3){
-
-    border-top:
-        5px solid var(--red);
-}
-
-.project-card:nth-child(4){
-
-    border-top:
-        5px solid var(--yellow);
-}
-
-/* ========================= */
-/* BADGES */
-/* ========================= */
-
-.badge{
-
-    display:inline-block;
-
-    margin-top:12px;
-
-    margin-right:8px;
-
-    padding:8px 14px;
-
-    border-radius:999px;
-
-    background:
-        rgba(255,255,255,.08);
-
-    color:var(--gold);
-
-    font-size:.85rem;
-
-    font-weight:700;
-}
-
-/* ========================= */
-/* ДОСТИЖЕНИЯ */
-/* ========================= */
-
-.achievement-list{
-
-    list-style:none;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:18px;
-
-    margin-top:30px;
-}
-
-.achievement-list li{
-
-    background:var(--card);
-
-    padding:22px 28px;
-
-    border-radius:18px;
-
-    box-shadow:var(--shadow);
-
-    color:var(--text-soft);
-
-    transition:.3s;
-
-    position:relative;
-
-    padding-left:70px;
-}
-
-.achievement-list li:hover{
-
-    transform:translateX(8px);
-}
-
-.achievement-list li::before{
-
-    content:"⭐";
-
-    position:absolute;
-
-    left:25px;
-
-    top:20px;
-
-    font-size:1.4rem;
-}
-
-.achievement-list strong{
-
-    color:white;
-}
-
-/* ========================= */
-/* КОНТАКТЫ */
-/* ========================= */
-
-.contacts{
-
-    display:flex;
-
-    justify-content:center;
-
-    flex-wrap:wrap;
-
-    gap:20px;
-
-    margin-top:30px;
-}
-
-.contacts a{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    text-decoration:none;
-
-    color:white;
-
-    background:var(--card);
-
-    padding:16px 28px;
-
-    border-radius:999px;
-
-    transition:.3s;
-
-    box-shadow:var(--shadow);
-
-    font-weight:600;
-}
-
-.contacts a:hover{
-
-    transform:translateY(-5px);
-
-    background:var(--gold);
-
-    color:#111;
-}
-
-/* ========================= */
-/* КНОПКИ */
-/* ========================= */
-
-.btn{
-
-    display:inline-block;
+    margin-top:10px;
 
     padding:14px 28px;
 
+    background:rgba(212,168,67,.08);
+
     border-radius:999px;
 
-    text-decoration:none;
-
-    font-weight:700;
-
-    transition:.3s;
-}
-
-.btn-primary{
-
-    background:var(--gold);
-
-    color:#111;
-}
-
-.btn-primary:hover{
-
-    transform:translateY(-4px);
-
-    box-shadow:
-        0 10px 25px rgba(212,168,67,.35);
-}
-
-.btn-outline{
-
-    border:2px solid var(--gold);
-
-    color:var(--gold);
-}
-
-.btn-outline:hover{
-
-    background:var(--gold);
-
-    color:#111;
-}
-
-/* ========================= */
-/* FOOTER */
-/* ========================= */
-
-footer{
-
-    margin-top:80px;
-
-    padding:50px 0;
-
-    text-align:center;
-
-    border-top:
-        1px solid rgba(255,255,255,.08);
-}
-
-.stardust{
-
-    color:var(--gold);
-
-    margin-bottom:15px;
+    color:var(--gold-dark);
 
     font-style:italic;
 
-    font-size:1.05rem;
-}
+    font-family:'Cormorant Garamond',serif;
 
-footer p{
-
-    color:var(--text-soft);
-}
-
-/* ========================= */
-/* МАЛЕНЬКИЙ ПРИНЦ */
-/* ========================= */
-
-.prince-quote{
-
-    text-align:center;
-
-    max-width:900px;
-
-    margin:50px auto;
-
-    padding:25px;
-
-    color:var(--gold);
-
-    font-size:1.3rem;
-
-    font-style:italic;
-
-    border-top:
-        1px solid rgba(212,168,67,.3);
-
-    border-bottom:
-        1px solid rgba(212,168,67,.3);
-}
-
-/* ========================= */
-/* АНИМАЦИИ */
-/* ========================= */
-
-@keyframes float{
-
-    0%{
-        transform:translateY(0);
-    }
-
-    50%{
-        transform:translateY(-10px);
-    }
-
-    100%{
-        transform:translateY(0);
-    }
-}
-
-.hero-avatar{
-
-    animation:
-        float 6s ease-in-out infinite;
-}
-
-/* ========================= */
-/* МОБИЛЬНАЯ ВЕРСИЯ */
-/* ========================= */
-
-@media(max-width:900px){
-
-    .grid-2{
-
-        grid-template-columns:1fr;
-    }
-
-    .info-grid{
-
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-
-    .hero h1{
-
-        font-size:3rem;
-    }
-}
-
-@media(max-width:600px){
-
-    .header-inner{
-
-        flex-direction:column;
-
-        gap:20px;
-    }
-
-    .nav{
-
-        flex-wrap:wrap;
-
-        justify-content:center;
-
-        gap:15px;
-    }
-
-    .hero{
-
-        padding:40px 0;
-    }
-
-    .hero h1{
-
-        font-size:2.3rem;
-    }
-
-    .hero-lead{
-
-        font-size:1rem;
-    }
-
-    .section{
-
-        padding:50px 0;
-    }
-
-    .section-title{
-
-        font-size:2.1rem;
-    }
-
-    .info-grid{
-
-        grid-template-columns:1fr;
-    }
-
-    .contacts{
-
-        flex-direction:column;
-    }
-
-    .contacts a{
-
-        justify-content:center;
-    }
-
-    .achievement-list li{
-
-        padding-left:60px;
-    }
-}
-
-/* ========================= */
-/* ДЕКОР */
-/* ========================= */
-
-.section-title::after{
-
-    content:"✦";
-
-    color:var(--gold);
-
-    margin-left:12px;
-
-    font-size:1.1rem;
-}
-
-.project-card::before{
-
-    content:"";
-
-    position:absolute;
-
-    top:0;
-    left:0;
-
-    width:100%;
-    height:100%;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.03),
-            transparent
-        );
-
-    pointer-events:none;
-}
-
-.project-card:hover{
-
-    box-shadow:
-        0 15px 40px rgba(0,0,0,.3),
-        0 0 20px rgba(212,168,67,.08);
-}
-
-.hero h1{
-
-    text-shadow:
-        0 0 20px rgba(212,168,67,.15);
+    font-size:1.2rem;
 }
