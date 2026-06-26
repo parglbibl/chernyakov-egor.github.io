@@ -22,19 +22,19 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // =====================================
-// 3. ГАЛЕРЕЯ И ЛАЙТБОКС — РАБОТАЕТ НА ВСЕХ УСТРОЙСТВАХ
+// 3. ГАЛЕРЕЯ И ЛАЙТБОКС
 // =====================================
 
 document.addEventListener("DOMContentLoaded", function() {
 
-    console.log("main.js загружен!"); // Проверка, что файл вообще запускается
+    console.log("main.js загружен!");
 
     const galleryItems = document.querySelectorAll('.gallery-item');
     console.log("Найдено элементов с классом gallery-item:", galleryItems.length);
 
     if (galleryItems.length === 0) return;
 
-    // Создаём лайтбокс
+    // Создаём лайтбокс, если его нет
     let overlay = document.querySelector('.lightbox-overlay');
     if (!overlay) {
         overlay = document.createElement('div');
@@ -71,21 +71,20 @@ document.addEventListener("DOMContentLoaded", function() {
         document.body.style.overflow = '';
     }
 
-    // Обработчик клика
     function handleGalleryClick(e) {
         const item = e.currentTarget;
         const img = item.querySelector('img');
+        const placeholder = item.querySelector('.placeholder');
         const captionText = getCaption(item);
         console.log("Клик по элементу галереи, caption:", captionText);
 
         if (img && img.src && !img.src.includes('undefined')) {
             openLightbox(img.src, captionText);
-        } else {
+        } else if (placeholder) {
             alert('🖼 Фото пока не загружено. Замените заглушку на своё фото!');
         }
     }
 
-    // Вешаем обработчики
     galleryItems.forEach(function(item) {
         item.addEventListener('click', handleGalleryClick);
         item.addEventListener('touchstart', handleGalleryClick, { passive: true });
