@@ -207,7 +207,9 @@ header{
     color:var(--dark);
 }
 
-/* ===== HERO ===== */
+/* ==========================================
+   HERO
+========================================== */
 
 .hero{
 
@@ -216,32 +218,50 @@ header{
     text-align:center;
 }
 
-.hero-avatar{
-
-    width:100%;
-
-    max-width:650px;
-
-    margin:auto;
-
-    border-radius:30px;
-
-    overflow:hidden;
-
-    border:6px solid var(--gold);
-
-    box-shadow:var(--shadow);
-
-    background:white;
+.hero-avatar {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    border-radius: 28px;
+    overflow: hidden;
+    border: 6px solid var(--gold);
+    box-shadow: var(--shadow);
+    background: white;
+    transition: transform 0.3s ease;
 }
 
-.hero-avatar img{
+.hero-avatar:hover {
+    transform: scale(1.01);
+}
 
-    width:100%;
+.hero-avatar img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 4 / 5;
+}
 
-    display:block;
+@media (max-width: 992px) {
+    .hero-avatar {
+        max-width: 420px;
+    }
+}
 
-    object-fit:cover;
+@media (max-width: 768px) {
+    .hero-avatar {
+        max-width: 340px;
+        border-width: 4px;
+        border-radius: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-avatar {
+        max-width: 260px;
+        border-width: 3px;
+        border-radius: 16px;
+    }
 }
 
 .hero h1{
@@ -827,46 +847,6 @@ header{
 }
 
 /* ==========================================
-   ФОТО В HERO
-========================================== */
-
-.hero-avatar{
-
-    position:relative;
-}
-
-.hero-avatar::after{
-
-    content:"✦";
-
-    position:absolute;
-
-    top:15px;
-
-    right:20px;
-
-    width:50px;
-
-    height:50px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    border-radius:50%;
-
-    background:rgba(255,255,255,.95);
-
-    color:var(--gold);
-
-    font-size:1.5rem;
-
-    font-weight:bold;
-}
-
-/* ==========================================
    КРАСИВЫЕ РАЗДЕЛИТЕЛИ
 ========================================== */
 
@@ -927,6 +907,13 @@ header{
     color:var(--text);
 
     margin-top:8px;
+}
+
+.stat-desc {
+    font-size: 0.85rem;
+    color: var(--text);
+    opacity: 0.7;
+    margin-top: 4px;
 }
 
 /* ==========================================
@@ -1029,7 +1016,7 @@ footer p{
 
     .stats{
 
-        grid-template-columns:1fr;
+        grid-template-columns:1fr 1fr;
     }
 
     .prince-quote{
@@ -1055,6 +1042,19 @@ footer p{
     .section-title{
 
         font-size:1.9rem;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+        gap: 16px;
+    }
+
+    .stat-card{
+        padding: 18px;
+    }
+
+    .stat-number{
+        font-size: 2rem;
     }
 
     .contacts a{
