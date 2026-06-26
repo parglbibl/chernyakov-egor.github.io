@@ -2,99 +2,101 @@
 // Егор Черняков — main.js
 // =====================================
 
-// Автоматический текущий год в футере
-
+// ===== 1. ТЕКУЩИЙ ГОД В ПОДВАЛЕ =====
 document.addEventListener("DOMContentLoaded", () => {
-
     const year = document.getElementById("current-year");
-
     if (year) {
         year.textContent = new Date().getFullYear();
     }
-
 });
 
-// =====================================
-// Плавная прокрутка для якорей
-// =====================================
-
+// ===== 2. ПЛАВНАЯ ПРОКРУТКА ДЛЯ ЯКОРЕЙ =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-
     anchor.addEventListener("click", function (e) {
-
-        const target = document.querySelector(
-            this.getAttribute("href")
-        );
-
+        const target = document.querySelector(this.getAttribute("href"));
         if (target) {
-
             e.preventDefault();
-
-            target.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
         }
-
     });
-
 });
 
 // =====================================
-// Lightbox для галереи
+// 3. ГАЛЕРЕЯ И ЛАЙТБОКС
 // =====================================
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function() {
 
-    const images = document.querySelectorAll(".gallery img");
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    if (galleryItems.length === 0) return;
 
-    if (!images.length) return;
+    // Создаём структуру лайтбокса один раз
+    let overlay = document.querySelector('.lightbox-overlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.className = 'lightbox-overlay';
+        overlay.innerHTML = `
+            <div class="lightbox-content">
+                <span class="close-btn">&times;</span>
+                <img src="" alt="Увеличенное фото">
+                <div class="caption"></div>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+    }
 
-    const overlay = document.createElement("div");
-    overlay.className = "lightbox-overlay";
+    const lightboxImg = overlay.querySelector('img');
+    const caption = overlay.querySelector('.caption');
+    const closeBtn = overlay.querySelector('.close-btn');
 
-    overlay.innerHTML = `
-        <div class="lightbox-content">
-            <span class="close-btn">&times;</span>
-            <img src="" alt="">
-        </div>
-    `;
+    // Функция получения подписи
+    function getCaption(item) {
+        return item.getAttribute('data-caption') || 'Мозаика из кубиков Рубика';
+    }
 
-    document.body.appendChild(overlay);
+    // Открыть лайтбокс
+    function openLightbox(src, captionText) {
+        lightboxImg.src = src;
+        caption.textContent = captionText;
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
 
-    const overlayImg =
-        overlay.querySelector("img");
+    // Закрыть лайтбокс
+    function closeLightbox() {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
 
-    const closeBtn =
-        overlay.querySelector(".close-btn");
+    // Клик по элементам галереи
+    galleryItems.forEach(function(item) {
+        item.addEventListener('click', function() {
+            const img = this.querySelector('img');
+            const captionText = getCaption(this);
 
-    images.forEach(img => {
-
-        img.addEventListener("click", () => {
-
-            overlayImg.src = img.src;
-
-            overlay.classList.add("active");
-
+            if (img && img.src && !img.src.includes('undefined')) {
+                openLightbox(img.src, captionText);
+            } else {
+                alert('🖼 Фото пока не загружено. Замените заглушку на своё фото!');
+            }
         });
-
     });
 
-    closeBtn.addEventListener("click", () => {
+    // Закрытие по крестику
+    closeBtn.addEventListener('click', closeLightbox);
 
-        overlay.classList.remove("active");
-
-    });
-
-    overlay.addEventListener("click", e => {
-
+    // Закрытие по клику на фон
+    overlay.addEventListener('click', function(e) {
         if (e.target === overlay) {
-
-            overlay.classList.remove("active");
-
+            closeLightbox();
         }
+    });
 
+    // Закрытие по Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeLightbox();
+        }
     });
 
 });
