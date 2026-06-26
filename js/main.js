@@ -1,5 +1,5 @@
 // =====================================
-// Егор Черняков — main.js (мобильная версия)
+// Егор Черняков — main.js
 // =====================================
 
 // ===== 1. ТЕКУЩИЙ ГОД В ПОДВАЛЕ =====
@@ -22,15 +22,19 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // =====================================
-// 3. ГАЛЕРЕЯ И ЛАЙТБОКС (с поддержкой мобильных)
+// 3. ГАЛЕРЕЯ И ЛАЙТБОКС — РАБОТАЕТ НА ВСЕХ УСТРОЙСТВАХ
 // =====================================
 
 document.addEventListener("DOMContentLoaded", function() {
 
+    console.log("main.js загружен!"); // Проверка, что файл вообще запускается
+
     const galleryItems = document.querySelectorAll('.gallery-item');
+    console.log("Найдено элементов с классом gallery-item:", galleryItems.length);
+
     if (galleryItems.length === 0) return;
 
-    // Создаём структуру лайтбокса один раз
+    // Создаём лайтбокс
     let overlay = document.querySelector('.lightbox-overlay');
     if (!overlay) {
         overlay = document.createElement('div');
@@ -43,60 +47,55 @@ document.addEventListener("DOMContentLoaded", function() {
             </div>
         `;
         document.body.appendChild(overlay);
+        console.log("Лайтбокс создан!");
     }
 
     const lightboxImg = overlay.querySelector('img');
     const caption = overlay.querySelector('.caption');
     const closeBtn = overlay.querySelector('.close-btn');
 
-    // Функция получения подписи
     function getCaption(item) {
         return item.getAttribute('data-caption') || 'Мозаика из кубиков Рубика';
     }
 
-    // Открыть лайтбокс
     function openLightbox(src, captionText) {
+        console.log("Открываем лайтбокс с фото:", src);
         lightboxImg.src = src;
         caption.textContent = captionText;
         overlay.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
 
-    // Закрыть лайтбокс
     function closeLightbox() {
         overlay.classList.remove('active');
         document.body.style.overflow = '';
     }
 
-    // Обработчик клика/касания для элементов галереи
+    // Обработчик клика
     function handleGalleryClick(e) {
         const item = e.currentTarget;
         const img = item.querySelector('img');
-        const placeholder = item.querySelector('.placeholder');
         const captionText = getCaption(item);
+        console.log("Клик по элементу галереи, caption:", captionText);
 
         if (img && img.src && !img.src.includes('undefined')) {
             openLightbox(img.src, captionText);
-        } else if (placeholder) {
+        } else {
             alert('🖼 Фото пока не загружено. Замените заглушку на своё фото!');
         }
     }
 
-    // Добавляем обработчики для мыши и касания
+    // Вешаем обработчики
     galleryItems.forEach(function(item) {
-        // Для десктопа
         item.addEventListener('click', handleGalleryClick);
-        // Для мобильных (чтобы не было задержки)
         item.addEventListener('touchstart', handleGalleryClick, { passive: true });
     });
 
-    // Закрытие по крестику (для мыши и касания)
     if (closeBtn) {
         closeBtn.addEventListener('click', closeLightbox);
         closeBtn.addEventListener('touchstart', closeLightbox, { passive: true });
     }
 
-    // Закрытие по клику на фон (для мыши и касания)
     overlay.addEventListener('click', function(e) {
         if (e.target === overlay) {
             closeLightbox();
@@ -108,7 +107,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }, { passive: true });
 
-    // Закрытие по Escape
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
             closeLightbox();
