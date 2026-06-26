@@ -72,18 +72,24 @@ document.addEventListener("DOMContentLoaded", function() {
     galleryItems.forEach(function(item) {
         item.addEventListener('click', function() {
             const img = this.querySelector('img');
+            const placeholder = this.querySelector('.placeholder');
             const captionText = getCaption(this);
 
             if (img && img.src && !img.src.includes('undefined')) {
                 openLightbox(img.src, captionText);
             } else {
-                alert('🖼 Фото пока не загружено. Замените заглушку на своё фото!');
+                // Если есть плейсхолдер — показываем сообщение
+                if (placeholder) {
+                    alert('🖼 Фото пока не загружено. Замените заглушку на своё фото!');
+                }
             }
         });
     });
 
     // Закрытие по крестику
-    closeBtn.addEventListener('click', closeLightbox);
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeLightbox);
+    }
 
     // Закрытие по клику на фон
     overlay.addEventListener('click', function(e) {
