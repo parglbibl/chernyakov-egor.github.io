@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Егор Черняков · Мозаики из кубиков Рубика</title>
+
+    <meta name="description" content="Мозаики из кубиков Рубика, созданные Егором Черняковым. Картины для VK Fest, логотип Додо, карельский орнамент и другие работы.">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="icon" href="images/favicon.png">
+
+    <style>
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            background: white;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            aspect-ratio: 1 / 1;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.03);
+        }
+
+        .gallery-item .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.6));
+            padding: 20px 16px 14px;
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+
+        .gallery-item .placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #e8e4dc;
+            color: #b0a89a;
+            font-size: 3rem;
+            font-weight: 300;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .gallery-item .placeholder span {
+            font-size: 0.9rem;
+            margin-top: 8px;
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 12px;
+            }
+            .gallery-item .overlay {
+                font-size: 0.75rem;
+                padding: 12px 12px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+
+    <div class="container header-inner">
+
+        <div class="logo">
+            <a href="index.html">
+                ✦ Егор <span>Черняков</span>
+            </a>
+        </div>
+
+        <ul class="nav">
+
+            <li><a href="index.html">Главная</a></li>
+
+            <li><a href="about.html">О себе</a></li>
+
+            <li><a href="projects.html">Проекты</a></li>
+
+            <li><a href="achievements.html">Достижения</a></li>
+
+            <li><a href="gallery.html" class="active">Галерея</a></li>
+
+            <li><a href="contacts.html">Контакты</a></li>
+
+        </ul>
+
+    </div>
+
+</header>
+
+<section class="hero">
+
+    <div class="container">
+
+        <div class="hero-avatar">
+
+            <img src="images/photo.jpg" alt="Егор Черняков">
+
+        </div>
+
+        <h1>
+
+            Мозаики из <span>кубиков</span>
+
+        </h1>
+
+        <p class="hero-lead">
+
+            Тысячи кубиков Рубика — одна большая картина
+
+        </p>
+
+        <div class="hero-quote">
+
+            ✨ «Самого главного глазами не увидишь» ✨
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <span>🖼</span>
+
+            Мои работы
+
+        </div>
+
+        <div class="section-quote">
+
+            Каждая мозаика — это история,
+            сложенная из цветных граней.
+
+        </div>
+
+        <div class="gallery" id="mosaicGallery">
+
+            <!-- ===== БОЛВАНКИ ===== -->
+            <!-- Замените src на свои фото, а подпись — на реальную -->
+
+            <div class="gallery-item" data-caption="VK Fest 2025">
+                <div class="placeholder">
+                    🧩
+                    <span>VK Fest 2025</span>
+                </div>
+                <div class="overlay">VK Fest 2025</div>
+            </div>
+
+            <div class="gallery-item" data-caption="Логотип Додо">
+                <div class="placeholder">
+                    🧩
+                    <span>Логотип Додо</span>
+                </div>
+                <div class="overlay">Логотип Додо</div>
+            </div>
+
+            <div class="gallery-item" data-caption="Карельский орнамент">
+                <div class="placeholder">
+                    🧩
+                    <span>Карельский орнамент</span>
+                </div>
+                <div class="overlay">Карельский орнамент</div>
+            </div>
+
+            <div class="gallery-item" data-caption="Мозаика на VK Fest">
+                <div class="placeholder">
+                    🧩
+                    <span>Мозаика на VK Fest</span>
+                </div>
+                <div class="overlay">Мозаика на VK Fest</div>
+            </div>
+
+            <div class="gallery-item" data-caption="Картина из кубиков">
+                <div class="placeholder">
+                    🧩
+                    <span>Картина из кубиков</span>
+                </div>
+                <div class="overlay">Картина из кубиков</div>
+            </div>
+
+            <div class="gallery-item" data-caption="Портрет из кубиков">
+                <div class="placeholder">
+                    🧩
+                    <span>Портрет из кубиков</span>
+                </div>
+                <div class="overlay">Портрет из кубиков</div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="prince-quote">
+
+            «Зорко одно лишь сердце.
+            Самого главного глазами не увидишь».
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ===== LIGHTBOX ===== -->
+
+<div class="lightbox-overlay" id="lightboxOverlay">
+
+    <div class="lightbox-content">
+
+        <span class="close-btn" id="closeLightbox">&times;</span>
+
+        <img id="lightboxImage" src="" alt="Увеличенное фото">
+
+        <div class="caption" id="lightboxCaption"></div>
+
+    </div>
+
+</div>
+
+<footer>
+
+    <div class="container">
+
+        <p class="stardust">
+
+            ✦ Каждая картина начинается с одного кубика ✦
+
+        </p>
+
+        <p>
+
+            © <span id="current-year"></span>
+            Егор Черняков
+
+        </p>
+
+    </div>
+
+</footer>
+
+<script src="js/main.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const overlay = document.getElementById('lightboxOverlay');
+        const lightboxImg = document.getElementById('lightboxImage');
+        const caption = document.getElementById('lightboxCaption');
+        const closeBtn = document.getElementById('closeLightbox');
+
+        function getCaption(item) {
+            return item.getAttribute('data-caption') || 'Мозаика из кубиков Рубика';
+        }
+
+        function openLightbox(src, captionText) {
+            lightboxImg.src = src;
+            caption.textContent = captionText;
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        galleryItems.forEach(function(item) {
+            item.addEventListener('click', function() {
+                const img = this.querySelector('img');
+                const captionText = getCaption(this);
+                if (img && img.src && !img.src.includes('undefined')) {
+                    openLightbox(img.src, captionText);
+                } else {
+                    alert('🖼 Фото пока не загружено. Замените заглушку на своё фото!');
+                }
+            });
+        });
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closeLightbox);
+        }
+
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                closeLightbox();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+
+        const yearSpan = document.getElementById('current-year');
+        if (yearSpan) {
+            yearSpan.textContent = new Date().getFullYear();
+        }
+
+    });
+</script>
+
+</body>
+</html>
