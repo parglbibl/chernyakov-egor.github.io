@@ -1,119 +1,94 @@
-// =====================================
-// Егор Черняков — main.js
-// =====================================
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-// ===== 1. ТЕКУЩИЙ ГОД В ПОДВАЛЕ =====
-document.addEventListener("DOMContentLoaded", () => {
-    const year = document.getElementById("current-year");
-    if (year) {
-        year.textContent = new Date().getFullYear();
-    }
-});
+    <title>Егор Черняков · Мозаики из кубиков Рубика</title>
 
-// ===== 2. ПЛАВНАЯ ПРОКРУТКА ДЛЯ ЯКОРЕЙ =====
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener("click", function (e) {
-        const target = document.querySelector(this.getAttribute("href"));
-        if (target) {
-            e.preventDefault();
-            target.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-    });
-});
+    <meta name="description" content="Мозаики из кубиков Рубика, созданные Егором Черняковым." />
 
-// =====================================
-// 3. ГАЛЕРЕЯ И ЛАЙТБОКС (РАБОТАЕТ НА ВСЕХ УСТРОЙСТВАХ)
-// =====================================
+    <link rel="stylesheet" href="css/style.css" />
 
-document.addEventListener("DOMContentLoaded", function() {
+    <link rel="icon" href="images/favicon.png" />
+</head>
 
-    // Ищем все элементы с классом gallery-item
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    if (galleryItems.length === 0) return;
+<body>
 
-    // Создаём лайтбокс, если его ещё нет
-    let overlay = document.querySelector('.lightbox-overlay');
-    if (!overlay) {
-        overlay = document.createElement('div');
-        overlay.className = 'lightbox-overlay';
-        overlay.innerHTML = `
-            <div class="lightbox-content">
-                <span class="close-btn">&times;</span>
-                <img src="" alt="Увеличенное фото">
-                <div class="caption"></div>
+    <header>
+        <div class="container header-inner">
+            <div class="logo">
+                <a href="index.html">✦ Егор <span>Черняков</span></a>
             </div>
-        `;
-        document.body.appendChild(overlay);
-    }
+            <ul class="nav">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="about.html">О себе</a></li>
+                <li><a href="projects.html">Проекты</a></li>
+                <li><a href="achievements.html">Достижения</a></li>
+                <li><a href="gallery.html" class="active">Галерея</a></li>
+                <li><a href="contacts.html">Контакты</a></li>
+            </ul>
+        </div>
+    </header>
 
-    const lightboxImg = overlay.querySelector('img');
-    const caption = overlay.querySelector('.caption');
-    const closeBtn = overlay.querySelector('.close-btn');
+    <section class="hero">
+        <div class="container">
+            <div class="hero-avatar">
+                <img src="images/photo.jpg" alt="Егор Черняков" />
+            </div>
+            <h1>Мозаики из <span>кубиков</span></h1>
+            <p class="hero-lead">Тысячи кубиков Рубика — одна большая картина</p>
+            <div class="hero-quote">✨ «Самого главного глазами не увидишь» ✨</div>
+        </div>
+    </section>
 
-    // Функция получения подписи
-    function getCaption(item) {
-        return item.getAttribute('data-caption') || 'Мозаика из кубиков Рубика';
-    }
+    <section class="section">
+        <div class="container">
+            <div class="section-title"><span>🖼</span> Мои работы</div>
+            <div class="section-quote">Каждая мозаика — это история, сложенная из цветных граней.</div>
 
-    // Открыть лайтбокс
-    function openLightbox(src, captionText) {
-        lightboxImg.src = src;
-        caption.textContent = captionText;
-        overlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
+            <div class="gallery" id="mosaicGallery">
+                <div class="gallery-item" data-caption="VK Fest 2025">
+                    <div class="placeholder">🧩<span>VK Fest 2025</span></div>
+                    <div class="overlay">VK Fest 2025</div>
+                </div>
+                <div class="gallery-item" data-caption="Логотип Додо">
+                    <div class="placeholder">🧩<span>Логотип Додо</span></div>
+                    <div class="overlay">Логотип Додо</div>
+                </div>
+                <div class="gallery-item" data-caption="Карельский орнамент">
+                    <div class="placeholder">🧩<span>Карельский орнамент</span></div>
+                    <div class="overlay">Карельский орнамент</div>
+                </div>
+                <div class="gallery-item" data-caption="Мозаика на VK Fest">
+                    <div class="placeholder">🧩<span>Мозаика на VK Fest</span></div>
+                    <div class="overlay">Мозаика на VK Fest</div>
+                </div>
+                <div class="gallery-item" data-caption="Картина из кубиков">
+                    <div class="placeholder">🧩<span>Картина из кубиков</span></div>
+                    <div class="overlay">Картина из кубиков</div>
+                </div>
+                <div class="gallery-item" data-caption="Портрет из кубиков">
+                    <div class="placeholder">🧩<span>Портрет из кубиков</span></div>
+                    <div class="overlay">Портрет из кубиков</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    // Закрыть лайтбокс
-    function closeLightbox() {
-        overlay.classList.remove('active');
-        document.body.style.overflow = '';
-    }
+    <section class="section">
+        <div class="container">
+            <div class="prince-quote">«Зорко одно лишь сердце. Самого главного глазами не увидишь».</div>
+        </div>
+    </section>
 
-    // Обработчик клика/касания для элементов галереи
-    function handleGalleryClick(e) {
-        const item = e.currentTarget;
-        const img = item.querySelector('img');
-        const placeholder = item.querySelector('.placeholder');
-        const captionText = getCaption(item);
+    <footer>
+        <div class="container">
+            <p class="stardust">✦ Каждая картина начинается с одного кубика ✦</p>
+            <p>© <span id="current-year"></span> Егор Черняков</p>
+        </div>
+    </footer>
 
-        if (img && img.src && !img.src.includes('undefined')) {
-            openLightbox(img.src, captionText);
-        } else if (placeholder) {
-            alert('🖼 Фото пока не загружено. Замените заглушку на своё фото!');
-        }
-    }
-
-    // Добавляем обработчики для мыши и касания
-    galleryItems.forEach(function(item) {
-        // Для десктопа
-        item.addEventListener('click', handleGalleryClick);
-        // Для мобильных
-        item.addEventListener('touchstart', handleGalleryClick, { passive: true });
-    });
-
-    // Закрытие по крестику (для мыши и касания)
-    if (closeBtn) {
-        closeBtn.addEventListener('click', closeLightbox);
-        closeBtn.addEventListener('touchstart', closeLightbox, { passive: true });
-    }
-
-    // Закрытие по клику на фон (для мыши и касания)
-    overlay.addEventListener('click', function(e) {
-        if (e.target === overlay) {
-            closeLightbox();
-        }
-    });
-    overlay.addEventListener('touchstart', function(e) {
-        if (e.target === overlay) {
-            closeLightbox();
-        }
-    }, { passive: true });
-
-    // Закрытие по Escape
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            closeLightbox();
-        }
-    });
-
-});
+    <script src="js/main.js"></script>
+</body>
+</html>
