@@ -1,5 +1,5 @@
 // =====================================
-// Егор Черняков — main.js
+// Егор Черняков — main.js (мобильная версия)
 // =====================================
 
 // ===== 1. ТЕКУЩИЙ ГОД В ПОДВАЛЕ =====
@@ -22,7 +22,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // =====================================
-// 3. ГАЛЕРЕЯ И ЛАЙТБОКС
+// 3. ГАЛЕРЕЯ И ЛАЙТБОКС (с поддержкой мобильных)
 // =====================================
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -68,35 +68,45 @@ document.addEventListener("DOMContentLoaded", function() {
         document.body.style.overflow = '';
     }
 
-    // Клик по элементам галереи
-    galleryItems.forEach(function(item) {
-        item.addEventListener('click', function() {
-            const img = this.querySelector('img');
-            const placeholder = this.querySelector('.placeholder');
-            const captionText = getCaption(this);
+    // Обработчик клика/касания для элементов галереи
+    function handleGalleryClick(e) {
+        const item = e.currentTarget;
+        const img = item.querySelector('img');
+        const placeholder = item.querySelector('.placeholder');
+        const captionText = getCaption(item);
 
-            if (img && img.src && !img.src.includes('undefined')) {
-                openLightbox(img.src, captionText);
-            } else {
-                // Если есть плейсхолдер — показываем сообщение
-                if (placeholder) {
-                    alert('🖼 Фото пока не загружено. Замените заглушку на своё фото!');
-                }
-            }
-        });
-    });
-
-    // Закрытие по крестику
-    if (closeBtn) {
-        closeBtn.addEventListener('click', closeLightbox);
+        if (img && img.src && !img.src.includes('undefined')) {
+            openLightbox(img.src, captionText);
+        } else if (placeholder) {
+            alert('🖼 Фото пока не загружено. Замените заглушку на своё фото!');
+        }
     }
 
-    // Закрытие по клику на фон
+    // Добавляем обработчики для мыши и касания
+    galleryItems.forEach(function(item) {
+        // Для десктопа
+        item.addEventListener('click', handleGalleryClick);
+        // Для мобильных (чтобы не было задержки)
+        item.addEventListener('touchstart', handleGalleryClick, { passive: true });
+    });
+
+    // Закрытие по крестику (для мыши и касания)
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeLightbox);
+        closeBtn.addEventListener('touchstart', closeLightbox, { passive: true });
+    }
+
+    // Закрытие по клику на фон (для мыши и касания)
     overlay.addEventListener('click', function(e) {
         if (e.target === overlay) {
             closeLightbox();
         }
     });
+    overlay.addEventListener('touchstart', function(e) {
+        if (e.target === overlay) {
+            closeLightbox();
+        }
+    }, { passive: true });
 
     // Закрытие по Escape
     document.addEventListener('keydown', function(e) {
