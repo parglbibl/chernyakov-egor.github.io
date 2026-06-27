@@ -719,7 +719,7 @@ footer p {
         height: 38px !important;
     }
     body {
-        padding-top: 38px !important;
+        padding-top: 0px !important;
     }
     .nav {
         gap: 14px;
