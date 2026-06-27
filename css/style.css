@@ -38,7 +38,7 @@ body {
     margin: 0 auto;
 }
 
-/* ===== ЗВЁЗДНОЕ НЕБО (ТОЛЬКО ФОН) ===== */
+/* ===== ЗВЁЗДНОЕ НЕБО ===== */
 .stars-container {
     position: fixed;
     top: 0;
@@ -61,7 +61,7 @@ body > *:not(.stars-container) {
     z-index: 1;
 }
 
-/* ===== ШАПКА (ВПРИТЫК К ВЕРХУ, БЕЗ ЗВЁЗД) ===== */
+/* ===== ШАПКА (ВПРИТЫК К ВЕРХУ) ===== */
 header {
     position: fixed;
     top: 0;
@@ -69,19 +69,23 @@ header {
     width: 100%;
     z-index: 100;
     backdrop-filter: blur(14px);
-    background: rgba(8, 11, 20, 0.92);
+    background: rgba(8, 11, 20, 0.95);
     border-bottom: 1px solid var(--line);
-    padding: 0;
-    margin: 0;
-}
-
-.header-inner {
-    min-height: 44px;
+    height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0;
     margin: 0;
+}
+
+.header-inner {
+    width: 100%;
+    max-width: 1120px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .nav {
@@ -105,15 +109,16 @@ header {
     font-size: 15px;
     transition: 0.3s;
     position: relative;
-    padding: 8px 0;
+    padding: 4px 0;
     margin: 0;
     display: inline-block;
+    line-height: 1;
 }
 
 .nav a::after {
     content: '';
     position: absolute;
-    bottom: 2px;
+    bottom: -2px;
     left: 0;
     width: 0;
     height: 2px;
@@ -709,165 +714,131 @@ footer p {
 
 /* ===== АДАПТИВ ===== */
 @media (max-width: 760px) {
-    .header-inner {
-        min-height: 38px;
+    header {
+        height: 38px;
     }
-
-    .nav {
-        gap: 12px;
-    }
-    
-    .nav a {
-        font-size: 12px;
-        padding: 6px 0;
-    }
-
     body {
         padding-top: 38px;
     }
-
+    .nav {
+        gap: 14px;
+    }
+    .nav a {
+        font-size: 13px;
+        padding: 2px 0;
+    }
     .section {
         padding: 50px 0;
     }
-    
     body {
         font-size: 16px;
     }
-
     .grid-2 {
         grid-template-columns: 1fr;
     }
-
     .stats {
         grid-template-columns: 1fr 1fr;
         gap: 14px;
     }
-
     .timeline-item {
         flex-direction: column;
         gap: 4px;
     }
-
     .contacts {
         gap: 12px;
     }
-
     .contacts a {
         padding: 12px 22px;
         font-size: 16px;
     }
-
     .gallery {
         grid-template-columns: 1fr 1fr;
     }
-
     .hero-avatar img {
         width: 280px;
     }
-    
     .section-text {
         font-size: 17px;
     }
-    
     .card p {
         font-size: 16px;
     }
-    
     .project-card p {
         font-size: 16px;
     }
 }
 
 @media (max-width: 480px) {
-    .header-inner {
-        min-height: 34px;
+    header {
+        height: 34px;
     }
-
-    .nav {
-        gap: 8px;
-    }
-    
-    .nav a {
-        font-size: 11px;
-        padding: 4px 0;
-    }
-
     body {
         padding-top: 34px;
     }
-
+    .nav {
+        gap: 10px;
+    }
+    .nav a {
+        font-size: 11px;
+        padding: 2px 0;
+    }
     .stats {
         grid-template-columns: 1fr;
     }
-
     .gallery {
         grid-template-columns: 1fr 1fr;
         gap: 12px;
     }
-
     .gallery-item {
         aspect-ratio: 1 / 1;
     }
-
     .hero-avatar img {
         width: 220px;
     }
-
     .hero-quote {
         font-size: 16px;
         padding: 10px 16px;
         white-space: normal;
     }
-    
     .section-title {
         font-size: 28px;
     }
-    
     .section-subtitle {
         font-size: 17px;
     }
-    
     .hero-lead {
         font-size: 17px;
     }
-    
     h1 {
         font-size: 34px;
     }
-
     .lightbox-content img {
         max-height: 75vh;
         max-width: 98%;
     }
-
     .close-btn {
         top: 5px;
         right: 10px;
         font-size: 2.4rem;
     }
-
     .lightbox-nav {
         gap: 12px;
         padding: 6px 14px;
     }
-
     .nav-btn {
         width: 38px;
         height: 38px;
         font-size: 22px;
     }
-
     .counter {
         font-size: 14px;
         min-width: 50px;
     }
-
     .lightbox-content .caption {
         font-size: 15px;
         padding: 6px 14px;
         margin-top: 4px;
     }
-    
     .contacts a {
         font-size: 15px;
         padding: 10px 18px;
