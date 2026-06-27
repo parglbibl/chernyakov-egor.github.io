@@ -12,6 +12,7 @@
     --card-bg: rgba(255, 255, 255, 0.06);
 }
 
+/* ===== ПОЛНЫЙ СБРОС ОТСТУПОВ ===== */
 * {
     margin: 0;
     padding: 0;
@@ -19,18 +20,18 @@
 }
 
 html, body {
-    margin: 0;
-    padding: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: radial-gradient(circle at top, #1b2545 0%, #080b14 45%);
 }
 
 body {
     font-family: 'Inter', Arial, sans-serif;
-    background: radial-gradient(circle at top, #1b2545 0%, #080b14 45%);
     color: var(--text);
     line-height: 1.8;
     min-height: 100vh;
     font-size: 18px;
-    padding-top: 44px;
+    padding-top: 44px !important;
 }
 
 .container {
@@ -64,10 +65,10 @@ body > *:not(.stars-container) {
 /* ===== ШАПКА (ВПРИТЫК К ВЕРХУ) ===== */
 header {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 100;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    z-index: 100 !important;
     backdrop-filter: blur(14px);
     background: rgba(8, 11, 20, 0.95);
     border-bottom: 1px solid var(--line);
@@ -75,8 +76,8 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0;
-    margin: 0;
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
 .header-inner {
@@ -715,10 +716,10 @@ footer p {
 /* ===== АДАПТИВ ===== */
 @media (max-width: 760px) {
     header {
-        height: 38px;
+        height: 38px !important;
     }
     body {
-        padding-top: 38px;
+        padding-top: 38px !important;
     }
     .nav {
         gap: 14px;
@@ -727,6 +728,7 @@ footer p {
         font-size: 13px;
         padding: 2px 0;
     }
+
     .section {
         padding: 50px 0;
     }
@@ -770,10 +772,10 @@ footer p {
 
 @media (max-width: 480px) {
     header {
-        height: 34px;
+        height: 34px !important;
     }
     body {
-        padding-top: 34px;
+        padding-top: 34px !important;
     }
     .nav {
         gap: 10px;
@@ -782,6 +784,7 @@ footer p {
         font-size: 11px;
         padding: 2px 0;
     }
+
     .stats {
         grid-template-columns: 1fr;
     }
