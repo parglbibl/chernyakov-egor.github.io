@@ -1,52 +1,52 @@
 // =====================================
-// main.js — Егор Черняков
+// main.js — Егор Черняков (универсальный)
 // =====================================
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function() {
 
     // ===== 1. ТЕКУЩИЙ ГОД В ПОДВАЛЕ =====
-    const year = document.getElementById("current-year");
+    var year = document.getElementById("current-year");
     if (year) {
         year.textContent = new Date().getFullYear();
     }
 
     // ===== 2. ПЛАВНАЯ ПРОКРУТКА =====
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function(e) {
-            const target = document.querySelector(this.getAttribute("href"));
+    var anchors = document.querySelectorAll('a[href^="#"]');
+    for (var i = 0; i < anchors.length; i++) {
+        anchors[i].addEventListener("click", function(e) {
+            var target = document.querySelector(this.getAttribute("href"));
             if (target) {
                 e.preventDefault();
                 target.scrollIntoView({ behavior: "smooth", block: "start" });
             }
         });
-    });
+    }
 
     // ===== 3. ЗВЁЗДНОЕ НЕБО (CSS-ЗВЁЗДЫ) =====
     function initStars() {
-        const container = document.getElementById('starsContainer');
+        var container = document.getElementById('starsContainer');
         if (!container) return;
         
-        const starCount = 400;
+        if (container.children.length > 0) return;
         
-        for (let i = 0; i < starCount; i++) {
-            const star = document.createElement('div');
+        var starCount = 400;
+        var fragment = document.createDocumentFragment();
+        
+        for (var i = 0; i < starCount; i++) {
+            var star = document.createElement('div');
             star.className = 'star-dot';
             
-            const x = Math.random() * 100;
-            const y = Math.random() * 100;
-            const size = Math.random() * 2.5 + 0.5;
-            const opacity = Math.random() * 0.6 + 0.2;
+            var x = Math.random() * 100;
+            var y = Math.random() * 100;
+            var size = Math.random() * 2.5 + 0.5;
+            var opacity = Math.random() * 0.6 + 0.2;
             
-            star.style.cssText = `
-                left: ${x}%;
-                top: ${y}%;
-                width: ${size}px;
-                height: ${size}px;
-                opacity: ${opacity};
-            `;
+            star.style.cssText = 'left:' + x + '%;top:' + y + '%;width:' + size + 'px;height:' + size + 'px;opacity:' + opacity + ';';
             
-            container.appendChild(star);
+            fragment.appendChild(star);
         }
+        
+        container.appendChild(fragment);
     }
     
     initStars();
