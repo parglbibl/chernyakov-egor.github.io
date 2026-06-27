@@ -42,7 +42,7 @@
     <section class="section">
         <div class="container">
             <div class="section-title">Мои работы</div>
-            <div class="section-subtitle">Каждая мозаика — это история, сложенная из цветных граней.</div>
+            <div class="section-subtitle">Нажмите на любую картину, чтобы рассмотреть в деталях</div>
 
             <div class="gallery" id="mosaicGallery"></div>
         </div>
@@ -87,7 +87,7 @@
 
             gallery.innerHTML = html;
 
-            // ===== ЛАЙТБОКС =====
+            // ===== РАСШИРЕННЫЙ ЛАЙТБОКС С МАКСИМАЛЬНЫМ УВЕЛИЧЕНИЕМ =====
             const items = document.querySelectorAll('.gallery-item');
             if (items.length === 0) return;
 
@@ -98,8 +98,15 @@
                 overlay.innerHTML = `
                     <div class="lightbox-content">
                         <span class="close-btn">&times;</span>
-                        <img src="" alt="Увеличенное фото" />
+                        <div class="lightbox-image-wrapper">
+                            <img src="" alt="Увеличенное фото" />
+                        </div>
                         <div class="caption"></div>
+                        <div class="lightbox-nav">
+                            <button class="nav-btn prev-btn" aria-label="Предыдущая">‹</button>
+                            <span class="counter">1 / 26</span>
+                            <button class="nav-btn next-btn" aria-label="Следующая">›</button>
+                        </div>
                     </div>
                 `;
                 document.body.appendChild(overlay);
@@ -108,12 +115,39 @@
             const lightboxImg = overlay.querySelector('img');
             const caption = overlay.querySelector('.caption');
             const closeBtn = overlay.querySelector('.close-btn');
+            const prevBtn = overlay.querySelector('.prev-btn');
+            const nextBtn = overlay.querySelector('.next-btn');
+            const counter = overlay.querySelector('.counter');
+            
+            let currentIndex = 0;
+            const imageItems = [];
 
-            function openLightbox(src, captionText) {
-                lightboxImg.src = src;
-                caption.textContent = captionText;
+            // Собираем все изображения
+            items.forEach((item, index) => {
+                const img = item.querySelector('img');
+                if (img && img.src) {
+                    imageItems.push({
+                        src: img.src,
+                        caption: item.dataset.caption || 'Мозаика'
+                    });
+                }
+            });
+
+            function openLightbox(index) {
+                if (index < 0) index = imageItems.length - 1;
+                if (index >= imageItems.length) index = 0;
+                currentIndex = index;
+                
+                const item = imageItems[currentIndex];
+                lightboxImg.src = item.src;
+                caption.textContent = item.caption;
+                counter.textContent = `${currentIndex + 1} / ${imageItems.length}`;
                 overlay.classList.add('active');
                 document.body.style.overflow = 'hidden';
+                
+                // Сброс зума при открытии
+                lightboxImg.style.transform = 'scale(1)';
+                lightboxImg.style.cursor = 'zoom-in';
             }
 
             function closeLightbox() {
@@ -121,22 +155,146 @@
                 document.body.style.overflow = '';
             }
 
-            items.forEach(item => {
+            // Открытие по клику на картинку
+            items.forEach((item, index) => {
                 item.addEventListener('click', function() {
                     const img = this.querySelector('img');
                     if (img && img.src) {
-                        openLightbox(img.src, this.dataset.caption || 'Мозаика');
+                        // Находим индекс в массиве imageItems
+                        const foundIndex = imageItems.findIndex(el => el.src === img.src);
+                        if (foundIndex !== -1) {
+                            openLightbox(foundIndex);
+                        }
                     }
                 });
             });
 
-            closeBtn.addEventListener('click', closeLightbox);
+            // Навигация
+            prevBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                openLightbox(currentIndex - 1);
+            });
+
+            nextBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                openLightbox(currentIndex + 1);
+            });
+
+            // Клавиатура
+            document.addEventListener('keydown', function(e) {
+                if (!overlay.classList.contains('active')) return;
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') openLightbox(currentIndex - 1);
+                if (e.key === 'ArrowRight') openLightbox(currentIndex + 1);
+            });
+
+            // Закрытие по клику на фон
             overlay.addEventListener('click', function(e) {
                 if (e.target === overlay) closeLightbox();
             });
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') closeLightbox();
+
+            // Закрытие по кнопке
+            closeBtn.addEventListener('click', closeLightbox);
+
+            // ===== МАСШТАБИРОВАНИЕ КОЛЁСИКОМ МЫШИ =====
+            let currentScale = 1;
+            const minScale = 1;
+            const maxScale = 5;
+            const zoomStep = 0.1;
+
+            lightboxImg.addEventListener('wheel', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const delta = e.deltaY > 0 ? -zoomStep : zoomStep;
+                currentScale = Math.min(maxScale, Math.max(minScale, currentScale + delta));
+                this.style.transform = `scale(${currentScale})`;
+                
+                // Меняем курсор
+                if (currentScale > 1) {
+                    this.style.cursor = 'zoom-out';
+                } else {
+                    this.style.cursor = 'zoom-in';
+                }
+            }, { passive: false });
+
+            // Сброс зума при переключении
+            const originalOpen = openLightbox;
+            openLightbox = function(index) {
+                originalOpen(index);
+                currentScale = 1;
+                lightboxImg.style.transform = 'scale(1)';
+                lightboxImg.style.cursor = 'zoom-in';
+            };
+
+            // Двойной клик для сброса зума
+            lightboxImg.addEventListener('dblclick', function() {
+                currentScale = 1;
+                this.style.transform = 'scale(1)';
+                this.style.cursor = 'zoom-in';
             });
+
+            // Тач-жесты для мобильных
+            let lastTouchDistance = 0;
+            let touchStartScale = 1;
+
+            lightboxImg.addEventListener('touchstart', function(e) {
+                if (e.touches.length === 2) {
+                    const touch1 = e.touches[0];
+                    const touch2 = e.touches[1];
+                    const distance = Math.hypot(
+                        touch1.clientX - touch2.clientX,
+                        touch1.clientY - touch2.clientY
+                    );
+                    lastTouchDistance = distance;
+                    touchStartScale = currentScale;
+                }
+            }, { passive: true });
+
+            lightboxImg.addEventListener('touchmove', function(e) {
+                if (e.touches.length === 2) {
+                    e.preventDefault();
+                    const touch1 = e.touches[0];
+                    const touch2 = e.touches[1];
+                    const distance = Math.hypot(
+                        touch1.clientX - touch2.clientX,
+                        touch1.clientY - touch2.clientY
+                    );
+                    const scaleChange = distance / lastTouchDistance;
+                    currentScale = Math.min(maxScale, Math.max(minScale, touchStartScale * scaleChange));
+                    this.style.transform = `scale(${currentScale})`;
+                }
+            }, { passive: false });
+
+            // Переключение свайпом для мобильных
+            let touchStartX = 0;
+            let touchStartY = 0;
+            
+            overlay.addEventListener('touchstart', function(e) {
+                if (e.target === overlay || e.target === lightboxImg) {
+                    touchStartX = e.touches[0].clientX;
+                    touchStartY = e.touches[0].clientY;
+                }
+            }, { passive: true });
+
+            overlay.addEventListener('touchend', function(e) {
+                if (currentScale > 1) return; // Если зум включен - не переключаем
+                if (touchStartX === 0) return;
+                
+                const touchEndX = e.changedTouches[0].clientX;
+                const touchEndY = e.changedTouches[0].clientY;
+                const diffX = touchStartX - touchEndX;
+                const diffY = touchStartY - touchEndY;
+                
+                if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+                    if (diffX > 0) {
+                        openLightbox(currentIndex + 1);
+                    } else {
+                        openLightbox(currentIndex - 1);
+                    }
+                }
+                touchStartX = 0;
+            }, { passive: true });
         });
     </script>
 </body>
