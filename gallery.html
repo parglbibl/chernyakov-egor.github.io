@@ -73,221 +73,243 @@
 
     <script src="js/main.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const gallery = document.getElementById('mosaicGallery');
-            if (!gallery) return;
+    document.addEventListener("DOMContentLoaded", function() {
+        const gallery = document.getElementById('mosaicGallery');
+        if (!gallery) return;
 
-            const totalImages = 26;
-            let html = '';
+        // ===== 1. ГЕНЕРАЦИЯ КАРТИНОК =====
+        const totalImages = 26;
+        let html = '';
+        for (let i = 1; i <= totalImages; i++) {
+            const ext = i === 1 ? 'jpeg' : 'png';
+            const src = `images/kartini/kartina${i}.${ext}`;
+            const caption = `Картина ${i}`;
+            html += `
+                <div class="gallery-item" data-caption="${caption}" data-src="${src}">
+                    <img src="${src}" alt="${caption}" loading="lazy" />
+                    <div class="overlay">${caption}</div>
+                </div>
+            `;
+        }
+        gallery.innerHTML = html;
 
-            for (let i = 1; i <= totalImages; i++) {
-                const ext = i === 1 ? 'jpeg' : 'png';
-                const src = `images/kartini/kartina${i}.${ext}`;
-                const caption = `Картина ${i}`;
+        // ===== 2. ЛАЙТБОКС =====
+        const items = document.querySelectorAll('.gallery-item');
+        if (items.length === 0) return;
 
-                html += `
-                    <div class="gallery-item" data-caption="${caption}">
-                        <img src="${src}" alt="${caption}" loading="lazy" />
-                        <div class="overlay">${caption}</div>
+        // Создаем оверлей, если его нет
+        let overlay = document.querySelector('.lightbox-overlay');
+        if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.className = 'lightbox-overlay';
+            overlay.innerHTML = `
+                <div class="lightbox-content">
+                    <span class="close-btn">&times;</span>
+                    <div class="lightbox-image-wrapper">
+                        <img src="" alt="Увеличенное фото" />
                     </div>
-                `;
-            }
-
-            gallery.innerHTML = html;
-
-            // ===== ЛАЙТБОКС =====
-            const items = document.querySelectorAll('.gallery-item');
-            if (items.length === 0) return;
-
-            let overlay = document.querySelector('.lightbox-overlay');
-            if (!overlay) {
-                overlay = document.createElement('div');
-                overlay.className = 'lightbox-overlay';
-                overlay.innerHTML = `
-                    <div class="lightbox-content">
-                        <span class="close-btn">&times;</span>
-                        <div class="lightbox-image-wrapper">
-                            <img src="" alt="Увеличенное фото" />
-                        </div>
-                        <div class="caption"></div>
-                        <div class="lightbox-nav">
-                            <button class="nav-btn prev-btn" aria-label="Предыдущая">‹</button>
-                            <span class="counter">1 / 26</span>
-                            <button class="nav-btn next-btn" aria-label="Следующая">›</button>
-                        </div>
+                    <div class="caption"></div>
+                    <div class="lightbox-nav">
+                        <button class="nav-btn prev-btn" aria-label="Предыдущая">‹</button>
+                        <span class="counter">1 / 26</span>
+                        <button class="nav-btn next-btn" aria-label="Следующая">›</button>
                     </div>
-                `;
-                document.body.appendChild(overlay);
-            }
+                </div>
+            `;
+            document.body.appendChild(overlay);
+        }
 
-            const lightboxImg = overlay.querySelector('img');
-            const caption = overlay.querySelector('.caption');
-            const closeBtn = overlay.querySelector('.close-btn');
-            const prevBtn = overlay.querySelector('.prev-btn');
-            const nextBtn = overlay.querySelector('.next-btn');
-            const counter = overlay.querySelector('.counter');
-            
-            let currentIndex = 0;
-            const imageItems = [];
+        const lightboxImg = overlay.querySelector('img');
+        const captionEl = overlay.querySelector('.caption');
+        const closeBtn = overlay.querySelector('.close-btn');
+        const prevBtn = overlay.querySelector('.prev-btn');
+        const nextBtn = overlay.querySelector('.next-btn');
+        const counter = overlay.querySelector('.counter');
 
-            items.forEach((item, index) => {
-                const img = item.querySelector('img');
-                if (img && img.src) {
-                    imageItems.push({
-                        src: img.src,
-                        caption: item.dataset.caption || 'Мозаика'
-                    });
-                }
-            });
-
-            function openLightbox(index) {
-                if (index < 0) index = imageItems.length - 1;
-                if (index >= imageItems.length) index = 0;
-                currentIndex = index;
-                
-                const item = imageItems[currentIndex];
-                lightboxImg.src = item.src;
-                caption.textContent = item.caption;
-                counter.textContent = `${currentIndex + 1} / ${imageItems.length}`;
-                overlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
-                
-                lightboxImg.style.transform = 'scale(1)';
-                lightboxImg.style.cursor = 'zoom-in';
-            }
-
-            function closeLightbox() {
-                overlay.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-
-            items.forEach((item, index) => {
-                item.addEventListener('click', function() {
-                    const img = this.querySelector('img');
-                    if (img && img.src) {
-                        const foundIndex = imageItems.findIndex(el => el.src === img.src);
-                        if (foundIndex !== -1) {
-                            openLightbox(foundIndex);
-                        }
-                    }
+        // Собираем данные картинок в массив
+        const imageItems = [];
+        items.forEach(item => {
+            const img = item.querySelector('img');
+            if (img && img.src) {
+                imageItems.push({
+                    src: img.src,
+                    caption: item.dataset.caption || 'Мозаика'
                 });
-            });
+            }
+        });
 
-            prevBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                openLightbox(currentIndex - 1);
-            });
+        let currentIndex = 0;
+        let currentScale = 1;
+        const minScale = 1;
+        const maxScale = 5;
 
-            nextBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                openLightbox(currentIndex + 1);
-            });
+        // ===== ФУНКЦИИ ОТКРЫТИЯ/ЗАКРЫТИЯ =====
+        function openLightbox(index) {
+            if (imageItems.length === 0) return;
+            if (index < 0) index = imageItems.length - 1;
+            if (index >= imageItems.length) index = 0;
+            currentIndex = index;
+            
+            const item = imageItems[currentIndex];
+            lightboxImg.src = item.src;
+            captionEl.textContent = item.caption;
+            counter.textContent = `${currentIndex + 1} / ${imageItems.length}`;
+            
+            // Сброс зума
+            currentScale = 1;
+            lightboxImg.style.transform = 'scale(1)';
+            lightboxImg.style.cursor = 'zoom-in';
+            
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
 
-            document.addEventListener('keydown', function(e) {
-                if (!overlay.classList.contains('active')) return;
-                if (e.key === 'Escape') closeLightbox();
-                if (e.key === 'ArrowLeft') openLightbox(currentIndex - 1);
-                if (e.key === 'ArrowRight') openLightbox(currentIndex + 1);
-            });
+        function closeLightbox() {
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
 
-            overlay.addEventListener('click', function(e) {
-                if (e.target === overlay) closeLightbox();
-            });
+        // ===== ОТКРЫТИЕ ПО КЛИКУ (РАБОТАЕТ И НА МОБИЛЕ) =====
+        items.forEach((item, index) => {
+            // Убираем все старые обработчики, чтобы избежать дублей
+            item.removeEventListener('click', handleItemClick);
+            item.removeEventListener('touchstart', handleItemTouch);
+            // Добавляем новые
+            item.addEventListener('click', handleItemClick);
+            item.addEventListener('touchstart', handleItemTouch, { passive: true });
+        });
 
-            closeBtn.addEventListener('click', closeLightbox);
-
-            // Зум колёсиком
-            let currentScale = 1;
-            const minScale = 1;
-            const maxScale = 5;
-            const zoomStep = 0.1;
-
-            lightboxImg.addEventListener('wheel', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                const delta = e.deltaY > 0 ? -zoomStep : zoomStep;
-                currentScale = Math.min(maxScale, Math.max(minScale, currentScale + delta));
-                this.style.transform = `scale(${currentScale})`;
-                
-                if (currentScale > 1) {
-                    this.style.cursor = 'zoom-out';
-                } else {
-                    this.style.cursor = 'zoom-in';
+        function handleItemClick(e) {
+            e.preventDefault();
+            const item = e.currentTarget;
+            const img = item.querySelector('img');
+            if (img && img.src) {
+                const foundIndex = imageItems.findIndex(el => el.src === img.src);
+                if (foundIndex !== -1) {
+                    openLightbox(foundIndex);
                 }
-            }, { passive: false });
+            }
+        }
 
-            const originalOpen = openLightbox;
-            openLightbox = function(index) {
-                originalOpen(index);
-                currentScale = 1;
-                lightboxImg.style.transform = 'scale(1)';
-                lightboxImg.style.cursor = 'zoom-in';
-            };
+        function handleItemTouch(e) {
+            // Просто сохраняем ссылку на элемент, чтобы клик сработал
+            // Это нужно, чтобы на мобилках touch не блокировал click
+            const item = e.currentTarget;
+            // Если это не свайп, то клик сработает отдельно
+        }
 
-            lightboxImg.addEventListener('dblclick', function() {
-                currentScale = 1;
-                this.style.transform = 'scale(1)';
-                this.style.cursor = 'zoom-in';
-            });
+        // ===== НАВИГАЦИЯ =====
+        function prevImage(e) {
+            e.stopPropagation();
+            openLightbox(currentIndex - 1);
+        }
 
-            // Тач-жесты
-            let lastTouchDistance = 0;
-            let touchStartScale = 1;
+        function nextImage(e) {
+            e.stopPropagation();
+            openLightbox(currentIndex + 1);
+        }
 
-            lightboxImg.addEventListener('touchstart', function(e) {
+        prevBtn.addEventListener('click', prevImage);
+        nextBtn.addEventListener('click', nextImage);
+
+        // ===== КЛАВИАТУРА =====
+        document.addEventListener('keydown', function(e) {
+            if (!overlay.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') openLightbox(currentIndex - 1);
+            if (e.key === 'ArrowRight') openLightbox(currentIndex + 1);
+        });
+
+        // ===== ЗАКРЫТИЕ =====
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) closeLightbox();
+        });
+        closeBtn.addEventListener('click', closeLightbox);
+
+        // ===== ЗУМ КОЛЁСИКОМ =====
+        lightboxImg.addEventListener('wheel', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const delta = e.deltaY > 0 ? -0.1 : 0.1;
+            currentScale = Math.min(maxScale, Math.max(minScale, currentScale + delta));
+            this.style.transform = `scale(${currentScale})`;
+            this.style.cursor = currentScale > 1 ? 'zoom-out' : 'zoom-in';
+        }, { passive: false });
+
+        // Двойной клик для сброса зума
+        lightboxImg.addEventListener('dblclick', function() {
+            currentScale = 1;
+            this.style.transform = 'scale(1)';
+            this.style.cursor = 'zoom-in';
+        });
+
+        // ===== ТАЧ-ЖЕСТЫ (свайп для переключения, щипок для зума) =====
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let lastTouchDistance = 0;
+        let touchStartScale = 1;
+
+        overlay.addEventListener('touchstart', function(e) {
+            const target = e.target;
+            // Если клик по картинке или оверлею
+            if (target === overlay || target === lightboxImg || target.closest('.lightbox-image-wrapper')) {
+                if (e.touches.length === 1) {
+                    touchStartX = e.touches[0].clientX;
+                    touchStartY = e.touches[0].clientY;
+                }
                 if (e.touches.length === 2) {
                     const touch1 = e.touches[0];
                     const touch2 = e.touches[1];
-                    const distance = Math.hypot(
+                    lastTouchDistance = Math.hypot(
                         touch1.clientX - touch2.clientX,
                         touch1.clientY - touch2.clientY
                     );
-                    lastTouchDistance = distance;
                     touchStartScale = currentScale;
                 }
-            }, { passive: true });
+            }
+        }, { passive: true });
 
-            lightboxImg.addEventListener('touchmove', function(e) {
-                if (e.touches.length === 2) {
-                    e.preventDefault();
-                    const touch1 = e.touches[0];
-                    const touch2 = e.touches[1];
-                    const distance = Math.hypot(
-                        touch1.clientX - touch2.clientX,
-                        touch1.clientY - touch2.clientY
-                    );
+        overlay.addEventListener('touchmove', function(e) {
+            if (e.touches.length === 2) {
+                e.preventDefault();
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                const distance = Math.hypot(
+                    touch1.clientX - touch2.clientX,
+                    touch1.clientY - touch2.clientY
+                );
+                if (lastTouchDistance > 0) {
                     const scaleChange = distance / lastTouchDistance;
                     currentScale = Math.min(maxScale, Math.max(minScale, touchStartScale * scaleChange));
-                    this.style.transform = `scale(${currentScale})`;
+                    lightboxImg.style.transform = `scale(${currentScale})`;
                 }
-            }, { passive: false });
+            }
+        }, { passive: false });
 
-            let touchStartX = 0;
-            
-            overlay.addEventListener('touchstart', function(e) {
-                if (e.target === overlay || e.target === lightboxImg) {
-                    touchStartX = e.touches[0].clientX;
-                }
-            }, { passive: true });
-
-            overlay.addEventListener('touchend', function(e) {
-                if (currentScale > 1) return;
-                if (touchStartX === 0) return;
-                
-                const touchEndX = e.changedTouches[0].clientX;
-                const diffX = touchStartX - touchEndX;
-                
-                if (Math.abs(diffX) > 50) {
-                    if (diffX > 0) {
-                        openLightbox(currentIndex + 1);
-                    } else {
-                        openLightbox(currentIndex - 1);
-                    }
-                }
+        overlay.addEventListener('touchend', function(e) {
+            // Свайп влево/вправо только если зум = 1
+            if (currentScale > 1) {
                 touchStartX = 0;
-            }, { passive: true });
-        });
+                return;
+            }
+            if (touchStartX === 0) return;
+            
+            const touchEndX = e.changedTouches[0].clientX;
+            const diffX = touchStartX - touchEndX;
+            
+            if (Math.abs(diffX) > 50) {
+                if (diffX > 0) {
+                    openLightbox(currentIndex + 1);
+                } else {
+                    openLightbox(currentIndex - 1);
+                }
+            }
+            touchStartX = 0;
+        }, { passive: true });
+
+        // ===== ОТКРЫТИЕ ПЕРВОЙ КАРТИНКИ ДЛЯ ТЕСТА (НЕ ОБЯЗАТЕЛЬНО) =====
+        // openLightbox(0);
+    });
     </script>
 </body>
 </html>
