@@ -35,7 +35,7 @@ body {
     line-height: 1.8;
     min-height: 100vh;
     font-size: 18px;
-    padding-top: 44px !important;
+    padding-top: 56px !important;
 }
 
 .container {
@@ -66,7 +66,7 @@ body > *:not(.stars-container) {
     z-index: 1;
 }
 
-/* ===== ШАПКА — ТОЧНО КАК НА СКРИНШОТЕ ===== */
+/* ===== ШАПКА (КРУПНОЕ МЕНЮ, ВПРИТЫК К ВЕРХУ) ===== */
 header {
     position: fixed;
     top: 0 !important;
@@ -76,7 +76,7 @@ header {
     backdrop-filter: blur(14px);
     background: rgba(8, 11, 20, 0.92);
     border-bottom: 1px solid var(--line);
-    height: 44px;
+    height: 56px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -95,7 +95,7 @@ header {
 
 .nav {
     display: flex;
-    gap: 24px;
+    gap: 32px;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -110,14 +110,15 @@ header {
 .nav a {
     color: var(--muted);
     text-decoration: none;
-    font-weight: 500;
-    font-size: 15px;
+    font-weight: 700;
+    font-size: 18px;
     transition: 0.3s;
     position: relative;
-    padding: 4px 0;
+    padding: 6px 0;
     margin: 0;
     display: inline-block;
     line-height: 1;
+    letter-spacing: 0.3px;
 }
 
 .nav a::after {
@@ -126,7 +127,7 @@ header {
     bottom: -2px;
     left: 0;
     width: 0;
-    height: 2px;
+    height: 3px;
     background: var(--accent);
     transition: 0.3s;
 }
@@ -703,7 +704,7 @@ footer p {
     opacity: 0.6;
 }
 
-/* ===== КНОПКА НАВЕРХ (УДАЛЕНА, НО ОСТАВЛЯЮ НА ВСЯКИЙ) ===== */
+/* ===== КНОПКА НАВЕРХ (СКРЫТА) ===== */
 .back-to-top {
     display: none !important;
 }
@@ -711,17 +712,18 @@ footer p {
 /* ===== АДАПТИВ ===== */
 @media (max-width: 760px) {
     header {
-        height: 38px !important;
+        height: 48px !important;
     }
     body {
-        padding-top: 38px !important;
+        padding-top: 48px !important;
     }
     .nav {
-        gap: 14px;
+        gap: 18px;
     }
     .nav a {
-        font-size: 13px;
-        padding: 2px 0;
+        font-size: 15px;
+        font-weight: 600;
+        padding: 4px 0;
     }
 
     .section {
@@ -767,17 +769,18 @@ footer p {
 
 @media (max-width: 480px) {
     header {
-        height: 34px !important;
+        height: 42px !important;
     }
     body {
-        padding-top: 34px !important;
+        padding-top: 42px !important;
     }
     .nav {
-        gap: 10px;
+        gap: 12px;
     }
     .nav a {
-        font-size: 11px;
-        padding: 2px 0;
+        font-size: 13px;
+        font-weight: 600;
+        padding: 3px 0;
     }
 
     .stats {
