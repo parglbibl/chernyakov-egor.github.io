@@ -593,54 +593,49 @@ footer p {
     opacity: 0.5;
 }
 
-/* ===== КНОПКА «НАВЕРХ» (ПЕРЕВЁРНУТАЯ ГАЛКА / КРЫША) ===== */
+/* ===== КНОПКА «НАВЕРХ» (ПЕРЕВЁРНУТАЯ ГАЛКА) ===== */
 .back-to-top {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    background: rgba(216, 180, 90, 0.12);
-    border: 1.5px solid var(--accent);
+    background: transparent;
+    border: none;
     color: var(--accent);
-    font-size: 22px;
+    font-size: 42px;
     cursor: pointer;
     opacity: 0;
     visibility: hidden;
     transform: translateY(20px);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    backdrop-filter: blur(8px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     z-index: 999;
     display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
     font-family: 'Inter', Arial, sans-serif;
-    font-weight: 400;
+    font-weight: 300;
+    line-height: 1;
+    padding: 0;
+    filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.5));
 }
 
 .back-to-top::before {
     content: 'ʌ';
-    font-size: 34px;
-    line-height: 1;
+    font-size: 48px;
     display: block;
-    margin-top: -6px;
     font-weight: 700;
 }
 
 .back-to-top.show {
-    opacity: 1;
+    opacity: 0.7;
     visibility: visible;
     transform: translateY(0);
 }
 
 .back-to-top:hover {
-    background: var(--accent);
-    color: #111;
-    transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(216, 180, 90, 0.3);
+    opacity: 1;
+    transform: translateY(-4px) scale(1.05);
+    color: var(--accent);
 }
 
 .back-to-top:active {
@@ -698,12 +693,10 @@ footer p {
     .back-to-top {
         bottom: 20px;
         right: 20px;
-        width: 44px;
-        height: 44px;
+        font-size: 32px;
     }
     .back-to-top::before {
-        font-size: 28px;
-        margin-top: -4px;
+        font-size: 38px;
     }
 }
 
@@ -739,11 +732,9 @@ footer p {
     .back-to-top {
         bottom: 16px;
         right: 16px;
-        width: 38px;
-        height: 38px;
+        font-size: 28px;
     }
     .back-to-top::before {
-        font-size: 24px;
-        margin-top: -3px;
+        font-size: 32px;
     }
 }
