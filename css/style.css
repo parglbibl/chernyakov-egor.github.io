@@ -684,24 +684,24 @@ footer p {
     opacity: 0.5;
 }
 
-/* ===== КНОПКА «НАВЕРХ» ===== */
+/* ===== КНОПКА «НАВЕРХ» (ИСПРАВЛЕНА) ===== */
 .back-to-top {
     position: fixed;
     bottom: 40px;
     right: 40px;
-    background: rgba(216, 180, 90, 0.08);
+    background: rgba(216, 180, 90, 0.12);
     border: 1.5px solid var(--accent);
     border-radius: 16px;
     color: var(--accent);
-    width: 64px;
-    height: 64px;
+    width: 60px;
+    height: 60px;
     font-size: 32px;
     cursor: pointer;
     opacity: 0;
     visibility: hidden;
     transform: translateY(30px) scale(0.9);
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    z-index: 999;
+    z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -714,15 +714,15 @@ footer p {
 
 .back-to-top::before {
     content: 'ʌ';
-    font-size: 36px;
+    font-size: 34px;
     line-height: 1;
     display: block;
     font-weight: 700;
-    margin-top: -4px;
+    margin-top: -2px;
 }
 
 .back-to-top.show {
-    opacity: 0.9;
+    opacity: 0.95;
     visibility: visible;
     transform: translateY(0) scale(1);
 }
@@ -730,7 +730,7 @@ footer p {
 .back-to-top:hover {
     background: var(--accent);
     color: #111;
-    transform: translateY(-6px) scale(1.05);
+    transform: translateY(-4px) scale(1.05);
     box-shadow: 0 12px 50px rgba(216, 180, 90, 0.3);
 }
 
@@ -789,13 +789,13 @@ footer p {
     .back-to-top {
         bottom: 24px;
         right: 24px;
-        width: 56px;
-        height: 56px;
+        width: 54px;
+        height: 54px;
         border-radius: 14px;
         font-size: 28px;
     }
     .back-to-top::before {
-        font-size: 32px;
+        font-size: 30px;
     }
 }
 
@@ -859,12 +859,12 @@ footer p {
     .back-to-top {
         bottom: 16px;
         right: 16px;
-        width: 50px;
-        height: 50px;
+        width: 48px;
+        height: 48px;
         border-radius: 12px;
         font-size: 24px;
     }
     .back-to-top::before {
-        font-size: 28px;
+        font-size: 26px;
     }
 }
