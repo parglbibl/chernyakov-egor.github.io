@@ -66,7 +66,7 @@ body > *:not(.stars-container) {
     z-index: 1;
 }
 
-/* ===== ШАПКА — КРУПНОЕ МЕНЮ В КОНТЕЙНЕРЕ ===== */
+/* ===== ШАПКА — ПРОЗРАЧНАЯ ===== */
 header {
     position: fixed;
     top: 0 !important;
@@ -74,7 +74,7 @@ header {
     width: 100% !important;
     z-index: 100 !important;
     backdrop-filter: blur(14px);
-    background: rgba(8, 11, 20, 0.92);
+    background: rgba(8, 11, 20, 0.75);
     border-bottom: 1px solid var(--line);
     min-height: 64px;
     display: flex;
