@@ -21,54 +21,32 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // ===== 3. ЗВЁЗДНОЕ НЕБО НА CANVAS (СТАТИЧНОЕ) =====
+    // ===== 3. ЗВЁЗДНОЕ НЕБО (CSS-ЗВЁЗДЫ) =====
     function initStars() {
-        const canvas = document.getElementById('starsCanvas');
-        if (!canvas) return;
+        const container = document.getElementById('starsContainer');
+        if (!container) return;
         
-        const ctx = canvas.getContext('2d');
-        let width, height;
-        let stars = [];
         const starCount = 400;
         
-        function resize() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        }
-        
-        function createStars() {
-            stars = [];
-            for (let i = 0; i < starCount; i++) {
-                stars.push({
-                    x: Math.random() * width,
-                    y: Math.random() * height,
-                    radius: Math.random() * 2 + 0.5,
-                    opacity: Math.random() * 0.6 + 0.2
-                });
-            }
-        }
-        
-        function drawStars() {
-            ctx.clearRect(0, 0, width, height);
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.className = 'star-dot';
             
-            stars.forEach(star => {
-                ctx.beginPath();
-                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
-                ctx.fill();
-            });
+            const x = Math.random() * 100;
+            const y = Math.random() * 100;
+            const size = Math.random() * 2.5 + 0.5;
+            const opacity = Math.random() * 0.6 + 0.2;
+            
+            star.style.cssText = `
+                left: ${x}%;
+                top: ${y}%;
+                width: ${size}px;
+                height: ${size}px;
+                opacity: ${opacity};
+            `;
+            
+            container.appendChild(star);
         }
-        
-        // При изменении размера окна — пересоздаем звезды
-        window.addEventListener('resize', () => {
-            resize();
-            createStars();
-            drawStars();
-        });
-        
-        resize();
-        createStars();
-        drawStars();
     }
     
     initStars();
