@@ -35,7 +35,7 @@ body {
     line-height: 1.8;
     min-height: 100vh;
     font-size: 18px;
-    padding-top: 56px !important;
+    padding-top: 64px !important;
 }
 
 .container {
@@ -66,7 +66,7 @@ body > *:not(.stars-container) {
     z-index: 1;
 }
 
-/* ===== ШАПКА (КРУПНОЕ МЕНЮ, ВПРИТЫК К ВЕРХУ) ===== */
+/* ===== ШАПКА — КРУПНОЕ МЕНЮ В КОНТЕЙНЕРЕ ===== */
 header {
     position: fixed;
     top: 0 !important;
@@ -76,11 +76,11 @@ header {
     backdrop-filter: blur(14px);
     background: rgba(8, 11, 20, 0.92);
     border-bottom: 1px solid var(--line);
-    height: 56px;
+    min-height: 64px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 !important;
+    padding: 8px 0 !important;
     margin: 0 !important;
 }
 
@@ -88,6 +88,7 @@ header {
     width: 100%;
     max-width: 1120px;
     padding: 0 20px;
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -95,7 +96,9 @@ header {
 
 .nav {
     display: flex;
-    gap: 32px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px 40px;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -111,14 +114,15 @@ header {
     color: var(--muted);
     text-decoration: none;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 20px;
     transition: 0.3s;
     position: relative;
-    padding: 6px 0;
+    padding: 4px 0;
     margin: 0;
     display: inline-block;
-    line-height: 1;
-    letter-spacing: 0.3px;
+    line-height: 1.2;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
 }
 
 .nav a::after {
@@ -710,20 +714,30 @@ footer p {
 }
 
 /* ===== АДАПТИВ ===== */
-@media (max-width: 760px) {
+@media (max-width: 860px) {
+    .nav {
+        gap: 20px 28px;
+    }
+    .nav a {
+        font-size: 17px;
+    }
+}
+
+@media (max-width: 700px) {
     header {
-        height: 48px !important;
+        min-height: 52px !important;
+        padding: 6px 0 !important;
     }
     body {
-        padding-top: 48px !important;
+        padding-top: 52px !important;
     }
     .nav {
-        gap: 18px;
+        gap: 12px 20px;
     }
     .nav a {
         font-size: 15px;
         font-weight: 600;
-        padding: 4px 0;
+        padding: 2px 0;
     }
 
     .section {
@@ -767,20 +781,22 @@ footer p {
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 500px) {
     header {
-        height: 42px !important;
+        min-height: 44px !important;
+        padding: 4px 0 !important;
     }
     body {
-        padding-top: 42px !important;
+        padding-top: 44px !important;
     }
     .nav {
-        gap: 12px;
+        gap: 8px 14px;
     }
     .nav a {
         font-size: 13px;
         font-weight: 600;
-        padding: 3px 0;
+        padding: 2px 0;
+        letter-spacing: 0.3px;
     }
 
     .stats {
