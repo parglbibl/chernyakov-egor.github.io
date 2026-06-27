@@ -10,6 +10,8 @@
 </head>
 <body>
 
+    <canvas id="starsCanvas"></canvas>
+
     <header>
         <div class="container header-inner">
             <div class="logo">
@@ -87,7 +89,7 @@
 
             gallery.innerHTML = html;
 
-            // ===== РАСШИРЕННЫЙ ЛАЙТБОКС С МАКСИМАЛЬНЫМ УВЕЛИЧЕНИЕМ =====
+            // ===== РАСШИРЕННЫЙ ЛАЙТБОКС =====
             const items = document.querySelectorAll('.gallery-item');
             if (items.length === 0) return;
 
@@ -122,7 +124,6 @@
             let currentIndex = 0;
             const imageItems = [];
 
-            // Собираем все изображения
             items.forEach((item, index) => {
                 const img = item.querySelector('img');
                 if (img && img.src) {
@@ -145,7 +146,6 @@
                 overlay.classList.add('active');
                 document.body.style.overflow = 'hidden';
                 
-                // Сброс зума при открытии
                 lightboxImg.style.transform = 'scale(1)';
                 lightboxImg.style.cursor = 'zoom-in';
             }
@@ -155,12 +155,10 @@
                 document.body.style.overflow = '';
             }
 
-            // Открытие по клику на картинку
             items.forEach((item, index) => {
                 item.addEventListener('click', function() {
                     const img = this.querySelector('img');
                     if (img && img.src) {
-                        // Находим индекс в массиве imageItems
                         const foundIndex = imageItems.findIndex(el => el.src === img.src);
                         if (foundIndex !== -1) {
                             openLightbox(foundIndex);
@@ -169,7 +167,6 @@
                 });
             });
 
-            // Навигация
             prevBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 openLightbox(currentIndex - 1);
@@ -180,7 +177,6 @@
                 openLightbox(currentIndex + 1);
             });
 
-            // Клавиатура
             document.addEventListener('keydown', function(e) {
                 if (!overlay.classList.contains('active')) return;
                 if (e.key === 'Escape') closeLightbox();
@@ -188,15 +184,13 @@
                 if (e.key === 'ArrowRight') openLightbox(currentIndex + 1);
             });
 
-            // Закрытие по клику на фон
             overlay.addEventListener('click', function(e) {
                 if (e.target === overlay) closeLightbox();
             });
 
-            // Закрытие по кнопке
             closeBtn.addEventListener('click', closeLightbox);
 
-            // ===== МАСШТАБИРОВАНИЕ КОЛЁСИКОМ МЫШИ =====
+            // Зум колёсиком
             let currentScale = 1;
             const minScale = 1;
             const maxScale = 5;
@@ -210,7 +204,6 @@
                 currentScale = Math.min(maxScale, Math.max(minScale, currentScale + delta));
                 this.style.transform = `scale(${currentScale})`;
                 
-                // Меняем курсор
                 if (currentScale > 1) {
                     this.style.cursor = 'zoom-out';
                 } else {
@@ -218,7 +211,6 @@
                 }
             }, { passive: false });
 
-            // Сброс зума при переключении
             const originalOpen = openLightbox;
             openLightbox = function(index) {
                 originalOpen(index);
@@ -227,14 +219,13 @@
                 lightboxImg.style.cursor = 'zoom-in';
             };
 
-            // Двойной клик для сброса зума
             lightboxImg.addEventListener('dblclick', function() {
                 currentScale = 1;
                 this.style.transform = 'scale(1)';
                 this.style.cursor = 'zoom-in';
             });
 
-            // Тач-жесты для мобильных
+            // Тач-жесты
             let lastTouchDistance = 0;
             let touchStartScale = 1;
 
@@ -266,27 +257,22 @@
                 }
             }, { passive: false });
 
-            // Переключение свайпом для мобильных
             let touchStartX = 0;
-            let touchStartY = 0;
             
             overlay.addEventListener('touchstart', function(e) {
                 if (e.target === overlay || e.target === lightboxImg) {
                     touchStartX = e.touches[0].clientX;
-                    touchStartY = e.touches[0].clientY;
                 }
             }, { passive: true });
 
             overlay.addEventListener('touchend', function(e) {
-                if (currentScale > 1) return; // Если зум включен - не переключаем
+                if (currentScale > 1) return;
                 if (touchStartX === 0) return;
                 
                 const touchEndX = e.changedTouches[0].clientX;
-                const touchEndY = e.changedTouches[0].clientY;
                 const diffX = touchStartX - touchEndX;
-                const diffY = touchStartY - touchEndY;
                 
-                if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+                if (Math.abs(diffX) > 50) {
                     if (diffX > 0) {
                         openLightbox(currentIndex + 1);
                     } else {
