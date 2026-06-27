@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // ===== 3. ЗВЁЗДНОЕ НЕБО НА CANVAS =====
+    // ===== 3. ЗВЁЗДНОЕ НЕБО НА CANVAS (СТАТИЧНОЕ) =====
     function initStars() {
         const canvas = document.getElementById('starsCanvas');
         if (!canvas) return;
@@ -59,6 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
         
+        // При изменении размера окна — пересоздаем звезды
         window.addEventListener('resize', () => {
             resize();
             createStars();
