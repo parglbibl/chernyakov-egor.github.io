@@ -79,7 +79,7 @@ header {
 .logo a {
     color: #fff;
     text-decoration: none;
-    font-size: 32px;
+    font-size: 0;
     font-weight: 400;
     letter-spacing: -0.5px;
     transition: 0.3s;
@@ -87,12 +87,24 @@ header {
     line-height: 1;
 }
 
-.logo a:hover {
-    transform: rotate(90deg);
+.logo a span {
+    font-size: 26px;
+    font-weight: 800;
+    color: #fff;
+}
+
+.logo a span.accent {
     color: var(--accent);
 }
 
-.logo span,
+.logo a:hover span {
+    color: var(--accent);
+}
+
+.logo a:hover span.accent {
+    color: #fff;
+}
+
 h1 span,
 .accent {
     color: var(--accent);
