@@ -100,4 +100,26 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // ===== 4. КНОПКА «НАВЕРХ» =====
+    const backBtn = document.createElement('button');
+    backBtn.className = 'back-to-top';
+    backBtn.innerHTML = '↑';
+    backBtn.setAttribute('aria-label', 'Наверх');
+    document.body.appendChild(backBtn);
+
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 400) {
+            backBtn.classList.add('show');
+        } else {
+            backBtn.classList.remove('show');
+        }
+    });
+
+    backBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
 });
