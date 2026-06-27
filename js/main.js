@@ -21,31 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // ===== 3. КНОПКА «НАВЕРХ» =====
-    const backBtn = document.createElement('button');
-    backBtn.className = 'back-to-top';
-    backBtn.innerHTML = '';
-    backBtn.setAttribute('aria-label', 'Наверх');
-    document.body.appendChild(backBtn);
-
-    // Показываем/скрываем кнопку при скролле
-    window.addEventListener('scroll', function() {
-        if (window.pageYOffset > 400) {
-            backBtn.classList.add('show');
-        } else {
-            backBtn.classList.remove('show');
-        }
-    });
-
-    // Клик для прокрутки наверх
-    backBtn.addEventListener('click', function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-
-    // ===== 4. ЗВЁЗДНОЕ НЕБО НА CANVAS =====
+    // ===== 3. ЗВЁЗДНОЕ НЕБО НА CANVAS =====
     function initStars() {
         const canvas = document.getElementById('starsCanvas');
         if (!canvas) return;
