@@ -21,86 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // ===== 3. ЛАЙТБОКС ДЛЯ ГАЛЕРЕИ =====
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    if (galleryItems.length > 0) {
-        let overlay = document.querySelector('.lightbox-overlay');
-        if (!overlay) {
-            overlay = document.createElement('div');
-            overlay.className = 'lightbox-overlay';
-            overlay.innerHTML = `
-                <div class="lightbox-content">
-                    <span class="close-btn">&times;</span>
-                    <img src="" alt="Увеличенное фото">
-                    <div class="caption"></div>
-                </div>
-            `;
-            document.body.appendChild(overlay);
-        }
-
-        const lightboxImg = overlay.querySelector('img');
-        const caption = overlay.querySelector('.caption');
-        const closeBtn = overlay.querySelector('.close-btn');
-
-        function getCaption(item) {
-            return item.getAttribute('data-caption') || 'Мозаика из кубиков Рубика';
-        }
-
-        function openLightbox(src, captionText) {
-            lightboxImg.src = src;
-            caption.textContent = captionText;
-            overlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeLightbox() {
-            overlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        function handleGalleryClick(e) {
-            const item = e.currentTarget;
-            const img = item.querySelector('img');
-            const placeholder = item.querySelector('.placeholder');
-            const captionText = getCaption(item);
-
-            if (img && img.src && !img.src.includes('undefined')) {
-                openLightbox(img.src, captionText);
-            } else if (placeholder) {
-                alert('🖼 Фото пока не загружено. Замените заглушку на своё фото!');
-            }
-        }
-
-        galleryItems.forEach(item => {
-            item.addEventListener('click', handleGalleryClick);
-            item.addEventListener('touchstart', handleGalleryClick, { passive: true });
-        });
-
-        if (closeBtn) {
-            closeBtn.addEventListener('click', closeLightbox);
-            closeBtn.addEventListener('touchstart', closeLightbox, { passive: true });
-        }
-
-        overlay.addEventListener('click', function(e) {
-            if (e.target === overlay) {
-                closeLightbox();
-            }
-        });
-
-        overlay.addEventListener('touchstart', function(e) {
-            if (e.target === overlay) {
-                closeLightbox();
-            }
-        }, { passive: true });
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeLightbox();
-            }
-        });
-    }
-
-    // ===== 4. КНОПКА «НАВЕРХ» =====
+    // ===== 3. КНОПКА «НАВЕРХ» =====
     const backBtn = document.createElement('button');
     backBtn.className = 'back-to-top';
     backBtn.innerHTML = '';
@@ -123,3 +44,55 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+
+// ===== ЗВЁЗДНОЕ НЕБО НА CANVAS =====
+function initStars() {
+    const canvas = document.getElementById('starsCanvas');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let stars = [];
+    const starCount = 400;
+    
+    function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+    }
+    
+    function createStars() {
+        stars = [];
+        for (let i = 0; i < starCount; i++) {
+            stars.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                radius: Math.random() * 2 + 0.5,
+                opacity: Math.random() * 0.6 + 0.2
+            });
+        }
+    }
+    
+    function drawStars() {
+        ctx.clearRect(0, 0, width, height);
+        
+        stars.forEach(star => {
+            ctx.beginPath();
+            ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
+            ctx.fill();
+        });
+    }
+    
+    window.addEventListener('resize', () => {
+        resize();
+        createStars();
+        drawStars();
+    });
+    
+    resize();
+    createStars();
+    drawStars();
+}
+
+// Запускаем звёзды
+document.addEventListener('DOMContentLoaded', initStars);
