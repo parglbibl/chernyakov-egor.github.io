@@ -13,22 +13,24 @@
 }
 
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
+html, body {
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    margin: 0;
     font-family: 'Inter', Arial, sans-serif;
     background: radial-gradient(circle at top, #1b2545 0%, #080b14 45%);
     color: var(--text);
     line-height: 1.8;
     min-height: 100vh;
     font-size: 18px;
-    padding-top: 72px;
+    padding-top: 44px;
 }
 
 .container {
@@ -36,7 +38,7 @@ body {
     margin: 0 auto;
 }
 
-/* ===== ЗВЁЗДНОЕ НЕБО (ФОН) ===== */
+/* ===== ЗВЁЗДНОЕ НЕБО (ТОЛЬКО ФОН) ===== */
 .stars-container {
     position: fixed;
     top: 0;
@@ -59,7 +61,7 @@ body > *:not(.stars-container) {
     z-index: 1;
 }
 
-/* ===== ШАПКА (ФИКСИРОВАННАЯ, БЕЗ ЛОГОТИПА) ===== */
+/* ===== ШАПКА (ВПРИТЫК К ВЕРХУ, БЕЗ ЗВЁЗД) ===== */
 header {
     position: fixed;
     top: 0;
@@ -67,38 +69,51 @@ header {
     width: 100%;
     z-index: 100;
     backdrop-filter: blur(14px);
-    background: rgba(8, 11, 20, 0.85);
+    background: rgba(8, 11, 20, 0.92);
     border-bottom: 1px solid var(--line);
+    padding: 0;
+    margin: 0;
 }
 
 .header-inner {
-    min-height: 72px;
+    min-height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0;
+    margin: 0;
 }
 
 .nav {
     display: flex;
-    gap: 28px;
+    gap: 24px;
     list-style: none;
     padding: 0;
     margin: 0;
+}
+
+.nav li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .nav a {
     color: var(--muted);
     text-decoration: none;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 15px;
     transition: 0.3s;
     position: relative;
+    padding: 8px 0;
+    margin: 0;
+    display: inline-block;
 }
 
 .nav a::after {
     content: '';
     position: absolute;
-    bottom: -4px;
+    bottom: 2px;
     left: 0;
     width: 0;
     height: 2px;
@@ -695,17 +710,20 @@ footer p {
 /* ===== АДАПТИВ ===== */
 @media (max-width: 760px) {
     .header-inner {
-        padding: 12px 0;
+        min-height: 38px;
     }
 
     .nav {
-        flex-wrap: wrap;
-        justify-content: center;
         gap: 12px;
     }
     
     .nav a {
-        font-size: 14px;
+        font-size: 12px;
+        padding: 6px 0;
+    }
+
+    body {
+        padding-top: 38px;
     }
 
     .section {
@@ -714,7 +732,6 @@ footer p {
     
     body {
         font-size: 16px;
-        padding-top: 100px;
     }
 
     .grid-2 {
@@ -762,6 +779,23 @@ footer p {
 }
 
 @media (max-width: 480px) {
+    .header-inner {
+        min-height: 34px;
+    }
+
+    .nav {
+        gap: 8px;
+    }
+    
+    .nav a {
+        font-size: 11px;
+        padding: 4px 0;
+    }
+
+    body {
+        padding-top: 34px;
+    }
+
     .stats {
         grid-template-columns: 1fr;
     }
