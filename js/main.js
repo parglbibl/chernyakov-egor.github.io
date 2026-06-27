@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // ===== 4. КНОПКА «НАВЕРХ» =====
     const backBtn = document.createElement('button');
     backBtn.className = 'back-to-top';
-    backBtn.innerHTML = '↑';
+    backBtn.innerHTML = '';
     backBtn.setAttribute('aria-label', 'Наверх');
     document.body.appendChild(backBtn);
 
