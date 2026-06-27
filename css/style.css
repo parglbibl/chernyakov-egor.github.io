@@ -152,7 +152,8 @@ h1 {
     font-size: 16px;
     color: var(--muted);
     font-style: italic;
-    white-space: nowrap; /* ← Иконка не переносится одна */
+    max-width: 100%;
+    word-break: break-word;
 }
 
 /* ===== СТАТИСТИКА ===== */
@@ -720,6 +721,12 @@ footer p {
 
     .hero-avatar img {
         width: 220px;
+    }
+
+    .hero-quote {
+        font-size: 14px;
+        padding: 10px 16px;
+        white-space: normal;
     }
 
     .lightbox-content img {
