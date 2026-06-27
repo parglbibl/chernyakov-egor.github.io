@@ -28,6 +28,7 @@ body {
     line-height: 1.8;
     min-height: 100vh;
     font-size: 18px;
+    padding-top: 72px;
 }
 
 .container {
@@ -58,11 +59,13 @@ body > *:not(.stars-container) {
     z-index: 1;
 }
 
-/* ===== ШАПКА ===== */
+/* ===== ШАПКА (ФИКСИРОВАННАЯ) ===== */
 header {
-    position: sticky;
+    position: fixed;
     top: 0;
-    z-index: 10;
+    left: 0;
+    width: 100%;
+    z-index: 100;
     backdrop-filter: blur(14px);
     background: rgba(8, 11, 20, 0.85);
     border-bottom: 1px solid var(--line);
@@ -79,7 +82,7 @@ header {
 .logo a {
     color: #fff;
     text-decoration: none;
-    font-size: 32px;
+    font-size: 0;
     font-weight: 400;
     letter-spacing: -0.5px;
     transition: 0.3s;
@@ -87,9 +90,22 @@ header {
     line-height: 1;
 }
 
-.logo a:hover {
-    transform: rotate(90deg);
+.logo a span {
+    font-size: 26px;
+    font-weight: 800;
+    color: #fff;
+}
+
+.logo a span.accent {
     color: var(--accent);
+}
+
+.logo a:hover span {
+    color: var(--accent);
+}
+
+.logo a:hover span.accent {
+    color: #fff;
 }
 
 h1 span,
@@ -729,6 +745,7 @@ footer p {
     
     body {
         font-size: 16px;
+        padding-top: 110px;
     }
 
     .grid-2 {
