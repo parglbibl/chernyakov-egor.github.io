@@ -79,9 +79,17 @@ header {
 .logo a {
     color: #fff;
     text-decoration: none;
-    font-size: 26px;
-    font-weight: 800;
+    font-size: 32px;
+    font-weight: 400;
     letter-spacing: -0.5px;
+    transition: 0.3s;
+    display: block;
+    line-height: 1;
+}
+
+.logo a:hover {
+    transform: rotate(90deg);
+    color: var(--accent);
 }
 
 .logo span,
