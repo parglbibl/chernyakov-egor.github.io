@@ -1,0 +1,1 @@
+document.querySelectorAll('.stat-card,.card,.project,.achievement').forEach(e=>{e.addEventListener('mouseenter',()=>e.style.transform='translateY(-8px)')})
