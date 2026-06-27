@@ -44,32 +44,8 @@
             <div class="section-title">Мои работы</div>
             <div class="section-subtitle">Каждая мозаика — это история, сложенная из цветных граней.</div>
 
-            <div class="gallery" id="mosaicGallery">
-                <div class="gallery-item" data-caption="VK Fest 2025">
-                    <div class="placeholder">🧩<span>VK Fest 2025</span></div>
-                    <div class="overlay">VK Fest 2025</div>
-                </div>
-                <div class="gallery-item" data-caption="Логотип Додо">
-                    <div class="placeholder">🧩<span>Логотип Додо</span></div>
-                    <div class="overlay">Логотип Додо</div>
-                </div>
-                <div class="gallery-item" data-caption="Карельский орнамент">
-                    <div class="placeholder">🧩<span>Карельский орнамент</span></div>
-                    <div class="overlay">Карельский орнамент</div>
-                </div>
-                <div class="gallery-item" data-caption="Мозаика на VK Fest">
-                    <div class="placeholder">🧩<span>Мозаика на VK Fest</span></div>
-                    <div class="overlay">Мозаика на VK Fest</div>
-                </div>
-                <div class="gallery-item" data-caption="Картина из кубиков">
-                    <div class="placeholder">🧩<span>Картина из кубиков</span></div>
-                    <div class="overlay">Картина из кубиков</div>
-                </div>
-                <div class="gallery-item" data-caption="Портрет из кубиков">
-                    <div class="placeholder">🧩<span>Портрет из кубиков</span></div>
-                    <div class="overlay">Портрет из кубиков</div>
-                </div>
-            </div>
+            <!-- Галерея будет заполнена через JavaScript -->
+            <div class="gallery" id="mosaicGallery"></div>
         </div>
     </section>
 
@@ -89,5 +65,118 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script>
+        // =============================================
+        // ЗАГРУЗКА КАРТИН ИЗ ПАПКИ images/kartini/
+        // =============================================
+        document.addEventListener("DOMContentLoaded", function() {
+            const gallery = document.getElementById('mosaicGallery');
+            if (!gallery) return;
+
+            const totalImages = 26;
+            let html = '';
+
+            for (let i = 1; i <= totalImages; i++) {
+                // kartina1 — jpeg, остальные — png
+                const ext = i === 1 ? 'jpeg' : 'png';
+                const src = `images/kartini/kartina${i}.${ext}`;
+                const caption = `Картина ${i}`;
+
+                html += `
+                    <div class="gallery-item" data-caption="${caption}">
+                        <img src="${src}" alt="${caption}" loading="lazy" />
+                        <div class="overlay">${caption}</div>
+                    </div>
+                `;
+            }
+
+            gallery.innerHTML = html;
+
+            // Лайтбокс инициализируется в main.js, но нужно перезапустить
+            // обработчики для новых элементов. Перезапустим лайтбокс вручную.
+            if (typeof initLightbox === 'function') {
+                initLightbox();
+            } else {
+                // Если в main.js лайтбокс инициализируется по-другому,
+                // просто повторно вызываем событие, чтобы сработала инициализация.
+                // Самый простой способ: перезапустить скрипт лайтбокса из main.js
+                // путем повторного вызова его функции, если она объявлена.
+                // Но чтобы не ломать, добавим свою инициализацию.
+                setupLightboxForGallery();
+            }
+        });
+
+        // Дублируем функцию лайтбокса для безопасности, если в main.js она не сработает
+        function setupLightboxForGallery() {
+            const items = document.querySelectorAll('.gallery-item');
+            if (items.length === 0) return;
+
+            let overlay = document.querySelector('.lightbox-overlay');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.className = 'lightbox-overlay';
+                overlay.innerHTML = `
+                    <div class="lightbox-content">
+                        <span class="close-btn">&times;</span>
+                        <img src="" alt="Увеличенное фото">
+                        <div class="caption"></div>
+                    </div>
+                `;
+                document.body.appendChild(overlay);
+            }
+
+            const lightboxImg = overlay.querySelector('img');
+            const caption = overlay.querySelector('.caption');
+            const closeBtn = overlay.querySelector('.close-btn');
+
+            function getCaption(item) {
+                return item.getAttribute('data-caption') || 'Мозаика из кубиков Рубика';
+            }
+
+            function openLightbox(src, captionText) {
+                lightboxImg.src = src;
+                caption.textContent = captionText;
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            function handleClick(e) {
+                const item = e.currentTarget;
+                const img = item.querySelector('img');
+                if (img && img.src) {
+                    openLightbox(img.src, getCaption(item));
+                }
+            }
+
+            items.forEach(item => {
+                item.removeEventListener('click', handleClick);
+                item.addEventListener('click', handleClick);
+            });
+
+            if (closeBtn) {
+                closeBtn.removeEventListener('click', closeLightbox);
+                closeBtn.addEventListener('click', closeLightbox);
+            }
+
+            overlay.removeEventListener('click', function(e) {
+                if (e.target === overlay) closeLightbox();
+            });
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) closeLightbox();
+            });
+
+            document.removeEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeLightbox();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeLightbox();
+            });
+        }
+    </script>
 </body>
 </html>
