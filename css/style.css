@@ -153,7 +153,10 @@ h1 {
     color: var(--muted);
     font-style: italic;
     max-width: 100%;
-    word-break: break-word;
+}
+
+.hero-quote .nowrap {
+    white-space: nowrap;
 }
 
 /* ===== СТАТИСТИКА ===== */
@@ -726,6 +729,8 @@ footer p {
     .hero-quote {
         font-size: 14px;
         padding: 10px 16px;
+    }
+    .hero-quote .nowrap {
         white-space: normal;
     }
 
