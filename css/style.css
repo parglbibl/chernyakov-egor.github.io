@@ -513,7 +513,7 @@ h1 {
     font-size: 13px;
 }
 
-/* ===== РАСШИРЕННЫЙ ЛАЙТБОКС ===== */
+/* ===== ЛАЙТБОКС ===== */
 .lightbox-overlay {
     display: none;
     position: fixed;
