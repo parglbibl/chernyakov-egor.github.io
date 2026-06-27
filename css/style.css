@@ -31,7 +31,7 @@ body {
     line-height: 1.8;
     min-height: 100vh;
     font-size: 18px;
-    padding-top: 0px !important;
+    padding-top: 0 !important;
 }
 
 .container {
@@ -107,7 +107,7 @@ header {
     color: var(--muted);
     text-decoration: none;
     font-weight: 500;
-    font-size: 17px;
+    font-size: 15px;
     transition: 0.3s;
     position: relative;
     padding: 4px 0;
@@ -632,7 +632,7 @@ h1 {
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: #fff;
     width: 44px;
-    height: 44px;
+    height: 64px;
     border-radius: 50%;
     font-size: 26px;
     cursor: pointer;
@@ -719,7 +719,7 @@ footer p {
         height: 38px !important;
     }
     body {
-        padding-top: 0px !important;
+        padding-top: 38px !important;
     }
     .nav {
         gap: 14px;
