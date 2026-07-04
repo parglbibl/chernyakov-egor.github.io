@@ -3,15 +3,26 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Егор Черняков · Мозаики из кубиков Рубика</title>
-    <meta name="description" content="Мозаики из кубиков Рубика, созданные Егором Черняковым." />
+    <title>Галерея мозаик из кубиков Рубика — Егор Черняков</title>
+    <meta name="description" content="Мозаики из кубиков Рубика, созданные Егором Черняковым. Картины на фестивалях и выставках, включая VK Fest. Тысячи кубиков — одна большая картина." />
+    <meta name="keywords" content="мозаики из кубиков Рубика, картины из кубиков Рубика, Егор Черняков галерея, кубик Рубика искусство, VK Fest мозаика, спидкубинг арт, мозаика из кубиков портрет, кубик Рубика картины" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://chernyakov-egor.github.io/gallery.html" />
+    <meta property="og:title" content="Мозаики из кубиков Рубика — галерея Егора Чернякова" />
+    <meta property="og:description" content="Картины из тысяч кубиков Рубика на фестивалях и выставках. Участие в VK Fest." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://chernyakov-egor.github.io/gallery.html" />
+    <meta property="og:image" content="https://chernyakov-egor.github.io/images/gallery/projects/darvin.jpg" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Мозаики из кубиков Рубика — галерея Егора Чернякова" />
+    <meta name="twitter:description" content="Картины из тысяч кубиков Рубика на фестивалях и выставках. Участие в VK Fest." />
+    <meta name="twitter:image" content="https://chernyakov-egor.github.io/images/gallery/projects/darvin.jpg" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="icon" href="images/favicon.png" />
 </head>
 <body>
-
     <div class="stars-container" id="starsContainer"></div>
-
     <header>
         <div class="container header-inner">
             <ul class="nav" id="mainNav">
@@ -24,18 +35,16 @@
             </ul>
         </div>
     </header>
-
     <section class="hero">
         <div class="container">
             <div class="hero-avatar">
-                <img src="images/photo.jpg" alt="Егор Черняков" />
+                <img src="images/photo.jpg" alt="Егор Черняков — библиотекарь и спидкубер" />
             </div>
             <h1>Мозаики из <span>кубиков</span></h1>
             <p class="hero-lead">Тысячи кубиков Рубика — одна большая картина</p>
             <div class="hero-quote">✨ «Самого главного глазами не увидишь» ✨</div>
         </div>
     </section>
-
     <section class="section">
         <div class="container">
             <div class="section-title">Мои работы</div>
@@ -43,20 +52,17 @@
             <div class="gallery" id="mosaicGallery"></div>
         </div>
     </section>
-
     <section class="section">
         <div class="container">
             <div class="hero-quote">«Зорко одно лишь сердце. Самого главного глазами не увидишь».</div>
         </div>
     </section>
-
     <footer>
         <div class="container">
             <p class="stardust">✦ Каждая картина начинается с одного кубика ✦</p>
             <p>© <span id="current-year"></span> Егор Черняков</p>
         </div>
     </footer>
-
     <script src="js/main.js"></script>
     <script>
     (function() {
@@ -75,7 +81,7 @@
             for (var i = 1; i <= totalImages; i++) {
                 var ext = i === 1 ? 'jpeg' : 'png';
                 var src = 'images/kartini/kartina' + i + '.' + ext;
-                var caption = 'Картина ' + i;
+                var caption = 'Мозаика из кубиков Рубика — картина ' + i;
                 html += '<div class="gallery-item" data-caption="' + caption + '" data-src="' + src + '">';
                 html += '<img src="' + src + '" alt="' + caption + '" loading="lazy" />';
                 html += '<div class="overlay">' + caption + '</div>';
@@ -120,7 +126,7 @@
                 if (img && img.src) {
                     imageItems.push({
                         src: img.src,
-                        caption: item.getAttribute('data-caption') || 'Мозаика'
+                        caption: item.getAttribute('data-caption') || 'Мозаика из кубиков Рубика'
                     });
                 }
             });
