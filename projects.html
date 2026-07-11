@@ -166,7 +166,7 @@
             <div class="section-title">Кубик добра</div>
             <div class="section-subtitle">Социальный проект, который помогает людям через спидкубинг.</div>
             <div class="project-card">
-                <!-- Теперь у этих картинок есть класс gallery-item и data-атрибуты -->
+                <!-- Класс gallery-item и data-атрибуты -->
                 <div style="display: flex; gap: 0.5rem; margin-bottom: 0.8rem; flex-wrap: wrap;">
                     <div class="gallery-item" style="flex: 1; min-width: 100px; height: 130px; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.04); cursor: pointer;" data-src="images/gallery/kubik-dobra/hospital-masterclass.PNG" data-caption="Мастер-класс по сборке кубика Рубика в госпитале — Кубик добра">
                         <img src="images/gallery/kubik-dobra/hospital-masterclass.PNG" alt="Мастер-класс в госпитале" style="width: 100%; height: 100%; object-fit: cover; display: block;">
@@ -214,7 +214,6 @@
             <div class="section-title">Мозаики из кубиков</div>
             <div class="section-subtitle">Тысячи кубиков — одна большая картина.</div>
             <div class="project-card">
-                <!-- И у этой картинки тоже есть класс gallery-item -->
                 <div class="gallery-item" style="width: 100%; height: 280px; border-radius: 12px; overflow: hidden; margin-bottom: 0.8rem; background: rgba(255,255,255,0.04); cursor: pointer;" data-src="images/gallery/projects/darvin.jpg" data-caption="Портрет Чарльза Дарвина из 2000 кубиков Рубика">
                     <img src="images/gallery/projects/darvin.jpg" alt="Портрет Чарльза Дарвина из 2000 кубиков Рубика" style="width: 100%; height: 100%; object-fit: contain; display: block;">
                 </div>
@@ -287,10 +286,8 @@
             const prevBtn = document.getElementById('galleryLightboxPrev');
             const nextBtn = document.getElementById('galleryLightboxNext');
             
-            // Собираем все элементы с классом gallery-item (это твои картинки)
             const items = document.querySelectorAll('.gallery-item');
             
-            // Создаем массив данных для навигации
             const galleryData = [];
             items.forEach(item => {
                 galleryData.push({
@@ -301,7 +298,6 @@
 
             let currentIndex = 0;
 
-            // Функция открытия
             function openLightbox(index) {
                 currentIndex = index;
                 const item = galleryData[index];
@@ -313,20 +309,20 @@
                 }
             }
 
-            // Функция закрытия
             function closeLightbox() {
                 lightbox.classList.remove('active');
                 document.body.style.overflow = '';
             }
 
-            // Навешиваем клик на каждую картинку
+            // === ГЛАВНОЕ: ОБРАБОТЧИК ДЛЯ МОБИЛЬНЫХ И ПК ===
             items.forEach((item, index) => {
-                item.addEventListener('click', function() {
+                // Используем pointerdown, чтобы ловить и клик мыши, и тач на телефоне
+                item.addEventListener('pointerdown', function(e) {
+                    e.preventDefault(); // Предотвращаем выделение текста/скролл
                     openLightbox(index);
                 });
             });
 
-            // Кнопки навигации
             closeBtn.addEventListener('click', closeLightbox);
             
             prevBtn.addEventListener('click', function() {
@@ -341,14 +337,12 @@
                 openLightbox(currentIndex);
             });
 
-            // Клик по фону для закрытия
             lightbox.addEventListener('click', function(e) {
                 if (e.target === lightbox) {
                     closeLightbox();
                 }
             });
 
-            // Клавиши на клавиатуре
             document.addEventListener('keydown', function(e) {
                 if (!lightbox.classList.contains('active')) return;
                 if (e.key === 'Escape') closeLightbox();
@@ -356,7 +350,7 @@
                 if (e.key === 'ArrowRight') nextBtn.click();
             });
 
-            // Свайпы на телефоне
+            // Свайпы для телефона
             let touchStartX = 0;
             lightbox.addEventListener('touchstart', function(e) {
                 touchStartX = e.changedTouches[0].screenX;
