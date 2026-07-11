@@ -19,6 +19,113 @@
     <meta name="twitter:description" content="«Кубик добра», «Книжные грани», краеведение, мозаики из кубиков." />
     <meta name="twitter:image" content="https://chernyakov-egor.github.io/images/gallery/kubik-dobra/hospital-masterclass.PNG" />
     <link rel="stylesheet" href="css/style.css" />
+    
+    <style>
+        /* Стили для лайтбокса прямо в этом файле, чтобы не зависеть от стилей других страниц */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            backdrop-filter: blur(4px);
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 98vw;
+            max-height: 98vh;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-image-wrapper {
+            width: 100%;
+            height: calc(100% - 80px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+            user-select: none;
+            -webkit-user-select: none;
+            cursor: zoom-in;
+        }
+
+        .lightbox-content .caption {
+            margin-top: 8px;
+            text-align: center;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 500;
+            opacity: 0.9;
+            padding: 8px 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            max-width: 90%;
+            backdrop-filter: blur(4px);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 3rem;
+            color: #fff;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: 0.2s;
+            z-index: 10;
+            line-height: 1;
+            font-weight: 300;
+        }
+
+        .close-btn:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        
+        /* Адаптив для маленьких экранов */
+        @media (max-width: 500px) {
+            .lightbox-content img {
+                max-height: 75vh;
+                max-width: 98%;
+            }
+            .close-btn {
+                top: 5px;
+                right: 10px;
+                font-size: 2.4rem;
+            }
+            .lightbox-content .caption {
+                font-size: 15px;
+                padding: 6px 14px;
+                margin-top: 4px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="stars-container" id="starsContainer"></div>
@@ -50,13 +157,13 @@
             <div class="section-subtitle">Социальный проект, который помогает людям через спидкубинг.</div>
             <div class="project-card">
                 <div style="display: flex; gap: 0.5rem; margin-bottom: 0.8rem; flex-wrap: wrap;">
-                    <div style="flex: 1; min-width: 100px; height: 130px; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.04); cursor: pointer;" onclick="openProjectLightbox('images/gallery/kubik-dobra/hospital-masterclass.PNG', 'Мастер-класс по сборке кубика Рубика в госпитале — Кубик добра')">
+                    <div style="flex: 1; min-width: 100px; height: 130px; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.04); cursor: pointer;" onclick="openLightbox('images/gallery/kubik-dobra/hospital-masterclass.PNG', 'Мастер-класс по сборке кубика Рубика в госпитале — Кубик добра')">
                         <img src="images/gallery/kubik-dobra/hospital-masterclass.PNG" alt="Мастер-класс по сборке кубика Рубика в госпитале — Кубик добра" style="width: 100%; height: 100%; object-fit: cover; display: block;">
                     </div>
-                    <div style="flex: 1; min-width: 100px; height: 130px; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.04); cursor: pointer;" onclick="openProjectLightbox('images/gallery/ovz/multicenter-masterclass.PNG', 'Мастер-класс в Мультицентре Всеволожск — Кубик добра')">
+                    <div style="flex: 1; min-width: 100px; height: 130px; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.04); cursor: pointer;" onclick="openLightbox('images/gallery/ovz/multicenter-masterclass.PNG', 'Мастер-класс в Мультицентре Всеволожск — Кубик добра')">
                         <img src="images/gallery/ovz/multicenter-masterclass.PNG" alt="Мастер-класс в Мультицентре Всеволожск — Кубик добра" style="width: 100%; height: 100%; object-fit: cover; display: block;">
                     </div>
-                    <div style="flex: 1; min-width: 100px; height: 130px; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.04); cursor: pointer;" onclick="openProjectLightbox('images/gallery/ovz/tesovy-bereg.PNG', 'Мастер-класс в ДСО Тесовый берег — Кубик добра')">
+                    <div style="flex: 1; min-width: 100px; height: 130px; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.04); cursor: pointer;" onclick="openLightbox('images/gallery/ovz/tesovy-bereg.PNG', 'Мастер-класс в ДСО Тесовый берег — Кубик добра')">
                         <img src="images/gallery/ovz/tesovy-bereg.PNG" alt="Мастер-класс в ДСО Тесовый берег — Кубик добра" style="width: 100%; height: 100%; object-fit: cover; display: block;">
                     </div>
                 </div>
@@ -96,7 +203,7 @@
             <div class="section-title">Мозаики из кубиков</div>
             <div class="section-subtitle">Тысячи кубиков — одна большая картина.</div>
             <div class="project-card">
-                <div style="width: 100%; height: 280px; border-radius: 12px; overflow: hidden; margin-bottom: 0.8rem; background: rgba(255,255,255,0.04); cursor: pointer;" onclick="openProjectLightbox('images/gallery/projects/darvin.jpg', 'Портрет Чарльза Дарвина из 2000 кубиков Рубика')">
+                <div style="width: 100%; height: 280px; border-radius: 12px; overflow: hidden; margin-bottom: 0.8rem; background: rgba(255,255,255,0.04); cursor: pointer;" onclick="openLightbox('images/gallery/projects/darvin.jpg', 'Портрет Чарльза Дарвина из 2000 кубиков Рубика')">
                     <img src="images/gallery/projects/darvin.jpg" alt="Портрет Чарльза Дарвина из 2000 кубиков Рубика" style="width: 100%; height: 100%; object-fit: contain; display: block;">
                 </div>
                 <h3>Арт-проекты и фестивали</h3>
@@ -146,10 +253,10 @@
         </div>
     </footer>
     
-    <!-- Лайтбокс для страницы проектов -->
+    <!-- Структура лайтбокса -->
     <div class="lightbox-overlay" id="projectLightbox">
         <div class="lightbox-content">
-            <span class="close-btn" onclick="closeProjectLightbox()">&times;</span>
+            <span class="close-btn" onclick="closeLightbox()">&times;</span>
             <div class="lightbox-image-wrapper">
                 <img id="projectLightboxImg" src="" alt="Увеличенное фото" />
             </div>
@@ -159,8 +266,9 @@
 
     <script src="js/main.js"></script>
     
+    <!-- Скрипт для лайтбокса -->
     <script>
-        function openProjectLightbox(src, caption) {
+        function openLightbox(src, caption) {
             var overlay = document.getElementById('projectLightbox');
             var img = document.getElementById('projectLightboxImg');
             var cap = document.getElementById('projectLightboxCaption');
@@ -169,13 +277,10 @@
                 cap.textContent = caption;
                 overlay.classList.add('active');
                 document.body.style.overflow = 'hidden';
-                // Сбрасываем зум при открытии
-                img.style.transform = 'scale(1)';
-                img.style.cursor = 'zoom-in';
             }
         }
 
-        function closeProjectLightbox() {
+        function closeLightbox() {
             var overlay = document.getElementById('projectLightbox');
             if (overlay) {
                 overlay.classList.remove('active');
@@ -183,22 +288,22 @@
             }
         }
 
-        // Закрытие по клику на фон
+        // Закрытие по клику на темный фон
         document.addEventListener('DOMContentLoaded', function() {
             var overlay = document.getElementById('projectLightbox');
             if (overlay) {
                 overlay.addEventListener('click', function(e) {
                     if (e.target === overlay) {
-                        closeProjectLightbox();
+                        closeLightbox();
                     }
                 });
             }
         });
 
-        // Закрытие по ESC
+        // Закрытие по нажатию ESC
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
-                closeProjectLightbox();
+                closeLightbox();
             }
         });
     </script>
