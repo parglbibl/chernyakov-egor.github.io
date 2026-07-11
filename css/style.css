@@ -708,11 +708,6 @@ footer p {
     opacity: 0.6;
 }
 
-/* ===== КНОПКА НАВЕРХ (СКРЫТА) ===== */
-.back-to-top {
-    display: none !important;
-}
-
 /* ===== АДАПТИВ ===== */
 @media (max-width: 860px) {
     .nav {
