@@ -50,13 +50,13 @@
             <div class="section-subtitle">Социальный проект, который помогает людям через спидкубинг.</div>
             <div class="project-card">
                 <div style="display: flex; gap: 0.5rem; margin-bottom: 0.8rem; flex-wrap: wrap;">
-                    <div style="flex: 1; min-width: 100px; height: 130px; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.04); cursor: pointer;" onclick="window.location.href='gallery.html'">
+                    <div style="flex: 1; min-width: 100px; height: 130px; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.04); cursor: pointer;" onclick="openProjectLightbox('images/gallery/kubik-dobra/hospital-masterclass.PNG', 'Мастер-класс по сборке кубика Рубика в госпитале — Кубик добра')">
                         <img src="images/gallery/kubik-dobra/hospital-masterclass.PNG" alt="Мастер-класс по сборке кубика Рубика в госпитале — Кубик добра" style="width: 100%; height: 100%; object-fit: cover; display: block;">
                     </div>
-                    <div style="flex: 1; min-width: 100px; height: 130px; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.04); cursor: pointer;" onclick="window.location.href='gallery.html'">
+                    <div style="flex: 1; min-width: 100px; height: 130px; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.04); cursor: pointer;" onclick="openProjectLightbox('images/gallery/ovz/multicenter-masterclass.PNG', 'Мастер-класс в Мультицентре Всеволожск — Кубик добра')">
                         <img src="images/gallery/ovz/multicenter-masterclass.PNG" alt="Мастер-класс в Мультицентре Всеволожск — Кубик добра" style="width: 100%; height: 100%; object-fit: cover; display: block;">
                     </div>
-                    <div style="flex: 1; min-width: 100px; height: 130px; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.04); cursor: pointer;" onclick="window.location.href='gallery.html'">
+                    <div style="flex: 1; min-width: 100px; height: 130px; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.04); cursor: pointer;" onclick="openProjectLightbox('images/gallery/ovz/tesovy-bereg.PNG', 'Мастер-класс в ДСО Тесовый берег — Кубик добра')">
                         <img src="images/gallery/ovz/tesovy-bereg.PNG" alt="Мастер-класс в ДСО Тесовый берег — Кубик добра" style="width: 100%; height: 100%; object-fit: cover; display: block;">
                     </div>
                 </div>
@@ -96,7 +96,7 @@
             <div class="section-title">Мозаики из кубиков</div>
             <div class="section-subtitle">Тысячи кубиков — одна большая картина.</div>
             <div class="project-card">
-                <div style="width: 100%; height: 280px; border-radius: 12px; overflow: hidden; margin-bottom: 0.8rem; background: rgba(255,255,255,0.04); cursor: pointer;" onclick="window.location.href='gallery.html'">
+                <div style="width: 100%; height: 280px; border-radius: 12px; overflow: hidden; margin-bottom: 0.8rem; background: rgba(255,255,255,0.04); cursor: pointer;" onclick="openProjectLightbox('images/gallery/projects/darvin.jpg', 'Портрет Чарльза Дарвина из 2000 кубиков Рубика')">
                     <img src="images/gallery/projects/darvin.jpg" alt="Портрет Чарльза Дарвина из 2000 кубиков Рубика" style="width: 100%; height: 100%; object-fit: contain; display: block;">
                 </div>
                 <h3>Арт-проекты и фестивали</h3>
@@ -145,6 +145,62 @@
             <p>© <span id="current-year"></span> Егор Черняков</p>
         </div>
     </footer>
+    
+    <!-- Лайтбокс для страницы проектов -->
+    <div class="lightbox-overlay" id="projectLightbox">
+        <div class="lightbox-content">
+            <span class="close-btn" onclick="closeProjectLightbox()">&times;</span>
+            <div class="lightbox-image-wrapper">
+                <img id="projectLightboxImg" src="" alt="Увеличенное фото" />
+            </div>
+            <div class="caption" id="projectLightboxCaption"></div>
+        </div>
+    </div>
+
     <script src="js/main.js"></script>
+    
+    <script>
+        function openProjectLightbox(src, caption) {
+            var overlay = document.getElementById('projectLightbox');
+            var img = document.getElementById('projectLightboxImg');
+            var cap = document.getElementById('projectLightboxCaption');
+            if (overlay && img && cap) {
+                img.src = src;
+                cap.textContent = caption;
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                // Сбрасываем зум при открытии
+                img.style.transform = 'scale(1)';
+                img.style.cursor = 'zoom-in';
+            }
+        }
+
+        function closeProjectLightbox() {
+            var overlay = document.getElementById('projectLightbox');
+            if (overlay) {
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Закрытие по клику на фон
+        document.addEventListener('DOMContentLoaded', function() {
+            var overlay = document.getElementById('projectLightbox');
+            if (overlay) {
+                overlay.addEventListener('click', function(e) {
+                    if (e.target === overlay) {
+                        closeProjectLightbox();
+                    }
+                });
+            }
+        });
+
+        // Закрытие по ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeProjectLightbox();
+            }
+        });
+    </script>
 </body>
 </html>
