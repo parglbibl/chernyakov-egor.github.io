@@ -112,7 +112,7 @@ header {
     color: var(--muted);
     text-decoration: none;
     font-weight: 700;
-    font-size: 22px; /* УВЕЛИЧЕНО с 20px до 22px */
+    font-size: 22px;
     transition: 0.3s;
     position: relative;
     padding: 4px 0;
@@ -502,12 +502,46 @@ footer p {
     opacity: 0.6;
 }
 
+/* ===== КНОПКА НАВЕРХ ===== */
+.back-to-top {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 50px;
+    height: 50px;
+    background: var(--accent);
+    color: #111;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 999;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.back-to-top:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    color: #111;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
 @media (max-width: 860px) {
     .nav {
         gap: 20px 28px;
     }
     .nav a {
-        font-size: 19px; /* УВЕЛИЧЕНО с 17px до 19px */
+        font-size: 19px;
     }
 }
 
@@ -520,7 +554,7 @@ footer p {
         gap: 12px 20px;
     }
     .nav a {
-        font-size: 16px; /* УВЕЛИЧЕНО с 15px до 16px */
+        font-size: 16px;
         font-weight: 600;
         padding: 2px 0;
     }
@@ -572,7 +606,7 @@ footer p {
         gap: 8px 14px;
     }
     .nav a {
-        font-size: 14px; /* УВЕЛИЧЕНО с 13px до 14px */
+        font-size: 14px;
         font-weight: 600;
         padding: 2px 0;
         letter-spacing: 0.3px;
@@ -607,5 +641,13 @@ footer p {
     .contacts a {
         font-size: 15px;
         padding: 10px 18px;
+    }
+
+    .back-to-top {
+        width: 44px;
+        height: 44px;
+        font-size: 20px;
+        bottom: 20px;
+        right: 20px;
     }
 }
