@@ -220,4 +220,96 @@
                 "Портрет Альберта Эйнштейна",
                 "Енот из «Стражи Галактики»",
                 "Губка Боб Квадратные Штаны",
-                "Портрет Олега
+                "Портрет Олега Роя",
+                "Вечный Огонь ко Дню Победы в г. Сертолово",
+                "Санта Клаус",
+                "Портрет",
+                "Портрет",
+                "Портрет Юрия Слепухина",
+                "Портрет",
+                "Ко Дню защиты детей",
+                "Сердце",
+                "Герб",
+                "К Масленице",
+                "Портрет"
+            ];
+
+            var totalImages = 26;
+            var html = '';
+            
+            for (var i = 1; i <= totalImages; i++) {
+                var ext = i === 1 ? 'jpeg' : 'png';
+                var src = 'images/kartini/kartina' + i + '.' + ext;
+                var captionText = captions[i-1];
+                
+                html += '<a href="' + src + '" onclick="openLightbox(' + (i-1) + '); return false;" class="gallery-link">';
+                html += '<img src="' + src + '" alt="' + captionText + '" loading="lazy" />';
+                html += '</a>';
+            }
+            gallery.innerHTML = html;
+
+            var lightbox = document.getElementById('lightbox');
+            if (!lightbox) {
+                lightbox = document.createElement('div');
+                lightbox.id = 'lightbox';
+                document.body.appendChild(lightbox);
+            }
+
+            var currentIndex = 0;
+
+            function renderLightbox(index) {
+                currentIndex = index;
+                var data = captions[currentIndex];
+                var src = 'images/kartini/kartina' + (index + 1) + '.' + (index === 0 ? 'jpeg' : 'png');
+                
+                lightbox.innerHTML = `
+                    <div class="image-wrapper">
+                        <span class="close" onclick="closeLightbox()">&times;</span>
+                        <span class="nav-btn nav-prev" onclick="changeImage(-1)">‹</span>
+                        <img src="${src}" alt="${data}" />
+                        <span class="nav-btn nav-next" onclick="changeImage(1)">›</span>
+                    </div>
+                    <div class="caption">${data}</div>
+                    <div class="counter">${currentIndex + 1} / ${totalImages}</div>
+                `;
+                
+                lightbox.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+
+                lightbox.onclick = function(e) {
+                    if (e.target === lightbox) closeLightbox();
+                };
+            }
+
+            window.openLightbox = function(index) {
+                renderLightbox(index);
+            };
+
+            window.closeLightbox = function() {
+                lightbox.style.display = 'none';
+                document.body.style.overflow = '';
+            };
+
+            window.changeImage = function(direction) {
+                var newIndex = currentIndex + direction;
+                if (newIndex < 0) newIndex = totalImages - 1;
+                if (newIndex >= totalImages) newIndex = 0;
+                renderLightbox(newIndex);
+            };
+
+            document.addEventListener('keydown', function(e) {
+                if (lightbox.style.display === 'none') return;
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                }
+                if (e.key === 'ArrowLeft') {
+                    changeImage(-1);
+                }
+                if (e.key === 'ArrowRight') {
+                    changeImage(1);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
