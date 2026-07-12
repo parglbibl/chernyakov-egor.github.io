@@ -6,7 +6,7 @@
     <title>Галерея мозаик из кубиков Рубика — Егор Черняков</title>
     <link rel="stylesheet" href="css/style.css" />
     
-    <!-- ===== ПОДКЛЮЧЕНИЕ LIGHTBOX2 С ЗАЩИТОЙ ОТ КЕША ===== -->
+    <!-- ===== ПОДКЛЮЧЕНИЕ LIGHTBOX2 ===== -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/css/lightbox.min.css" rel="stylesheet" />
     
     <style>
@@ -95,7 +95,7 @@
     <!-- ===== ПОДКЛЮЧЕНИЕ JS LIGHTBOX2 ===== -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox.min.js"></script>
 
-    <!-- ===== ГЕНЕРАЦИЯ 26 КАРТИНОК ПОД LIGHTBOX2 ===== -->
+    <!-- ===== ГЕНЕРАЦИЯ 26 КАРТИНОК ПОД LIGHTBOX2 (С ХЭШЕМ) ===== -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var gallery = document.getElementById('mosaicGallery');
@@ -108,8 +108,8 @@
                 var src = 'images/kartini/kartina' + i + '.' + ext;
                 var captionText = 'Мозаика из кубиков Рубика — картина ' + i;
                 
-                // Каждая ссылка получает data-lightbox и data-title!
-                html += '<a href="' + src + '" data-lightbox="mosaic" data-title="' + captionText + '" class="gallery-link">';
+                // ВАЖНО! Ссылка href="#" не даёт браузеру уходить со страницы!
+                html += '<a href="#" data-lightbox="mosaic" data-title="' + captionText + '" class="gallery-link">';
                 html += '<img src="' + src + '" alt="' + captionText + '" loading="lazy" />';
                 html += '</a>';
             }
