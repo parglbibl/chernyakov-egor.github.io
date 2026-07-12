@@ -9,121 +9,52 @@
     <link rel="canonical" href="https://chernyakov-egor.github.io/projects.html" />
     <link rel="stylesheet" href="css/style.css" />
     
+    <!-- ===== ПОДКЛЮЧЕНИЕ LIGHTBOX2 (никаких конфликтов) ===== -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/css/lightbox.min.css" rel="stylesheet" />
+    
     <style>
-        /* Специфичные стили для лайтбокса на странице проектов */
-        .row > .column { padding: 0 8px; }
-        .row:after { content: ""; display: table; clear: both; }
-        .column { float: left; width: 25%; }
-
-        /* Модальный (фон) */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 9999; /* ВАЖНО: поверх всего */
-            padding-top: 80px;
-            left: 0;
-            top: 0;
+        /* Стили только для превьюшек в проектах */
+        .preview-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .preview-item {
+            flex: 1;
+            min-width: 140px;
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        .preview-item:hover {
+            transform: translateY(-4px);
+        }
+        .preview-item img {
             width: 100%;
             height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(4px);
+            object-fit: cover;
+            display: block;
         }
-
-        .modal-content {
-            position: relative;
-            background-color: transparent;
-            margin: auto;
-            padding: 0;
-            width: 90%;
-            max-width: 1000px;
-        }
-
-        .close {
-            color: #fff;
-            position: absolute;
-            top: -50px;
-            right: 0;
-            font-size: 40px;
-            font-weight: bold;
-            transition: 0.3s;
-            cursor: pointer;
-            z-index: 10;
-        }
-        .close:hover { color: var(--accent); }
-
-        .mySlides { display: none; text-align: center; }
-        .mySlides img { 
-            width: 100%; 
-            height: auto; 
-            max-height: 80vh; 
-            object-fit: contain; 
-            border-radius: 12px;
-        }
-
-        .prev, .next {
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            width: auto;
-            padding: 20px;
-            margin-top: -50px;
-            color: #fff;
-            font-weight: bold;
-            font-size: 28px;
-            transition: 0.3s;
-            border-radius: 0 3px 3px 0;
-            user-select: none;
-            background: rgba(0,0,0,0.3);
-        }
-        .next { right: 0; border-radius: 3px 0 0 3px; }
-        .prev:hover, .next:hover { background-color: var(--accent); color: #000; }
-
-        .numbertext {
-            color: #f2f2f2;
-            font-size: 14px;
-            padding: 8px 12px;
-            position: absolute;
-            top: 0;
-            left: 0;
-            background: rgba(0,0,0,0.5);
-            border-radius: 0 0 12px 0;
-        }
-
-        .caption-container {
-            text-align: center;
-            background-color: rgba(0,0,0,0.6);
-            padding: 10px 16px;
-            color: #fff;
-            border-radius: 12px;
-            margin-top: 10px;
-            font-size: 18px;
-        }
-
-        .demo {
-            opacity: 0.6;
-            cursor: pointer;
+        .darvin-wrapper {
             width: 100%;
-            height: auto;
-            border-radius: 8px;
-            transition: 0.3s;
+            height: 280px;
+            margin-bottom: 0.8rem;
+            border-radius: 12px;
+            overflow: hidden;
+            display: block;
+            transition: transform 0.3s ease;
         }
-        .active, .demo:hover { opacity: 1; }
-
-        img.hover-shadow { transition: 0.3s; cursor: pointer; }
-        .hover-shadow:hover { 
+        .darvin-wrapper:hover {
             transform: translateY(-4px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
         }
-
-        @media (max-width: 700px) {
-            .column { width: 50%; }
-            .prev, .next { font-size: 20px; padding: 12px; }
-            .close { top: -40px; font-size: 30px; }
-            .mySlides img { max-height: 60vh; }
-        }
-        @media (max-width: 500px) {
-            .column { width: 100%; }
+        .darvin-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
         }
     </style>
 </head>
@@ -159,17 +90,17 @@
             <div class="section-subtitle">Социальный проект, который помогает людям через спидкубинг.</div>
             
             <div class="project-card">
-                <!-- КАРТИНКИ С ЛАЙТБОКСОМ -->
-                <div class="row" style="margin-bottom: 1.5rem; display: flex; flex-wrap: wrap;">
-                    <div class="column" style="flex: 1; min-width: 140px;">
-                        <img src="images/gallery/kubik-dobra/hospital-masterclass.PNG" onclick="openModal();currentSlide(1)" class="hover-shadow" alt="Мастер-класс в госпитале" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:12px;">
-                    </div>
-                    <div class="column" style="flex: 1; min-width: 140px;">
-                        <img src="images/gallery/ovz/multicenter-masterclass.PNG" onclick="openModal();currentSlide(2)" class="hover-shadow" alt="Мастер-класс в Мультицентре" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:12px;">
-                    </div>
-                    <div class="column" style="flex: 1; min-width: 140px;">
-                        <img src="images/gallery/ovz/tesovy-bereg.PNG" onclick="openModal();currentSlide(3)" class="hover-shadow" alt="Мастер-класс в Тесовый берег" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:12px;">
-                    </div>
+                <!-- КАРТИНКИ С LIGHTBOX2 -->
+                <div class="preview-row">
+                    <a href="images/gallery/kubik-dobra/hospital-masterclass.PNG" data-lightbox="kubik-dobra" data-title="Мастер-класс в госпитале" class="preview-item">
+                        <img src="images/gallery/kubik-dobra/hospital-masterclass.PNG" alt="Мастер-класс в госпитале">
+                    </a>
+                    <a href="images/gallery/ovz/multicenter-masterclass.PNG" data-lightbox="kubik-dobra" data-title="Мастер-класс в Мультицентре" class="preview-item">
+                        <img src="images/gallery/ovz/multicenter-masterclass.PNG" alt="Мастер-класс в Мультицентре">
+                    </a>
+                    <a href="images/gallery/ovz/tesovy-bereg.PNG" data-lightbox="kubik-dobra" data-title="Мастер-класс в Тесовый берег" class="preview-item">
+                        <img src="images/gallery/ovz/tesovy-bereg.PNG" alt="Мастер-класс в Тесовый берег">
+                    </a>
                 </div>
                 
                 <h3>Кубик добра</h3>
@@ -208,10 +139,10 @@
             <div class="section-title">Мозаики из кубиков</div>
             <div class="section-subtitle">Тысячи кубиков — одна большая картина.</div>
             <div class="project-card">
-                <!-- Портрет Дарвина с лайтбоксом -->
-                <div style="width: 100%; height: 280px; margin-bottom: 0.8rem; border-radius: 12px; overflow: hidden;">
-                    <img src="images/gallery/projects/darvin.jpg" onclick="openModal();currentSlide(4)" class="hover-shadow" alt="Портрет Чарльза Дарвина" style="width:100%; height:100%; object-fit:contain; display:block; border-radius:12px; cursor:pointer;">
-                </div>
+                <!-- Портрет Дарвина с Lightbox2 -->
+                <a href="images/gallery/projects/darvin.jpg" data-lightbox="kubik-dobra" data-title="Портрет Чарльза Дарвина" class="darvin-wrapper">
+                    <img src="images/gallery/projects/darvin.jpg" alt="Портрет Чарльза Дарвина">
+                </a>
                 <h3>Арт-проекты и фестивали</h3>
                 <p>Неоднократно участвовал в создании больших мозаик из кубиков Рубика.</p>
                 <p style="margin-top: 12px;">Работы демонстрировались на крупных мероприятиях, включая VK Fest.</p>
@@ -261,88 +192,7 @@
 
     <script src="js/main.js"></script>
 
-    <!-- ===== ЛАЙТБОКС ДЛЯ ПРОЕКТОВ (4 картинки) ===== -->
-    <div id="myModal" class="modal" style="display: none; z-index: 9999;">
-        <span class="close cursor" onclick="closeModal()">&times;</span>
-        <div class="modal-content">
-            
-            <div class="mySlides">
-                <div class="numbertext">1 / 4</div>
-                <img src="images/gallery/kubik-dobra/hospital-masterclass.PNG" style="width:100%">
-            </div>
-
-            <div class="mySlides">
-                <div class="numbertext">2 / 4</div>
-                <img src="images/gallery/ovz/multicenter-masterclass.PNG" style="width:100%">
-            </div>
-
-            <div class="mySlides">
-                <div class="numbertext">3 / 4</div>
-                <img src="images/gallery/ovz/tesovy-bereg.PNG" style="width:100%">
-            </div>
-
-            <div class="mySlides">
-                <div class="numbertext">4 / 4</div>
-                <img src="images/gallery/projects/darvin.jpg" style="width:100%">
-            </div>
-
-            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-            <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-            <div class="caption-container">
-                <p id="caption"></p>
-            </div>
-
-            <div class="row" style="display: flex; gap: 10px; margin-top: 10px;">
-                <div class="column" style="flex: 1;">
-                    <img class="demo" src="images/gallery/kubik-dobra/hospital-masterclass.PNG" onclick="currentSlide(1)" alt="Мастер-класс в госпитале" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:8px;">
-                </div>
-                <div class="column" style="flex: 1;">
-                    <img class="demo" src="images/gallery/ovz/multicenter-masterclass.PNG" onclick="currentSlide(2)" alt="Мастер-класс в Мультицентре" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:8px;">
-                </div>
-                <div class="column" style="flex: 1;">
-                    <img class="demo" src="images/gallery/ovz/tesovy-bereg.PNG" onclick="currentSlide(3)" alt="Мастер-класс в Тесовый берег" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:8px;">
-                </div>
-                <div class="column" style="flex: 1;">
-                    <img class="demo" src="images/gallery/projects/darvin.jpg" onclick="currentSlide(4)" alt="Портрет Чарльза Дарвина" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:8px;">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Твой JS (дублируется локально для projects.html)
-        function openModal() {
-            document.getElementById("myModal").style.display = "block";
-        }
-        function closeModal() {
-            document.getElementById("myModal").style.display = "none";
-        }
-        var slideIndex = 1;
-        showSlides(slideIndex);
-        function plusSlides(n) {
-            showSlides(slideIndex += n);
-        }
-        function currentSlide(n) {
-            showSlides(slideIndex = n);
-        }
-        function showSlides(n) {
-            var i;
-            var slides = document.getElementsByClassName("mySlides");
-            var dots = document.getElementsByClassName("demo");
-            var captionText = document.getElementById("caption");
-            if (n > slides.length) {slideIndex = 1}
-            if (n < 1) {slideIndex = slides.length}
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" active", "");
-            }
-            slides[slideIndex-1].style.display = "block";
-            dots[slideIndex-1].className += " active";
-            captionText.innerHTML = dots[slideIndex-1].alt;
-        }
-    </script>
+    <!-- ===== ПОДКЛЮЧЕНИЕ JS LIGHTBOX2 ===== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox.min.js"></script>
 </body>
 </html>
