@@ -26,6 +26,4 @@ document.addEventListener("DOMContentLoaded", function() {
         container.appendChild(fragment);
     }
     initStars();
-
-    // ===== ВСЁ, ЛАЙТБОКСА БОЛЬШЕ НЕТ! =====
 });
