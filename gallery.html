@@ -168,10 +168,13 @@
     
     <section class="hero">
         <div class="container">
-            <div class="hero-avatar" style="background: linear-gradient(135deg, var(--accent), rgba(216, 180, 90, 0.15));">
-                <div style="width: 120px; height: 120px; display: flex; align-items: center; justify-content: center; font-size: 64px; border-radius: 16px; background: var(--bg);">
-                    🎨
-                </div>
+            <div class="hero-avatar">
+                <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#d8b45a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M9 9l-4-4"></path>
+                    <path d="M15 15l4 4"></path>
+                </svg>
             </div>
             <h1>Мозаики из <span>кубиков</span></h1>
             <p class="hero-lead">Тысячи кубиков Рубика — одна большая картина</p>
@@ -187,8 +190,6 @@
             <div class="gallery-grid" id="mosaicGallery"></div>
         </div>
     </section>
-
-    <!-- ЛИШНЯЯ ЦИТАТА ВНИЗУ ПОЛНОСТЬЮ УДАЛЕНА -->
 
     <footer>
         <div class="container">
@@ -219,96 +220,4 @@
                 "Портрет Альберта Эйнштейна",
                 "Енот из «Стражи Галактики»",
                 "Губка Боб Квадратные Штаны",
-                "Портрет Олега Роя",
-                "Вечный Огонь ко Дню Победы в г. Сертолово",
-                "Санта Клаус",
-                "Портрет",
-                "Портрет",
-                "Портрет Юрия Слепухина",
-                "Портрет",
-                "Ко Дню защиты детей",
-                "Сердце",
-                "Герб",
-                "К Масленице",
-                "Портрет"
-            ];
-
-            var totalImages = 26;
-            var html = '';
-            
-            for (var i = 1; i <= totalImages; i++) {
-                var ext = i === 1 ? 'jpeg' : 'png';
-                var src = 'images/kartini/kartina' + i + '.' + ext;
-                var captionText = captions[i-1];
-                
-                html += '<a href="' + src + '" onclick="openLightbox(' + (i-1) + '); return false;" class="gallery-link">';
-                html += '<img src="' + src + '" alt="' + captionText + '" loading="lazy" />';
-                html += '</a>';
-            }
-            gallery.innerHTML = html;
-
-            var lightbox = document.getElementById('lightbox');
-            if (!lightbox) {
-                lightbox = document.createElement('div');
-                lightbox.id = 'lightbox';
-                document.body.appendChild(lightbox);
-            }
-
-            var currentIndex = 0;
-
-            function renderLightbox(index) {
-                currentIndex = index;
-                var data = captions[currentIndex];
-                var src = 'images/kartini/kartina' + (index + 1) + '.' + (index === 0 ? 'jpeg' : 'png');
-                
-                lightbox.innerHTML = `
-                    <div class="image-wrapper">
-                        <span class="close" onclick="closeLightbox()">&times;</span>
-                        <span class="nav-btn nav-prev" onclick="changeImage(-1)">‹</span>
-                        <img src="${src}" alt="${data}" />
-                        <span class="nav-btn nav-next" onclick="changeImage(1)">›</span>
-                    </div>
-                    <div class="caption">${data}</div>
-                    <div class="counter">${currentIndex + 1} / ${totalImages}</div>
-                `;
-                
-                lightbox.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-
-                lightbox.onclick = function(e) {
-                    if (e.target === lightbox) closeLightbox();
-                };
-            }
-
-            window.openLightbox = function(index) {
-                renderLightbox(index);
-            };
-
-            window.closeLightbox = function() {
-                lightbox.style.display = 'none';
-                document.body.style.overflow = '';
-            };
-
-            window.changeImage = function(direction) {
-                var newIndex = currentIndex + direction;
-                if (newIndex < 0) newIndex = totalImages - 1;
-                if (newIndex >= totalImages) newIndex = 0;
-                renderLightbox(newIndex);
-            };
-
-            document.addEventListener('keydown', function(e) {
-                if (lightbox.style.display === 'none') return;
-                if (e.key === 'Escape') {
-                    closeLightbox();
-                }
-                if (e.key === 'ArrowLeft') {
-                    changeImage(-1);
-                }
-                if (e.key === 'ArrowRight') {
-                    changeImage(1);
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+                "Портрет Олега
