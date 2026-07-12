@@ -23,73 +23,6 @@
             object-fit: contain;
             background: #0a0e1a;
         }
-        
-        /* ===== СТИЛИ ЛАЙТБОКСА ===== */
-        .lightbox-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.92);
-            z-index: 9999;
-            justify-content: center; align-items: center;
-            padding: 20px;
-            backdrop-filter: blur(4px);
-        }
-        .lightbox-overlay.active { display: flex; }
-        
-        .lightbox-content {
-            position: relative;
-            max-width: 98vw; max-height: 98vh;
-            width: 100%; height: 100%;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-        }
-        .lightbox-image-wrapper {
-            width: 100%; height: calc(100% - 80px);
-            display: flex; align-items: center; justify-content: center;
-            overflow: hidden;
-        }
-        .lightbox-content img {
-            max-width: 100%; max-height: 100%;
-            width: auto; height: auto; object-fit: contain;
-            border-radius: 8px;
-            user-select: none; -webkit-user-select: none;
-            cursor: zoom-in;
-        }
-        .lightbox-content .caption {
-            margin-top: 8px; text-align: center; color: #fff;
-            font-size: 18px; font-weight: 500; opacity: 0.9;
-            padding: 8px 20px; background: rgba(0, 0, 0, 0.5);
-            border-radius: 8px; max-width: 90%;
-        }
-        .close-btn {
-            position: absolute; top: 10px; right: 20px;
-            font-size: 3rem; color: #fff; cursor: pointer;
-            opacity: 0.7; transition: 0.2s; line-height: 1;
-        }
-        .close-btn:hover { opacity: 1; transform: scale(1.1); }
-        
-        .lightbox-nav {
-            display: flex; align-items: center; gap: 20px;
-            margin-top: 12px; background: rgba(0, 0, 0, 0.4);
-            padding: 8px 20px; border-radius: 30px;
-        }
-        .nav-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #fff; width: 44px; height: 44px;
-            border-radius: 50%; font-size: 26px; cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .nav-btn:hover { background: rgba(255, 255, 255, 0.2); transform: scale(1.1); }
-        .counter { color: #fff; font-size: 16px; font-weight: 500; opacity: 0.8; min-width: 60px; text-align: center; }
-        
-        @media (max-width: 500px) {
-            .close-btn { top: 5px; right: 10px; font-size: 2.4rem; }
-            .lightbox-content .caption { font-size: 15px; padding: 6px 14px; }
-            .nav-btn { width: 38px; height: 38px; font-size: 22px; }
-            .counter { font-size: 14px; min-width: 50px; }
-        }
     </style>
 </head>
 <body>
@@ -135,7 +68,7 @@
         </div>
     </footer>
 
-    <!-- ===== СТРУКТУРА ЛАЙТБОКСА ===== -->
+    <!-- ===== ЛАЙТБОКС (ЕДИНЫЙ ДЛЯ ВСЕГО САЙТА) ===== -->
     <div class="lightbox-overlay" id="lightboxOverlay">
         <div class="lightbox-content">
             <span class="close-btn" id="lightboxClose">&times;</span>
@@ -153,7 +86,7 @@
 
     <script src="js/main.js"></script>
     
-    <!-- Генерация 26 картинок для галереи -->
+    <!-- ===== ГЕНЕРАЦИЯ 26 КАРТИНОК ===== -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var gallery = document.getElementById('mosaicGallery');
