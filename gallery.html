@@ -95,7 +95,7 @@
     <!-- ===== ПОДКЛЮЧЕНИЕ JS LIGHTBOX2 ===== -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox.min.js"></script>
 
-    <!-- ===== ГЕНЕРАЦИЯ 26 КАРТИНОК ПОД LIGHTBOX2 (БЕЗ ПРОКРУТКИ) ===== -->
+    <!-- ===== ГЕНЕРАЦИЯ 26 КАРТИНОК ПОД LIGHTBOX2 (ФИНАЛЬНЫЙ РАБОЧИЙ ВАРИАНТ) ===== -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var gallery = document.getElementById('mosaicGallery');
@@ -108,12 +108,23 @@
                 var src = 'images/kartini/kartina' + i + '.' + ext;
                 var captionText = 'Мозаика из кубиков Рубика — картина ' + i;
                 
-                // ВАЖНО! href="javascript:void(0)" не прокручивает страницу!
-                html += '<a href="javascript:void(0)" data-lightbox="mosaic" data-title="' + captionText + '" class="gallery-link">';
+                // ЕДИНСТВЕННЫЙ РАБОЧИЙ ВАРИАНТ:
+                // href ведёт на картинку, data-lightbox активирует лайтбокс
+                html += '<a href="' + src + '" data-lightbox="mosaic" data-title="' + captionText + '" class="gallery-link">';
                 html += '<img src="' + src + '" alt="' + captionText + '" loading="lazy" />';
                 html += '</a>';
             }
             gallery.innerHTML = html;
+        });
+
+        // ===== ДОБАВЛЯЕМ ПРЕДОТВРАЩЕНИЕ ПЕРЕХОДА ПО ССЫЛКЕ =====
+        document.addEventListener('click', function(e) {
+            // Если кликнули на ссылку с data-lightbox, не даём браузеру уйти
+            var target = e.target.closest('a[data-lightbox]');
+            if (target) {
+                e.preventDefault(); // Запрещаем переход по ссылке
+                // Lightbox2 сам откроется благодаря data-lightbox
+            }
         });
     </script>
 </body>
