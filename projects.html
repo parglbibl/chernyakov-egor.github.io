@@ -19,6 +19,123 @@
     <meta name="twitter:description" content="«Кубик добра», «Книжные грани», краеведение, мозаики из кубиков." />
     <meta name="twitter:image" content="https://chernyakov-egor.github.io/images/gallery/kubik-dobra/hospital-masterclass.PNG" />
     <link rel="stylesheet" href="css/style.css" />
+    
+    <style>
+        /* Стили лайтбокса — точная копия твоего рабочего проекта (но с твоими цветами) */
+        .gallery-lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .gallery-lightbox.active {
+            display: flex;
+        }
+
+        .gallery-lightbox-image-wrapper {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-lightbox-image-wrapper img {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 16px;
+            object-fit: contain;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+        }
+
+        .gallery-lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: color 0.2s;
+        }
+
+        .gallery-lightbox-close:hover {
+            color: #d8b45a; /* Твой акцентный цвет */
+        }
+
+        .gallery-lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            background: rgba(0,0,0,0.4);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+            border: none;
+        }
+
+        .gallery-lightbox-nav:hover {
+            background: #d8b45a;
+        }
+
+        .gallery-lightbox-prev {
+            left: -70px;
+        }
+
+        .gallery-lightbox-next {
+            right: -70px;
+        }
+
+        .gallery-lightbox-counter {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-lightbox-close {
+                top: -40px;
+                font-size: 2rem;
+            }
+            .gallery-lightbox-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+            }
+            .gallery-lightbox-prev {
+                left: 10px;
+            }
+            .gallery-lightbox-next {
+                right: 10px;
+            }
+            .gallery-lightbox-image-wrapper {
+                max-width: 95vw;
+                max-height: 90vh;
+            }
+            .gallery-lightbox-image-wrapper img {
+                max-height: 90vh;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="stars-container" id="starsContainer"></div>
@@ -49,16 +166,16 @@
             <div class="section-title">Кубик добра</div>
             <div class="section-subtitle">Социальный проект, который помогает людям через спидкубинг.</div>
             <div class="project-card">
-                <!-- Убраны все скрипты и атрибуты onclick, оставлен только красивый стиль при наведении -->
+                <!-- ВАЖНО: класс gallery-item и data-src / data-caption один в один как в твоем рабочем проекте -->
                 <div style="display: flex; gap: 0.5rem; margin-bottom: 0.8rem; flex-wrap: wrap;">
-                    <div style="flex: 1; min-width: 100px; height: 130px; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.04); transition: transform 0.2s;">
-                        <img src="images/gallery/kubik-dobra/hospital-masterclass.PNG" alt="Мастер-класс в госпитале" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease; cursor: default;">
+                    <div class="gallery-item" style="flex: 1; min-width: 100px; height: 130px; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.04); cursor: pointer;" data-src="images/gallery/kubik-dobra/hospital-masterclass.PNG" data-caption="Мастер-класс в госпитале — Кубик добра">
+                        <img src="images/gallery/kubik-dobra/hospital-masterclass.PNG" alt="Мастер-класс в госпитале" style="width: 100%; height: 100%; object-fit: cover; display: block;">
                     </div>
-                    <div style="flex: 1; min-width: 100px; height: 130px; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.04); transition: transform 0.2s;">
-                        <img src="images/gallery/ovz/multicenter-masterclass.PNG" alt="Мастер-класс в Мультицентре" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease; cursor: default;">
+                    <div class="gallery-item" style="flex: 1; min-width: 100px; height: 130px; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.04); cursor: pointer;" data-src="images/gallery/ovz/multicenter-masterclass.PNG" data-caption="Мастер-класс в Мультицентре Всеволожск — Кубик добра">
+                        <img src="images/gallery/ovz/multicenter-masterclass.PNG" alt="Мастер-класс в Мультицентре" style="width: 100%; height: 100%; object-fit: cover; display: block;">
                     </div>
-                    <div style="flex: 1; min-width: 100px; height: 130px; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.04); transition: transform 0.2s;">
-                        <img src="images/gallery/ovz/tesovy-bereg.PNG" alt="Мастер-класс в Тесовый берег" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease; cursor: default;">
+                    <div class="gallery-item" style="flex: 1; min-width: 100px; height: 130px; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.04); cursor: pointer;" data-src="images/gallery/ovz/tesovy-bereg.PNG" data-caption="Мастер-класс в ДСО Тесовый берег — Кубик добра">
+                        <img src="images/gallery/ovz/tesovy-bereg.PNG" alt="Мастер-класс в Тесовый берег" style="width: 100%; height: 100%; object-fit: cover; display: block;">
                     </div>
                 </div>
                 <h3>Кубик добра</h3>
@@ -97,9 +214,8 @@
             <div class="section-title">Мозаики из кубиков</div>
             <div class="section-subtitle">Тысячи кубиков — одна большая картина.</div>
             <div class="project-card">
-                <!-- Убрана onclick-ссылка, оставлен только красивый эффект -->
-                <div style="width: 100%; height: 280px; border-radius: 12px; overflow: hidden; margin-bottom: 0.8rem; background: rgba(255,255,255,0.04); transition: transform 0.2s;">
-                    <img src="images/gallery/projects/darvin.jpg" alt="Портрет Чарльза Дарвина" style="width: 100%; height: 100%; object-fit: contain; display: block; transition: transform 0.3s ease; cursor: default;">
+                <div class="gallery-item" style="width: 100%; height: 280px; border-radius: 12px; overflow: hidden; margin-bottom: 0.8rem; background: rgba(255,255,255,0.04); cursor: pointer;" data-src="images/gallery/projects/darvin.jpg" data-caption="Портрет Чарльза Дарвина из 2000 кубиков Рубика">
+                    <img src="images/gallery/projects/darvin.jpg" alt="Портрет Чарльза Дарвина" style="width: 100%; height: 100%; object-fit: contain; display: block;">
                 </div>
                 <h3>Арт-проекты и фестивали</h3>
                 <p>Неоднократно участвовал в создании больших мозаик из кубиков Рубика.</p>
@@ -148,7 +264,101 @@
         </div>
     </footer>
 
-    <!-- Никаких лайтбоксов и скриптов. Только чистый HTML и CSS. -->
+    <!-- ЛАЙТБОКС -->
+    <div class="gallery-lightbox" id="galleryLightbox">
+        <button class="gallery-lightbox-close" id="galleryLightboxClose">&times;</button>
+        <button class="gallery-lightbox-nav gallery-lightbox-prev" id="galleryLightboxPrev">‹</button>
+        <button class="gallery-lightbox-nav gallery-lightbox-next" id="galleryLightboxNext">›</button>
+        <div class="gallery-lightbox-image-wrapper">
+            <img id="galleryLightboxImage" src="" alt="">
+        </div>
+        <div class="gallery-lightbox-counter" id="galleryLightboxCounter">1 / 4</div>
+    </div>
+
     <script src="js/main.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const lightbox = document.getElementById('galleryLightbox');
+            const lightboxImage = document.getElementById('galleryLightboxImage');
+            const lightboxCounter = document.getElementById('galleryLightboxCounter');
+            const closeBtn = document.getElementById('galleryLightboxClose');
+            const prevBtn = document.getElementById('galleryLightboxPrev');
+            const nextBtn = document.getElementById('galleryLightboxNext');
+            
+            const items = document.querySelectorAll('.gallery-item');
+            
+            const galleryData = [];
+            items.forEach(item => {
+                galleryData.push({
+                    src: item.getAttribute('data-src'),
+                    caption: item.getAttribute('data-caption')
+                });
+            });
+
+            let currentIndex = 0;
+
+            function openLightbox(index) {
+                currentIndex = index;
+                const item = galleryData[index];
+                if (item) {
+                    lightboxImage.src = item.src;
+                    lightboxCounter.textContent = (index + 1) + ' / ' + galleryData.length;
+                    lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            items.forEach((item, index) => {
+                item.addEventListener('click', function() {
+                    openLightbox(index);
+                });
+            });
+
+            closeBtn.addEventListener('click', closeLightbox);
+            
+            prevBtn.addEventListener('click', function() {
+                if (galleryData.length === 0) return;
+                currentIndex = (currentIndex - 1 + galleryData.length) % galleryData.length;
+                openLightbox(currentIndex);
+            });
+
+            nextBtn.addEventListener('click', function() {
+                if (galleryData.length === 0) return;
+                currentIndex = (currentIndex + 1) % galleryData.length;
+                openLightbox(currentIndex);
+            });
+
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (!lightbox.classList.contains('active')) return;
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') prevBtn.click();
+                if (e.key === 'ArrowRight') nextBtn.click();
+            });
+
+            let touchStartX = 0;
+            lightbox.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+            lightbox.addEventListener('touchend', function(e) {
+                const diff = touchStartX - e.changedTouches[0].screenX;
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0) nextBtn.click();
+                    else prevBtn.click();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
