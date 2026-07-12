@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Проекты Егора Чернякова</title>
+    <title>Проекты Егора Чернякова — «Кубик добра», «Книжные грани», краеведение</title>
+    <meta name="description" content="Социальные, образовательные и культурные проекты Егора Чернякова: «Кубик добра» (Топ-100 России), настольная игра «Книжные грани», краеведческий портал Парголово, мозаики из кубиков Рубика." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://chernyakov-egor.github.io/projects.html" />
     <link rel="stylesheet" href="css/style.css" />
+    
     <style>
         /* Убираем желтую рамку при нажатии */
         * { -webkit-tap-highlight-color: transparent; }
         
-        /* Стили для кликабельных картинок */
         .gallery-item {
             display: block;
             cursor: pointer;
@@ -23,7 +26,7 @@
             object-fit: cover;
         }
         
-        /* ===== НОВЫЙ ЛАЙТБОКС (РАБОТАЕТ БЕЗ MAIN.JS) ===== */
+        /* ===== СТИЛИ ЛАЙТБОКСА ===== */
         .lightbox-overlay {
             display: none;
             position: fixed;
@@ -93,50 +96,131 @@
 </head>
 <body>
     <div class="stars-container" id="starsContainer"></div>
-    <header>...</header> <!-- (остальной header такой же) -->
-    <section class="hero">...</section>
+    <header>
+        <div class="container header-inner">
+            <ul class="nav" id="mainNav">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="about.html">О себе</a></li>
+                <li><a href="projects.html" class="active">Проекты</a></li>
+                <li><a href="achievements.html">Достижения</a></li>
+                <li><a href="gallery.html">Галерея</a></li>
+                <li><a href="contacts.html">Контакты</a></li>
+            </ul>
+        </div>
+    </header>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-avatar">
+                <img src="images/photo.jpg" alt="Егор Черняков — библиотекарь и спидкубер" />
+            </div>
+            <h1>Мои <span>проекты</span></h1>
+            <p class="hero-lead">Каждый проект — это ответ на вопрос «что я могу сделать для других?»</p>
+            <div class="hero-quote">✨ «Ты навсегда в ответе за тех, кого приручил» ✨</div>
+        </div>
+    </section>
     <section class="section">
         <div class="container">
             <div class="section-title">Кубик добра</div>
             <div class="section-subtitle">Социальный проект, который помогает людям через спидкубинг.</div>
             <div class="project-card">
                 <div style="display: flex; gap: 0.5rem; margin-bottom: 0.8rem; flex-wrap: wrap;">
-                    <div class="gallery-item" style="flex: 1; min-width: 100px; height: 130px;" data-src="images/gallery/kubik-dobra/hospital-masterclass.PNG" data-caption="Мастер-класс в госпитале">
-                        <img src="images/gallery/kubik-dobra/hospital-masterclass.PNG" alt="Мастер-класс">
+                    <div class="gallery-item" style="flex: 1; min-width: 100px; height: 130px;" data-src="images/gallery/kubik-dobra/hospital-masterclass.PNG" data-caption="Мастер-класс по сборке кубика Рубика в госпитале — Кубик добра">
+                        <img src="images/gallery/kubik-dobra/hospital-masterclass.PNG" alt="Мастер-класс в госпитале">
                     </div>
-                    <div class="gallery-item" style="flex: 1; min-width: 100px; height: 130px;" data-src="images/gallery/ovz/multicenter-masterclass.PNG" data-caption="Мастер-класс в Мультицентре">
-                        <img src="images/gallery/ovz/multicenter-masterclass.PNG" alt="Мультицентр">
+                    <div class="gallery-item" style="flex: 1; min-width: 100px; height: 130px;" data-src="images/gallery/ovz/multicenter-masterclass.PNG" data-caption="Мастер-класс в Мультицентре Всеволожск — Кубик добра">
+                        <img src="images/gallery/ovz/multicenter-masterclass.PNG" alt="Мастер-класс в Мультицентре">
                     </div>
-                    <div class="gallery-item" style="flex: 1; min-width: 100px; height: 130px;" data-src="images/gallery/ovz/tesovy-bereg.PNG" data-caption="Мастер-класс в Тесовый берег">
-                        <img src="images/gallery/ovz/tesovy-bereg.PNG" alt="Тесовый берег">
+                    <div class="gallery-item" style="flex: 1; min-width: 100px; height: 130px;" data-src="images/gallery/ovz/tesovy-bereg.PNG" data-caption="Мастер-класс в ДСО Тесовый берег — Кубик добра">
+                        <img src="images/gallery/ovz/tesovy-bereg.PNG" alt="Мастер-класс в Тесовый берег">
                     </div>
                 </div>
                 <h3>Кубик добра</h3>
                 <p>Проект направлен на обучение сборке кубика Рубика детей с ОВЗ, воспитанников социальных учреждений, а также участников СВО, проходящих лечение в госпиталях.</p>
+                <p style="margin-top: 12px;">Благодаря проекту сотни людей получили возможность познакомиться с миром головоломок, развивать память, внимание и моторику.</p>
                 <div class="badge">🏆 Топ-100 практик России</div>
                 <div class="badge">🤝 Действующий проект</div>
             </div>
         </div>
     </section>
-    <!-- ОСТАЛЬНЫЕ СЕКЦИИ (Книжные грани, Парголово и т.д.) БЕЗ ИЗМЕНЕНИЙ -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">Книжные грани</div>
+            <div class="project-card">
+                <h3>Настольная игра «Книжные грани»</h3>
+                <p>Авторская настольная игра, объединяющая литературу, логику и элементы спидкубинга.</p>
+                <p style="margin-top: 12px;">Игра помогает знакомить детей и подростков с книгами через увлекательный игровой формат.</p>
+                <a href="https://knig-grani.ru" target="_blank" class="btn btn-outline" style="margin-top: 16px; display: inline-block;">Перейти на сайт →</a>
+                <div class="badge">📚 Авторский проект</div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="section-title">Парголово</div>
+            <div class="project-card">
+                <h3>Краеведческий портал Парголово</h3>
+                <p>Электронный ресурс, посвящённый истории, культуре и людям Парголово.</p>
+                <p style="margin-top: 12px;">На портале собраны материалы, архивные документы, виртуальные экскурсии, викторины и публикации.</p>
+                <a href="https://parglbibl.ru" target="_blank" class="btn btn-outline" style="margin-top: 16px; display: inline-block;">Открыть портал →</a>
+            </div>
+        </div>
+    </section>
     <section class="section">
         <div class="container">
             <div class="section-title">Мозаики из кубиков</div>
             <div class="section-subtitle">Тысячи кубиков — одна большая картина.</div>
             <div class="project-card">
                 <div class="gallery-item" style="width: 100%; height: 280px; margin-bottom: 0.8rem;" data-src="images/gallery/projects/darvin.jpg" data-caption="Портрет Чарльза Дарвина из 2000 кубиков Рубика">
-                    <img src="images/gallery/projects/darvin.jpg" alt="Дарвин" style="object-fit: contain;">
+                    <img src="images/gallery/projects/darvin.jpg" alt="Портрет Чарльза Дарвина" style="object-fit: contain;">
                 </div>
                 <h3>Арт-проекты и фестивали</h3>
                 <p>Неоднократно участвовал в создании больших мозаик из кубиков Рубика.</p>
+                <p style="margin-top: 12px;">Работы демонстрировались на крупных мероприятиях, включая VK Fest.</p>
                 <div class="badge">🎨 Арт-проект</div>
                 <div class="badge">🎪 VK Fest</div>
             </div>
         </div>
     </section>
-    <footer>...</footer>
+    <section class="section">
+        <div class="container">
+            <div class="section-title">Образовательные программы</div>
+            <div class="grid-2">
+                <div class="card">
+                    <div class="emoji">🧩</div>
+                    <h3>Спидкубинг</h3>
+                    <p>Авторские программы обучения сборке кубика Рубика.</p>
+                </div>
+                <div class="card">
+                    <div class="emoji">♟</div>
+                    <h3>Шахматы</h3>
+                    <p>Развитие логики, внимания и стратегического мышления.</p>
+                </div>
+                <div class="card">
+                    <div class="emoji">🖨</div>
+                    <h3>3D-моделирование</h3>
+                    <p>Создание цифровых моделей и знакомство с технологиями будущего.</p>
+                </div>
+                <div class="card">
+                    <div class="emoji">📚</div>
+                    <h3>Чтение и литература</h3>
+                    <p>Современные форматы продвижения чтения.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="hero-quote">«Если звёзды зажигают — значит это кому-нибудь нужно».</div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <p class="stardust">✦ Проекты начинаются с идеи, а становятся реальностью благодаря людям ✦</p>
+            <p>© <span id="current-year"></span> Егор Черняков</p>
+        </div>
+    </footer>
 
-    <!-- ===== НОВЫЙ ЛАЙТБОКС ===== -->
+    <!-- ===== СТРУКТУРА ЛАЙТБОКСА ===== -->
     <div class="lightbox-overlay" id="lightboxOverlay">
         <div class="lightbox-content">
             <span class="close-btn" id="lightboxClose">&times;</span>
@@ -152,107 +236,6 @@
         </div>
     </div>
 
-    <!-- ===== СКРИПТ ДЛЯ ЛАЙТБОКСА (НЕ ЗАВИСИТ ОТ MAIN.JS) ===== -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const overlay = document.getElementById('lightboxOverlay');
-            const img = document.getElementById('lightboxImage');
-            const caption = document.getElementById('lightboxCaption');
-            const counter = document.getElementById('lightboxCounter');
-            const closeBtn = document.getElementById('lightboxClose');
-            const prevBtn = document.getElementById('lightboxPrev');
-            const nextBtn = document.getElementById('lightboxNext');
-
-            const items = document.querySelectorAll('.gallery-item');
-            const data = [];
-
-            items.forEach(el => {
-                data.push({
-                    src: el.getAttribute('data-src'),
-                    cap: el.getAttribute('data-caption')
-                });
-            });
-
-            let currentIndex = 0;
-
-            function openLightbox(index) {
-                if (data.length === 0) return;
-                currentIndex = index;
-                const item = data[currentIndex];
-                img.src = item.src;
-                caption.textContent = item.cap;
-                counter.textContent = (currentIndex + 1) + ' / ' + data.length;
-                overlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
-                img.style.transform = 'scale(1)';
-            }
-
-            function closeLightbox() {
-                overlay.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-
-            items.forEach((el, index) => {
-                el.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    openLightbox(index);
-                });
-            });
-
-            closeBtn.addEventListener('click', closeLightbox);
-            overlay.addEventListener('click', function(e) {
-                if (e.target === overlay) closeLightbox();
-            });
-
-            prevBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                if (data.length === 0) return;
-                currentIndex = (currentIndex - 1 + data.length) % data.length;
-                openLightbox(currentIndex);
-            });
-
-            nextBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                if (data.length === 0) return;
-                currentIndex = (currentIndex + 1) % data.length;
-                openLightbox(currentIndex);
-            });
-
-            document.addEventListener('keydown', function(e) {
-                if (!overlay.classList.contains('active')) return;
-                if (e.key === 'Escape') closeLightbox();
-                if (e.key === 'ArrowLeft') prevBtn.click();
-                if (e.key === 'ArrowRight') nextBtn.click();
-            });
-
-            // Зум колесиком мыши
-            img.addEventListener('wheel', function(e) {
-                e.preventDefault(); e.stopPropagation();
-                let currentScale = parseFloat(this.style.transform.replace('scale(', '').replace(')', '')) || 1;
-                let delta = e.deltaY > 0 ? -0.1 : 0.1;
-                currentScale = Math.min(5, Math.max(1, currentScale + delta));
-                this.style.transform = 'scale(' + currentScale + ')';
-            }, { passive: false });
-
-            img.addEventListener('dblclick', function() {
-                this.style.transform = 'scale(1)';
-            });
-
-            // Свайпы для телефона
-            let touchStartX = 0;
-            overlay.addEventListener('touchstart', function(e) {
-                touchStartX = e.changedTouches[0].clientX;
-            }, { passive: true });
-            overlay.addEventListener('touchend', function(e) {
-                let touchEndX = e.changedTouches[0].clientX;
-                let diffX = touchStartX - touchEndX;
-                if (Math.abs(diffX) > 50) {
-                    if (diffX > 0) nextBtn.click();
-                    else prevBtn.click();
-                }
-                touchStartX = 0;
-            }, { passive: true });
-        });
-    </script>
+    <script src="js/main.js"></script>
 </body>
 </html>
