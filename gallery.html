@@ -77,9 +77,9 @@
             padding: 8px 20px;
             background: rgba(0,0,0,0.5);
             border-radius: 8px;
+            font-weight: 500;
         }
 
-        /* Кнопка закрытия (крестик) */
         #lightbox .close {
             position: absolute;
             top: -50px;
@@ -96,7 +96,6 @@
             transform: scale(1.1);
         }
 
-        /* Кнопки навигации (стрелки) */
         #lightbox .nav-btn {
             position: absolute;
             top: 50%;
@@ -126,7 +125,6 @@
             right: -70px;
         }
 
-        /* Счётчик */
         #lightbox .counter {
             color: rgba(255,255,255,0.6);
             font-size: 16px;
@@ -205,30 +203,54 @@
 
     <script src="js/main.js"></script>
 
-    <!-- ===== ГЕНЕРАЦИЯ КАРТИНОК И ЛАЙТБОКС СО СТРЕЛКАМИ ===== -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var gallery = document.getElementById('mosaicGallery');
             if (!gallery) return;
 
+            var captions = [
+                "Карельский орнамент",
+                "Автопортрет",
+                "Портрет",
+                "Логотип «Додо» в пиццерии г. Сертолово",
+                "Мультяшные герои",
+                "Мультяшные герои",
+                "Портрет Чарльза Дарвина",
+                "Портрет Гарри Поттера",
+                "Рик и Морти",
+                "Ричард Докинз: «We Are All Africans»",
+                "Портрет Иосифа Бродского",
+                "Портрет Альберта Эйнштейна",
+                "Енот из «Стражи Галактики»",
+                "Губка Боб Квадратные Штаны",
+                "Портрет Олега Роя",
+                "Вечный Огонь ко Дню Победы в г. Сертолово",
+                "Санта Клаус",
+                "Портрет",
+                "Портрет",
+                "Портрет Юрия Слепухина",
+                "Портрет",
+                "Ко Дню защиты детей",
+                "Сердце",
+                "Герб",
+                "К Масленице",
+                "Портрет"
+            ];
+
             var totalImages = 26;
-            var allImages = [];
             var html = '';
             
             for (var i = 1; i <= totalImages; i++) {
                 var ext = i === 1 ? 'jpeg' : 'png';
                 var src = 'images/kartini/kartina' + i + '.' + ext;
-                var captionText = 'Мозаика из кубиков Рубика — картина ' + i;
-                allImages.push({ src: src, caption: captionText });
+                var captionText = captions[i-1];
                 
-                // Генерируем ссылки с индексом
                 html += '<a href="' + src + '" onclick="openLightbox(' + (i-1) + '); return false;" class="gallery-link">';
                 html += '<img src="' + src + '" alt="' + captionText + '" loading="lazy" />';
                 html += '</a>';
             }
             gallery.innerHTML = html;
 
-            // ===== ВСТРОЕННЫЙ ЛАЙТБОКС СО СТРЕЛКАМИ =====
             var lightbox = document.getElementById('lightbox');
             if (!lightbox) {
                 lightbox = document.createElement('div');
@@ -240,23 +262,23 @@
 
             function renderLightbox(index) {
                 currentIndex = index;
-                var data = allImages[currentIndex];
+                var data = captions[currentIndex];
+                var src = 'images/kartini/kartina' + (index + 1) + '.' + (index === 0 ? 'jpeg' : 'png');
                 
                 lightbox.innerHTML = `
                     <div class="image-wrapper">
                         <span class="close" onclick="closeLightbox()">&times;</span>
                         <span class="nav-btn nav-prev" onclick="changeImage(-1)">‹</span>
-                        <img src="${data.src}" alt="${data.caption}" />
+                        <img src="${src}" alt="${data}" />
                         <span class="nav-btn nav-next" onclick="changeImage(1)">›</span>
                     </div>
-                    <div class="caption">${data.caption}</div>
-                    <div class="counter">${currentIndex + 1} / ${allImages.length}</div>
+                    <div class="caption">${data}</div>
+                    <div class="counter">${currentIndex + 1} / ${totalImages}</div>
                 `;
                 
                 lightbox.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
 
-                // Закрытие по клику на фон
                 lightbox.onclick = function(e) {
                     if (e.target === lightbox) closeLightbox();
                 };
@@ -273,20 +295,20 @@
 
             window.changeImage = function(direction) {
                 var newIndex = currentIndex + direction;
-                if (newIndex < 0) newIndex = allImages.length - 1;
-                if (newIndex >= allImages.length) newIndex = 0;
+                if (newIndex < 0) newIndex = totalImages - 1;
+                if (newIndex >= totalImages) newIndex = 0;
                 renderLightbox(newIndex);
             };
 
-            // Клавиша ESC
             document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && lightbox.style.display !== 'none') {
+                if (lightbox.style.display === 'none') return;
+                if (e.key === 'Escape') {
                     closeLightbox();
                 }
-                if (e.key === 'ArrowLeft' && lightbox.style.display !== 'none') {
+                if (e.key === 'ArrowLeft') {
                     changeImage(-1);
                 }
-                if (e.key === 'ArrowRight' && lightbox.style.display !== 'none') {
+                if (e.key === 'ArrowRight') {
                     changeImage(1);
                 }
             });
