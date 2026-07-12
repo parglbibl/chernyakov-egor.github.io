@@ -31,121 +31,6 @@
             height: 100%;
             object-fit: cover;
         }
-        
-        /* ===== ЛАЙТБОКС ИЗ ТВОЕГО РАБОЧЕГО ФАЙЛА ===== */
-        .gallery-lightbox {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.92);
-            backdrop-filter: blur(8px);
-            z-index: 9999;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-
-        .gallery-lightbox.active {
-            display: flex;
-        }
-
-        .gallery-lightbox-image-wrapper {
-            position: relative;
-            max-width: 90vw;
-            max-height: 90vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .gallery-lightbox-image-wrapper img {
-            max-width: 100%;
-            max-height: 90vh;
-            border-radius: 16px;
-            object-fit: contain;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-        }
-
-        .gallery-lightbox-close {
-            position: absolute;
-            top: -50px;
-            right: 0;
-            color: #fff;
-            font-size: 2.5rem;
-            cursor: pointer;
-            background: none;
-            border: none;
-            transition: color 0.2s;
-        }
-
-        .gallery-lightbox-close:hover {
-            color: #d8b45a; /* Твой золотой акцент */
-        }
-
-        .gallery-lightbox-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #fff;
-            font-size: 2.5rem;
-            cursor: pointer;
-            background: rgba(0,0,0,0.4);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s;
-            border: none;
-        }
-
-        .gallery-lightbox-nav:hover {
-            background: #d8b45a; /* Твой золотой акцент */
-        }
-
-        .gallery-lightbox-prev {
-            left: -70px;
-        }
-
-        .gallery-lightbox-next {
-            right: -70px;
-        }
-
-        .gallery-lightbox-counter {
-            color: rgba(255,255,255,0.6);
-            font-size: 0.9rem;
-            margin-top: 1rem;
-            font-family: 'Inter', sans-serif;
-        }
-
-        @media (max-width: 768px) {
-            .gallery-lightbox-close {
-                top: -40px;
-                font-size: 2rem;
-            }
-            .gallery-lightbox-nav {
-                width: 40px;
-                height: 40px;
-                font-size: 1.5rem;
-            }
-            .gallery-lightbox-prev {
-                left: 10px;
-            }
-            .gallery-lightbox-next {
-                right: 10px;
-            }
-            .gallery-lightbox-image-wrapper {
-                max-width: 95vw;
-                max-height: 90vh;
-            }
-            .gallery-lightbox-image-wrapper img {
-                max-height: 90vh;
-            }
-        }
     </style>
 </head>
 <body>
@@ -177,15 +62,15 @@
             <div class="section-title">Кубик добра</div>
             <div class="section-subtitle">Социальный проект, который помогает людям через спидкубинг.</div>
             <div class="project-card">
-                <!-- Картинки с классом gallery-item и data-индексами -->
+                <!-- Картинки с классом gallery-item и data-атрибутами -->
                 <div style="display: flex; gap: 0.5rem; margin-bottom: 0.8rem; flex-wrap: wrap;">
-                    <div class="gallery-item" style="flex: 1; min-width: 100px; height: 130px;" data-index="0">
+                    <div class="gallery-item" style="flex: 1; min-width: 100px; height: 130px;" data-src="images/gallery/kubik-dobra/hospital-masterclass.PNG" data-caption="Мастер-класс в госпитале">
                         <img src="images/gallery/kubik-dobra/hospital-masterclass.PNG" alt="Мастер-класс в госпитале">
                     </div>
-                    <div class="gallery-item" style="flex: 1; min-width: 100px; height: 130px;" data-index="1">
+                    <div class="gallery-item" style="flex: 1; min-width: 100px; height: 130px;" data-src="images/gallery/ovz/multicenter-masterclass.PNG" data-caption="Мастер-класс в Мультицентре">
                         <img src="images/gallery/ovz/multicenter-masterclass.PNG" alt="Мастер-класс в Мультицентре">
                     </div>
-                    <div class="gallery-item" style="flex: 1; min-width: 100px; height: 130px;" data-index="2">
+                    <div class="gallery-item" style="flex: 1; min-width: 100px; height: 130px;" data-src="images/gallery/ovz/tesovy-bereg.PNG" data-caption="Мастер-класс в Тесовый берег">
                         <img src="images/gallery/ovz/tesovy-bereg.PNG" alt="Мастер-класс в Тесовый берег">
                     </div>
                 </div>
@@ -225,7 +110,7 @@
             <div class="section-title">Мозаики из кубиков</div>
             <div class="section-subtitle">Тысячи кубиков — одна большая картина.</div>
             <div class="project-card">
-                <div class="gallery-item" style="width: 100%; height: 280px; margin-bottom: 0.8rem;" data-index="3">
+                <div class="gallery-item" style="width: 100%; height: 280px; margin-bottom: 0.8rem;" data-src="images/gallery/projects/darvin.jpg" data-caption="Портрет Чарльза Дарвина">
                     <img src="images/gallery/projects/darvin.jpg" alt="Портрет Чарльза Дарвина" style="object-fit: contain;">
                 </div>
                 <h3>Арт-проекты и фестивали</h3>
@@ -275,107 +160,6 @@
         </div>
     </footer>
 
-    <!-- ===== СТРУКТУРА ЛАЙТБОКСА (ТОЧНО КАК В ТВОЕМ РАБОЧЕМ ФАЙЛЕ) ===== -->
-    <div class="gallery-lightbox" id="galleryLightbox">
-        <button class="gallery-lightbox-close" id="galleryLightboxClose">&times;</button>
-        <button class="gallery-lightbox-nav gallery-lightbox-prev" id="galleryLightboxPrev">‹</button>
-        <button class="gallery-lightbox-nav gallery-lightbox-next" id="galleryLightboxNext">›</button>
-        <div class="gallery-lightbox-image-wrapper">
-            <img id="galleryLightboxImage" src="" alt="">
-        </div>
-        <div class="gallery-lightbox-counter" id="galleryLightboxCounter">1 / 4</div>
-    </div>
-
     <script src="js/main.js"></script>
-    
-    <!-- ===== СКРИПТ ДЛЯ ЛАЙТБОКСА (ТОЧНО КАК В ТВОЕМ РАБОЧЕМ ФАЙЛЕ) ===== -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const lightbox = document.getElementById('galleryLightbox');
-            const lightboxImage = document.getElementById('galleryLightboxImage');
-            const lightboxCounter = document.getElementById('galleryLightboxCounter');
-            const closeBtn = document.getElementById('galleryLightboxClose');
-            const prevBtn = document.getElementById('galleryLightboxPrev');
-            const nextBtn = document.getElementById('galleryLightboxNext');
-
-            // ===== ВСЕ ФОТО (4 штуки для проектов) =====
-            const photos = [
-                { src: 'images/gallery/kubik-dobra/hospital-masterclass.PNG', label: 'Мастер-класс в госпитале' },
-                { src: 'images/gallery/ovz/multicenter-masterclass.PNG', label: 'Мастер-класс в Мультицентре' },
-                { src: 'images/gallery/ovz/tesovy-bereg.PNG', label: 'Мастер-класс в Тесовый берег' },
-                { src: 'images/gallery/projects/darvin.jpg', label: 'Портрет Чарльза Дарвина' }
-            ];
-
-            let currentImageIndex = 0;
-
-            function openLightbox(index) {
-                currentImageIndex = index;
-                const photo = photos[index];
-                lightboxImage.src = photo.src;
-                lightboxCounter.textContent = `${index + 1} / ${photos.length}`;
-                lightbox.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-
-            function closeLightbox() {
-                lightbox.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-
-            function prevImage() {
-                currentImageIndex = (currentImageIndex - 1 + photos.length) % photos.length;
-                const photo = photos[currentImageIndex];
-                lightboxImage.src = photo.src;
-                lightboxCounter.textContent = `${currentImageIndex + 1} / ${photos.length}`;
-            }
-
-            function nextImage() {
-                currentImageIndex = (currentImageIndex + 1) % photos.length;
-                const photo = photos[currentImageIndex];
-                lightboxImage.src = photo.src;
-                lightboxCounter.textContent = `${currentImageIndex + 1} / ${photos.length}`;
-            }
-
-            // Навешиваем клик на каждую картинку
-            document.querySelectorAll('.gallery-item').forEach(item => {
-                item.addEventListener('click', function() {
-                    const index = parseInt(this.dataset.index);
-                    openLightbox(index);
-                });
-            });
-
-            // Обработчики лайтбокса
-            closeBtn.addEventListener('click', closeLightbox);
-            prevBtn.addEventListener('click', prevImage);
-            nextBtn.addEventListener('click', nextImage);
-
-            lightbox.addEventListener('click', function(e) {
-                if (e.target === lightbox) {
-                    closeLightbox();
-                }
-            });
-
-            // Клавиатура
-            document.addEventListener('keydown', function(e) {
-                if (!lightbox.classList.contains('active')) return;
-                if (e.key === 'Escape') closeLightbox();
-                if (e.key === 'ArrowLeft') prevImage();
-                if (e.key === 'ArrowRight') nextImage();
-            });
-
-            // Свайпы на мобильных
-            let touchStartX = 0;
-            lightbox.addEventListener('touchstart', function(e) {
-                touchStartX = e.changedTouches[0].screenX;
-            });
-            lightbox.addEventListener('touchend', function(e) {
-                const diff = touchStartX - e.changedTouches[0].screenX;
-                if (Math.abs(diff) > 50) {
-                    if (diff > 0) nextImage();
-                    else prevImage();
-                }
-            });
-        });
-    </script>
 </body>
 </html>
