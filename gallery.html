@@ -36,147 +36,7 @@
             background: #0a0e1a;
         }
 
-        /* ===== ВСТРОЕННЫЙ CSS ЛАЙТБОКСА ===== */
-        .lb-loader, .lb-closeContainer, .lb-cancel, .lb-nav, .lb-next, .lb-prev, .lb-dataContainer {
-            position: absolute;
-        }
-        .lb-data, .lb-outerContainer {
-            position: relative;
-        }
-        .lb-cancel {
-            display: block;
-            width: 32px;
-            height: 32px;
-            margin: 0 auto;
-            background: url(data:image/gif;base64,R0lGODlhIAAgAIABAI6Ojv///yH5BAEAAAEALAAAAAAgACAAAAIChH+YRw4AAAA7) no-repeat;
-        }
-        .lb-outerContainer {
-            width: 250px;
-            height: 250px;
-            margin: 0 auto;
-            border-radius: 4px;
-            background-color: #fff;
-        }
-        .lb-container {
-            padding: 4px;
-        }
-        .lb-loader {
-            top: 43%;
-            left: 0;
-            height: 25%;
-            width: 100%;
-            text-align: center;
-            line-height: 0;
-        }
-        .lb-nav {
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            z-index: 10;
-        }
-        .lb-container > .nav {
-            left: 0;
-        }
-        .lb-nav a {
-            outline: 0;
-            background-image: url(data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==);
-        }
-        .lb-prev, .lb-next {
-            height: 100%;
-            cursor: pointer;
-            display: block;
-        }
-        .lb-nav a.lb-prev {
-            width: 34%;
-            left: 0;
-            float: left;
-            background: url(data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==) 0 0;
-            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-            opacity: 0;
-            transition: opacity 0.6s;
-        }
-        .lb-nav a.lb-prev:hover {
-            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
-            opacity: 1;
-        }
-        .lb-nav a.lb-next {
-            width: 64%;
-            right: 0;
-            float: right;
-            background: url(data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==) 0 0;
-            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-            opacity: 0;
-            transition: opacity 0.6s;
-        }
-        .lb-nav a.lb-next:hover {
-            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
-            opacity: 1;
-        }
-        .lb-dataContainer {
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: #666;
-            background-color: rgba(0,0,0,0.5);
-            overflow: hidden;
-            border-radius: 0 0 4px 4px;
-        }
-        .lb-data {
-            padding: 0 4px;
-            color: #ccc;
-        }
-        .lb-data .lb-details {
-            width: 85%;
-            float: left;
-            text-align: left;
-            line-height: 1.1em;
-        }
-        .lb-data .lb-caption {
-            font-size: 13px;
-            font-weight: 700;
-            line-height: 1em;
-        }
-        .lb-data .lb-number {
-            display: block;
-            clear: left;
-            padding-bottom: 1em;
-            font-size: 12px;
-            color: #999;
-        }
-        .lb-data .lb-close {
-            display: block;
-            float: right;
-            outline: 0;
-            background: url(data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==) 0 0;
-            width: 30px;
-            height: 30px;
-            text-align: right;
-            cursor: pointer;
-            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
-            opacity: 0.7;
-            transition: opacity 0.2s;
-        }
-        .lb-data .lb-close:hover {
-            cursor: pointer;
-            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
-            opacity: 1;
-        }
-        .lb-outerContainer {
-            background-color: #000;
-        }
-        .lb-data .lb-details {
-            color: #fff;
-        }
-        .lb-data .lb-caption {
-            color: #fff;
-        }
-        .lb-data .lb-number {
-            color: #fff;
-        }
-        .lb-data .lb-close {
-            background: url(data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==) 0 0;
-        }
+        /* ===== СТИЛИ ДЛЯ ВСТРОЕННОГО ЛАЙТБОКСА ===== */
         #lightbox {
             position: fixed;
             top: 0;
@@ -184,22 +44,112 @@
             width: 100%;
             height: 100%;
             z-index: 9999;
-            text-align: center;
-            line-height: 0;
-            background: #000;
-            background: rgba(0,0,0,0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background: rgba(0,0,0,0.92);
+            backdrop-filter: blur(4px);
         }
+
+        #lightbox .image-wrapper {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         #lightbox img {
             max-width: 90vw;
             max-height: 90vh;
             object-fit: contain;
-            border-radius: 4px;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
         }
-        #lightbox .lb-image {
-            display: block;
-            height: auto;
-            max-width: 100%;
-            border-radius: 4px;
+
+        #lightbox .caption {
+            color: #fff;
+            font-size: 18px;
+            margin-top: 20px;
+            text-align: center;
+            padding: 8px 20px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 8px;
+        }
+
+        /* Кнопка закрытия (крестик) */
+        #lightbox .close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            color: #fff;
+            font-size: 40px;
+            cursor: pointer;
+            transition: 0.3s;
+            line-height: 1;
+            z-index: 10;
+        }
+        #lightbox .close:hover {
+            color: var(--accent);
+            transform: scale(1.1);
+        }
+
+        /* Кнопки навигации (стрелки) */
+        #lightbox .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #fff;
+            font-size: 40px;
+            cursor: pointer;
+            background: rgba(0,0,0,0.4);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            user-select: none;
+            z-index: 5;
+        }
+        #lightbox .nav-btn:hover {
+            background: var(--accent);
+            transform: translateY(-50%) scale(1.1);
+        }
+        #lightbox .nav-prev {
+            left: -70px;
+        }
+        #lightbox .nav-next {
+            right: -70px;
+        }
+
+        /* Счётчик */
+        #lightbox .counter {
+            color: rgba(255,255,255,0.6);
+            font-size: 16px;
+            margin-top: 10px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        @media (max-width: 768px) {
+            #lightbox .nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 30px;
+            }
+            #lightbox .nav-prev {
+                left: 10px;
+            }
+            #lightbox .nav-next {
+                right: 10px;
+            }
+            #lightbox .close {
+                top: -40px;
+                font-size: 32px;
+            }
         }
     </style>
 </head>
@@ -255,116 +205,92 @@
 
     <script src="js/main.js"></script>
 
-    <!-- ===== ГЕНЕРАЦИЯ КАРТИНОК ===== -->
+    <!-- ===== ГЕНЕРАЦИЯ КАРТИНОК И ЛАЙТБОКС СО СТРЕЛКАМИ ===== -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var gallery = document.getElementById('mosaicGallery');
             if (!gallery) return;
 
             var totalImages = 26;
+            var allImages = [];
             var html = '';
+            
             for (var i = 1; i <= totalImages; i++) {
                 var ext = i === 1 ? 'jpeg' : 'png';
                 var src = 'images/kartini/kartina' + i + '.' + ext;
                 var captionText = 'Мозаика из кубиков Рубика — картина ' + i;
+                allImages.push({ src: src, caption: captionText });
                 
-                // Теперь ссылка просто ведёт на картинку, а лайтбокс встроен прямо в страницу
-                html += '<a href="' + src + '" onclick="openLightbox(this.href, \'' + captionText + '\'); return false;" class="gallery-link">';
+                // Генерируем ссылки с индексом
+                html += '<a href="' + src + '" onclick="openLightbox(' + (i-1) + '); return false;" class="gallery-link">';
                 html += '<img src="' + src + '" alt="' + captionText + '" loading="lazy" />';
                 html += '</a>';
             }
             gallery.innerHTML = html;
-        });
 
-        // ===== ВСТРОЕННЫЙ ЛАЙТБОКС БЕЗ ВНЕШНИХ БИБЛИОТЕК =====
-        var lightbox = null;
-        var lbImage = null;
-        var lbCaption = null;
-        var lbClose = null;
-        var currentIndex = 0;
-        var allImages = [];
-
-        function initLightbox() {
+            // ===== ВСТРОЕННЫЙ ЛАЙТБОКС СО СТРЕЛКАМИ =====
+            var lightbox = document.getElementById('lightbox');
             if (!lightbox) {
                 lightbox = document.createElement('div');
                 lightbox.id = 'lightbox';
-                lightbox.style.display = 'none';
-                lightbox.style.position = 'fixed';
-                lightbox.style.top = '0';
-                lightbox.style.left = '0';
-                lightbox.style.width = '100%';
-                lightbox.style.height = '100%';
-                lightbox.style.zIndex = '9999';
-                lightbox.style.textAlign = 'center';
-                lightbox.style.lineHeight = '0';
-                lightbox.style.background = 'rgba(0,0,0,0.9)';
-                lightbox.style.display = 'flex';
-                lightbox.style.alignItems = 'center';
-                lightbox.style.justifyContent = 'center';
-                lightbox.style.flexDirection = 'column';
-                
-                var imgWrapper = document.createElement('div');
-                imgWrapper.style.position = 'relative';
-                imgWrapper.style.maxWidth = '90vw';
-                imgWrapper.style.maxHeight = '90vh';
-                
-                lbImage = document.createElement('img');
-                lbImage.style.maxWidth = '90vw';
-                lbImage.style.maxHeight = '90vh';
-                lbImage.style.objectFit = 'contain';
-                lbImage.style.borderRadius = '4px';
-                
-                lbCaption = document.createElement('div');
-                lbCaption.style.color = '#fff';
-                lbCaption.style.fontSize = '18px';
-                lbCaption.style.marginTop = '20px';
-                lbCaption.style.textAlign = 'center';
-                
-                lbClose = document.createElement('span');
-                lbClose.innerHTML = '&times;';
-                lbClose.style.position = 'absolute';
-                lbClose.style.top = '-40px';
-                lbClose.style.right = '0';
-                lbClose.style.color = '#fff';
-                lbClose.style.fontSize = '40px';
-                lbClose.style.cursor = 'pointer';
-                lbClose.style.transition = '0.3s';
-                lbClose.onclick = closeLightbox;
-                lbClose.onmouseover = function() { this.style.color = '#d8b45a'; };
-                lbClose.onmouseout = function() { this.style.color = '#fff'; };
-                
-                imgWrapper.appendChild(lbImage);
-                imgWrapper.appendChild(lbClose);
-                lightbox.appendChild(imgWrapper);
-                lightbox.appendChild(lbCaption);
                 document.body.appendChild(lightbox);
+            }
+
+            var currentIndex = 0;
+
+            function renderLightbox(index) {
+                currentIndex = index;
+                var data = allImages[currentIndex];
                 
+                lightbox.innerHTML = `
+                    <div class="image-wrapper">
+                        <span class="close" onclick="closeLightbox()">&times;</span>
+                        <span class="nav-btn nav-prev" onclick="changeImage(-1)">‹</span>
+                        <img src="${data.src}" alt="${data.caption}" />
+                        <span class="nav-btn nav-next" onclick="changeImage(1)">›</span>
+                    </div>
+                    <div class="caption">${data.caption}</div>
+                    <div class="counter">${currentIndex + 1} / ${allImages.length}</div>
+                `;
+                
+                lightbox.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+
                 // Закрытие по клику на фон
                 lightbox.onclick = function(e) {
                     if (e.target === lightbox) closeLightbox();
                 };
-                
-                // Клавиша ESC
-                document.addEventListener('keydown', function(e) {
-                    if (e.key === 'Escape' && lightbox.style.display !== 'none') {
-                        closeLightbox();
-                    }
-                });
             }
-        }
 
-        function openLightbox(src, caption) {
-            initLightbox();
-            lbImage.src = src;
-            lbCaption.textContent = caption;
-            lightbox.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
+            window.openLightbox = function(index) {
+                renderLightbox(index);
+            };
 
-        function closeLightbox() {
-            lightbox.style.display = 'none';
-            document.body.style.overflow = '';
-        }
+            window.closeLightbox = function() {
+                lightbox.style.display = 'none';
+                document.body.style.overflow = '';
+            };
+
+            window.changeImage = function(direction) {
+                var newIndex = currentIndex + direction;
+                if (newIndex < 0) newIndex = allImages.length - 1;
+                if (newIndex >= allImages.length) newIndex = 0;
+                renderLightbox(newIndex);
+            };
+
+            // Клавиша ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && lightbox.style.display !== 'none') {
+                    closeLightbox();
+                }
+                if (e.key === 'ArrowLeft' && lightbox.style.display !== 'none') {
+                    changeImage(-1);
+                }
+                if (e.key === 'ArrowRight' && lightbox.style.display !== 'none') {
+                    changeImage(1);
+                }
+            });
+        });
     </script>
 </body>
 </html>
