@@ -26,4 +26,24 @@ document.addEventListener("DOMContentLoaded", function() {
         container.appendChild(fragment);
     }
     initStars();
+
+    // ===== 3. КНОПКА «НАВЕРХ» =====
+    var backBtn = document.createElement('a');
+    backBtn.href = '#';
+    backBtn.className = 'back-to-top';
+    backBtn.innerHTML = '↑';
+    document.body.appendChild(backBtn);
+
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+            backBtn.classList.add('show');
+        } else {
+            backBtn.classList.remove('show');
+        }
+    });
+
+    backBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 });
