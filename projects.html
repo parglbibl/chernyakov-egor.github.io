@@ -56,7 +56,7 @@
             display: block;
         }
 
-        /* ===== СТИЛИ ДЛЯ ВСТРОЕННОГО ЛАЙТБОКСА (ТОЧНО КАК В GALLERY) ===== */
+        /* ===== СТИЛИ ДЛЯ ВСТРОЕННОГО ЛАЙТБОКСА ===== */
         #lightbox {
             position: fixed;
             top: 0;
@@ -97,6 +97,7 @@
             padding: 8px 20px;
             background: rgba(0,0,0,0.5);
             border-radius: 8px;
+            font-weight: 500;
         }
 
         #lightbox .close {
@@ -207,10 +208,10 @@
                         <img src="images/gallery/kubik-dobra/hospital-masterclass.PNG" alt="Мастер-класс в госпитале">
                     </div>
                     <div class="preview-item" onclick="openLightbox(1, 'kubik')">
-                        <img src="images/gallery/ovz/multicenter-masterclass.PNG" alt="Мастер-класс в Мультицентре">
+                        <img src="images/gallery/ovz/multicenter-masterclass.PNG" alt="Занятие в Мультицентре">
                     </div>
                     <div class="preview-item" onclick="openLightbox(2, 'kubik')">
-                        <img src="images/gallery/ovz/tesovy-bereg.PNG" alt="Мастер-класс в Тесовый берег">
+                        <img src="images/gallery/ovz/tesovy-bereg.PNG" alt="Выездной мастер-класс в Тесовый берег">
                     </div>
                 </div>
                 
@@ -250,7 +251,7 @@
             <div class="section-title">Мозаики из кубиков</div>
             <div class="section-subtitle">Тысячи кубиков — одна большая картина.</div>
             <div class="project-card">
-                <!-- Портрет Дарвина с отдельным лайтбоксом (без стрелок) -->
+                <!-- Портрет Дарвина с отдельным лайтбоксом -->
                 <div class="darvin-wrapper" onclick="openDarvinLightbox()">
                     <img src="images/gallery/projects/darvin.jpg" alt="Портрет Чарльза Дарвина">
                 </div>
@@ -307,11 +308,11 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
 
-            // ===== 1. ЛАЙТБОКС ДЛЯ «КУБИКА ДОБРА» (3 картинки со стрелками) =====
+            // ===== 1. ЛАЙТБОКС ДЛЯ «КУБИКА ДОБРА» (3 картинки) =====
             var kubikImages = [
-                { src: 'images/gallery/kubik-dobra/hospital-masterclass.PNG', caption: 'Мастер-класс в госпитале' },
-                { src: 'images/gallery/ovz/multicenter-masterclass.PNG', caption: 'Мастер-класс в Мультицентре' },
-                { src: 'images/gallery/ovz/tesovy-bereg.PNG', caption: 'Мастер-класс в Тесовый берег' }
+                { src: 'images/gallery/kubik-dobra/hospital-masterclass.PNG', caption: 'Мастер-класс для участников СВО в госпитале' },
+                { src: 'images/gallery/ovz/multicenter-masterclass.PNG', caption: 'Занятие по спидкубингу в Мультицентре' },
+                { src: 'images/gallery/ovz/tesovy-bereg.PNG', caption: 'Выездной мастер-класс в Тесовый берег' }
             ];
 
             var currentKubikIndex = 0;
@@ -328,7 +329,6 @@
                 var total = imagesArray.length;
                 var isKubik = (imagesArray === kubikImages);
                 
-                // Если это Кубик добра — показываем стрелки и счётчик
                 var navHtml = isKubik ? `
                     <span class="nav-btn nav-prev" onclick="changeKubik(-1)">‹</span>
                     <span class="nav-btn nav-next" onclick="changeKubik(1)">›</span>
@@ -352,7 +352,6 @@
                 };
             }
 
-            // ===== ОТКРЫТИЕ «КУБИКА ДОБРА» =====
             window.openLightbox = function(index, type) {
                 if (type === 'kubik') {
                     currentKubikIndex = index;
@@ -360,7 +359,6 @@
                 }
             };
 
-            // ===== ПЕРЕЛИСТЫВАНИЕ «КУБИКА ДОБРА» =====
             window.changeKubik = function(direction) {
                 var newIndex = currentKubikIndex + direction;
                 if (newIndex < 0) newIndex = kubikImages.length - 1;
@@ -369,9 +367,9 @@
                 renderLightbox(currentKubikIndex, kubikImages);
             };
 
-            // ===== 2. ОТДЕЛЬНЫЙ ЛАЙТБОКС ДЛЯ ДАРВИНА (без стрелок) =====
+            // ===== 2. ОТДЕЛЬНЫЙ ЛАЙТБОКС ДЛЯ ДАРВИНА =====
             window.openDarvinLightbox = function() {
-                var data = { src: 'images/gallery/projects/darvin.jpg', caption: 'Портрет Чарльза Дарвина' };
+                var data = { src: 'images/gallery/projects/darvin.jpg', caption: 'Мозаика из кубиков Рубика — портрет Чарльза Дарвина' };
                 
                 lightbox.innerHTML = `
                     <div class="image-wrapper">
@@ -389,20 +387,17 @@
                 };
             };
 
-            // ===== ЗАКРЫТИЕ =====
             window.closeLightbox = function() {
                 lightbox.style.display = 'none';
                 document.body.style.overflow = '';
             };
 
-            // ===== КЛАВИАТУРА (ESC и стрелки только для Кубика добра) =====
             document.addEventListener('keydown', function(e) {
                 if (lightbox.style.display === 'none') return;
                 
                 if (e.key === 'Escape') {
                     closeLightbox();
                 }
-                // Стрелки работают только если открыт Кубик добра (есть счётчик)
                 if (e.key === 'ArrowLeft' && lightbox.querySelector('.counter')) {
                     changeKubik(-1);
                 }
