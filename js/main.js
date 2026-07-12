@@ -1,21 +1,12 @@
 document.addEventListener("DOMContentLoaded", function() {
 
+    // ===== 1. ГОД В ПОДВАЛЕ =====
     var year = document.getElementById("current-year");
     if (year) {
         year.textContent = new Date().getFullYear();
     }
 
-    var anchors = document.querySelectorAll('a[href^="#"]');
-    for (var i = 0; i < anchors.length; i++) {
-        anchors[i].addEventListener("click", function(e) {
-            var target = document.querySelector(this.getAttribute("href"));
-            if (target) {
-                e.preventDefault();
-                target.scrollIntoView({ behavior: "smooth", block: "start" });
-            }
-        });
-    }
-
+    // ===== 2. ЗВЁЗДЫ =====
     function initStars() {
         var container = document.getElementById('starsContainer');
         if (!container) return;
@@ -36,4 +27,133 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     initStars();
 
+    // ===== 3. ЛАЙТБОКС (РАБОТАЕТ И НА GALLERY, И НА PROJECTS) =====
+    var overlay = document.getElementById('lightboxOverlay');
+    var img = document.getElementById('lightboxImage');
+    var caption = document.getElementById('lightboxCaption');
+    var counter = document.getElementById('lightboxCounter');
+    var closeBtn = document.getElementById('lightboxClose');
+    var prevBtn = document.getElementById('lightboxPrev');
+    var nextBtn = document.getElementById('lightboxNext');
+
+    // Если лайтбокс есть на странице — запускаем логику
+    if (overlay && img) {
+        var items = document.querySelectorAll('.gallery-item');
+        var data = [];
+
+        // Собираем данные со всех картинок с классом gallery-item
+        items.forEach(function(el) {
+            var src = el.getAttribute('data-src');
+            var cap = el.getAttribute('data-caption');
+            if (src) {
+                data.push({ src: src, cap: cap });
+            }
+        });
+
+        var currentIndex = 0;
+
+        function openLightbox(index) {
+            if (data.length === 0) return;
+            currentIndex = index;
+            var item = data[currentIndex];
+            img.src = item.src;
+            caption.textContent = item.cap || 'Фото';
+            counter.textContent = (currentIndex + 1) + ' / ' + data.length;
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            // Сброс зума при открытии
+            img.style.transform = 'scale(1)';
+            img.style.cursor = 'zoom-in';
+        }
+
+        function closeLightbox() {
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Навешиваем клик на каждую картинку
+        items.forEach(function(el, index) {
+            el.addEventListener('click', function(e) {
+                e.preventDefault();
+                openLightbox(index);
+            });
+        });
+
+        // Закрытие по крестику и по фону
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closeLightbox);
+        }
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                closeLightbox();
+            }
+        });
+
+        // Навигация (предыдущая / следующая)
+        if (prevBtn) {
+            prevBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (data.length === 0) return;
+                currentIndex = (currentIndex - 1 + data.length) % data.length;
+                openLightbox(currentIndex);
+            });
+        }
+        if (nextBtn) {
+            nextBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (data.length === 0) return;
+                currentIndex = (currentIndex + 1) % data.length;
+                openLightbox(currentIndex);
+            });
+        }
+
+        // Клавиатура (ESC, стрелки влево/вправо)
+        document.addEventListener('keydown', function(e) {
+            if (!overlay.classList.contains('active')) return;
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+            if (e.key === 'ArrowLeft' && prevBtn) {
+                prevBtn.click();
+            }
+            if (e.key === 'ArrowRight' && nextBtn) {
+                nextBtn.click();
+            }
+        });
+
+        // Зум колесиком мыши
+        img.addEventListener('wheel', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var currentScale = parseFloat(this.style.transform.replace('scale(', '').replace(')', '')) || 1;
+            var delta = e.deltaY > 0 ? -0.1 : 0.1;
+            currentScale = Math.min(5, Math.max(1, currentScale + delta));
+            this.style.transform = 'scale(' + currentScale + ')';
+            this.style.cursor = currentScale > 1 ? 'zoom-out' : 'zoom-in';
+        }, { passive: false });
+
+        // Двойной клик для сброса зума
+        img.addEventListener('dblclick', function() {
+            this.style.transform = 'scale(1)';
+            this.style.cursor = 'zoom-in';
+        });
+
+        // Свайпы для телефона
+        var touchStartX = 0;
+        overlay.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].clientX;
+        }, { passive: true });
+        overlay.addEventListener('touchend', function(e) {
+            var touchEndX = e.changedTouches[0].clientX;
+            var diffX = touchStartX - touchEndX;
+            if (Math.abs(diffX) > 50) {
+                if (diffX > 0 && nextBtn) {
+                    nextBtn.click();
+                } else if (prevBtn) {
+                    prevBtn.click();
+                }
+            }
+            touchStartX = 0;
+        }, { passive: true });
+    }
 });
