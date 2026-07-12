@@ -8,30 +8,6 @@
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://chernyakov-egor.github.io/projects.html" />
     <link rel="stylesheet" href="css/style.css" />
-    
-    <style>
-        /* Убираем желтую рамку при нажатии */
-        * { -webkit-tap-highlight-color: transparent; }
-        
-        /* Стили для картинок (кликабельные) */
-        .gallery-item {
-            display: block;
-            cursor: pointer;
-            border-radius: 12px;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-            position: relative;
-        }
-        .gallery-item:hover {
-            transform: translateY(-4px);
-        }
-        .gallery-item img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-    </style>
 </head>
 <body>
     <div class="stars-container" id="starsContainer"></div>
@@ -62,16 +38,16 @@
             <div class="section-title">Кубик добра</div>
             <div class="section-subtitle">Социальный проект, который помогает людям через спидкубинг.</div>
             <div class="project-card">
-                <!-- Картинки с классом gallery-item и data-атрибутами -->
+                <!-- Просто картинки без классов лайтбокса -->
                 <div style="display: flex; gap: 0.5rem; margin-bottom: 0.8rem; flex-wrap: wrap;">
-                    <div class="gallery-item" style="flex: 1; min-width: 100px; height: 130px;" data-src="images/gallery/kubik-dobra/hospital-masterclass.PNG" data-caption="Мастер-класс в госпитале">
-                        <img src="images/gallery/kubik-dobra/hospital-masterclass.PNG" alt="Мастер-класс в госпитале">
+                    <div style="flex: 1; min-width: 100px; height: 130px;">
+                        <img src="images/gallery/kubik-dobra/hospital-masterclass.PNG" alt="Мастер-класс в госпитале" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
                     </div>
-                    <div class="gallery-item" style="flex: 1; min-width: 100px; height: 130px;" data-src="images/gallery/ovz/multicenter-masterclass.PNG" data-caption="Мастер-класс в Мультицентре">
-                        <img src="images/gallery/ovz/multicenter-masterclass.PNG" alt="Мастер-класс в Мультицентре">
+                    <div style="flex: 1; min-width: 100px; height: 130px;">
+                        <img src="images/gallery/ovz/multicenter-masterclass.PNG" alt="Мастер-класс в Мультицентре" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
                     </div>
-                    <div class="gallery-item" style="flex: 1; min-width: 100px; height: 130px;" data-src="images/gallery/ovz/tesovy-bereg.PNG" data-caption="Мастер-класс в Тесовый берег">
-                        <img src="images/gallery/ovz/tesovy-bereg.PNG" alt="Мастер-класс в Тесовый берег">
+                    <div style="flex: 1; min-width: 100px; height: 130px;">
+                        <img src="images/gallery/ovz/tesovy-bereg.PNG" alt="Мастер-класс в Тесовый берег" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
                     </div>
                 </div>
                 <h3>Кубик добра</h3>
@@ -110,8 +86,8 @@
             <div class="section-title">Мозаики из кубиков</div>
             <div class="section-subtitle">Тысячи кубиков — одна большая картина.</div>
             <div class="project-card">
-                <div class="gallery-item" style="width: 100%; height: 280px; margin-bottom: 0.8rem;" data-src="images/gallery/projects/darvin.jpg" data-caption="Портрет Чарльза Дарвина">
-                    <img src="images/gallery/projects/darvin.jpg" alt="Портрет Чарльза Дарвина" style="object-fit: contain;">
+                <div style="width: 100%; height: 280px; margin-bottom: 0.8rem;">
+                    <img src="images/gallery/projects/darvin.jpg" alt="Портрет Чарльза Дарвина" style="width:100%; height:100%; object-fit:contain; border-radius:8px;">
                 </div>
                 <h3>Арт-проекты и фестивали</h3>
                 <p>Неоднократно участвовал в создании больших мозаик из кубиков Рубика.</p>
