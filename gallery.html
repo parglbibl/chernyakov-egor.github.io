@@ -6,7 +6,7 @@
     <title>Галерея мозаик из кубиков Рубика — Егор Черняков</title>
     <link rel="stylesheet" href="css/style.css" />
     
-    <!-- ===== ПОДКЛЮЧЕНИЕ LIGHTBOX2 (никаких конфликтов) ===== -->
+    <!-- ===== ПОДКЛЮЧЕНИЕ LIGHTBOX2 ===== -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/css/lightbox.min.css" rel="stylesheet" />
     
     <style>
@@ -19,19 +19,20 @@
             grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
             gap: 16px;
         }
-        .gallery-item {
+        .gallery-link {
             display: block;
             border-radius: 12px;
             overflow: hidden;
             aspect-ratio: 1 / 1;
             border: 1px solid rgba(255,255,255,0.08);
             transition: transform 0.3s ease, border-color 0.3s ease;
+            cursor: pointer;
         }
-        .gallery-item:hover {
+        .gallery-link:hover {
             transform: translateY(-4px);
             border-color: var(--accent);
         }
-        .gallery-item img {
+        .gallery-link img {
             display: block;
             width: 100%;
             height: 100%;
@@ -96,7 +97,7 @@
     <!-- ===== ПОДКЛЮЧЕНИЕ JS LIGHTBOX2 ===== -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox.min.js"></script>
 
-    <!-- ===== ГЕНЕРАЦИЯ 26 КАРТИНОК ПОД LIGHTBOX2 ===== -->
+    <!-- ===== ГЕНЕРАЦИЯ 26 КАРТИНОК ПОД LIGHTBOX2 (ИСПРАВЛЕННАЯ) ===== -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var gallery = document.getElementById('mosaicGallery');
@@ -109,8 +110,8 @@
                 var src = 'images/kartini/kartina' + i + '.' + ext;
                 var captionText = 'Мозаика из кубиков Рубика — картина ' + i;
                 
-                // Ссылка на полное изображение + data-атрибуты Lightbox2
-                html += '<a href="' + src + '" data-lightbox="mosaic" data-title="' + captionText + '" class="gallery-item">';
+                // ВАЖНО: data-lightbox="mosaic" включает Lightbox2!
+                html += '<a href="' + src + '" data-lightbox="mosaic" data-title="' + captionText + '" class="gallery-link">';
                 html += '<img src="' + src + '" alt="' + captionText + '" loading="lazy" />';
                 html += '</a>';
             }
