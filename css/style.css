@@ -464,7 +464,7 @@ h1 {
     opacity: 0.9;
 }
 
-/* ===== ГАЛЕРЕЯ (ИСПРАВЛЕННАЯ) ===== */
+/* ===== ГАЛЕРЕЯ (БЕЗ КЛИКОВ, БЕЗ ЛАЙТБОКСА) ===== */
 .gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -478,13 +478,11 @@ h1 {
     overflow: hidden;
     background: rgba(255, 255, 255, 0.06);
     border: 1px solid var(--line);
-    cursor: pointer;
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    pointer-events: none; /* полностью отключаем клики */
     aspect-ratio: 1 / 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    -webkit-tap-highlight-color: transparent;
 }
 
 .gallery-item img {
@@ -493,156 +491,6 @@ h1 {
     object-fit: contain;
     display: block;
     background: #0a0e1a;
-    pointer-events: none; /* ПРОПУСКАЕТ КЛИК НА РОДИТЕЛЯ */
-    transition: none; /* Убираем зум картинки при наведении */
-}
-
-.gallery-item:hover {
-    transform: translateY(-4px);
-    border-color: var(--accent);
-}
-
-.gallery-item:hover img {
-    transform: none;
-}
-
-.gallery-item .overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 14px;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
-    color: #fff;
-    font-weight: 500;
-    font-size: 15px;
-    text-align: center;
-    opacity: 0;
-    transition: 0.3s;
-    pointer-events: none;
-}
-
-.gallery-item:hover .overlay {
-    opacity: 1;
-}
-
-/* ===== ЛАЙТБОКС (КРАСИВЫЙ, С ЗОЛОТЫМ АКЦЕНТОМ) ===== */
-.lightbox-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.92);
-    backdrop-filter: blur(8px);
-    z-index: 9999;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-}
-
-.lightbox-overlay.active {
-    display: flex;
-}
-
-.lightbox-image-wrapper {
-    position: relative;
-    max-width: 90vw;
-    max-height: 90vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.lightbox-image-wrapper img {
-    max-width: 100%;
-    max-height: 90vh;
-    border-radius: 16px;
-    object-fit: contain;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-    transition: transform 0.1s ease;
-    user-select: none;
-    -webkit-user-select: none;
-    cursor: zoom-in;
-}
-
-.lightbox-close {
-    position: absolute;
-    top: -50px;
-    right: 0;
-    color: #fff;
-    font-size: 2.5rem;
-    cursor: pointer;
-    background: none;
-    border: none;
-    transition: color 0.2s;
-}
-
-.lightbox-close:hover {
-    color: var(--accent);
-}
-
-.lightbox-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #fff;
-    font-size: 2.5rem;
-    cursor: pointer;
-    background: rgba(0,0,0,0.4);
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s;
-    border: none;
-}
-
-.lightbox-nav:hover {
-    background: var(--accent);
-}
-
-.lightbox-prev {
-    left: -70px;
-}
-
-.lightbox-next {
-    right: -70px;
-}
-
-.lightbox-counter {
-    color: rgba(255,255,255,0.6);
-    font-size: 0.9rem;
-    margin-top: 1rem;
-    font-family: 'Inter', sans-serif;
-}
-
-@media (max-width: 768px) {
-    .lightbox-close {
-        top: -40px;
-        font-size: 2rem;
-    }
-    .lightbox-nav {
-        width: 40px;
-        height: 40px;
-        font-size: 1.5rem;
-    }
-    .lightbox-prev {
-        left: 10px;
-    }
-    .lightbox-next {
-        right: 10px;
-    }
-    .lightbox-image-wrapper {
-        max-width: 95vw;
-        max-height: 90vh;
-    }
-    .lightbox-image-wrapper img {
-        max-height: 90vh;
-    }
 }
 
 /* ===== КНОПКИ ===== */
@@ -812,25 +660,6 @@ footer p {
     }
     h1 {
         font-size: 34px;
-    }
-    .lightbox-image-wrapper img {
-        max-height: 85vh;
-    }
-    .lightbox-close {
-        top: 5px;
-        right: 10px;
-        font-size: 2.4rem;
-    }
-    .lightbox-nav {
-        width: 38px;
-        height: 38px;
-        font-size: 1.5rem;
-    }
-    .lightbox-prev {
-        left: 5px;
-    }
-    .lightbox-next {
-        right: 5px;
     }
     .contacts a {
         font-size: 15px;
