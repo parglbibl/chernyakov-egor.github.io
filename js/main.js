@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function() {
-
     // ===== 1. ГОД В ПОДВАЛЕ =====
     var year = document.getElementById("current-year");
     if (year) {
@@ -27,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     initStars();
 
-    // ===== 3. ЛАЙТБОКС (РАБОТАЕТ И НА GALLERY, И НА PROJECTS) =====
+    // ===== 3. УНИВЕРСАЛЬНЫЙ ЛАЙТБОКС (ДЛЯ ВСЕХ СТРАНИЦ) =====
     var overlay = document.getElementById('lightboxOverlay');
     var img = document.getElementById('lightboxImage');
     var caption = document.getElementById('lightboxCaption');
@@ -36,21 +35,65 @@ document.addEventListener("DOMContentLoaded", function() {
     var prevBtn = document.getElementById('lightboxPrev');
     var nextBtn = document.getElementById('lightboxNext');
 
-    // Если лайтбокс есть на странице — запускаем логику
     if (overlay && img) {
         var items = document.querySelectorAll('.gallery-item');
         var data = [];
 
         // Собираем данные со всех картинок с классом gallery-item
         items.forEach(function(el) {
-            var src = el.getAttribute('data-src');
-            var cap = el.getAttribute('data-caption');
+            var src = el.getAttribute('data-src') || el.querySelector('img')?.getAttribute('src');
+            var cap = el.getAttribute('data-caption') || el.querySelector('img')?.getAttribute('alt') || 'Фото';
             if (src) {
                 data.push({ src: src, cap: cap });
             }
         });
 
         var currentIndex = 0;
+
+        // Если картинки генерируются динамически (например, в gallery.html), ждём их
+        if (data.length === 0) {
+            var observer = new MutationObserver(function() {
+                var newItems = document.querySelectorAll('.gallery-item');
+                if (newItems.length > 0) {
+                    newItems.forEach(function(el) {
+                        var src = el.getAttribute('data-src') || el.querySelector('img')?.getAttribute('src');
+                        var cap = el.getAttribute('data-caption') || el.querySelector('img')?.getAttribute('alt') || 'Фото';
+                        if (src && !data.some(function(d) { return d.src === src; })) {
+                            data.push({ src: src, cap: cap });
+                        }
+                    });
+                    attachClickHandlers();
+                }
+            });
+            observer.observe(document.body, { childList: true, subtree: true });
+        } else {
+            attachClickHandlers();
+        }
+
+        function attachClickHandlers() {
+            document.querySelectorAll('.gallery-item').forEach(function(el, index) {
+                // Удаляем старый обработчик, если есть
+                el.removeEventListener('click', clickHandler);
+                el.addEventListener('click', clickHandler);
+                
+                function clickHandler(e) {
+                    e.preventDefault();
+                    // Находим индекс в глобальном массиве data
+                    var src = el.getAttribute('data-src') || el.querySelector('img')?.getAttribute('src');
+                    var foundIndex = data.findIndex(function(d) { return d.src === src; });
+                    if (foundIndex === -1) {
+                        // Если не найден, используем индекс из data-index
+                        var idx = parseInt(el.getAttribute('data-index'));
+                        if (!isNaN(idx)) {
+                            foundIndex = idx;
+                        }
+                    }
+                    if (foundIndex !== -1) {
+                        openLightbox(foundIndex);
+                    }
+                }
+            });
+        }
 
         function openLightbox(index) {
             if (data.length === 0) return;
@@ -69,15 +112,8 @@ document.addEventListener("DOMContentLoaded", function() {
         function closeLightbox() {
             overlay.classList.remove('active');
             document.body.style.overflow = '';
+            img.style.transform = 'scale(1)';
         }
-
-        // Навешиваем клик на каждую картинку
-        items.forEach(function(el, index) {
-            el.addEventListener('click', function(e) {
-                e.preventDefault();
-                openLightbox(index);
-            });
-        });
 
         // Закрытие по крестику и по фону
         if (closeBtn) {
