@@ -4,22 +4,93 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Галерея мозаик из кубиков Рубика — Егор Черняков</title>
-    <meta name="description" content="Мозаики из кубиков Рубика, созданные Егором Черняковым. Картины на фестивалях и выставках, включая VK Fest. Тысячи кубиков — одна большая картина." />
-    <meta name="keywords" content="мозаики из кубиков Рубика, картины из кубиков Рубика, Егор Черняков галерея, кубик Рубика искусство, VK Fest мозаика, спидкубинг арт, мозаика из кубиков портрет, кубик Рубика картины" />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://chernyakov-egor.github.io/gallery.html" />
-    <meta property="og:title" content="Мозаики из кубиков Рубика — галерея Егора Чернякова" />
-    <meta property="og:description" content="Картины из тысяч кубиков Рубика на фестивалях и выставках. Участие в VK Fest." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://chernyakov-egor.github.io/gallery.html" />
-    <meta property="og:image" content="https://chernyakov-egor.github.io/images/gallery/projects/darvin.jpg" />
-    <meta property="og:locale" content="ru_RU" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Мозаики из кубиков Рубика — галерея Егора Чернякова" />
-    <meta name="twitter:description" content="Картины из тысяч кубиков Рубика на фестивалях и выставках. Участие в VK Fest." />
-    <meta name="twitter:image" content="https://chernyakov-egor.github.io/images/gallery/projects/darvin.jpg" />
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="icon" href="images/favicon.png" />
+    <style>
+        /* Убираем желтую рамку */
+        * { -webkit-tap-highlight-color: transparent; }
+        
+        .gallery-item {
+            display: block;
+            cursor: pointer;
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+        }
+        .gallery-item img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #0a0e1a;
+        }
+        
+        /* ===== СТИЛИ ЛАЙТБОКСА ===== */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 9999;
+            justify-content: center; align-items: center;
+            padding: 20px;
+            backdrop-filter: blur(4px);
+        }
+        .lightbox-overlay.active { display: flex; }
+        
+        .lightbox-content {
+            position: relative;
+            max-width: 98vw; max-height: 98vh;
+            width: 100%; height: 100%;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+        }
+        .lightbox-image-wrapper {
+            width: 100%; height: calc(100% - 80px);
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+        }
+        .lightbox-content img {
+            max-width: 100%; max-height: 100%;
+            width: auto; height: auto; object-fit: contain;
+            border-radius: 8px;
+            user-select: none; -webkit-user-select: none;
+            cursor: zoom-in;
+        }
+        .lightbox-content .caption {
+            margin-top: 8px; text-align: center; color: #fff;
+            font-size: 18px; font-weight: 500; opacity: 0.9;
+            padding: 8px 20px; background: rgba(0, 0, 0, 0.5);
+            border-radius: 8px; max-width: 90%;
+        }
+        .close-btn {
+            position: absolute; top: 10px; right: 20px;
+            font-size: 3rem; color: #fff; cursor: pointer;
+            opacity: 0.7; transition: 0.2s; line-height: 1;
+        }
+        .close-btn:hover { opacity: 1; transform: scale(1.1); }
+        
+        .lightbox-nav {
+            display: flex; align-items: center; gap: 20px;
+            margin-top: 12px; background: rgba(0, 0, 0, 0.4);
+            padding: 8px 20px; border-radius: 30px;
+        }
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff; width: 44px; height: 44px;
+            border-radius: 50%; font-size: 26px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .nav-btn:hover { background: rgba(255, 255, 255, 0.2); transform: scale(1.1); }
+        .counter { color: #fff; font-size: 16px; font-weight: 500; opacity: 0.8; min-width: 60px; text-align: center; }
+        
+        @media (max-width: 500px) {
+            .close-btn { top: 5px; right: 10px; font-size: 2.4rem; }
+            .lightbox-content .caption { font-size: 15px; padding: 6px 14px; }
+            .nav-btn { width: 38px; height: 38px; font-size: 22px; }
+            .counter { font-size: 14px; min-width: 50px; }
+        }
+    </style>
 </head>
 <body>
     <div class="stars-container" id="starsContainer"></div>
@@ -63,16 +134,28 @@
             <p>© <span id="current-year"></span> Егор Черняков</p>
         </div>
     </footer>
-    <script src="js/main.js"></script>
-    <script>
-    (function() {
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initGallery);
-        } else {
-            initGallery();
-        }
 
-        function initGallery() {
+    <!-- ===== СТРУКТУРА ЛАЙТБОКСА ===== -->
+    <div class="lightbox-overlay" id="lightboxOverlay">
+        <div class="lightbox-content">
+            <span class="close-btn" id="lightboxClose">&times;</span>
+            <div class="lightbox-image-wrapper">
+                <img id="lightboxImage" src="" alt="Увеличенное фото" />
+            </div>
+            <div class="caption" id="lightboxCaption"></div>
+            <div class="lightbox-nav">
+                <button class="nav-btn prev-btn" id="lightboxPrev">‹</button>
+                <span class="counter" id="lightboxCounter">1 / 26</span>
+                <button class="nav-btn next-btn" id="lightboxNext">›</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    
+    <!-- Генерация 26 картинок для галереи -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
             var gallery = document.getElementById('mosaicGallery');
             if (!gallery) return;
 
@@ -81,191 +164,15 @@
             for (var i = 1; i <= totalImages; i++) {
                 var ext = i === 1 ? 'jpeg' : 'png';
                 var src = 'images/kartini/kartina' + i + '.' + ext;
-                var caption = 'Мозаика из кубиков Рубика — картина ' + i;
-                html += '<div class="gallery-item" data-caption="' + caption + '" data-src="' + src + '">';
-                html += '<img src="' + src + '" alt="' + caption + '" loading="lazy" />';
-                html += '<div class="overlay">' + caption + '</div>';
+                var captionText = 'Мозаика из кубиков Рубика — картина ' + i;
+                
+                // Добавляем класс gallery-item и data-атрибуты для лайтбокса
+                html += '<div class="gallery-item" data-src="' + src + '" data-caption="' + captionText + '">';
+                html += '<img src="' + src + '" alt="' + captionText + '" loading="lazy" />';
                 html += '</div>';
             }
             gallery.innerHTML = html;
-
-            var items = document.querySelectorAll('.gallery-item');
-            if (items.length === 0) return;
-
-            var overlay = document.querySelector('.lightbox-overlay');
-            if (!overlay) {
-                overlay = document.createElement('div');
-                overlay.className = 'lightbox-overlay';
-                overlay.innerHTML = `
-                    <div class="lightbox-content">
-                        <span class="close-btn">&times;</span>
-                        <div class="lightbox-image-wrapper">
-                            <img src="" alt="Увеличенное фото" />
-                        </div>
-                        <div class="caption"></div>
-                        <div class="lightbox-nav">
-                            <button class="nav-btn prev-btn">‹</button>
-                            <span class="counter">1 / 26</span>
-                            <button class="nav-btn next-btn">›</button>
-                        </div>
-                    </div>
-                `;
-                document.body.appendChild(overlay);
-            }
-
-            var lightboxImg = overlay.querySelector('img');
-            var captionEl = overlay.querySelector('.caption');
-            var closeBtn = overlay.querySelector('.close-btn');
-            var prevBtn = overlay.querySelector('.prev-btn');
-            var nextBtn = overlay.querySelector('.next-btn');
-            var counter = overlay.querySelector('.counter');
-
-            var imageItems = [];
-            items.forEach(function(item) {
-                var img = item.querySelector('img');
-                if (img && img.src) {
-                    imageItems.push({
-                        src: img.src,
-                        caption: item.getAttribute('data-caption') || 'Мозаика из кубиков Рубика'
-                    });
-                }
-            });
-
-            var currentIndex = 0;
-            var currentScale = 1;
-            var minScale = 1;
-            var maxScale = 5;
-
-            function openLightbox(index) {
-                if (imageItems.length === 0) return;
-                if (index < 0) index = imageItems.length - 1;
-                if (index >= imageItems.length) index = 0;
-                currentIndex = index;
-                
-                var item = imageItems[currentIndex];
-                lightboxImg.src = item.src;
-                captionEl.textContent = item.caption;
-                counter.textContent = (currentIndex + 1) + ' / ' + imageItems.length;
-                
-                currentScale = 1;
-                lightboxImg.style.transform = 'scale(1)';
-                lightboxImg.style.cursor = 'zoom-in';
-                
-                overlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-
-            function closeLightbox() {
-                overlay.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-
-            items.forEach(function(item) {
-                item.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    var img = this.querySelector('img');
-                    if (img && img.src) {
-                        for (var j = 0; j < imageItems.length; j++) {
-                            if (imageItems[j].src === img.src) {
-                                openLightbox(j);
-                                break;
-                            }
-                        }
-                    }
-                });
-            });
-
-            prevBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                openLightbox(currentIndex - 1);
-            });
-
-            nextBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                openLightbox(currentIndex + 1);
-            });
-
-            closeBtn.addEventListener('click', closeLightbox);
-            overlay.addEventListener('click', function(e) {
-                if (e.target === overlay) closeLightbox();
-            });
-
-            document.addEventListener('keydown', function(e) {
-                if (!overlay.classList.contains('active')) return;
-                if (e.key === 'Escape') closeLightbox();
-                if (e.key === 'ArrowLeft') openLightbox(currentIndex - 1);
-                if (e.key === 'ArrowRight') openLightbox(currentIndex + 1);
-            });
-
-            lightboxImg.addEventListener('wheel', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                var delta = e.deltaY > 0 ? -0.1 : 0.1;
-                currentScale = Math.min(maxScale, Math.max(minScale, currentScale + delta));
-                this.style.transform = 'scale(' + currentScale + ')';
-                this.style.cursor = currentScale > 1 ? 'zoom-out' : 'zoom-in';
-            }, { passive: false });
-
-            lightboxImg.addEventListener('dblclick', function() {
-                currentScale = 1;
-                this.style.transform = 'scale(1)';
-                this.style.cursor = 'zoom-in';
-            });
-
-            var touchStartX = 0;
-            var lastTouchDistance = 0;
-            var touchStartScale = 1;
-
-            overlay.addEventListener('touchstart', function(e) {
-                var target = e.target;
-                if (target === overlay || target === lightboxImg || target.closest('.lightbox-image-wrapper')) {
-                    if (e.touches.length === 1) {
-                        touchStartX = e.touches[0].clientX;
-                    }
-                    if (e.touches.length === 2) {
-                        var t1 = e.touches[0];
-                        var t2 = e.touches[1];
-                        lastTouchDistance = Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
-                        touchStartScale = currentScale;
-                    }
-                }
-            }, { passive: true });
-
-            overlay.addEventListener('touchmove', function(e) {
-                if (e.touches.length === 2) {
-                    e.preventDefault();
-                    var t1 = e.touches[0];
-                    var t2 = e.touches[1];
-                    var distance = Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
-                    if (lastTouchDistance > 0) {
-                        var scaleChange = distance / lastTouchDistance;
-                        currentScale = Math.min(maxScale, Math.max(minScale, touchStartScale * scaleChange));
-                        lightboxImg.style.transform = 'scale(' + currentScale + ')';
-                    }
-                }
-            }, { passive: false });
-
-            overlay.addEventListener('touchend', function(e) {
-                if (currentScale > 1) {
-                    touchStartX = 0;
-                    return;
-                }
-                if (touchStartX === 0) return;
-                
-                var touchEndX = e.changedTouches[0].clientX;
-                var diffX = touchStartX - touchEndX;
-                
-                if (Math.abs(diffX) > 50) {
-                    if (diffX > 0) {
-                        openLightbox(currentIndex + 1);
-                    } else {
-                        openLightbox(currentIndex - 1);
-                    }
-                }
-                touchStartX = 0;
-            }, { passive: true });
-        }
-    })();
+        });
     </script>
 </body>
 </html>
