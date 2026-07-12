@@ -27,23 +27,54 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     initStars();
 
-    // ===== 3. КНОПКА «НАВЕРХ» =====
-    var backBtn = document.createElement('a');
-    backBtn.href = '#';
+    // ===== 3. КНОПКА «НАВЕРХ» (САМЫЙ НАДЁЖНЫЙ ВАРИАНТ) =====
+    // Создаём кнопку через JS с принудительными стилями
+    var backBtn = document.createElement('button');
     backBtn.className = 'back-to-top';
     backBtn.innerHTML = '↑';
+    // Насильно прописываем правильное положение
+    backBtn.style.cssText = `
+        position: fixed !important;
+        bottom: 25px !important;
+        right: 25px !important;
+        left: auto !important;
+        width: 50px;
+        height: 50px;
+        background: #d8b45a;
+        color: #111;
+        border-radius: 50%;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        font-weight: bold;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 9999 !important;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        cursor: pointer;
+    `;
     document.body.appendChild(backBtn);
 
+    // Обработка скролла
     window.addEventListener('scroll', function() {
         if (window.pageYOffset > 300) {
-            backBtn.classList.add('show');
+            backBtn.style.opacity = '1';
+            backBtn.style.visibility = 'visible';
         } else {
-            backBtn.classList.remove('show');
+            backBtn.style.opacity = '0';
+            backBtn.style.visibility = 'hidden';
         }
     });
 
+    // Обработка клика
     backBtn.addEventListener('click', function(e) {
         e.preventDefault();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     });
 });
