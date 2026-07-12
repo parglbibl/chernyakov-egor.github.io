@@ -502,39 +502,16 @@ footer p {
     opacity: 0.6;
 }
 
-/* ===== КНОПКА НАВЕРХ — СТРОГО СПРАВА ВНИЗУ ===== */
-.back-to-top {
-    position: fixed;
-    bottom: 25px;
-    right: 25px !important; /* Принудительно справа */
-    left: auto !important;   /* Запрещаем прилипание к левому краю */
-    width: 50px;
-    height: 50px;
-    background: var(--accent);
-    color: #111;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    font-weight: bold;
-    text-decoration: none;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    z-index: 999;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-}
-
-.back-to-top:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-    color: #111;
-}
-
-.back-to-top.show {
-    opacity: 1;
-    visibility: visible;
+/* ===== АДАПТАЦИЯ КНОПКИ НАВЕРХ (только для мобильных) ===== */
+@media (max-width: 500px) {
+    .back-to-top {
+        width: 44px !important;
+        height: 44px !important;
+        font-size: 20px !important;
+        bottom: 20px !important;
+        right: 20px !important;
+        left: auto !important;
+    }
 }
 
 @media (max-width: 860px) {
@@ -642,14 +619,5 @@ footer p {
     .contacts a {
         font-size: 15px;
         padding: 10px 18px;
-    }
-
-    .back-to-top {
-        width: 44px;
-        height: 44px;
-        font-size: 20px;
-        bottom: 20px;
-        right: 20px !important;
-        left: auto !important;
     }
 }
