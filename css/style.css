@@ -17,6 +17,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent; /* Убирает жёлтую рамку на мобильных */
 }
 
 html {
@@ -463,7 +464,7 @@ h1 {
     opacity: 0.9;
 }
 
-/* ===== ГАЛЕРЕЯ ===== */
+/* ===== ГАЛЕРЕЯ (ИСПРАВЛЕННАЯ) ===== */
 .gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -478,11 +479,12 @@ h1 {
     background: rgba(255, 255, 255, 0.06);
     border: 1px solid var(--line);
     cursor: pointer;
-    transition: 0.3s;
+    transition: transform 0.3s ease, border-color 0.3s ease;
     aspect-ratio: 1 / 1;
     display: flex;
     align-items: center;
     justify-content: center;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .gallery-item img {
@@ -491,16 +493,17 @@ h1 {
     object-fit: contain;
     display: block;
     background: #0a0e1a;
-    transition: transform 0.3s ease;
-}
-
-.gallery-item:hover img {
-    transform: scale(1.03);
+    pointer-events: none; /* ПРОПУСКАЕТ КЛИК НА РОДИТЕЛЯ */
+    transition: none; /* Убираем зум картинки при наведении */
 }
 
 .gallery-item:hover {
-    transform: none;
+    transform: translateY(-4px);
     border-color: var(--accent);
+}
+
+.gallery-item:hover img {
+    transform: none;
 }
 
 .gallery-item .overlay {
