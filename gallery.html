@@ -6,14 +6,13 @@
     <title>Галерея мозаик из кубиков Рубика — Егор Черняков</title>
     <link rel="stylesheet" href="css/style.css" />
     
-    <!-- ===== ПОДКЛЮЧЕНИЕ LIGHTBOX2 ===== -->
+    <!-- ===== ПОДКЛЮЧЕНИЕ LIGHTBOX2 С ЗАЩИТОЙ ОТ КЕША ===== -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/css/lightbox.min.css" rel="stylesheet" />
     
     <style>
         /* Убираем желтую рамку */
         * { -webkit-tap-highlight-color: transparent; }
         
-        /* Стили для сетки и превьюшек — только для Lightbox2 */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -74,7 +73,6 @@
             <div class="section-title">Мои работы</div>
             <div class="section-subtitle">Кликните на любую картину, чтобы рассмотреть в деталях</div>
             
-            <!-- ===== КОНТЕЙНЕР ДЛЯ КАРТИНОК ===== -->
             <div class="gallery-grid" id="mosaicGallery"></div>
         </div>
     </section>
@@ -97,7 +95,7 @@
     <!-- ===== ПОДКЛЮЧЕНИЕ JS LIGHTBOX2 ===== -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox.min.js"></script>
 
-    <!-- ===== ГЕНЕРАЦИЯ 26 КАРТИНОК ПОД LIGHTBOX2 (ИСПРАВЛЕННАЯ) ===== -->
+    <!-- ===== ГЕНЕРАЦИЯ 26 КАРТИНОК ПОД LIGHTBOX2 ===== -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var gallery = document.getElementById('mosaicGallery');
@@ -110,7 +108,7 @@
                 var src = 'images/kartini/kartina' + i + '.' + ext;
                 var captionText = 'Мозаика из кубиков Рубика — картина ' + i;
                 
-                // ВАЖНО: data-lightbox="mosaic" включает Lightbox2!
+                // Каждая ссылка получает data-lightbox и data-title!
                 html += '<a href="' + src + '" data-lightbox="mosaic" data-title="' + captionText + '" class="gallery-link">';
                 html += '<img src="' + src + '" alt="' + captionText + '" loading="lazy" />';
                 html += '</a>';
