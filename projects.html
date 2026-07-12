@@ -19,7 +19,7 @@
         .modal {
             display: none;
             position: fixed;
-            z-index: 9999;
+            z-index: 9999; /* ВАЖНО: поверх всего */
             padding-top: 80px;
             left: 0;
             top: 0;
@@ -262,7 +262,7 @@
     <script src="js/main.js"></script>
 
     <!-- ===== ЛАЙТБОКС ДЛЯ ПРОЕКТОВ (4 картинки) ===== -->
-    <div id="myModal" class="modal" style="display: none;">
+    <div id="myModal" class="modal" style="display: none; z-index: 9999;">
         <span class="close cursor" onclick="closeModal()">&times;</span>
         <div class="modal-content">
             
