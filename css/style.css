@@ -112,7 +112,7 @@ header {
     color: var(--muted);
     text-decoration: none;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 22px; /* УВЕЛИЧЕНО с 20px до 22px */
     transition: 0.3s;
     position: relative;
     padding: 4px 0;
@@ -507,7 +507,7 @@ footer p {
         gap: 20px 28px;
     }
     .nav a {
-        font-size: 17px;
+        font-size: 19px; /* УВЕЛИЧЕНО с 17px до 19px */
     }
 }
 
@@ -520,7 +520,7 @@ footer p {
         gap: 12px 20px;
     }
     .nav a {
-        font-size: 15px;
+        font-size: 16px; /* УВЕЛИЧЕНО с 15px до 16px */
         font-weight: 600;
         padding: 2px 0;
     }
@@ -572,7 +572,7 @@ footer p {
         gap: 8px 14px;
     }
     .nav a {
-        font-size: 13px;
+        font-size: 14px; /* УВЕЛИЧЕНО с 13px до 14px */
         font-weight: 600;
         padding: 2px 0;
         letter-spacing: 0.3px;
