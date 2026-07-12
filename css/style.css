@@ -36,7 +36,6 @@ body {
     line-height: 1.8;
     min-height: 100vh;
     font-size: 18px;
-    /* padding-top удалён полностью */
 }
 
 .container {
@@ -247,7 +246,7 @@ h1 {
 }
 
 .section {
-    padding: 70px 0;
+    padding: 40px 0; /* Уменьшено с 70px до 40px для всех устройств */
 }
 
 .section-title {
@@ -527,7 +526,7 @@ footer p {
     }
 
     .section {
-        padding: 50px 0;
+        padding: 30px 0; /* Уменьшено с 50px до 30px */
     }
     body {
         font-size: 16px;
@@ -579,6 +578,9 @@ footer p {
         letter-spacing: 0.3px;
     }
 
+    .section {
+        padding: 20px 0; /* Уменьшено с 50px до 20px */
+    }
     .stats {
         grid-template-columns: 1fr;
     }
