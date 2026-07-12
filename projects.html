@@ -9,11 +9,8 @@
     <link rel="canonical" href="https://chernyakov-egor.github.io/projects.html" />
     <link rel="stylesheet" href="css/style.css" />
     
-    <!-- ===== ПОДКЛЮЧЕНИЕ LIGHTBOX2 (никаких конфликтов) ===== -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/css/lightbox.min.css" rel="stylesheet" />
-    
     <style>
-        /* Стили только для превьюшек в проектах */
+        /* Стили для превьюшек в проектах */
         .preview-row {
             display: flex;
             flex-wrap: wrap;
@@ -28,6 +25,7 @@
             aspect-ratio: 4/3;
             display: block;
             transition: transform 0.3s ease;
+            cursor: pointer;
         }
         .preview-item:hover {
             transform: translateY(-4px);
@@ -46,6 +44,7 @@
             overflow: hidden;
             display: block;
             transition: transform 0.3s ease;
+            cursor: pointer;
         }
         .darvin-wrapper:hover {
             transform: translateY(-4px);
@@ -55,6 +54,119 @@
             height: 100%;
             object-fit: contain;
             display: block;
+        }
+
+        /* ===== СТИЛИ ДЛЯ ВСТРОЕННОГО ЛАЙТБОКСА (ТОЧНО КАК В GALLERY) ===== */
+        #lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background: rgba(0,0,0,0.92);
+            backdrop-filter: blur(4px);
+        }
+
+        #lightbox .image-wrapper {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #lightbox img {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+        }
+
+        #lightbox .caption {
+            color: #fff;
+            font-size: 18px;
+            margin-top: 20px;
+            text-align: center;
+            padding: 8px 20px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 8px;
+        }
+
+        #lightbox .close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            color: #fff;
+            font-size: 40px;
+            cursor: pointer;
+            transition: 0.3s;
+            line-height: 1;
+            z-index: 10;
+        }
+        #lightbox .close:hover {
+            color: var(--accent);
+            transform: scale(1.1);
+        }
+
+        #lightbox .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #fff;
+            font-size: 40px;
+            cursor: pointer;
+            background: rgba(0,0,0,0.4);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            user-select: none;
+            z-index: 5;
+        }
+        #lightbox .nav-btn:hover {
+            background: var(--accent);
+            transform: translateY(-50%) scale(1.1);
+        }
+        #lightbox .nav-prev {
+            left: -70px;
+        }
+        #lightbox .nav-next {
+            right: -70px;
+        }
+
+        #lightbox .counter {
+            color: rgba(255,255,255,0.6);
+            font-size: 16px;
+            margin-top: 10px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        @media (max-width: 768px) {
+            #lightbox .nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 30px;
+            }
+            #lightbox .nav-prev {
+                left: 10px;
+            }
+            #lightbox .nav-next {
+                right: 10px;
+            }
+            #lightbox .close {
+                top: -40px;
+                font-size: 32px;
+            }
         }
     </style>
 </head>
@@ -90,17 +202,16 @@
             <div class="section-subtitle">Социальный проект, который помогает людям через спидкубинг.</div>
             
             <div class="project-card">
-                <!-- КАРТИНКИ С LIGHTBOX2 -->
                 <div class="preview-row">
-                    <a href="images/gallery/kubik-dobra/hospital-masterclass.PNG" data-lightbox="kubik-dobra" data-title="Мастер-класс в госпитале" class="preview-item">
+                    <div class="preview-item" onclick="openLightbox(0, 'kubik')">
                         <img src="images/gallery/kubik-dobra/hospital-masterclass.PNG" alt="Мастер-класс в госпитале">
-                    </a>
-                    <a href="images/gallery/ovz/multicenter-masterclass.PNG" data-lightbox="kubik-dobra" data-title="Мастер-класс в Мультицентре" class="preview-item">
+                    </div>
+                    <div class="preview-item" onclick="openLightbox(1, 'kubik')">
                         <img src="images/gallery/ovz/multicenter-masterclass.PNG" alt="Мастер-класс в Мультицентре">
-                    </a>
-                    <a href="images/gallery/ovz/tesovy-bereg.PNG" data-lightbox="kubik-dobra" data-title="Мастер-класс в Тесовый берег" class="preview-item">
+                    </div>
+                    <div class="preview-item" onclick="openLightbox(2, 'kubik')">
                         <img src="images/gallery/ovz/tesovy-bereg.PNG" alt="Мастер-класс в Тесовый берег">
-                    </a>
+                    </div>
                 </div>
                 
                 <h3>Кубик добра</h3>
@@ -139,10 +250,10 @@
             <div class="section-title">Мозаики из кубиков</div>
             <div class="section-subtitle">Тысячи кубиков — одна большая картина.</div>
             <div class="project-card">
-                <!-- Портрет Дарвина с Lightbox2 -->
-                <a href="images/gallery/projects/darvin.jpg" data-lightbox="kubik-dobra" data-title="Портрет Чарльза Дарвина" class="darvin-wrapper">
+                <!-- Портрет Дарвина с отдельным лайтбоксом (без стрелок) -->
+                <div class="darvin-wrapper" onclick="openDarvinLightbox()">
                     <img src="images/gallery/projects/darvin.jpg" alt="Портрет Чарльза Дарвина">
-                </a>
+                </div>
                 <h3>Арт-проекты и фестивали</h3>
                 <p>Неоднократно участвовал в создании больших мозаик из кубиков Рубика.</p>
                 <p style="margin-top: 12px;">Работы демонстрировались на крупных мероприятиях, включая VK Fest.</p>
@@ -192,7 +303,114 @@
 
     <script src="js/main.js"></script>
 
-    <!-- ===== ПОДКЛЮЧЕНИЕ JS LIGHTBOX2 ===== -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox.min.js"></script>
+    <!-- ===== ГЕНЕРАЦИЯ ЛАЙТБОКСОВ ДЛЯ PROJECTS ===== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // ===== 1. ЛАЙТБОКС ДЛЯ «КУБИКА ДОБРА» (3 картинки со стрелками) =====
+            var kubikImages = [
+                { src: 'images/gallery/kubik-dobra/hospital-masterclass.PNG', caption: 'Мастер-класс в госпитале' },
+                { src: 'images/gallery/ovz/multicenter-masterclass.PNG', caption: 'Мастер-класс в Мультицентре' },
+                { src: 'images/gallery/ovz/tesovy-bereg.PNG', caption: 'Мастер-класс в Тесовый берег' }
+            ];
+
+            var currentKubikIndex = 0;
+            var lightbox = document.getElementById('lightbox');
+
+            if (!lightbox) {
+                lightbox = document.createElement('div');
+                lightbox.id = 'lightbox';
+                document.body.appendChild(lightbox);
+            }
+
+            function renderLightbox(index, imagesArray) {
+                var data = imagesArray[index];
+                var total = imagesArray.length;
+                var isKubik = (imagesArray === kubikImages);
+                
+                // Если это Кубик добра — показываем стрелки и счётчик
+                var navHtml = isKubik ? `
+                    <span class="nav-btn nav-prev" onclick="changeKubik(-1)">‹</span>
+                    <span class="nav-btn nav-next" onclick="changeKubik(1)">›</span>
+                    <div class="counter">${index + 1} / ${total}</div>
+                ` : '';
+                
+                lightbox.innerHTML = `
+                    <div class="image-wrapper">
+                        <span class="close" onclick="closeLightbox()">&times;</span>
+                        ${navHtml}
+                        <img src="${data.src}" alt="${data.caption}" />
+                    </div>
+                    <div class="caption">${data.caption}</div>
+                `;
+                
+                lightbox.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+
+                lightbox.onclick = function(e) {
+                    if (e.target === lightbox) closeLightbox();
+                };
+            }
+
+            // ===== ОТКРЫТИЕ «КУБИКА ДОБРА» =====
+            window.openLightbox = function(index, type) {
+                if (type === 'kubik') {
+                    currentKubikIndex = index;
+                    renderLightbox(currentKubikIndex, kubikImages);
+                }
+            };
+
+            // ===== ПЕРЕЛИСТЫВАНИЕ «КУБИКА ДОБРА» =====
+            window.changeKubik = function(direction) {
+                var newIndex = currentKubikIndex + direction;
+                if (newIndex < 0) newIndex = kubikImages.length - 1;
+                if (newIndex >= kubikImages.length) newIndex = 0;
+                currentKubikIndex = newIndex;
+                renderLightbox(currentKubikIndex, kubikImages);
+            };
+
+            // ===== 2. ОТДЕЛЬНЫЙ ЛАЙТБОКС ДЛЯ ДАРВИНА (без стрелок) =====
+            window.openDarvinLightbox = function() {
+                var data = { src: 'images/gallery/projects/darvin.jpg', caption: 'Портрет Чарльза Дарвина' };
+                
+                lightbox.innerHTML = `
+                    <div class="image-wrapper">
+                        <span class="close" onclick="closeLightbox()">&times;</span>
+                        <img src="${data.src}" alt="${data.caption}" />
+                    </div>
+                    <div class="caption">${data.caption}</div>
+                `;
+                
+                lightbox.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+
+                lightbox.onclick = function(e) {
+                    if (e.target === lightbox) closeLightbox();
+                };
+            };
+
+            // ===== ЗАКРЫТИЕ =====
+            window.closeLightbox = function() {
+                lightbox.style.display = 'none';
+                document.body.style.overflow = '';
+            };
+
+            // ===== КЛАВИАТУРА (ESC и стрелки только для Кубика добра) =====
+            document.addEventListener('keydown', function(e) {
+                if (lightbox.style.display === 'none') return;
+                
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                }
+                // Стрелки работают только если открыт Кубик добра (есть счётчик)
+                if (e.key === 'ArrowLeft' && lightbox.querySelector('.counter')) {
+                    changeKubik(-1);
+                }
+                if (e.key === 'ArrowRight' && lightbox.querySelector('.counter')) {
+                    changeKubik(1);
+                }
+            });
+        });
+    </script>
 </body>
 </html>
