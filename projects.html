@@ -49,16 +49,16 @@
             <div class="section-title">Кубик добра</div>
             <div class="section-subtitle">Социальный проект, который помогает людям через спидкубинг.</div>
             <div class="project-card">
-                <!-- Картинки с классом gallery-click для лайтбокса -->
+                <!-- Убраны все скрипты и атрибуты onclick, оставлен только красивый стиль при наведении -->
                 <div style="display: flex; gap: 0.5rem; margin-bottom: 0.8rem; flex-wrap: wrap;">
-                    <div class="gallery-click" style="flex: 1; min-width: 100px; height: 130px; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.04); cursor: pointer;" data-src="images/gallery/kubik-dobra/hospital-masterclass.PNG" data-caption="Мастер-класс по сборке кубика Рубика в госпитале — Кубик добра">
-                        <img src="images/gallery/kubik-dobra/hospital-masterclass.PNG" alt="Мастер-класс в госпитале" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                    <div style="flex: 1; min-width: 100px; height: 130px; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.04); transition: transform 0.2s;">
+                        <img src="images/gallery/kubik-dobra/hospital-masterclass.PNG" alt="Мастер-класс в госпитале" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease; cursor: default;">
                     </div>
-                    <div class="gallery-click" style="flex: 1; min-width: 100px; height: 130px; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.04); cursor: pointer;" data-src="images/gallery/ovz/multicenter-masterclass.PNG" data-caption="Мастер-класс в Мультицентре Всеволожск — Кубик добра">
-                        <img src="images/gallery/ovz/multicenter-masterclass.PNG" alt="Мастер-класс в Мультицентре" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                    <div style="flex: 1; min-width: 100px; height: 130px; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.04); transition: transform 0.2s;">
+                        <img src="images/gallery/ovz/multicenter-masterclass.PNG" alt="Мастер-класс в Мультицентре" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease; cursor: default;">
                     </div>
-                    <div class="gallery-click" style="flex: 1; min-width: 100px; height: 130px; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.04); cursor: pointer;" data-src="images/gallery/ovz/tesovy-bereg.PNG" data-caption="Мастер-класс в ДСО Тесовый берег — Кубик добра">
-                        <img src="images/gallery/ovz/tesovy-bereg.PNG" alt="Мастер-класс в Тесовый берег" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                    <div style="flex: 1; min-width: 100px; height: 130px; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.04); transition: transform 0.2s;">
+                        <img src="images/gallery/ovz/tesovy-bereg.PNG" alt="Мастер-класс в Тесовый берег" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease; cursor: default;">
                     </div>
                 </div>
                 <h3>Кубик добра</h3>
@@ -97,9 +97,9 @@
             <div class="section-title">Мозаики из кубиков</div>
             <div class="section-subtitle">Тысячи кубиков — одна большая картина.</div>
             <div class="project-card">
-                <!-- Картинка с классом gallery-click -->
-                <div class="gallery-click" style="width: 100%; height: 280px; border-radius: 12px; overflow: hidden; margin-bottom: 0.8rem; background: rgba(255,255,255,0.04); cursor: pointer;" data-src="images/gallery/projects/darvin.jpg" data-caption="Портрет Чарльза Дарвина из 2000 кубиков Рубика">
-                    <img src="images/gallery/projects/darvin.jpg" alt="Портрет Чарльза Дарвина" style="width: 100%; height: 100%; object-fit: contain; display: block;">
+                <!-- Убрана onclick-ссылка, оставлен только красивый эффект -->
+                <div style="width: 100%; height: 280px; border-radius: 12px; overflow: hidden; margin-bottom: 0.8rem; background: rgba(255,255,255,0.04); transition: transform 0.2s;">
+                    <img src="images/gallery/projects/darvin.jpg" alt="Портрет Чарльза Дарвина" style="width: 100%; height: 100%; object-fit: contain; display: block; transition: transform 0.3s ease; cursor: default;">
                 </div>
                 <h3>Арт-проекты и фестивали</h3>
                 <p>Неоднократно участвовал в создании больших мозаик из кубиков Рубика.</p>
@@ -148,134 +148,7 @@
         </div>
     </footer>
 
-    <!-- ПОДКЛЮЧАЕМ ТВОЙ ЖЕ ЛАЙТБОКС ИЗ GALLERY.HTML -->
-    <div class="lightbox-overlay" id="lightboxOverlay">
-        <div class="lightbox-content">
-            <span class="close-btn" id="lightboxClose">&times;</span>
-            <div class="lightbox-image-wrapper">
-                <img id="lightboxImage" src="" alt="Увеличенное фото" />
-            </div>
-            <div class="caption" id="lightboxCaption"></div>
-            <div class="lightbox-nav">
-                <button class="nav-btn prev-btn" id="lightboxPrev">‹</button>
-                <span class="counter" id="lightboxCounter">1 / 4</span>
-                <button class="nav-btn next-btn" id="lightboxNext">›</button>
-            </div>
-        </div>
-    </div>
-
+    <!-- Никаких лайтбоксов и скриптов. Только чистый HTML и CSS. -->
     <script src="js/main.js"></script>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const overlay = document.getElementById('lightboxOverlay');
-            const img = document.getElementById('lightboxImage');
-            const caption = document.getElementById('lightboxCaption');
-            const counter = document.getElementById('lightboxCounter');
-            const closeBtn = document.getElementById('lightboxClose');
-            const prevBtn = document.getElementById('lightboxPrev');
-            const nextBtn = document.getElementById('lightboxNext');
-
-            const items = document.querySelectorAll('.gallery-click');
-            const data = [];
-
-            items.forEach(el => {
-                data.push({
-                    src: el.getAttribute('data-src'),
-                    cap: el.getAttribute('data-caption')
-                });
-            });
-
-            let currentIndex = 0;
-
-            function openLightbox(index) {
-                if (data.length === 0) return;
-                currentIndex = index;
-                const item = data[currentIndex];
-                img.src = item.src;
-                caption.textContent = item.cap;
-                counter.textContent = (currentIndex + 1) + ' / ' + data.length;
-                overlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
-                // Сбрасываем зум
-                img.style.transform = 'scale(1)';
-                img.style.cursor = 'zoom-in';
-            }
-
-            function closeLightbox() {
-                overlay.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-
-            // Навешиваем клик на картинки
-            items.forEach((el, index) => {
-                el.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    openLightbox(index);
-                });
-            });
-
-            // Кнопки управления
-            closeBtn.addEventListener('click', closeLightbox);
-            overlay.addEventListener('click', function(e) {
-                if (e.target === overlay) closeLightbox();
-            });
-
-            prevBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                if (data.length === 0) return;
-                currentIndex = (currentIndex - 1 + data.length) % data.length;
-                openLightbox(currentIndex);
-            });
-
-            nextBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                if (data.length === 0) return;
-                currentIndex = (currentIndex + 1) % data.length;
-                openLightbox(currentIndex);
-            });
-
-            // Клавиатура
-            document.addEventListener('keydown', function(e) {
-                if (!overlay.classList.contains('active')) return;
-                if (e.key === 'Escape') closeLightbox();
-                if (e.key === 'ArrowLeft') prevBtn.click();
-                if (e.key === 'ArrowRight') nextBtn.click();
-            });
-
-            // Зум колесиком мыши (как в твоей галерее)
-            img.addEventListener('wheel', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                let currentScale = parseFloat(this.style.transform.replace('scale(', '').replace(')', '')) || 1;
-                let delta = e.deltaY > 0 ? -0.1 : 0.1;
-                currentScale = Math.min(5, Math.max(1, currentScale + delta));
-                this.style.transform = 'scale(' + currentScale + ')';
-                this.style.cursor = currentScale > 1 ? 'zoom-out' : 'zoom-in';
-            }, { passive: false });
-
-            // Двойной клик для сброса зума
-            img.addEventListener('dblclick', function() {
-                this.style.transform = 'scale(1)';
-                this.style.cursor = 'zoom-in';
-            });
-
-            // Свайпы для телефона
-            let touchStartX = 0;
-            overlay.addEventListener('touchstart', function(e) {
-                touchStartX = e.changedTouches[0].clientX;
-            }, { passive: true });
-
-            overlay.addEventListener('touchend', function(e) {
-                let touchEndX = e.changedTouches[0].clientX;
-                let diffX = touchStartX - touchEndX;
-                if (Math.abs(diffX) > 50) {
-                    if (diffX > 0) nextBtn.click();
-                    else prevBtn.click();
-                }
-                touchStartX = 0;
-            }, { passive: true });
-        });
-    </script>
 </body>
 </html>
