@@ -27,12 +27,12 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     initStars();
 
-    // ===== 3. КНОПКА «НАВЕРХ» (САМЫЙ НАДЁЖНЫЙ ВАРИАНТ) =====
-    // Создаём кнопку через JS с принудительными стилями
+    // ===== 3. КНОПКА «НАВЕРХ» (КРАСИВАЯ, ИЗЯЩНАЯ) =====
     var backBtn = document.createElement('button');
     backBtn.className = 'back-to-top';
-    backBtn.innerHTML = '↑';
-    // Насильно прописываем правильное положение
+    backBtn.innerHTML = '↑'; // Изящная тонкая стрелка вместо жирной
+
+    // Элегантные стили с золотым ободком и свечением
     backBtn.style.cssText = `
         position: fixed !important;
         bottom: 25px !important;
@@ -40,21 +40,22 @@ document.addEventListener("DOMContentLoaded", function() {
         left: auto !important;
         width: 50px;
         height: 50px;
-        background: #d8b45a;
-        color: #111;
+        background: transparent;
+        color: #d8b45a;
+        border: 2px solid #d8b45a;
         border-radius: 50%;
-        border: none;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 24px;
-        font-weight: bold;
+        font-size: 26px;
+        font-weight: 300;
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease;
         z-index: 9999 !important;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        box-shadow: 0 0 15px rgba(216, 180, 90, 0.1);
         cursor: pointer;
+        backdrop-filter: blur(4px);
     `;
     document.body.appendChild(backBtn);
 
