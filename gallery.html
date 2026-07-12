@@ -11,10 +11,10 @@
         
         .gallery-item {
             display: block;
-            cursor: pointer;
             border-radius: 12px;
             overflow: hidden;
             aspect-ratio: 1 / 1;
+            pointer-events: none; /* убираем кликабельность полностью */
         }
         .gallery-item img {
             display: block;
@@ -52,7 +52,7 @@
     <section class="section">
         <div class="container">
             <div class="section-title">Мои работы</div>
-            <div class="section-subtitle">Нажмите на любую картину, чтобы рассмотреть в деталях</div>
+            <div class="section-subtitle">Просто картинки — без увеличения.</div>
             <div class="gallery" id="mosaicGallery"></div>
         </div>
     </section>
@@ -68,25 +68,9 @@
         </div>
     </footer>
 
-    <!-- ===== ЛАЙТБОКС (ЕДИНЫЙ ДЛЯ ВСЕГО САЙТА) ===== -->
-    <div class="lightbox-overlay" id="lightboxOverlay">
-        <div class="lightbox-content">
-            <span class="close-btn" id="lightboxClose">&times;</span>
-            <div class="lightbox-image-wrapper">
-                <img id="lightboxImage" src="" alt="Увеличенное фото" />
-            </div>
-            <div class="caption" id="lightboxCaption"></div>
-            <div class="lightbox-nav">
-                <button class="nav-btn prev-btn" id="lightboxPrev">‹</button>
-                <span class="counter" id="lightboxCounter">1 / 26</span>
-                <button class="nav-btn next-btn" id="lightboxNext">›</button>
-            </div>
-        </div>
-    </div>
-
     <script src="js/main.js"></script>
     
-    <!-- ===== ГЕНЕРАЦИЯ 26 КАРТИНОК ===== -->
+    <!-- Генерация 26 картинок без лайтбокса -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var gallery = document.getElementById('mosaicGallery');
@@ -99,8 +83,7 @@
                 var src = 'images/kartini/kartina' + i + '.' + ext;
                 var captionText = 'Мозаика из кубиков Рубика — картина ' + i;
                 
-                // Добавляем класс gallery-item и data-атрибуты для лайтбокса
-                html += '<div class="gallery-item" data-src="' + src + '" data-caption="' + captionText + '">';
+                html += '<div class="gallery-item">';
                 html += '<img src="' + src + '" alt="' + captionText + '" loading="lazy" />';
                 html += '</div>';
             }
