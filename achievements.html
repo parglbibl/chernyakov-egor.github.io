@@ -8,6 +8,122 @@
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://chernyakov-egor.github.io/achievements.html" />
     <link rel="stylesheet" href="css/style.css" />
+    
+    <style>
+        /* ===== СТИЛИ ДЛЯ ЛАЙТБОКСА (как в галерее) ===== */
+        #lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background: rgba(0,0,0,0.92);
+            backdrop-filter: blur(4px);
+        }
+
+        #lightbox .image-wrapper {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #lightbox img {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+        }
+
+        #lightbox .caption {
+            color: #fff;
+            font-size: 18px;
+            margin-top: 20px;
+            text-align: center;
+            padding: 8px 20px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        #lightbox .close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            color: #fff;
+            font-size: 40px;
+            cursor: pointer;
+            transition: 0.3s;
+            line-height: 1;
+            z-index: 10;
+        }
+        #lightbox .close:hover {
+            color: var(--accent);
+            transform: scale(1.1);
+        }
+
+        #lightbox .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #fff;
+            font-size: 40px;
+            cursor: pointer;
+            background: rgba(0,0,0,0.4);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            user-select: none;
+            z-index: 5;
+        }
+        #lightbox .nav-btn:hover {
+            background: var(--accent);
+            transform: translateY(-50%) scale(1.1);
+        }
+        #lightbox .nav-prev {
+            left: -70px;
+        }
+        #lightbox .nav-next {
+            right: -70px;
+        }
+
+        #lightbox .counter {
+            color: rgba(255,255,255,0.6);
+            font-size: 16px;
+            margin-top: 10px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        @media (max-width: 768px) {
+            #lightbox .nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 30px;
+            }
+            #lightbox .nav-prev {
+                left: 10px;
+            }
+            #lightbox .nav-next {
+                right: 10px;
+            }
+            #lightbox .close {
+                top: -40px;
+                font-size: 32px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="stars-container" id="starsContainer"></div>
@@ -44,8 +160,8 @@
             <div class="section-title">Основные достижения</div>
             <div class="section-subtitle">Каждый результат — это история людей, труда и веры в идею.</div>
 
-            <!-- ===== ФОТО С ВРУЧЕНИЯ БЛАГОДАРНОСТИ ГУБЕРНАТОРА ===== -->
-            <div style="max-width: 800px; margin: 0 auto 2rem auto; text-align: center;">
+            <!-- ===== ФОТО С ВРУЧЕНИЯ БЛАГОДАРНОСТИ ГУБЕРНАТОРА (С ЛАЙТБОКСОМ) ===== -->
+            <div style="max-width: 800px; margin: 0 auto 2rem auto; text-align: center; cursor: pointer;" onclick="openAwardLightbox()">
                 <div style="border-radius: 16px; overflow: hidden; border: 1px solid rgba(216, 180, 90, 0.3); box-shadow: 0 8px 30px rgba(0,0,0,0.4);">
                     <img src="images/gallery/awards/governor-thanks-2025.webp" alt="Вручение благодарности губернатора Ленинградской области" style="width: 100%; height: auto; display: block;">
                 </div>
@@ -101,6 +217,50 @@
             <p>© <span id="current-year"></span> Егор Черняков</p>
         </div>
     </footer>
+
     <script src="js/main.js"></script>
+
+    <!-- ===== ЛАЙТБОКС ДЛЯ ФОТО С НАГРАЖДЕНИЯ ===== -->
+    <div id="lightbox" style="display: none;">
+        <span class="close" onclick="closeAwardLightbox()" style="position: absolute; top: 20px; right: 30px; color: #fff; font-size: 40px; cursor: pointer; z-index: 10;">&times;</span>
+        <div class="image-wrapper">
+            <img id="lightboxImage" src="" alt="Вручение благодарности губернатора" />
+        </div>
+        <div class="caption">Вручение благодарственного письма губернатора Ленинградской области, 2025 год</div>
+    </div>
+
+    <script>
+        function openAwardLightbox() {
+            var lightbox = document.getElementById('lightbox');
+            var img = document.getElementById('lightboxImage');
+            img.src = 'images/gallery/awards/governor-thanks-2025.webp';
+            lightbox.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAwardLightbox() {
+            var lightbox = document.getElementById('lightbox');
+            lightbox.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        // Закрытие по клику на фон
+        document.addEventListener('DOMContentLoaded', function() {
+            var lightbox = document.getElementById('lightbox');
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) {
+                    closeAwardLightbox();
+                }
+            });
+        });
+
+        // Закрытие по Escape
+        document.addEventListener('keydown', function(e) {
+            var lightbox = document.getElementById('lightbox');
+            if (e.key === 'Escape' && lightbox.style.display === 'flex') {
+                closeAwardLightbox();
+            }
+        });
+    </script>
 </body>
 </html>
