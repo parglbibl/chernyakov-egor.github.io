@@ -507,7 +507,7 @@ footer p {
     .back-to-top {
         width: 44px !important;
         height: 44px !important;
-        font-size: 20px !important;
+        font-size: 22px !important;
         bottom: 20px !important;
         right: 20px !important;
         left: auto !important;
@@ -602,7 +602,9 @@ footer p {
     .hero-quote {
         font-size: 16px;
         padding: 10px 16px;
-        white-space: normal;
+        white-space: normal !important; /* КРАСИВЫЙ ПЕРЕНОС ДЛЯ ЦИТАТЫ */
+        word-break: break-word !important;
+        max-width: 90% !important;
     }
     .section-title {
         font-size: 28px;
