@@ -186,7 +186,7 @@
     <section class="hero">
         <div class="container">
             <div class="hero-avatar">
-                <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#d8b45a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#d8b45a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                 </svg>
             </div>
@@ -203,13 +203,13 @@
             <div class="project-card">
                 <div class="preview-row">
                     <div class="preview-item" onclick="openLightbox(0, 'kubik')">
-                        <img src="images/gallery/kubik-dobra/hospital-masterclass.PNG" alt="Мастер-класс в госпитале">
+                        <img src="images/gallery/kubik-dobra/hospital-masterclass.webp" alt="Мастер-класс в госпитале">
                     </div>
                     <div class="preview-item" onclick="openLightbox(1, 'kubik')">
-                        <img src="images/gallery/ovz/multicenter-masterclass.PNG" alt="Занятие в Мультицентре">
+                        <img src="images/gallery/ovz/multicenter-masterclass.webp" alt="Занятие в Мультицентре">
                     </div>
                     <div class="preview-item" onclick="openLightbox(2, 'kubik')">
-                        <img src="images/gallery/ovz/tesovy-bereg.PNG" alt="Выездной мастер-класс в Тесовый берег">
+                        <img src="images/gallery/ovz/tesovy-bereg.webp" alt="Выездной мастер-класс в Тесовый берег">
                     </div>
                 </div>
                 
@@ -250,7 +250,7 @@
             <div class="section-subtitle">Тысячи кубиков — одна большая картина.</div>
             <div class="project-card">
                 <div class="darvin-wrapper" onclick="openDarvinLightbox()">
-                    <img src="images/gallery/projects/darvin.jpg" alt="Портрет Чарльза Дарвина">
+                    <img src="images/gallery/projects/darvin.webp" alt="Портрет Чарльза Дарвина">
                 </div>
                 <h3>Арт-проекты и фестивали</h3>
                 <p>Неоднократно участвовал в создании больших мозаик из кубиков Рубика.</p>
@@ -300,9 +300,9 @@
         document.addEventListener('DOMContentLoaded', function() {
 
             var kubikImages = [
-                { src: 'images/gallery/kubik-dobra/hospital-masterclass.PNG', caption: 'Мастер-класс для участников СВО в госпитале' },
-                { src: 'images/gallery/ovz/multicenter-masterclass.PNG', caption: 'Занятие по спидкубингу в Мультицентре' },
-                { src: 'images/gallery/ovz/tesovy-bereg.PNG', caption: 'Выездной мастер-класс в Тесовый берег' }
+                { src: 'images/gallery/kubik-dobra/hospital-masterclass.webp', caption: 'Мастер-класс для участников СВО в госпитале' },
+                { src: 'images/gallery/ovz/multicenter-masterclass.webp', caption: 'Занятие по спидкубингу в Мультицентре' },
+                { src: 'images/gallery/ovz/tesovy-bereg.webp', caption: 'Выездной мастер-класс в Тесовый берег' }
             ];
 
             var currentKubikIndex = 0;
@@ -358,7 +358,7 @@
             };
 
             window.openDarvinLightbox = function() {
-                var data = { src: 'images/gallery/projects/darvin.jpg', caption: 'Портрет Чарльза Дарвина' };
+                var data = { src: 'images/gallery/projects/darvin.webp', caption: 'Портрет Чарльза Дарвина' };
                 
                 lightbox.innerHTML = `
                     <div class="image-wrapper">
