@@ -168,9 +168,7 @@
         <div class="container">
             <div class="hero-avatar">
                 <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#d8b45a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <!-- Внешний квадрат (рамка кубика) -->
                     <rect x="4" y="4" width="16" height="16" rx="2" />
-                    <!-- Внутренние линии (грани кубика) -->
                     <path d="M4 12h16" />
                     <path d="M12 4v16" />
                 </svg>
@@ -237,8 +235,8 @@
             var html = '';
             
             for (var i = 1; i <= totalImages; i++) {
-                var ext = i === 1 ? 'jpeg' : 'png';
-                var src = 'images/kartini/kartina' + i + '.' + ext;
+                // Все картинки теперь загружаются в формате .webp
+                var src = 'images/kartini/kartina' + i + '.webp';
                 var captionText = captions[i-1];
                 
                 html += '<a href="' + src + '" onclick="openLightbox(' + (i-1) + '); return false;" class="gallery-link">';
@@ -259,7 +257,7 @@
             function renderLightbox(index) {
                 currentIndex = index;
                 var data = captions[currentIndex];
-                var src = 'images/kartini/kartina' + (index + 1) + '.' + (index === 0 ? 'jpeg' : 'png');
+                var src = 'images/kartini/kartina' + (index + 1) + '.webp';
                 
                 lightbox.innerHTML = `
                     <div class="image-wrapper">
