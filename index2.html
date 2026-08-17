@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Егор Черняков | Спидкубинг, картины и социальные проекты</title>
+    <meta name="description" content="Егор Черняков — автор проекта «Кубик добра». Индивидуальное обучение спидкубингу, мастер-классы для бизнеса, картины из кубиков Рубика на заказ и социальные проекты." />
+    <link rel="stylesheet" href="css/style.css" />
+    
+    <style>
+        /* Специфичные стили для многоцелевого лендинга */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
+
+        .landing-section { padding: 70px 0; }
+        .section-tag { text-align: center; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 14px; margin-bottom: 10px; }
+
+        /* Герой */
+        .hero-landing { padding-top: 120px; padding-bottom: 40px; text-align: center; }
+        .hero-landing h1 { font-size: clamp(44px, 7vw, 76px); font-weight: 900; margin-bottom: 15px; }
+        .hero-landing h1 span { color: var(--accent); }
+        .hero-desc { max-width: 700px; margin: 0 auto 30px; font-size: 20px; color: var(--muted); line-height: 1.6; }
+        .hero-photo { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); margin-bottom: 20px; box-shadow: 0 0 30px rgba(216, 180, 90, 0.2); }
+
+        /* Сетка из 3 услуг */
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px; }
+        .service-card { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 40px 30px; text-align: center; transition: all 0.3s ease; display: flex; flex-direction: column; align-items: center; }
+        .service-card:hover { transform: translateY(-6px); border-color: var(--accent); background: rgba(255, 255, 255, 0.08); box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+        .service-icon { font-size: 48px; display: block; margin-bottom: 15px; }
+        .service-title { font-size: 26px; font-weight: 700; margin-bottom: 12px; color: #fff; }
+        .service-desc { color: var(--muted); font-size: 16px; line-height: 1.7; margin-bottom: 25px; flex-grow: 1; }
+
+        .mini-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 15px 0 20px; width: 100%; }
+        .mini-gallery img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
+        .mini-gallery img:hover { transform: scale(1.05); }
+
+        .btn-gold-outline { display: inline-block; padding: 12px 30px; border: 1px solid var(--accent); border-radius: 40px; color: var(--accent); text-decoration: none; font-weight: 600; transition: 0.3s; margin-top: 10px; }
+        .btn-gold-outline:hover { background: var(--accent); color: #111; }
+        
+        .service-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 15px; }
+        .service-tags span { background: rgba(216,180,90,0.1); padding: 4px 12px; border-radius: 12px; font-size: 13px; border: 1px solid rgba(216,180,90,0.2); }
+
+        @media (max-width: 992px) {
+            .services-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 600px) {
+            .services-grid { grid-template-columns: 1fr; }
+            .mini-gallery { grid-template-columns: repeat(3, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars-container" id="starsContainer"></div>
+
+    <header>
+        <div class="header-inner" style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="color: var(--accent); font-weight: 700; font-size: 20px;">Кубик добра</span>
+            <a href="#contact" style="text-decoration: none; color: var(--accent); border: 1px solid var(--accent); padding: 8px 20px; border-radius: 30px; font-size: 14px; font-weight: 600;">Связаться</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. Герой (Универсальный) -->
+        <section class="hero-landing container">
+            <img src="images/photo.jpg" alt="Егор Черняков" class="hero-photo">
+            <h1>Егор <span>Черняков</span></h1>
+            <p class="hero-desc">
+                Автор социального проекта «Кубик добра». Учу собирать кубик Рубика, создаю арт-объекты из мозаик и провожу мероприятия для любых организаций.
+            </p>
+        </section>
+
+        <!-- 2. Три направления (Частные, Бизнес, Социальные) -->
+        <section class="landing-section container" id="services">
+            <div class="section-tag">Направления</div>
+            
+            <div class="services-grid">
+                <!-- 1. Частные лица -->
+                <div class="service-card">
+                    <span class="service-icon">👨‍👩‍👧‍👦</span>
+                    <div class="service-title">Для частных лиц</div>
+                    <div class="service-tags">
+                        <span>Дети 7+</span>
+                        <span>Взрослые</span>
+                        <span>Подарки</span>
+                    </div>
+                    <div class="service-desc">
+                        Провожу индивидуальные уроки по сборке кубика Рубика. Делаю на заказ стильные мозаики, портреты и пиксель-арт в подарок или для интерьера.
+                    </div>
+                    <a href="#contact" class="btn-gold-outline">Записаться / Заказать</a>
+                </div>
+
+                <!-- 2. Бизнес и события -->
+                <div class="service-card">
+                    <span class="service-icon">🏢</span>
+                    <div class="service-title">Для бизнеса</div>
+                    <div class="service-tags">
+                        <span>Корпоративы</span>
+                        <span>Логотипы</span>
+                        <span>Мероприятия</span>
+                    </div>
+                    <div class="mini-gallery">
+                        <img src="images/kartini/kartina4.webp" alt="Логотип">
+                        <img src="images/kartini/kartina1.webp" alt="Арт">
+                        <img src="images/kartini/kartina7.webp" alt="Портрет">
+                    </div>
+                    <div class="service-desc">
+                        Соберу логотип вашей компании из кубиков для офиса или выставки. Проведу динамичный мастер-класс по спидкубингу для команды.
+                    </div>
+                    <a href="#contact" class="btn-gold-outline">Обсудить сотрудничество</a>
+                </div>
+
+                <!-- 3. Социальные и гос учреждения -->
+                <div class="service-card" style="border-color: rgba(216, 180, 90, 0.3); background: rgba(216, 180, 90, 0.05);">
+                    <span class="service-icon">🤝</span>
+                    <div class="service-title">Социальный проект</div>
+                    <div class="service-tags">
+                        <span>🏆 Топ-100</span>
+                        <span>🎖 Губернатор</span>
+                        <span>❤️ ОВЗ / СВО</span>
+                    </div>
+                    <div class="service-desc">
+                        Проект «Кубик добра» — обучение спидкубингу детей с ОВЗ, участников СВО и воспитанников соцучреждений. Входит в Топ-100 лучших библиотечных практик России.
+                    </div>
+                    <a href="#contact" class="btn-gold-outline">Пригласить в учреждение</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Контакты -->
+        <section class="landing-section container" id="contact">
+            <div class="section-tag">Связь</div>
+            <div class="section-title" style="margin-bottom: 10px;">Всегда на связи</div>
+            <p class="section-subtitle" style="margin-bottom: 30px;">Напишите, и мы обсудим ваш запрос, подберём формат и договоримся о встрече.</p>
+            
+            <div class="contacts" style="flex-direction: column; align-items: center; gap: 12px;">
+                <a href="mailto:cherniakov-egor@yandex.ru" style="min-width: 250px; text-align: center;">📧 cherniakov-egor@yandex.ru</a>
+                <a href="tel:+79214089944" style="min-width: 250px; text-align: center;">📞 +7 (921) 408-99-44</a>
+                <a href="https://vk.com/che_egor" target="_blank" style="min-width: 250px; text-align: center;">💬 VK: che_egor</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="stardust">✦ Собрано как кубик Рубика — по алгоритму и с душой ✦</p>
+            <p>© <span id="current-year"></span> Егор Черняков</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
