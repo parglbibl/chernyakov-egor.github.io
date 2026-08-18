@@ -3,53 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Егор Черняков | Кибер-Арт</title>
+    <title>Егор Черняков | Проект Кубик Добра</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
         body {
-            background: #03050b;
+            background: #020308;
             color: #fff;
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
             cursor: none;
+            user-select: none;
         }
 
-        /* ===== КУРСОР-ШЛЕЙФ ===== */
-        .cursor-glow {
+        /* ===== КУРСОР-ПРИЦЕЛ ===== */
+        .cursor-target {
             position: fixed;
             pointer-events: none;
-            z-index: 9999;
+            z-index: 99999;
             width: 40px; height: 40px;
+            border: 1px solid rgba(216, 180, 90, 0.6);
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(216,180,90,0.8) 0%, transparent 70%);
             transform: translate(-50%, -50%);
-            mix-blend-mode: screen;
-            transition: width 0.2s, height 0.2s;
+            transition: width 0.2s, height 0.2s, border-color 0.2s;
+            box-shadow: 0 0 20px rgba(216, 180, 90, 0.2);
         }
-        .cursor-trail {
+        .cursor-dot {
             position: fixed;
             pointer-events: none;
-            z-index: 9998;
-            border: 1px solid rgba(216,180,90,0.3);
+            z-index: 99999;
+            width: 6px; height: 6px;
+            background: #d8b45a;
             border-radius: 50%;
             transform: translate(-50%, -50%);
-            transition: all 0.05s linear;
+            transition: width 0.1s, height 0.1s;
+            box-shadow: 0 0 15px #d8b45a;
         }
 
-        /* ===== ФОН - ВРАЩАЮЩИЙСЯ ШАР ИЗ ЛИНИЙ ===== */
-        #webgl-bg {
+        /* ===== ФОН: 3D СЦЕНА ===== */
+        #three-bg {
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
             z-index: 0;
+            display: block;
         }
 
-        /* ===== ТАНЦУЮЩИЙ ТЕКСТ ===== */
+        /* ===== МАТРИЦА (Золотой дождь) ===== */
+        #matrix-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+
+        /* ===== ГЕРОЙ ===== */
         .hero {
             position: relative;
-            z-index: 1;
+            z-index: 2;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -57,387 +70,437 @@
             justify-content: center;
             text-align: center;
             padding: 20px;
+            pointer-events: none;
         }
+        .hero * { pointer-events: auto; }
 
-        .glitch-title {
-            font-size: clamp(50px, 10vw, 120px);
+        /* ГЛИТЧ-ТЕКСТ */
+        .glitch-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .glitch-text {
+            font-size: clamp(60px, 12vw, 140px);
             font-weight: 900;
             text-transform: uppercase;
-            background: linear-gradient(45deg, #d8b45a, #ff6b6b, #4ecdc4, #d8b45a);
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: danceGradient 2s ease-in-out infinite;
-            filter: drop-shadow(0 0 30px rgba(216,180,90,0.3));
-            margin-bottom: 10px;
-            letter-spacing: 4px;
+            color: #fff;
+            letter-spacing: 8px;
+            text-shadow: 0 0 20px rgba(216,180,90,0.3);
+            animation: glitch 1.5s infinite;
         }
-        @keyframes danceGradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-3px, 2px); }
+            40% { transform: translate(3px, -2px); }
+            60% { transform: translate(-2px, 3px); }
+            80% { transform: translate(2px, -3px); }
+            100% { transform: translate(0); }
         }
 
         .hero-sub {
             color: #8890b0;
-            font-size: 22px;
+            font-size: clamp(18px, 2.5vw, 28px);
             max-width: 700px;
             line-height: 1.6;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+            text-shadow: 0 0 10px rgba(0,0,0,0.8);
         }
 
-        /* ===== 3D СЛАЙДЕР КАРТИН ===== */
-        .slider-3d-wrap {
-            width: 100%;
-            max-width: 900px;
-            height: 400px;
-            perspective: 1200px;
-            margin: 40px 0;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .slider-3d {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transform-style: preserve-3d;
-            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .slide-card {
-            position: absolute;
-            width: 300px;
-            height: 350px;
-            left: 50%;
-            top: 50%;
-            margin-left: -150px;
-            margin-top: -175px;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(216,180,90,0.2);
-            border-radius: 20px;
-            backdrop-filter: blur(12px);
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: 700;
-            color: #d8b45a;
-            box-shadow: 0 0 40px rgba(0,0,0,0.8);
-            transition: all 0.3s;
-        }
-        .slide-card:hover {
-            border-color: #fff;
-            transform: scale(1.05);
-        }
-        /* Плейсхолдеры для картин (заменишь на свои) */
-        .slide-card:nth-child(1) { background: #1a1f2e; }
-        .slide-card:nth-child(2) { background: #2a1f1e; }
-        .slide-card:nth-child(3) { background: #1e2a1e; }
-        .slide-card:nth-child(4) { background: #2e1e2a; }
-        .slide-card:nth-child(5) { background: #1e2e2e; }
-
-        .slide-card span {
-            background: rgba(0,0,0,0.5);
-            padding: 10px 20px;
-            border-radius: 12px;
-        }
-
-        /* ===== КНОПКА С ВЗРЫВОМ ===== */
-        .btn-explode {
+        /* ===== КНОПКА С ЗАРЯДКОЙ ===== */
+        .btn-charge {
             position: relative;
             display: inline-block;
             padding: 18px 50px;
             border-radius: 60px;
-            background: #d8b45a;
-            color: #03050b;
+            background: transparent;
+            color: #d8b45a;
+            border: 2px solid #d8b45a;
             font-weight: 900;
             font-size: 20px;
             text-decoration: none;
-            border: none;
-            transition: 0.3s;
+            transition: all 0.2s;
             cursor: pointer;
             z-index: 10;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
-        .btn-explode:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 50px rgba(216,180,90,0.5);
+        .btn-charge:active {
+            transform: scale(0.95);
         }
 
-        /* ===== БЛОК УСЛУГ ===== */
+        /* ===== СЕКЦИИ ===== */
         .section {
             position: relative;
-            z-index: 1;
-            padding: 80px 0;
+            z-index: 2;
+            padding: 100px 20px;
             max-width: 1120px;
             margin: 0 auto;
         }
-        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; }
 
-        .card-cyber {
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+
+        .card-holo {
             background: rgba(255,255,255,0.02);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(16px);
             border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 20px;
+            border-radius: 24px;
             padding: 40px 30px;
             text-align: center;
             transition: 0.4s;
             position: relative;
             overflow: hidden;
         }
-        .card-cyber::before {
+        .card-holo::before {
             content: '';
             position: absolute;
-            top: -2px; left: -2px; right: -2px; bottom: -2px;
-            background: linear-gradient(45deg, transparent, rgba(216,180,90,0.2), transparent);
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(216,180,90,0.1), transparent);
+            animation: spinCard 8s linear infinite;
             z-index: -1;
-            filter: blur(10px);
-            opacity: 0;
-            transition: 0.4s;
         }
-        .card-cyber:hover::before { opacity: 1; }
-        .card-cyber:hover { transform: translateY(-10px) scale(1.02); border-color: rgba(216,180,90,0.3); }
+        @keyframes spinCard { 100% { transform: rotate(360deg); } }
+        .card-holo::after {
+            content: '';
+            position: absolute;
+            inset: 1px;
+            background: rgba(8, 11, 20, 0.6);
+            backdrop-filter: blur(20px);
+            border-radius: 23px;
+            z-index: -1;
+        }
+        .card-holo:hover { transform: translateY(-10px) scale(1.02); border-color: rgba(216,180,90,0.3); }
 
-        .card-icon { font-size: 50px; margin-bottom: 15px; }
+        .card-icon { font-size: 48px; margin-bottom: 15px; }
         .card-title { font-size: 24px; font-weight: 700; margin-bottom: 10px; }
-        .card-desc { color: #8890b0; line-height: 1.7; }
+        .card-desc { color: #8890b0; line-height: 1.7; margin-bottom: 20px; }
 
-        /* ===== ФУТЕР ===== */
-        footer { text-align: center; padding: 40px; color: #555; border-top: 1px solid rgba(255,255,255,0.05); }
+        .tag {
+            display: inline-block;
+            background: rgba(216,180,90,0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            border: 1px solid rgba(216,180,90,0.2);
+            color: #d8b45a;
+            margin: 2px;
+        }
 
-        /* ===== АДАПТАЦИЯ ===== */
+        /* ===== КОНТАКТЫ ===== */
+        .contact-row {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        .contact-row a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 320px;
+            padding: 18px 30px;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 40px;
+            background: rgba(255,255,255,0.02);
+            backdrop-filter: blur(8px);
+            text-decoration: none;
+            color: #a0a8c0;
+            font-weight: 500;
+            transition: 0.3s;
+            font-size: 18px;
+        }
+        .contact-row a:hover {
+            border-color: #d8b45a;
+            background: rgba(216,180,90,0.05);
+            color: #fff;
+            transform: translateX(10px) scale(1.02);
+            box-shadow: 0 0 30px rgba(216,180,90,0.1);
+        }
+
         @media (max-width: 900px) { .grid-3 { grid-template-columns: 1fr 1fr; } }
-        @media (max-width: 600px) {
-            .grid-3 { grid-template-columns: 1fr; }
-            .slider-3d-wrap { height: 300px; }
-            .slide-card { width: 200px; height: 250px; margin-left: -100px; margin-top: -125px; }
+        @media (max-width: 600px) { 
+            .grid-3 { grid-template-columns: 1fr; } 
+            .contact-row a { min-width: auto; width: 100%; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Фон - вращающийся шар -->
-    <canvas id="webgl-bg"></canvas>
+    <!-- Канвас для 3D (Кубики) -->
+    <canvas id="three-bg"></canvas>
 
-    <!-- Курсор-шлейф -->
-    <div class="cursor-glow" id="cursor"></div>
+    <!-- Канвас для Матрицы -->
+    <canvas id="matrix-canvas"></canvas>
 
-    <!-- Слайдер картин 3D -->
+    <!-- Курсор -->
+    <div class="cursor-target" id="cursorOuter"></div>
+    <div class="cursor-dot" id="cursorInner"></div>
+
+    <!-- ГЕРОЙ -->
     <section class="hero">
-        <h1 class="glitch-title">ЕГОР ЧЕРНЯКОВ</h1>
-        <p class="hero-sub">Автор проекта «Кубик добра». Мозаики, мастер-классы и социальные инициативы.</p>
-
-        <div class="slider-3d-wrap">
-            <div class="slider-3d" id="slider3d">
-                <!-- 5 слайдов (заменишь на свои картинки) -->
-                <div class="slide-card"><span>🎨 Портрет</span></div>
-                <div class="slide-card"><span>🏢 Логотип</span></div>
-                <div class="slide-card"><span>🧩 Мозаика</span></div>
-                <div class="slide-card"><span>⭐ VK Fest</span></div>
-                <div class="slide-card"><span>🏆 Топ-100</span></div>
-            </div>
+        <div class="glitch-wrapper">
+            <h1 class="glitch-text">ЕГОР ЧЕРНЯКОВ</h1>
         </div>
-        
-        <button class="btn-explode" id="explodeBtn">Запустить</button>
+        <p class="hero-sub">Автор социального проекта «Кубик добра». Создаю арт-объекты, провожу мастер-классы и запускаю социальные инициативы.</p>
+        <button class="btn-charge" id="chargeBtn">ЗАРЯДИТЬ</button>
     </section>
 
-    <!-- Услуги -->
+    <!-- УСЛУГИ -->
     <section class="section">
-        <h2 style="text-align: center; font-size: 40px; margin-bottom: 40px; color: #d8b45a;">Мои направления</h2>
+        <h2 style="text-align: center; font-size: 42px; margin-bottom: 40px; color: #d8b45a; letter-spacing: 2px; text-shadow: 0 0 30px rgba(216,180,90,0.2);">НАПРАВЛЕНИЯ</h2>
         <div class="grid-3">
-            <div class="card-cyber">
-                <div class="card-icon">👨‍👩‍👧‍👦</div>
+            <div class="card-holo">
+                <div class="card-icon">🧩</div>
                 <div class="card-title">Частным лицам</div>
-                <div class="card-desc">Индивидуальные уроки по спидкубингу. Развитие логики и моторики. Создаю стильные мозаики в подарок.</div>
-                <a href="#contact" class="btn-explode" style="padding: 10px 25px; font-size: 14px; margin-top: 20px;">Записаться</a>
+                <div><span class="tag">Дети 7+</span><span class="tag">Взрослые</span><span class="tag">Индивидуально</span></div>
+                <div class="card-desc">Индивидуальные уроки по спидкубингу. Развитие логики и моторики. Создаю стильные мозаики.</div>
+                <a href="#contact" class="btn-charge" style="padding: 10px 25px; font-size: 14px;">ЗАПИСАТЬСЯ</a>
             </div>
-            <div class="card-cyber">
+            <div class="card-holo">
                 <div class="card-icon">🏢</div>
                 <div class="card-title">Для бизнеса</div>
-                <div class="card-desc">Соберу логотип компании из кубиков. Проведу яркий мастер-класс по спидкубингу для команды.</div>
-                <a href="#contact" class="btn-explode" style="padding: 10px 25px; font-size: 14px; margin-top: 20px;">Заказать</a>
+                <div><span class="tag">Корпоративы</span><span class="tag">Логотипы</span><span class="tag">Выставки</span></div>
+                <div class="card-desc">Соберу логотип компании из кубиков. Проведу яркий мастер-класс для команды.</div>
+                <a href="#contact" class="btn-charge" style="padding: 10px 25px; font-size: 14px;">ЗАКАЗАТЬ</a>
             </div>
-            <div class="card-cyber">
+            <div class="card-holo">
                 <div class="card-icon">🤝</div>
                 <div class="card-title">Социальный проект</div>
-                <div class="card-desc">«Кубик добра». Обучение детей с ОВЗ, участников СВО. Входит в Топ-100 лучших практик России.</div>
-                <a href="#contact" class="btn-explode" style="padding: 10px 25px; font-size: 14px; margin-top: 20px;">Сотрудничать</a>
+                <div><span class="tag">🏆 Топ-100</span><span class="tag">🎖 Губернатор</span><span class="tag">❤️ ОВЗ / СВО</span></div>
+                <div class="card-desc">«Кубик добра». Обучение детей с ОВЗ, участников СВО. Входит в Топ-100 практик России.</div>
+                <a href="#contact" class="btn-charge" style="padding: 10px 25px; font-size: 14px;">СОТРУДНИЧАТЬ</a>
             </div>
         </div>
     </section>
 
-    <!-- Контакты -->
+    <!-- КОНТАКТЫ -->
     <section class="section" id="contact" style="text-align: center;">
-        <h2 style="font-size: 40px; color: #d8b45a; margin-bottom: 20px;">На связи</h2>
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
-            <a href="mailto:cherniakov-egor@yandex.ru" style="color: #8890b0; text-decoration: none; font-size: 20px; border: 1px solid rgba(255,255,255,0.1); padding: 15px 40px; border-radius: 40px; transition: 0.3s;">📧 cherniakov-egor@yandex.ru</a>
-            <a href="tel:+79214089944" style="color: #8890b0; text-decoration: none; font-size: 20px; border: 1px solid rgba(255,255,255,0.1); padding: 15px 40px; border-radius: 40px; transition: 0.3s;">📞 +7 (921) 408-99-44</a>
+        <h2 style="font-size: 42px; color: #d8b45a; margin-bottom: 20px; text-shadow: 0 0 30px rgba(216,180,90,0.2);">НА СВЯЗИ</h2>
+        <p style="color: #8890b0; margin-bottom: 40px;">Напиши — обсудим детали и разрулим.</p>
+        <div class="contact-row">
+            <a href="mailto:cherniakov-egor@yandex.ru">📧 cherniakov-egor@yandex.ru</a>
+            <a href="tel:+79214089944">📞 +7 (921) 408-99-44</a>
+            <a href="https://vk.com/che_egor" target="_blank">💬 VK: che_egor</a>
         </div>
     </section>
 
-    <footer>
-        <p>✦ Собрано как кубик Рубика — по алгоритму и с душой ✦</p>
-        <p>© 2026 Егор Черняков</p>
+    <footer style="text-align: center; padding: 40px; color: #555; border-top: 1px solid rgba(255,255,255,0.03);">
+        <p style="font-size: 14px;">✦ Собрано как кубик Рубика — по алгоритму и с душой ✦</p>
+        <p style="font-size: 12px; margin-top: 5px;">© 2026 Егор Черняков</p>
     </footer>
 
     <script>
-        // ===== 1. КУРСОР-ШЛЕЙФ =====
-        const cursor = document.getElementById('cursor');
-        const trails = [];
-        for (let i = 0; i < 10; i++) {
-            const trail = document.createElement('div');
-            trail.className = 'cursor-trail';
-            trail.style.width = (40 - i * 3) + 'px';
-            trail.style.height = (40 - i * 3) + 'px';
-            trail.style.opacity = 0.5 - i * 0.05;
-            document.body.appendChild(trail);
-            trails.push(trail);
-        }
-
-        let mouseX = 0, mouseY = 0;
+        // ==========================================
+        // 1. КУРСОР
+        // ==========================================
+        const outer = document.getElementById('cursorOuter');
+        const inner = document.getElementById('cursorInner');
         document.addEventListener('mousemove', e => {
-            mouseX = e.clientX; mouseY = e.clientY;
-            cursor.style.left = mouseX + 'px';
-            cursor.style.top = mouseY + 'px';
+            outer.style.left = e.clientX + 'px';
+            outer.style.top = e.clientY + 'px';
+            inner.style.left = e.clientX + 'px';
+            inner.style.top = e.clientY + 'px';
         });
 
-        function animateTrails() {
-            trails.forEach((t, i) => {
-                setTimeout(() => {
-                    t.style.left = mouseX + 'px';
-                    t.style.top = mouseY + 'px';
-                }, i * 20);
-            });
-            requestAnimationFrame(animateTrails);
-        }
-        animateTrails();
+        // ==========================================
+        // 2. МАТРИЦА (ЗОЛОТОЙ ДОЖДЬ)
+        // ==========================================
+        const matrixCanvas = document.getElementById('matrix-canvas');
+        const mCtx = matrixCanvas.getContext('2d');
+        matrixCanvas.width = window.innerWidth;
+        matrixCanvas.height = window.innerHeight;
 
-        // ===== 2. 3D ВРАЩАЮЩИЙСЯ ШАР (WEBGL) =====
-        const canvas = document.getElementById('webgl-bg');
+        const chars = '01';
+        const fontSize = 16;
+        const columns = matrixCanvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function drawMatrix() {
+            mCtx.fillStyle = 'rgba(2, 3, 8, 0.1)';
+            mCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+            mCtx.fillStyle = '#d8b45a';
+            mCtx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                mCtx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > matrixCanvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+            requestAnimationFrame(drawMatrix);
+        }
+        drawMatrix();
+
+        // ==========================================
+        // 3. 3D КУБИКИ (ПОЛНЫЙ ИНТЕРАКТИВ)
+        // ==========================================
+        const canvas = document.getElementById('three-bg');
         const ctx = canvas.getContext('2d');
-        let width, height;
+        let w, h;
         function resize() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
         }
         window.addEventListener('resize', resize);
         resize();
 
-        const dots = [];
-        const numDots = 400;
-        for (let i = 0; i < numDots; i++) {
-            const theta = Math.random() * Math.PI * 2;
-            const phi = Math.acos(2 * Math.random() - 1);
-            const r = 200 + Math.random() * 150;
-            dots.push({
-                x: r * Math.sin(phi) * Math.cos(theta),
-                y: r * Math.sin(phi) * Math.sin(theta),
-                z: r * Math.cos(phi),
-                theta, phi, r
+        // Генерация 40 кубиков
+        const cubes = [];
+        for (let i = 0; i < 40; i++) {
+            cubes.push({
+                x: (Math.random() - 0.5) * w * 1.2,
+                y: (Math.random() - 0.5) * h * 1.2,
+                z: (Math.random() - 0.5) * 600,
+                size: 10 + Math.random() * 30,
+                vx: (Math.random() - 0.5) * 0.3,
+                vy: (Math.random() - 0.5) * 0.3,
+                vz: (Math.random() - 0.5) * 0.3
             });
         }
 
-        let angle = 0;
-        function drawSphere() {
-            ctx.clearRect(0, 0, width, height);
-            const centerX = width / 2, centerY = height / 2;
-            const projected = [];
+        let mouseX = w/2, mouseY = h/2;
+        document.addEventListener('mousemove', e => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
 
-            dots.forEach(d => {
-                const cosA = Math.cos(angle);
-                const sinA = Math.sin(angle);
-                const x = d.x * cosA - d.z * sinA;
-                const z = d.x * sinA + d.z * cosA;
-                const y = d.y;
-                const scale = 400 / (400 + z);
-                const sx = centerX + x * scale;
-                const sy = centerY + y * scale;
-                const size = Math.max(0.5, 2 * scale);
-                projected.push({ sx, sy, size, z });
-            });
+        let globalAngle = 0;
 
-            // Рисуем линии (коннекты)
-            for (let i = 0; i < projected.length; i++) {
-                for (let j = i + 1; j < projected.length; j++) {
-                    const dx = projected[i].sx - projected[j].sx;
-                    const dy = projected[i].sy - projected[j].sy;
-                    const dist = Math.sqrt(dx*dx + dy*dy);
-                    if (dist < 100) {
-                        ctx.beginPath();
-                        ctx.moveTo(projected[i].sx, projected[i].sy);
-                        ctx.lineTo(projected[j].sx, projected[j].sy);
-                        ctx.strokeStyle = `rgba(216, 180, 90, ${0.08 * (1 - dist/100)})`;
-                        ctx.stroke();
-                    }
+        function drawCubes() {
+            ctx.clearRect(0, 0, w, h);
+            ctx.shadowBlur = 20;
+            ctx.shadowColor = 'rgba(216, 180, 90, 0.3)';
+
+            // Сортируем по Z для глубины
+            cubes.sort((a, b) => a.z - b.z);
+
+            cubes.forEach(c => {
+                // Отталкивание от мыши
+                const dx = mouseX - (w/2 + c.x);
+                const dy = mouseY - (h/2 + c.y);
+                const dist = Math.sqrt(dx*dx + dy*dy);
+                if (dist < 200) {
+                    const force = (200 - dist) / 200 * 5;
+                    c.x -= (dx / dist) * force;
+                    c.y -= (dy / dist) * force;
                 }
-            }
 
-            // Рисуем точки
-            projected.forEach(p => {
-                ctx.beginPath();
-                ctx.arc(p.sx, p.sy, p.size, 0, Math.PI*2);
-                ctx.fillStyle = 'rgba(216, 180, 90, 0.7)';
-                ctx.fill();
+                // Движение
+                c.x += c.vx;
+                c.y += c.vy;
+                c.z += c.vz;
+
+                // Возврат в центр (мягкое притяжение)
+                c.x += (0 - c.x) * 0.001;
+                c.y += (0 - c.y) * 0.001;
+                c.z += (0 - c.z) * 0.001;
+
+                // Рисование кубика с 3D-перспективой
+                const scale = 400 / (400 + c.z);
+                const sx = w/2 + c.x * scale;
+                const sy = h/2 + c.y * scale;
+                const size = c.size * scale;
+
+                ctx.save();
+                ctx.translate(sx, sy);
+                ctx.rotate(globalAngle + c.z * 0.01);
+                
+                // Градиент для кубика
+                const grad = ctx.createRadialGradient(-size/3, -size/3, 2, 0, 0, size);
+                grad.addColorStop(0, 'rgba(216, 180, 90, 0.9)');
+                grad.addColorStop(1, 'rgba(216, 180, 90, 0.1)');
+                
+                ctx.fillStyle = grad;
+                ctx.strokeStyle = 'rgba(216, 180, 90, 0.4)';
+                ctx.lineWidth = 1;
+                ctx.shadowBlur = 25;
+                ctx.shadowColor = 'rgba(216, 180, 90, 0.4)';
+                
+                ctx.fillRect(-size/2, -size/2, size, size);
+                ctx.strokeRect(-size/2, -size/2, size, size);
+                ctx.restore();
             });
 
-            angle += 0.003;
-            requestAnimationFrame(drawSphere);
+            globalAngle += 0.005;
+            requestAnimationFrame(drawCubes);
         }
-        drawSphere();
+        drawCubes();
 
-        // ===== 3. 3D СЛАЙДЕР =====
-        const slider = document.getElementById('slider3d');
-        const slides = slider.querySelectorAll('.slide-card');
-        const totalSlides = slides.length;
-        let currentSlide = 0;
-        const radius = 600;
+        // ==========================================
+        // 4. КНОПКА С ЗАРЯДКОЙ (ВЗРЫВ ЧАСТИЦ ПРИ ОТПУСКАНИИ)
+        // ==========================================
+        const chargeBtn = document.getElementById('chargeBtn');
+        let isCharging = false;
+        let chargeLevel = 0;
+        let chargeInterval;
 
-        function updateSlider() {
-            slides.forEach((slide, i) => {
-                const angle = (i - currentSlide) * (360 / totalSlides);
-                const rad = angle * (Math.PI / 180);
-                const x = Math.sin(rad) * radius;
-                const z = Math.cos(rad) * radius - radius;
-                const scale = 1 + z / 800;
-                slide.style.transform = `translateX(${x}px) translateZ(${z}px) scale(${Math.max(0.6, scale)})`;
-                slide.style.opacity = Math.max(0.3, scale);
-            });
-        }
-        updateSlider();
-
-        setInterval(() => {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            updateSlider();
-        }, 3000);
-
-        // ===== 4. ВЗРЫВ ЧАСТИЦ ПРИ КЛИКЕ =====
-        document.getElementById('explodeBtn').addEventListener('click', function(e) {
-            const rect = this.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            for (let i = 0; i < 40; i++) {
-                const spark = document.createElement('div');
-                spark.style.cssText = `
-                    position: fixed; pointer-events: none; z-index: 9999;
-                    left: ${e.clientX}px; top: ${e.clientY}px;
-                    width: 6px; height: 6px; border-radius: 50%;
-                    background: #d8b45a;
-                    box-shadow: 0 0 10px #d8b45a;
-                    transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-                `;
-                document.body.appendChild(spark);
+        // Генератор частиц
+        function explodeParticles(x, y, count = 60) {
+            for (let i = 0; i < count; i++) {
+                const p = document.createElement('div');
+                const size = 4 + Math.random() * 8;
                 const angle = Math.random() * Math.PI * 2;
-                const speed = 150 + Math.random() * 250;
+                const speed = 200 + Math.random() * 400;
+                p.style.cssText = `
+                    position: fixed; pointer-events: none; z-index: 9999;
+                    left: ${x}px; top: ${y}px;
+                    width: ${size}px; height: ${size}px;
+                    background: ${Math.random() > 0.5 ? '#d8b45a' : '#fff'};
+                    border-radius: 50%;
+                    box-shadow: 0 0 15px #d8b45a;
+                    transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+                `;
+                document.body.appendChild(p);
                 requestAnimationFrame(() => {
-                    spark.style.transform = `translate(${Math.cos(angle)*speed}px, ${Math.sin(angle)*speed}px) scale(0)`;
-                    spark.style.opacity = 0;
+                    p.style.transform = `translate(${Math.cos(angle)*speed}px, ${Math.sin(angle)*speed}px) scale(0)`;
+                    p.style.opacity = 0;
                 });
-                setTimeout(() => spark.remove(), 800);
+                setTimeout(() => p.remove(), 1000);
+            }
+        }
+
+        chargeBtn.addEventListener('mousedown', () => {
+            isCharging = true;
+            chargeLevel = 0;
+            chargeBtn.style.borderColor = '#fff';
+            chargeBtn.style.boxShadow = '0 0 30px rgba(216,180,90,0.5)';
+            chargeInterval = setInterval(() => {
+                chargeLevel += 0.02;
+                const glow = Math.min(chargeLevel * 2, 1);
+                chargeBtn.style.boxShadow = `0 0 ${30 + chargeLevel * 100}px rgba(216,180,90,${glow})`;
+                chargeBtn.style.transform = `scale(${1 + chargeLevel * 0.05})`;
+            }, 50);
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (isCharging) {
+                clearInterval(chargeInterval);
+                const rect = chargeBtn.getBoundingClientRect();
+                const cx = rect.left + rect.width/2;
+                const cy = rect.top + rect.height/2;
+                explodeParticles(cx, cy, 80 + Math.floor(chargeLevel * 50));
+                chargeBtn.style.borderColor = '#d8b45a';
+                chargeBtn.style.boxShadow = 'none';
+                chargeBtn.style.transform = 'scale(1)';
+                isCharging = false;
             }
         });
+
+        // ==========================================
+        // 5. СЛУЧАЙНЫЙ ГЛИТЧ НА ТЕКСТЕ
+        // ==========================================
+        const glitchEl = document.querySelector('.glitch-text');
+        setInterval(() => {
+            if (Math.random() > 0.9) {
+                glitchEl.style.animation = 'none';
+                glitchEl.offsetHeight;
+                glitchEl.style.animation = 'glitch 1.5s infinite';
+            }
+        }, 3000);
     </script>
 </body>
 </html>
