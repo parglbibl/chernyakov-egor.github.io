@@ -5,50 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Егор Черняков | Спидкубинг, арт и социальные проекты</title>
     <meta name="description" content="Интерактивный лендинг Егора Чернякова. Автор «Кубика добра». Обучение, картины из кубиков, мастер-классы." />
-    <link rel="stylesheet" href="css/style.css" />
+    
+    <!-- Шрифт Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
-        /* ===== ДОБАВЛЕННЫЕ ФИШКИ ===== */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
-
+        /* ===== БАЗОВЫЕ СТИЛИ (ЗАМЕНЯЮТ CSS ФАЙЛ) ===== */
         :root {
+            --bg: #080b14;
+            --text: #f5f7ff;
+            --muted: #c8d0e8;
             --accent: #d8b45a;
             --accent-glow: rgba(216, 180, 90, 0.4);
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --line: rgba(255, 255, 255, 0.08);
+            --card-bg: rgba(255, 255, 255, 0.03);
         }
 
-        * { box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top, #1b2545 0%, #080b14 45%);
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
 
-        /* Анимация появления */
+        .container { width: min(1120px, 92%); margin: 0 auto; }
+
+        /* Звёзды (генерация через JS, но стили здесь) */
+        .stars-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 0; overflow: hidden;
+        }
+        .star-dot {
+            position: absolute; background: #fff; border-radius: 50%;
+        }
+
+        /* Header */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+            backdrop-filter: blur(14px); background: rgba(8, 11, 20, 0.75);
+            border-bottom: 1px solid var(--line); padding: 12px 0;
+        }
+        .header-inner {
+            max-width: 1120px; margin: 0 auto; padding: 0 20px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        /* ===== ДОБАВЛЕННЫЕ ФИШКИ ===== */
+        
+        /* Анимация появления при скролле */
         .reveal {
-            opacity: 0;
-            transform: translateY(60px) scale(0.95);
+            opacity: 0; transform: translateY(60px) scale(0.95);
             transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
         }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
+        .reveal.active { opacity: 1; transform: translateY(0) scale(1); }
 
         /* Плавающие кубики на фоне */
         .floating-cubes {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 0; overflow: hidden;
         }
         .cube {
-            position: absolute;
-            width: 20px;
-            height: 20px;
+            position: absolute; border-radius: 4px;
             background: rgba(216, 180, 90, 0.06);
             border: 1px solid rgba(216, 180, 90, 0.1);
-            border-radius: 4px;
             animation: floatCube 20s infinite linear;
         }
         @keyframes floatCube {
@@ -65,10 +90,9 @@
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 24px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            transform-style: preserve-3d;
-            perspective: 1000px;
+            transform-style: preserve-3d; perspective: 1000px;
         }
         .glass-card:hover {
             transform: translateY(-8px) scale(1.01);
@@ -78,101 +102,91 @@
 
         /* Кнопка с неоновым свечением */
         .btn-neon {
-            display: inline-block;
-            padding: 14px 34px;
-            border-radius: 40px;
-            background: transparent;
-            color: var(--accent);
-            border: 1px solid var(--accent);
-            font-weight: 700;
-            font-size: 16px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 10px transparent;
-            position: relative;
-            overflow: hidden;
-        }
-        .btn-neon::before {
-            content: '';
-            position: absolute;
-            top: -2px; left: -2px; right: -2px; bottom: -2px;
-            background: linear-gradient(45deg, var(--accent), transparent, var(--accent));
-            z-index: -1;
-            filter: blur(10px);
-            opacity: 0;
-            transition: 0.5s;
+            display: inline-block; padding: 14px 34px; border-radius: 40px;
+            background: transparent; color: var(--accent);
+            border: 1px solid var(--accent); font-weight: 700; font-size: 16px;
+            text-decoration: none; transition: all 0.3s ease;
+            position: relative; overflow: hidden;
         }
         .btn-neon:hover {
-            background: var(--accent);
-            color: #111;
-            box-shadow: 0 0 30px var(--accent-glow), inset 0 0 20px rgba(0,0,0,0.2);
+            background: var(--accent); color: #111;
+            box-shadow: 0 0 30px var(--accent-glow);
             transform: scale(1.05);
         }
-        .btn-neon:hover::before {
-            opacity: 1;
-        }
 
-        /* Градиентные рамки для соцблока */
+        /* Градиентные рамки */
         .gradient-border {
-            position: relative;
-            border-radius: 24px;
-            padding: 3px;
+            position: relative; border-radius: 24px; padding: 3px;
             background: linear-gradient(135deg, var(--accent), rgba(216, 180, 90, 0.1), var(--accent));
             box-shadow: 0 0 40px rgba(216, 180, 90, 0.15);
         }
         .gradient-border .inner {
-            background: rgba(8, 11, 20, 0.9);
-            backdrop-filter: blur(10px);
-            border-radius: 22px;
-            padding: 40px;
-            text-align: center;
+            background: rgba(8, 11, 20, 0.9); backdrop-filter: blur(10px);
+            border-radius: 22px; padding: 40px; text-align: center;
         }
 
         /* Счетчик с цифрами */
         .counter-row {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            margin-top: 30px;
+            display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 30px;
         }
-        .counter-item {
-            text-align: center;
-        }
+        .counter-item { text-align: center; }
         .counter-number {
-            font-size: 48px;
-            font-weight: 900;
-            color: var(--accent);
-            display: inline-block;
-            min-width: 80px;
+            font-size: 48px; font-weight: 900; color: var(--accent);
+            display: inline-block; min-width: 80px;
         }
-        .counter-label {
-            color: var(--muted);
-            font-size: 15px;
-            margin-top: 4px;
-        }
+        .counter-label { color: var(--muted); font-size: 15px; margin-top: 4px; opacity: 0.8; }
 
-        /* 3D-эффект для карточек (Tilt) */
-        .tilt-card {
-            transition: transform 0.1s ease;
-        }
+        /* ===== ГЕРОЙ ===== */
+        .hero-landing { padding-top: 140px; padding-bottom: 60px; text-align: center; }
+        .hero-landing h1 { font-size: clamp(44px, 7vw, 76px); font-weight: 900; margin: 20px 0 15px; }
+        .hero-landing h1 span { color: var(--accent); }
+        .hero-desc { max-width: 700px; margin: 0 auto 30px; font-size: 20px; color: var(--muted); line-height: 1.6; }
+        .hero-photo { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); box-shadow: 0 0 60px var(--accent-glow); }
 
-        /* Адаптация */
-        @media (max-width: 768px) {
+        /* ===== СЕТКА УСЛУГ ===== */
+        .landing-section { padding: 70px 0; position: relative; z-index: 1; }
+        .section-tag { text-align: center; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 14px; margin-bottom: 10px; }
+        
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px; }
+        .service-card { padding: 40px 30px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+        .service-icon { font-size: 48px; display: block; margin-bottom: 15px; }
+        .service-title { font-size: 26px; font-weight: 700; margin-bottom: 12px; color: #fff; }
+        .service-desc { color: var(--muted); font-size: 16px; line-height: 1.7; margin-bottom: 25px; flex-grow: 1; }
+        
+        .service-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 15px; }
+        .service-tags span { background: rgba(216,180,90,0.1); padding: 4px 12px; border-radius: 12px; font-size: 13px; border: 1px solid rgba(216,180,90,0.2); }
+
+        /* ===== КОНТАКТЫ ===== */
+        .contacts { display: flex; flex-direction: column; align-items: center; gap: 15px; margin-top: 10px; }
+        .contacts a {
+            min-width: 280px; text-align: center; padding: 16px 30px;
+            border: 1px solid rgba(255,255,255,0.08); border-radius: 40px;
+            background: rgba(255,255,255,0.03); backdrop-filter: blur(8px);
+            text-decoration: none; color: var(--muted); font-weight: 500; transition: 0.3s;
+        }
+        .contacts a:hover { border-color: var(--accent); color: #fff; background: rgba(216,180,90,0.05); }
+
+        /* ===== ФУТЕР ===== */
+        footer { padding: 30px 0; border-top: 1px solid var(--line); text-align: center; color: var(--muted); opacity: 0.5; }
+
+        /* ===== АДАПТИВ ===== */
+        @media (max-width: 992px) { .services-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 600px) {
+            .services-grid { grid-template-columns: 1fr; }
             .counter-number { font-size: 36px; min-width: 60px; }
             .counter-row { gap: 20px; }
             .gradient-border .inner { padding: 25px; }
+            .hero-landing h1 { font-size: 36px; }
         }
     </style>
 </head>
 <body>
-    <!-- Фон со звёздами -->
+    <!-- Фон со звёздами и кубиками -->
     <div class="stars-container" id="starsContainer"></div>
-    <!-- Фон с плавающими кубиками -->
     <div class="floating-cubes" id="floatingCubes"></div>
 
     <header>
-        <div class="header-inner" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0;">
+        <div class="header-inner">
             <span style="color: var(--accent); font-weight: 800; font-size: 22px; letter-spacing: 1px;">✦ КУБИК ДОБРА</span>
             <a href="#contact" class="btn-neon" style="padding: 8px 20px; font-size: 14px;">Связаться</a>
         </div>
@@ -181,8 +195,9 @@
     <main>
         <!-- ГЕРОЙ -->
         <section class="hero-landing container reveal">
-            <img src="images/photo.jpg" alt="Егор Черняков" class="hero-photo" style="box-shadow: 0 0 60px var(--accent-glow);">
-            <h1 style="margin-top: 20px;">Егор <span>Черняков</span></h1>
+            <!-- Замени src на свою фотку -->
+            <img src="https://via.placeholder.com/120x120/111/fff?text=Фото" alt="Егор Черняков" class="hero-photo">
+            <h1>Егор <span>Черняков</span></h1>
             <p class="hero-desc">
                 Автор социального проекта «Кубик добра». Создаю уникальные арт-объекты из кубиков Рубика и провожу мастер-классы для детей, взрослых и организаций.
             </p>
@@ -196,53 +211,47 @@
             <div class="section-tag reveal">Направления</div>
             <div class="services-grid">
                 <!-- Частные лица -->
-                <div class="service-card glass-card tilt-card reveal" style="transition-delay: 0.1s;">
+                <div class="service-card glass-card reveal" style="transition-delay: 0.1s;">
                     <span class="service-icon">👨‍👩‍👧‍👦</span>
                     <div class="service-title">Частным лицам</div>
-                    <div class="service-tags" style="margin-bottom: 15px;">
-                        <span>Дети 7+</span>
-                        <span>Взрослые</span>
-                        <span>Индивидуально</span>
+                    <div class="service-tags">
+                        <span>Дети 7+</span> <span>Взрослые</span> <span>Индивидуально</span>
                     </div>
                     <div class="service-desc">
-                        Индивидуальные уроки по спидкубингу. Развитие логики, памяти и моторики. Также создаю стильные мозаики в подарок или для интерьера.
+                        Индивидуальные уроки по спидкубингу. Развитие логики и моторики. Создаю стильные мозаики в подарок или для интерьера.
                     </div>
                     <a href="#contact" class="btn-neon" style="margin-top: auto;">Записаться</a>
                 </div>
 
                 <!-- Бизнес -->
-                <div class="service-card glass-card tilt-card reveal" style="transition-delay: 0.2s;">
+                <div class="service-card glass-card reveal" style="transition-delay: 0.2s;">
                     <span class="service-icon">🏢</span>
                     <div class="service-title">Для бизнеса</div>
-                    <div class="service-tags" style="margin-bottom: 15px;">
-                        <span>Корпоративы</span>
-                        <span>Логотипы</span>
-                        <span>Выставки</span>
+                    <div class="service-tags">
+                        <span>Корпоративы</span> <span>Логотипы</span> <span>Выставки</span>
                     </div>
                     <div class="service-desc">
-                        Соберу логотип компании или бренда из кубиков для офиса. Проведу яркий и динамичный мастер-класс по сборке кубика для команды.
+                        Соберу логотип компании из кубиков для офиса. Проведу яркий мастер-класс по спидкубингу для команды.
                     </div>
                     <a href="#contact" class="btn-neon" style="margin-top: auto;">Заказать</a>
                 </div>
 
                 <!-- Социальный проект -->
-                <div class="service-card glass-card tilt-card reveal" style="transition-delay: 0.3s; border-color: rgba(216, 180, 90, 0.3);">
+                <div class="service-card glass-card reveal" style="transition-delay: 0.3s; border-color: rgba(216, 180, 90, 0.3);">
                     <span class="service-icon">🤝</span>
                     <div class="service-title">Социальный проект</div>
-                    <div class="service-tags" style="margin-bottom: 15px;">
-                        <span>🏆 Топ-100</span>
-                        <span>🎖 Губернатор</span>
-                        <span>❤️ ОВЗ / СВО</span>
+                    <div class="service-tags">
+                        <span>🏆 Топ-100</span> <span>🎖 Губернатор</span> <span>❤️ ОВЗ / СВО</span>
                     </div>
                     <div class="service-desc">
-                        Проект «Кубик добра» — обучение сборке кубика детей с ОВЗ, участников СВО и воспитанников соцучреждений. Входит в Топ-100 лучших практик России.
+                        Проект «Кубик добра». Обучение детей с ОВЗ, участников СВО и соцучреждений. Входит в Топ-100 лучших практик России.
                     </div>
                     <a href="#contact" class="btn-neon" style="margin-top: auto;">Сотрудничать</a>
                 </div>
             </div>
         </section>
 
-        <!-- СОЦИАЛЬНЫЙ БЛОК (с градиентной рамкой) -->
+        <!-- СОЦИАЛЬНЫЙ БЛОК -->
         <section class="landing-section container reveal">
             <div class="gradient-border">
                 <div class="inner">
@@ -252,7 +261,6 @@
                         Социальный проект, направленный на обучение сборке кубика Рубика детей с ОВЗ, участников СВО и социальных учреждений. Проект вошёл в <strong>Топ-100 лучших библиотечных практик России</strong> и получил благодарность губернатора Ленинградской области.
                     </p>
                     <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
-                        <span style="background: rgba(216,180,90,0.15); padding: 6px 18px; border-radius: 20px; border: 1px solid rgba(216,180,90,0.2);">Официально</span>
                         <span style="background: rgba(216,180,90,0.15); padding: 6px 18px; border-radius: 20px; border: 1px solid rgba(216,180,90,0.2);">99 баллов из 110</span>
                         <span style="background: rgba(216,180,90,0.15); padding: 6px 18px; border-radius: 20px; border: 1px solid rgba(216,180,90,0.2);">Межрегиональный</span>
                     </div>
@@ -282,30 +290,37 @@
         <!-- КОНТАКТЫ -->
         <section class="landing-section container" id="contact">
             <div class="section-tag reveal">Связь</div>
-            <div class="section-title reveal" style="margin-bottom: 10px;">Всегда на связи</div>
-            <p class="section-subtitle reveal" style="margin-bottom: 30px;">Напишите в любом удобном мессенджере — обсудим детали.</p>
+            <div class="section-title reveal" style="margin-bottom: 10px; font-size: clamp(32px, 4vw, 46px); font-weight: 700; text-align: center;">Всегда на связи</div>
+            <p class="section-subtitle reveal" style="margin-bottom: 30px; text-align: center; color: var(--muted); font-size: 18px;">Напишите в любом удобном мессенджере — обсудим детали.</p>
             
-            <div class="contacts reveal" style="flex-direction: column; align-items: center; gap: 15px;">
-                <a href="mailto:cherniakov-egor@yandex.ru" style="min-width: 280px; text-align: center; padding: 16px 30px; border: 1px solid rgba(255,255,255,0.1); border-radius: 40px; background: rgba(255,255,255,0.03); backdrop-filter: blur(8px); transition: 0.3s;">📧 cherniakov-egor@yandex.ru</a>
-                <a href="tel:+79214089944" style="min-width: 280px; text-align: center; padding: 16px 30px; border: 1px solid rgba(255,255,255,0.1); border-radius: 40px; background: rgba(255,255,255,0.03); backdrop-filter: blur(8px); transition: 0.3s;">📞 +7 (921) 408-99-44</a>
-                <a href="https://vk.com/che_egor" target="_blank" style="min-width: 280px; text-align: center; padding: 16px 30px; border: 1px solid rgba(255,255,255,0.1); border-radius: 40px; background: rgba(255,255,255,0.03); backdrop-filter: blur(8px); transition: 0.3s;">💬 VK: che_egor</a>
+            <div class="contacts reveal">
+                <a href="mailto:cherniakov-egor@yandex.ru">📧 cherniakov-egor@yandex.ru</a>
+                <a href="tel:+79214089944">📞 +7 (921) 408-99-44</a>
+                <a href="https://vk.com/che_egor" target="_blank">💬 VK: che_egor</a>
             </div>
         </section>
     </main>
 
     <footer>
-        <div class="container" style="text-align: center; padding: 30px 0;">
-            <p style="color: var(--muted); opacity: 0.5;">✦ Собрано как кубик Рубика — по алгоритму и с душой ✦</p>
-            <p style="color: var(--muted); opacity: 0.4;">© <span id="current-year"></span> Егор Черняков</p>
+        <div class="container">
+            <p>✦ Собрано как кубик Рубика — по алгоритму и с душой ✦</p>
+            <p>© <span id="current-year"></span> Егор Черняков</p>
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
-    
-    <!-- ===== ДОПОЛНИТЕЛЬНЫЕ СКРИПТЫ ===== -->
+    <!-- ===== СКРИПТЫ ===== -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Генерация плавающих кубиков
+            // 1. Звёзды
+            const starsContainer = document.getElementById('starsContainer');
+            for (let i = 0; i < 400; i++) {
+                const star = document.createElement('div');
+                star.className = 'star-dot';
+                star.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;width:${Math.random()*2.5+0.5}px;height:${Math.random()*2.5+0.5}px;opacity:${Math.random()*0.6+0.2};`;
+                starsContainer.appendChild(star);
+            }
+
+            // 2. Плавающие кубики
             const cubesContainer = document.getElementById('floatingCubes');
             for (let i = 0; i < 25; i++) {
                 const cube = document.createElement('div');
@@ -318,28 +333,23 @@
                 cubesContainer.appendChild(cube);
             }
 
-            // AOS-like анимация появления при скролле
+            // 3. Анимация появления (AOS-like)
             const reveals = document.querySelectorAll('.reveal');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                    }
+                    if (entry.isIntersecting) entry.target.classList.add('active');
                 });
             }, { threshold: 0.1 });
-
             reveals.forEach(el => observer.observe(el));
 
-            // Счётчик (Counter)
+            // 4. Счётчик цифр (Counter)
             const counters = document.querySelectorAll('.counter-number');
-            const speed = 200;
-
             const counterObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const target = parseInt(entry.target.getAttribute('data-target'));
-                        const increment = target / speed;
                         let current = 0;
+                        const increment = target / 200;
                         const updateCount = () => {
                             if (current < target) {
                                 current += increment;
@@ -354,28 +364,9 @@
                     }
                 });
             }, { threshold: 0.5 });
-
             counters.forEach(el => counterObserver.observe(el));
 
-            // 3D Tilt эффект на карточках
-            const tiltCards = document.querySelectorAll('.tilt-card');
-            tiltCards.forEach(card => {
-                card.addEventListener('mousemove', e => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    const rotateX = ((y - centerY) / centerY) * -6;
-                    const rotateY = ((x - centerX) / centerX) * 6;
-                    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
-                });
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = 'rotateX(0) rotateY(0) scale(1)';
-                });
-            });
-
-            // Год в футере
+            // 5. Год в футере
             document.getElementById('current-year').textContent = new Date().getFullYear();
         });
     </script>
