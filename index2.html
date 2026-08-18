@@ -4,9 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Егор Черняков | Спидкубинг, искусство и социальные проекты</title>
+    
+    <!-- Подключаем шрифты с "характером" -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
     
     <style>
         /* ===== БАЗОВЫЕ НАСТРОЙКИ ===== */
@@ -25,71 +27,82 @@
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
-        /* ===== ФОН С ТЁПЛЫМ СВЕЧЕНИЕМ ===== */
+        /* ===== "ЖИВОЙ" ФОН С ПУЛЬСАЦИЕЙ ===== */
         .bg-gradient {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: 0;
             background: 
-                radial-gradient(ellipse at 20% 50%, rgba(216, 180, 90, 0.12) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 20%, rgba(255, 213, 0, 0.06) 0%, transparent 30%),
-                radial-gradient(ellipse at 50% 100%, rgba(255, 0, 0, 0.04) 0%, transparent 30%),
+                radial-gradient(ellipse at 20% 50%, rgba(216, 180, 90, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(255, 213, 0, 0.04) 0%, transparent 30%),
+                radial-gradient(ellipse at 50% 100%, rgba(255, 0, 0, 0.03) 0%, transparent 30%),
                 #0b0e17;
+            animation: pulseBg 8s ease-in-out infinite alternate;
             pointer-events: none;
         }
+        @keyframes pulseBg {
+            0% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
 
-        /* ===== ЦВЕТНЫЕ ПАРЯЩИЕ КУБИКИ (Декор) ===== */
-        .floating-decor {
+        /* ===== ЗОЛОТАЯ СЕТКА (Изюминка фона) ===== */
+        .gold-grid {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: 0;
             pointer-events: none;
             overflow: hidden;
-        }
-        .decor-cube {
-            position: absolute;
-            width: 16px; height: 16px;
-            border-radius: 3px;
             opacity: 0.15;
-            animation: floatDecor 25s infinite linear;
         }
-        @keyframes floatDecor {
-            0% { transform: translateY(100vh) rotate(0deg) scale(0.5); opacity: 0; }
-            10% { opacity: 0.15; }
-            90% { opacity: 0.15; }
-            100% { transform: translateY(-10vh) rotate(720deg) scale(1.2); opacity: 0; }
+        .gold-grid::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background-image: 
+                linear-gradient(rgba(216, 180, 90, 0.4) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(216, 180, 90, 0.4) 1px, transparent 1px);
+            background-size: 60px 60px;
+            transform: rotate(15deg);
+            animation: moveGrid 30s linear infinite;
+        }
+        @keyframes moveGrid {
+            0% { transform: rotate(15deg) translate(0, 0); }
+            100% { transform: rotate(15deg) translate(60px, 60px); }
         }
 
-        /* ===== КНОПКА В ШАПКЕ ===== */
+        /* ===== ШАПКА (Стеклянная) ===== */
         .header {
             position: fixed;
             top: 0; left: 0; width: 100%;
             z-index: 100;
             padding: 20px 0;
-            background: rgba(11, 14, 23, 0.6);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255,255,255,0.04);
+            background: rgba(11, 14, 23, 0.5);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
         }
         .header-inner {
             max-width: 1200px; margin: 0 auto; padding: 0 24px;
             display: flex; justify-content: flex-end; align-items: center;
         }
         .header-btn {
-            padding: 10px 28px;
+            padding: 12px 32px;
             border-radius: 40px;
-            background: rgba(216, 180, 90, 0.1);
+            background: rgba(216, 180, 90, 0.08);
             border: 1px solid rgba(216, 180, 90, 0.2);
             color: #d8b45a;
             text-decoration: none;
             font-weight: 600;
             font-size: 15px;
             transition: 0.3s;
+            backdrop-filter: blur(4px);
         }
         .header-btn:hover {
             background: #d8b45a;
             border-color: #d8b45a;
             color: #0b0e17;
-            box-shadow: 0 0 30px rgba(216, 180, 90, 0.2);
+            box-shadow: 0 0 40px rgba(216, 180, 90, 0.3);
+            transform: translateY(-2px);
         }
 
         /* ===== ГЕРОЙ ===== */
@@ -105,23 +118,23 @@
             padding: 120px 20px 60px;
         }
 
-        /* КУБИК С ЦВЕТНЫМИ ГРАНЯМИ И СВЕЧЕНИЕМ */
+        /* КУБИК С ГЛУБОКОЙ ТЕНЬЮ И ОБЪЁМОМ */
         .cube-box {
-            width: 160px; height: 160px;
+            width: 180px; height: 180px;
             margin-bottom: 30px;
-            perspective: 1000px;
+            perspective: 1200px;
             position: relative;
-            filter: drop-shadow(0 0 40px rgba(216, 180, 90, 0.15));
+            filter: drop-shadow(0 0 60px rgba(216, 180, 90, 0.2));
         }
         .cube-box::after {
             content: '';
             position: absolute;
-            bottom: -30px; left: 50%;
+            bottom: -40px; left: 50%;
             transform: translateX(-50%);
-            width: 120px; height: 30px;
-            background: radial-gradient(ellipse, rgba(216, 180, 90, 0.2) 0%, transparent 70%);
+            width: 140px; height: 40px;
+            background: radial-gradient(ellipse, rgba(216, 180, 90, 0.3) 0%, transparent 70%);
             border-radius: 50%;
-            filter: blur(8px);
+            filter: blur(12px);
             z-index: -1;
         }
         .cube-3d {
@@ -134,49 +147,64 @@
         }
         @keyframes floatCube {
             0%, 100% { transform: rotateX(-20deg) rotateY(30deg) translateY(0); }
-            50% { transform: rotateX(-15deg) rotateY(35deg) translateY(-12px); }
+            50% { transform: rotateX(-15deg) rotateY(35deg) translateY(-16px); }
         }
 
         .face {
             position: absolute;
-            width: 160px; height: 160px;
-            border-radius: 10px;
+            width: 180px; height: 180px;
+            border-radius: 12px;
             display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr 1fr 1fr;
-            gap: 5px; padding: 5px;
+            gap: 6px; padding: 6px;
             box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2);
         }
         .cell { 
-            border-radius: 3px; 
+            border-radius: 4px; 
             border: 1px solid rgba(255,255,255,0.05);
             transition: all 0.3s;
         }
         
-        /* ЯРКИЕ ЦВЕТА ГРАНЕЙ (Спидкуберский стиль) */
-        .front  { transform: translateZ(80px); background: rgba(255, 255, 255, 0.7); }
-        .back   { transform: rotateY(180deg) translateZ(80px); background: rgba(255, 213, 0, 0.7); }
-        .right  { transform: rotateY(90deg) translateZ(80px); background: rgba(255, 0, 0, 0.7); }
-        .left   { transform: rotateY(-90deg) translateZ(80px); background: rgba(255, 165, 0, 0.7); }
-        .top    { transform: rotateX(90deg) translateZ(80px); background: rgba(255, 255, 255, 0.8); }
-        .bottom { transform: rotateX(-90deg) translateZ(80px); background: rgba(255, 213, 0, 0.6); }
+        .front  { transform: translateZ(90px); background: rgba(255, 255, 255, 0.6); }
+        .back   { transform: rotateY(180deg) translateZ(90px); background: rgba(255, 213, 0, 0.6); }
+        .right  { transform: rotateY(90deg) translateZ(90px); background: rgba(255, 0, 0, 0.6); }
+        .left   { transform: rotateY(-90deg) translateZ(90px); background: rgba(255, 165, 0, 0.6); }
+        .top    { transform: rotateX(90deg) translateZ(90px); background: rgba(255, 255, 255, 0.8); }
+        .bottom { transform: rotateX(-90deg) translateZ(90px); background: rgba(255, 213, 0, 0.5); }
 
-        .hero h1 {
-            font-size: clamp(52px, 10vw, 96px);
+        /* ЗАГОЛОВОК С ОБЪЁМОМ И ГРАДИЕНТОМ */
+        .hero-title-wrapper {
+            position: relative;
+            margin-bottom: 12px;
+        }
+        .hero-title {
+            font-family: 'Playfair Display', serif; /* Элегантный шрифт для изюминки */
+            font-size: clamp(56px, 11vw, 100px);
             font-weight: 900;
             line-height: 1.05;
             letter-spacing: -1px;
-            margin-bottom: 12px;
+            background: linear-gradient(135deg, #ffffff 0%, #d8b45a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 20px 60px rgba(216, 180, 90, 0.2);
         }
-        .hero h1 span { color: #d8b45a; text-shadow: 0 0 40px rgba(216, 180, 90, 0.3); }
-        
+        .hero-title span {
+            font-family: 'Inter', sans-serif;
+            color: #fff;
+            background: none;
+            -webkit-text-fill-color: #fff;
+            text-shadow: none;
+        }
+
         .hero-desc {
             font-size: clamp(18px, 2.2vw, 24px);
             color: #b0b8d0;
             max-width: 680px;
             margin: 0 auto 40px;
             line-height: 1.7;
+            font-weight: 400;
         }
 
-        /* ===== КНОПКИ ===== */
+        /* ===== СТЕКЛЯННЫЕ КНОПКИ ===== */
         .hero-actions {
             display: flex;
             flex-wrap: wrap;
@@ -186,23 +214,25 @@
         .btn-primary {
             padding: 18px 44px;
             border-radius: 60px;
-            background: #d8b45a;
+            background: linear-gradient(145deg, #d8b45a, #c09b3e);
             color: #0b0e17;
             font-weight: 800;
             font-size: 18px;
             text-decoration: none;
             transition: 0.3s;
-            box-shadow: 0 4px 30px rgba(216, 180, 90, 0.3);
+            box-shadow: 0 8px 30px rgba(216, 180, 90, 0.3);
+            border: 1px solid rgba(255,255,255,0.1);
         }
         .btn-primary:hover {
             transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 8px 50px rgba(216, 180, 90, 0.5);
+            box-shadow: 0 12px 50px rgba(216, 180, 90, 0.5);
         }
         .btn-secondary {
             padding: 18px 44px;
             border-radius: 60px;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.15);
             color: #fff;
             font-weight: 700;
             font-size: 18px;
@@ -212,9 +242,10 @@
         .btn-secondary:hover {
             background: rgba(255,255,255,0.1);
             transform: translateY(-3px);
+            border-color: #d8b45a;
         }
 
-        /* ===== СЕКЦИЯ УСЛУГ ===== */
+        /* ===== СЕКЦИЯ УСЛУГ (Стекло 2.0) ===== */
         .section {
             position: relative;
             z-index: 1;
@@ -235,8 +266,17 @@
             font-weight: 800;
             margin-bottom: 16px;
             line-height: 1.2;
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #ffffff, #d8b45a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .section-title span { color: #d8b45a; }
+        .section-title span { 
+            font-family: 'Inter', sans-serif;
+            color: #fff;
+            background: none;
+            -webkit-text-fill-color: #fff; 
+        }
         .section-desc {
             text-align: center;
             color: #8892b0;
@@ -253,22 +293,23 @@
 
         .card-premium {
             background: rgba(255,255,255,0.02);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(16px);
             border: 1px solid rgba(255,255,255,0.06);
             border-radius: 24px;
             padding: 40px 30px;
             text-align: center;
             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
         }
         .card-premium:hover {
             transform: translateY(-12px);
             border-color: rgba(216, 180, 90, 0.3);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 40px rgba(216, 180, 90, 0.05);
             background: rgba(255,255,255,0.04);
         }
 
-        .card-icon { font-size: 52px; display: block; margin-bottom: 16px; }
+        .card-icon { font-size: 52px; display: block; margin-bottom: 16px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.1)); }
         .card-title { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
         .card-desc { color: #8892b0; font-size: 16px; line-height: 1.8; margin-bottom: 25px; }
         
@@ -280,23 +321,27 @@
             font-size: 13px;
             font-weight: 600;
             color: #d8b45a;
+            border: 1px solid rgba(216, 180, 90, 0.05);
         }
 
         .btn-outline-gold {
             display: inline-block;
-            padding: 12px 32px;
+            padding: 14px 32px;
             border-radius: 40px;
-            border: 1px solid rgba(216, 180, 90, 0.3);
+            background: rgba(216, 180, 90, 0.05);
+            border: 1px solid rgba(216, 180, 90, 0.2);
             color: #d8b45a;
             text-decoration: none;
             font-weight: 600;
             transition: 0.3s;
             font-size: 15px;
+            backdrop-filter: blur(4px);
         }
         .btn-outline-gold:hover {
             background: #d8b45a;
             color: #0b0e17;
             border-color: #d8b45a;
+            box-shadow: 0 0 30px rgba(216, 180, 90, 0.2);
         }
 
         /* ===== КОНТАКТЫ ===== */
@@ -312,7 +357,7 @@
             padding: 18px 30px;
             border-radius: 40px;
             background: rgba(255,255,255,0.02);
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(12px);
             border: 1px solid rgba(255,255,255,0.05);
             text-decoration: none;
             color: #8892b0;
@@ -331,24 +376,22 @@
         @media (max-width: 700px) {
             .grid-3 { grid-template-columns: 1fr; }
             .contact-grid a { min-width: auto; width: 100%; }
-            .cube-box { width: 130px; height: 130px; }
-            .face { width: 130px; height: 130px; }
-            .front  { transform: translateZ(65px); }
-            .back   { transform: rotateY(180deg) translateZ(65px); }
-            .right  { transform: rotateY(90deg) translateZ(65px); }
-            .left   { transform: rotateY(-90deg) translateZ(65px); }
-            .top    { transform: rotateX(90deg) translateZ(65px); }
-            .bottom { transform: rotateX(-90deg) translateZ(65px); }
+            .cube-box { width: 140px; height: 140px; }
+            .face { width: 140px; height: 140px; }
+            .front  { transform: translateZ(70px); }
+            .back   { transform: rotateY(180deg) translateZ(70px); }
+            .right  { transform: rotateY(90deg) translateZ(70px); }
+            .left   { transform: rotateY(-90deg) translateZ(70px); }
+            .top    { transform: rotateX(90deg) translateZ(70px); }
+            .bottom { transform: rotateX(-90deg) translateZ(70px); }
         }
     </style>
 </head>
 <body>
 
-    <!-- ТЁПЛЫЙ ГРАДИЕНТНЫЙ ФОН -->
+    <!-- ФОНЫ -->
     <div class="bg-gradient"></div>
-
-    <!-- ЦВЕТНЫЕ ПАРЯЩИЕ КУБИКИ -->
-    <div class="floating-decor" id="decorCubes"></div>
+    <div class="gold-grid"></div>
 
     <!-- ШАПКА -->
     <header class="header">
@@ -370,7 +413,9 @@
             </div>
         </div>
 
-        <h1>Егор <span>Черняков</span></h1>
+        <div class="hero-title-wrapper">
+            <h1 class="hero-title">Егор <span>Черняков</span></h1>
+        </div>
         <p class="hero-desc">Автор социального проекта «Кубик добра». Превращаю тысячи кубиков в искусство и обучаю спидкубингу с нуля до профи.</p>
         
         <div class="hero-actions">
@@ -432,26 +477,11 @@
     </footer>
 
     <script>
-        // ===== ЦВЕТНЫЕ ПАРЯЩИЕ КУБИКИ =====
-        const decorContainer = document.getElementById('decorCubes');
-        const colors = ['#ff0000', '#ffd500', '#0000ff', '#00ff00', '#d8b45a'];
-        for (let i = 0; i < 20; i++) {
-            const cube = document.createElement('div');
-            cube.className = 'decor-cube';
-            cube.style.left = Math.random() * 100 + '%';
-            cube.style.background = colors[Math.floor(Math.random() * colors.length)];
-            cube.style.width = (8 + Math.random() * 20) + 'px';
-            cube.style.height = cube.style.width;
-            cube.style.animationDuration = 20 + Math.random() * 20 + 's';
-            cube.style.animationDelay = Math.random() * 20 + 's';
-            decorContainer.appendChild(cube);
-        }
-
         // ===== ИНТЕРАКТИВНЫЙ 3D КУБИК =====
         const cube = document.getElementById('rubikCube');
         document.addEventListener('mousemove', (e) => {
-            const x = (window.innerWidth / 2 - e.clientX) / 50;
-            const y = (window.innerHeight / 2 - e.clientY) / 50;
+            const x = (window.innerWidth / 2 - e.clientX) / 40;
+            const y = (window.innerHeight / 2 - e.clientY) / 40;
             cube.style.transform = `rotateX(${y}deg) rotateY(${x}deg)`;
         });
 
