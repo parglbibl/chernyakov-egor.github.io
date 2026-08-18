@@ -1,461 +1,443 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Егор Черняков | Кибер-лендинг</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
-    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Егор Черняков | Кибер-Арт</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            font-family: 'Inter', sans-serif;
-            background: #05080f;
+            background: #03050b;
             color: #fff;
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
-            min-height: 100vh;
+            cursor: none;
         }
 
-        /* ===== ФОН ===== */
-        .bg-layer {
+        /* ===== КУРСОР-ШЛЕЙФ ===== */
+        .cursor-glow {
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 0;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(216, 180, 90, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(0, 150, 255, 0.05) 0%, transparent 40%),
-                #05080f;
-        }
-
-        /* Анимированные неоновые линии */
-        .neon-ring {
-            position: fixed;
-            top: 50%; left: 50%;
-            width: 120vw; height: 120vw;
-            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            width: 40px; height: 40px;
             border-radius: 50%;
-            border: 1px solid rgba(216, 180, 90, 0.1);
-            z-index: 0;
-            animation: spinRing 60s linear infinite;
-            pointer-events: none;
+            background: radial-gradient(circle, rgba(216,180,90,0.8) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            mix-blend-mode: screen;
+            transition: width 0.2s, height 0.2s;
         }
-        .neon-ring:nth-child(2) { width: 100vw; height: 100vw; border-color: rgba(216, 180, 90, 0.05); animation-duration: 80s; animation-direction: reverse; }
-        .neon-ring:nth-child(3) { width: 80vw; height: 80vw; border-color: rgba(216, 180, 90, 0.15); animation-duration: 40s; }
-        @keyframes spinRing {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        .cursor-trail {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            border: 1px solid rgba(216,180,90,0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.05s linear;
         }
 
-        /* Светящиеся частицы */
-        #particles-canvas {
+        /* ===== ФОН - ВРАЩАЮЩИЙСЯ ШАР ИЗ ЛИНИЙ ===== */
+        #webgl-bg {
             position: fixed;
             top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 1;
-            pointer-events: none;
+            width: 100vw; height: 100vh;
+            z-index: 0;
         }
 
-        /* ===== 3D КУБ В ГЕРОЕ ===== */
-        .hero-wrap {
+        /* ===== ТАНЦУЮЩИЙ ТЕКСТ ===== */
+        .hero {
             position: relative;
-            z-index: 2;
+            z-index: 1;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 100px 20px;
-            perspective: 1000px;
+            padding: 20px;
         }
 
-        .cube-3d-wrapper {
-            width: 150px;
-            height: 150px;
-            margin-bottom: 30px;
-            transform-style: preserve-3d;
-            animation: floatY 6s ease-in-out infinite;
-        }
-        @keyframes floatY {
-            0%, 100% { transform: translateY(0px) rotateX(-15deg); }
-            50% { transform: translateY(-20px) rotateX(-15deg); }
-        }
-
-        .cube-3d {
-            width: 100%; height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            transform: rotateX(-20deg) rotateY(-30deg);
-            transition: transform 0.1s ease-out;
-        }
-        .cube-face {
-            position: absolute;
-            width: 150px; height: 150px;
-            background: rgba(216, 180, 90, 0.05);
-            border: 2px solid rgba(216, 180, 90, 0.6);
-            box-shadow: inset 0 0 30px rgba(216, 180, 90, 0.1);
-            border-radius: 8px;
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: 1fr 1fr 1fr;
-            gap: 2px;
-            padding: 2px;
-            backdrop-filter: blur(4px);
-        }
-        .cube-face .cell {
-            background: rgba(216, 180, 90, 0.2);
-            border-radius: 2px;
-            transition: 0.3s;
-        }
-        .cube-face .cell:hover { background: var(--accent); }
-        
-        .front  { transform: translateZ(75px); }
-        .back   { transform: rotateY(180deg) translateZ(75px); }
-        .right  { transform: rotateY(90deg) translateZ(75px); }
-        .left   { transform: rotateY(-90deg) translateZ(75px); }
-        .top    { transform: rotateX(90deg) translateZ(75px); }
-        .bottom { transform: rotateX(-90deg) translateZ(75px); }
-
-        /* Текст с печатью */
-        .hero-title {
-            font-size: clamp(42px, 8vw, 80px);
+        .glitch-title {
+            font-size: clamp(50px, 10vw, 120px);
             font-weight: 900;
-            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: linear-gradient(45deg, #d8b45a, #ff6b6b, #4ecdc4, #d8b45a);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: danceGradient 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 30px rgba(216,180,90,0.3));
             margin-bottom: 10px;
+            letter-spacing: 4px;
         }
-        .typewriter {
-            color: #d8b45a;
-            border-right: 3px solid #d8b45a;
-            padding-right: 5px;
-            display: inline-block;
-            animation: blink-caret 0.75s step-end infinite;
-        }
-        @keyframes blink-caret {
-            50% { border-color: transparent; }
+        @keyframes danceGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        .hero-desc {
-            font-size: 20px;
-            color: #a0a8c0;
+        .hero-sub {
+            color: #8890b0;
+            font-size: 22px;
             max-width: 700px;
-            margin: 10px auto 30px;
             line-height: 1.6;
+            margin-bottom: 30px;
         }
 
-        /* Кнопка с радугой */
-        .btn-rainbow {
+        /* ===== 3D СЛАЙДЕР КАРТИН ===== */
+        .slider-3d-wrap {
+            width: 100%;
+            max-width: 900px;
+            height: 400px;
+            perspective: 1200px;
+            margin: 40px 0;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slider-3d {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .slide-card {
+            position: absolute;
+            width: 300px;
+            height: 350px;
+            left: 50%;
+            top: 50%;
+            margin-left: -150px;
+            margin-top: -175px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(216,180,90,0.2);
+            border-radius: 20px;
+            backdrop-filter: blur(12px);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: #d8b45a;
+            box-shadow: 0 0 40px rgba(0,0,0,0.8);
+            transition: all 0.3s;
+        }
+        .slide-card:hover {
+            border-color: #fff;
+            transform: scale(1.05);
+        }
+        /* Плейсхолдеры для картин (заменишь на свои) */
+        .slide-card:nth-child(1) { background: #1a1f2e; }
+        .slide-card:nth-child(2) { background: #2a1f1e; }
+        .slide-card:nth-child(3) { background: #1e2a1e; }
+        .slide-card:nth-child(4) { background: #2e1e2a; }
+        .slide-card:nth-child(5) { background: #1e2e2e; }
+
+        .slide-card span {
+            background: rgba(0,0,0,0.5);
+            padding: 10px 20px;
+            border-radius: 12px;
+        }
+
+        /* ===== КНОПКА С ВЗРЫВОМ ===== */
+        .btn-explode {
             position: relative;
             display: inline-block;
-            padding: 16px 48px;
-            border-radius: 50px;
-            font-weight: 800;
-            font-size: 18px;
-            color: #fff;
-            background: #111;
+            padding: 18px 50px;
+            border-radius: 60px;
+            background: #d8b45a;
+            color: #03050b;
+            font-weight: 900;
+            font-size: 20px;
             text-decoration: none;
-            z-index: 1;
+            border: none;
             transition: 0.3s;
+            cursor: pointer;
+            z-index: 10;
         }
-        .btn-rainbow::before {
+        .btn-explode:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 50px rgba(216,180,90,0.5);
+        }
+
+        /* ===== БЛОК УСЛУГ ===== */
+        .section {
+            position: relative;
+            z-index: 1;
+            padding: 80px 0;
+            max-width: 1120px;
+            margin: 0 auto;
+        }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; }
+
+        .card-cyber {
+            background: rgba(255,255,255,0.02);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+        .card-cyber::before {
             content: '';
             position: absolute;
             top: -2px; left: -2px; right: -2px; bottom: -2px;
-            background: linear-gradient(45deg, #d8b45a, #ff6b6b, #d8b45a, #4ecdc4, #d8b45a);
-            background-size: 400%;
-            border-radius: 50px;
+            background: linear-gradient(45deg, transparent, rgba(216,180,90,0.2), transparent);
             z-index: -1;
-            animation: glowing 4s linear infinite;
+            filter: blur(10px);
+            opacity: 0;
+            transition: 0.4s;
         }
-        .btn-rainbow::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: #0a0e1a;
-            border-radius: 50px;
-            z-index: -1;
-            transition: 0.3s;
-        }
-        .btn-rainbow:hover::after { background: transparent; }
-        .btn-rainbow:hover { color: #111; transform: scale(1.05); box-shadow: 0 0 40px rgba(216,180,90,0.3); }
-        @keyframes glowing {
-            0% { background-position: 0 0; }
-            50% { background-position: 300% 0; }
-            100% { background-position: 0 0; }
-        }
+        .card-cyber:hover::before { opacity: 1; }
+        .card-cyber:hover { transform: translateY(-10px) scale(1.02); border-color: rgba(216,180,90,0.3); }
 
-        /* ===== КАРТОЧКИ ===== */
-        .section-wrap { position: relative; z-index: 2; padding: 80px 0; }
-        .container { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+        .card-icon { font-size: 50px; margin-bottom: 15px; }
+        .card-title { font-size: 24px; font-weight: 700; margin-bottom: 10px; }
+        .card-desc { color: #8890b0; line-height: 1.7; }
 
-        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        /* ===== ФУТЕР ===== */
+        footer { text-align: center; padding: 40px; color: #555; border-top: 1px solid rgba(255,255,255,0.05); }
 
-        .card-neon {
-            position: relative;
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 24px;
-            padding: 40px 30px;
-            text-align: center;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            overflow: hidden;
-        }
-        .card-neon::before {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: conic-gradient(from 0deg, transparent, rgba(216,180,90,0.1), transparent, rgba(216,180,90,0.1), transparent);
-            animation: spinCard 8s linear infinite;
-            z-index: -1;
-        }
-        @keyframes spinCard {
-            100% { transform: rotate(360deg); }
-        }
-        .card-neon::after {
-            content: '';
-            position: absolute;
-            inset: 1px;
-            background: rgba(8, 11, 20, 0.6);
-            backdrop-filter: blur(20px);
-            border-radius: 23px;
-            z-index: -1;
-        }
-        .card-neon:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 0 50px rgba(216,180,90,0.2);
-        }
-
-        .card-icon { font-size: 48px; margin-bottom: 15px; display: block; }
-        .card-title { font-size: 24px; font-weight: 700; margin-bottom: 12px; }
-        .card-desc { color: #a0a8c0; font-size: 16px; line-height: 1.7; margin-bottom: 20px; }
-        
-        .tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
-        .tags span { background: rgba(216,180,90,0.1); padding: 4px 12px; border-radius: 20px; font-size: 12px; border: 1px solid rgba(216,180,90,0.2); color: #d8b45a; }
-
-        /* ===== КОНТАКТЫ ===== */
-        .contact-grid {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-        }
-        .contact-grid a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            min-width: 300px;
-            padding: 16px 24px;
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 40px;
-            background: rgba(255,255,255,0.02);
-            backdrop-filter: blur(8px);
-            text-decoration: none;
-            color: #a0a8c0;
-            font-weight: 500;
-            transition: 0.3s;
-        }
-        .contact-grid a:hover {
-            border-color: #d8b45a;
-            background: rgba(216,180,90,0.05);
-            color: #fff;
-            transform: translateX(5px);
-            box-shadow: 0 0 20px rgba(216,180,90,0.1);
-        }
-
+        /* ===== АДАПТАЦИЯ ===== */
         @media (max-width: 900px) { .grid-3 { grid-template-columns: 1fr 1fr; } }
-        @media (max-width: 600px) { .grid-3 { grid-template-columns: 1fr; } }
+        @media (max-width: 600px) {
+            .grid-3 { grid-template-columns: 1fr; }
+            .slider-3d-wrap { height: 300px; }
+            .slide-card { width: 200px; height: 250px; margin-left: -100px; margin-top: -125px; }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Фон -->
-    <div class="bg-layer"></div>
-    <div class="neon-ring"></div>
-    <div class="neon-ring"></div>
-    <div class="neon-ring"></div>
-    <canvas id="particles-canvas"></canvas>
+    <!-- Фон - вращающийся шар -->
+    <canvas id="webgl-bg"></canvas>
 
-    <!-- ГЕРОЙ -->
-    <section class="hero-wrap">
+    <!-- Курсор-шлейф -->
+    <div class="cursor-glow" id="cursor"></div>
+
+    <!-- Слайдер картин 3D -->
+    <section class="hero">
+        <h1 class="glitch-title">ЕГОР ЧЕРНЯКОВ</h1>
+        <p class="hero-sub">Автор проекта «Кубик добра». Мозаики, мастер-классы и социальные инициативы.</p>
+
+        <div class="slider-3d-wrap">
+            <div class="slider-3d" id="slider3d">
+                <!-- 5 слайдов (заменишь на свои картинки) -->
+                <div class="slide-card"><span>🎨 Портрет</span></div>
+                <div class="slide-card"><span>🏢 Логотип</span></div>
+                <div class="slide-card"><span>🧩 Мозаика</span></div>
+                <div class="slide-card"><span>⭐ VK Fest</span></div>
+                <div class="slide-card"><span>🏆 Топ-100</span></div>
+            </div>
+        </div>
         
-        <div class="cube-3d-wrapper">
-            <div class="cube-3d" id="cube3d">
-                <div class="cube-face front">
-                    <div class="cell"></div><div class="cell"></div><div class="cell"></div>
-                    <div class="cell"></div><div class="cell"></div><div class="cell"></div>
-                    <div class="cell"></div><div class="cell"></div><div class="cell"></div>
-                </div>
-                <div class="cube-face back">
-                    <div class="cell"></div><div class="cell"></div><div class="cell"></div>
-                    <div class="cell"></div><div class="cell"></div><div class="cell"></div>
-                    <div class="cell"></div><div class="cell"></div><div class="cell"></div>
-                </div>
-                <div class="cube-face right">
-                    <div class="cell"></div><div class="cell"></div><div class="cell"></div>
-                    <div class="cell"></div><div class="cell"></div><div class="cell"></div>
-                    <div class="cell"></div><div class="cell"></div><div class="cell"></div>
-                </div>
-                <div class="cube-face left">
-                    <div class="cell"></div><div class="cell"></div><div class="cell"></div>
-                    <div class="cell"></div><div class="cell"></div><div class="cell"></div>
-                    <div class="cell"></div><div class="cell"></div><div class="cell"></div>
-                </div>
-                <div class="cube-face top">
-                    <div class="cell"></div><div class="cell"></div><div class="cell"></div>
-                    <div class="cell"></div><div class="cell"></div><div class="cell"></div>
-                    <div class="cell"></div><div class="cell"></div><div class="cell"></div>
-                </div>
-                <div class="cube-face bottom">
-                    <div class="cell"></div><div class="cell"></div><div class="cell"></div>
-                    <div class="cell"></div><div class="cell"></div><div class="cell"></div>
-                    <div class="cell"></div><div class="cell"></div><div class="cell"></div>
-                </div>
-            </div>
-        </div>
-
-        <h1 class="hero-title"><span class="typewriter" id="typewriter"></span></h1>
-        <p class="hero-desc">Автор социального проекта «Кубик добра». Создаю арт из кубиков Рубика и провожу мастер-классы для детей, взрослых и организаций.</p>
-        <a href="#services" class="btn-rainbow">Запустить</a>
+        <button class="btn-explode" id="explodeBtn">Запустить</button>
     </section>
 
-    <!-- УСЛУГИ -->
-    <section class="section-wrap" id="services">
-        <div class="container">
-            <h2 style="text-align: center; font-size: 42px; margin-bottom: 40px; color: #d8b45a;">Мои направления</h2>
-            <div class="grid-3">
-                <div class="card-neon">
-                    <span class="card-icon">🧩</span>
-                    <div class="card-title">Частным лицам</div>
-                    <div class="tags"><span>Дети 7+</span><span>Взрослые</span><span>Индивидуально</span></div>
-                    <div class="card-desc">Индивидуальные уроки по спидкубингу. Развитие логики и моторики. Создаю стильные мозаики в подарок или для интерьера.</div>
-                    <a href="#contact" class="btn-rainbow" style="padding: 12px 28px; font-size: 14px;">Записаться</a>
-                </div>
-                <div class="card-neon">
-                    <span class="card-icon">🏢</span>
-                    <div class="card-title">Для бизнеса</div>
-                    <div class="tags"><span>Корпоративы</span><span>Логотипы</span><span>Выставки</span></div>
-                    <div class="card-desc">Соберу логотип компании из кубиков для офиса. Проведу яркий мастер-класс по спидкубингу для команды.</div>
-                    <a href="#contact" class="btn-rainbow" style="padding: 12px 28px; font-size: 14px;">Заказать</a>
-                </div>
-                <div class="card-neon">
-                    <span class="card-icon">🤝</span>
-                    <div class="card-title">Социальный проект</div>
-                    <div class="tags"><span>🏆 Топ-100</span><span>🎖 Губернатор</span><span>❤️ ОВЗ / СВО</span></div>
-                    <div class="card-desc">Проект «Кубик добра». Обучение детей с ОВЗ, участников СВО и соцучреждений. Входит в Топ-100 лучших практик России.</div>
-                    <a href="#contact" class="btn-rainbow" style="padding: 12px 28px; font-size: 14px;">Сотрудничать</a>
-                </div>
+    <!-- Услуги -->
+    <section class="section">
+        <h2 style="text-align: center; font-size: 40px; margin-bottom: 40px; color: #d8b45a;">Мои направления</h2>
+        <div class="grid-3">
+            <div class="card-cyber">
+                <div class="card-icon">👨‍👩‍👧‍👦</div>
+                <div class="card-title">Частным лицам</div>
+                <div class="card-desc">Индивидуальные уроки по спидкубингу. Развитие логики и моторики. Создаю стильные мозаики в подарок.</div>
+                <a href="#contact" class="btn-explode" style="padding: 10px 25px; font-size: 14px; margin-top: 20px;">Записаться</a>
+            </div>
+            <div class="card-cyber">
+                <div class="card-icon">🏢</div>
+                <div class="card-title">Для бизнеса</div>
+                <div class="card-desc">Соберу логотип компании из кубиков. Проведу яркий мастер-класс по спидкубингу для команды.</div>
+                <a href="#contact" class="btn-explode" style="padding: 10px 25px; font-size: 14px; margin-top: 20px;">Заказать</a>
+            </div>
+            <div class="card-cyber">
+                <div class="card-icon">🤝</div>
+                <div class="card-title">Социальный проект</div>
+                <div class="card-desc">«Кубик добра». Обучение детей с ОВЗ, участников СВО. Входит в Топ-100 лучших практик России.</div>
+                <a href="#contact" class="btn-explode" style="padding: 10px 25px; font-size: 14px; margin-top: 20px;">Сотрудничать</a>
             </div>
         </div>
     </section>
 
-    <!-- КОНТАКТЫ -->
-    <section class="section-wrap" id="contact">
-        <div class="container">
-            <h2 style="text-align: center; font-size: 42px; margin-bottom: 10px; color: #d8b45a;">На связи</h2>
-            <p style="text-align: center; color: #a0a8c0; margin-bottom: 40px;">Напишите — обсудим детали.</p>
-            <div class="contact-grid">
-                <a href="mailto:cherniakov-egor@yandex.ru">📧 cherniakov-egor@yandex.ru</a>
-                <a href="tel:+79214089944">📞 +7 (921) 408-99-44</a>
-                <a href="https://vk.com/che_egor" target="_blank">💬 VK: che_egor</a>
-            </div>
+    <!-- Контакты -->
+    <section class="section" id="contact" style="text-align: center;">
+        <h2 style="font-size: 40px; color: #d8b45a; margin-bottom: 20px;">На связи</h2>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
+            <a href="mailto:cherniakov-egor@yandex.ru" style="color: #8890b0; text-decoration: none; font-size: 20px; border: 1px solid rgba(255,255,255,0.1); padding: 15px 40px; border-radius: 40px; transition: 0.3s;">📧 cherniakov-egor@yandex.ru</a>
+            <a href="tel:+79214089944" style="color: #8890b0; text-decoration: none; font-size: 20px; border: 1px solid rgba(255,255,255,0.1); padding: 15px 40px; border-radius: 40px; transition: 0.3s;">📞 +7 (921) 408-99-44</a>
         </div>
     </section>
 
-    <footer style="text-align: center; padding: 40px; color: #555; border-top: 1px solid rgba(255,255,255,0.05);">
+    <footer>
         <p>✦ Собрано как кубик Рубика — по алгоритму и с душой ✦</p>
-        <p>© <span id="current-year"></span> Егор Черняков</p>
+        <p>© 2026 Егор Черняков</p>
     </footer>
 
     <script>
-        // ===== ПЕЧАТЬ ТЕКСТА =====
-        const text = "Егор Черняков";
-        let i = 0;
-        function typeWriter() {
-            if (i < text.length) {
-                document.getElementById("typewriter").textContent += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 150);
-            }
+        // ===== 1. КУРСОР-ШЛЕЙФ =====
+        const cursor = document.getElementById('cursor');
+        const trails = [];
+        for (let i = 0; i < 10; i++) {
+            const trail = document.createElement('div');
+            trail.className = 'cursor-trail';
+            trail.style.width = (40 - i * 3) + 'px';
+            trail.style.height = (40 - i * 3) + 'px';
+            trail.style.opacity = 0.5 - i * 0.05;
+            document.body.appendChild(trail);
+            trails.push(trail);
         }
-        typeWriter();
 
-        // ===== 3D КУБ (Слежение за мышкой) =====
-        const cube = document.getElementById('cube3d');
-        document.addEventListener('mousemove', (e) => {
-            const x = (window.innerWidth / 2 - e.clientX) / 50;
-            const y = (window.innerHeight / 2 - e.clientY) / 50;
-            cube.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+        let mouseX = 0, mouseY = 0;
+        document.addEventListener('mousemove', e => {
+            mouseX = e.clientX; mouseY = e.clientY;
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top = mouseY + 'px';
         });
 
-        // ===== ЧАСТИЦЫ (Золотая пыль) =====
-        const canvas = document.getElementById('particles-canvas');
+        function animateTrails() {
+            trails.forEach((t, i) => {
+                setTimeout(() => {
+                    t.style.left = mouseX + 'px';
+                    t.style.top = mouseY + 'px';
+                }, i * 20);
+            });
+            requestAnimationFrame(animateTrails);
+        }
+        animateTrails();
+
+        // ===== 2. 3D ВРАЩАЮЩИЙСЯ ШАР (WEBGL) =====
+        const canvas = document.getElementById('webgl-bg');
         const ctx = canvas.getContext('2d');
-        let particles = [];
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+        let width, height;
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
         }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
+        window.addEventListener('resize', resize);
+        resize();
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.vx = (Math.random() - 0.5) * 0.5;
-                this.vy = (Math.random() - 0.5) * 0.5;
-                this.size = Math.random() * 3 + 1;
-                this.opacity = Math.random() * 0.5 + 0.3;
-            }
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-            }
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(216, 180, 90, ${this.opacity})`;
-                ctx.fill();
-                ctx.shadowBlur = 15;
-                ctx.shadowColor = 'rgba(216, 180, 90, 0.5)';
-            }
+        const dots = [];
+        const numDots = 400;
+        for (let i = 0; i < numDots; i++) {
+            const theta = Math.random() * Math.PI * 2;
+            const phi = Math.acos(2 * Math.random() - 1);
+            const r = 200 + Math.random() * 150;
+            dots.push({
+                x: r * Math.sin(phi) * Math.cos(theta),
+                y: r * Math.sin(phi) * Math.sin(theta),
+                z: r * Math.cos(phi),
+                theta, phi, r
+            });
         }
 
-        for (let i = 0; i < 80; i++) particles.push(new Particle());
+        let angle = 0;
+        function drawSphere() {
+            ctx.clearRect(0, 0, width, height);
+            const centerX = width / 2, centerY = height / 2;
+            const projected = [];
 
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => { p.update(); p.draw(); });
-            // Рисуем линии между близкими частицами
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 120) {
+            dots.forEach(d => {
+                const cosA = Math.cos(angle);
+                const sinA = Math.sin(angle);
+                const x = d.x * cosA - d.z * sinA;
+                const z = d.x * sinA + d.z * cosA;
+                const y = d.y;
+                const scale = 400 / (400 + z);
+                const sx = centerX + x * scale;
+                const sy = centerY + y * scale;
+                const size = Math.max(0.5, 2 * scale);
+                projected.push({ sx, sy, size, z });
+            });
+
+            // Рисуем линии (коннекты)
+            for (let i = 0; i < projected.length; i++) {
+                for (let j = i + 1; j < projected.length; j++) {
+                    const dx = projected[i].sx - projected[j].sx;
+                    const dy = projected[i].sy - projected[j].sy;
+                    const dist = Math.sqrt(dx*dx + dy*dy);
+                    if (dist < 100) {
                         ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(216, 180, 90, ${0.1 * (1 - dist / 120)})`;
+                        ctx.moveTo(projected[i].sx, projected[i].sy);
+                        ctx.lineTo(projected[j].sx, projected[j].sy);
+                        ctx.strokeStyle = `rgba(216, 180, 90, ${0.08 * (1 - dist/100)})`;
                         ctx.stroke();
                     }
                 }
             }
-            requestAnimationFrame(animateParticles);
-        }
-        animateParticles();
 
-        // Год
-        document.getElementById('current-year').textContent = new Date().getFullYear();
+            // Рисуем точки
+            projected.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.sx, p.sy, p.size, 0, Math.PI*2);
+                ctx.fillStyle = 'rgba(216, 180, 90, 0.7)';
+                ctx.fill();
+            });
+
+            angle += 0.003;
+            requestAnimationFrame(drawSphere);
+        }
+        drawSphere();
+
+        // ===== 3. 3D СЛАЙДЕР =====
+        const slider = document.getElementById('slider3d');
+        const slides = slider.querySelectorAll('.slide-card');
+        const totalSlides = slides.length;
+        let currentSlide = 0;
+        const radius = 600;
+
+        function updateSlider() {
+            slides.forEach((slide, i) => {
+                const angle = (i - currentSlide) * (360 / totalSlides);
+                const rad = angle * (Math.PI / 180);
+                const x = Math.sin(rad) * radius;
+                const z = Math.cos(rad) * radius - radius;
+                const scale = 1 + z / 800;
+                slide.style.transform = `translateX(${x}px) translateZ(${z}px) scale(${Math.max(0.6, scale)})`;
+                slide.style.opacity = Math.max(0.3, scale);
+            });
+        }
+        updateSlider();
+
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        }, 3000);
+
+        // ===== 4. ВЗРЫВ ЧАСТИЦ ПРИ КЛИКЕ =====
+        document.getElementById('explodeBtn').addEventListener('click', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            for (let i = 0; i < 40; i++) {
+                const spark = document.createElement('div');
+                spark.style.cssText = `
+                    position: fixed; pointer-events: none; z-index: 9999;
+                    left: ${e.clientX}px; top: ${e.clientY}px;
+                    width: 6px; height: 6px; border-radius: 50%;
+                    background: #d8b45a;
+                    box-shadow: 0 0 10px #d8b45a;
+                    transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+                `;
+                document.body.appendChild(spark);
+                const angle = Math.random() * Math.PI * 2;
+                const speed = 150 + Math.random() * 250;
+                requestAnimationFrame(() => {
+                    spark.style.transform = `translate(${Math.cos(angle)*speed}px, ${Math.sin(angle)*speed}px) scale(0)`;
+                    spark.style.opacity = 0;
+                });
+                setTimeout(() => spark.remove(), 800);
+            }
+        });
     </script>
 </body>
 </html>
