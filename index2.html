@@ -15,8 +15,8 @@
     <style>
         :root {
             --ink: #172033;
-            --ink-soft: #33405a;
-            --muted: #758095;
+            --ink-light: #354158;
+            --muted: #748095;
 
             --cream: #f7f4ee;
             --white: #ffffff;
@@ -30,8 +30,8 @@
             --mint: #66b48c;
             --violet: #8068d8;
 
-            --shadow-soft: 0 8px 25px rgba(35,45,70,.07);
-            --shadow: 0 22px 65px rgba(35,45,70,.13);
+            --shadow-soft: 0 8px 25px rgba(35, 45, 70, .07);
+            --shadow: 0 22px 65px rgba(35, 45, 70, .14);
 
             --radius: 24px;
             --container: 1180px;
@@ -51,8 +51,8 @@
             min-width: 320px;
             overflow-x: hidden;
             background:
-                radial-gradient(circle at 95% 0%, rgba(243,200,75,.18), transparent 25rem),
-                radial-gradient(circle at 0% 40%, rgba(49,91,234,.09), transparent 28rem),
+                radial-gradient(circle at 95% 0%, rgba(243, 200, 75, .18), transparent 25rem),
+                radial-gradient(circle at 0% 40%, rgba(49, 91, 234, .09), transparent 28rem),
                 var(--cream);
             color: var(--ink);
             font-family: Inter, Arial, sans-serif;
@@ -70,7 +70,6 @@
 
         button,
         input,
-        textarea,
         select {
             font: inherit;
         }
@@ -93,8 +92,8 @@
             width: 18px;
             height: 18px;
             border-radius: 5px;
-            opacity: .22;
             transform: rotate(45deg);
+            opacity: .22;
             pointer-events: none;
         }
 
@@ -131,16 +130,16 @@
             right: 0;
             z-index: 50;
             padding: 18px 0;
-            background: rgba(247,244,238,.84);
+            background: rgba(247, 244, 238, .84);
             border-bottom: 1px solid transparent;
             backdrop-filter: blur(18px);
             transition: .3s ease;
         }
 
         .header.scrolled {
-            background: rgba(255,255,255,.95);
+            background: rgba(255, 255, 255, .95);
             border-color: var(--line);
-            box-shadow: 0 5px 25px rgba(35,45,70,.06);
+            box-shadow: 0 5px 25px rgba(35, 45, 70, .06);
         }
 
         .header-inner {
@@ -193,7 +192,7 @@
         .nav {
             display: flex;
             align-items: center;
-            gap: 27px;
+            gap: 26px;
             color: var(--muted);
             font-size: 13px;
             font-weight: 600;
@@ -209,12 +208,14 @@
 
         .header-button {
             padding: 10px 17px;
+            border: 0;
             border-radius: 100px;
             background: var(--blue);
             color: white;
             font-size: 12px;
             font-weight: 700;
-            box-shadow: 0 7px 20px rgba(49,91,234,.18);
+            cursor: pointer;
+            box-shadow: 0 7px 20px rgba(49, 91, 234, .18);
             transition: .25s ease;
         }
 
@@ -223,7 +224,7 @@
             transform: translateY(-2px);
         }
 
-        /* ===== ОБЩИЕ ЭЛЕМЕНТЫ ===== */
+        /* ===== ОБЩИЕ СТИЛИ ===== */
 
         .section {
             position: relative;
@@ -283,7 +284,7 @@
             transform: translateY(25px);
             transition:
                 opacity .75s ease,
-                transform .75s cubic-bezier(.2,.8,.2,1);
+                transform .75s cubic-bezier(.2, .8, .2, 1);
         }
 
         .reveal.visible {
@@ -305,14 +306,14 @@
             font-size: 14px;
             font-weight: 800;
             cursor: pointer;
-            box-shadow: 0 9px 22px rgba(49,91,234,.18);
+            box-shadow: 0 9px 22px rgba(49, 91, 234, .18);
             transition: .3s ease;
         }
 
         .btn:hover {
             background: var(--blue-dark);
             transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(49,91,234,.25);
+            box-shadow: 0 15px 30px rgba(49, 91, 234, .25);
         }
 
         .btn-yellow {
@@ -321,7 +322,7 @@
         }
 
         .btn-yellow:hover {
-            background: #e9b72d;
+            background: #e8b62d;
             color: var(--ink);
         }
 
@@ -342,10 +343,10 @@
         /* ===== HERO ===== */
 
         .hero {
-            min-height: 920px;
+            min-height: 910px;
             display: flex;
             align-items: center;
-            padding: 145px 0 100px;
+            padding: 145px 0 105px;
         }
 
         .hero-content {
@@ -370,7 +371,7 @@
             height: 9px;
             border-radius: 50%;
             background: var(--coral);
-            box-shadow: 0 0 0 6px rgba(233,106,93,.14);
+            box-shadow: 0 0 0 6px rgba(233, 106, 93, .14);
         }
 
         .hero h1 {
@@ -399,8 +400,8 @@
 
         .hero-actions {
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             flex-wrap: wrap;
             gap: 12px;
         }
@@ -638,38 +639,38 @@
             line-height: 1.75;
         }
 
-        /* ===== КОНСУЛЬТАЦИЯ ===== */
+        /* ===== КАЛЬКУЛЯТОР ===== */
 
-        .consultation-section {
+        .calculator-section {
             background: #fffdf8;
             border-top: 1px solid #f0eadb;
             border-bottom: 1px solid #f0eadb;
         }
 
-        .consultation-box {
-            max-width: 940px;
+        .calculator-box {
+            max-width: 920px;
             margin: 55px auto 0;
-            padding: 43px;
+            padding: 42px;
             border-radius: var(--radius);
             background: white;
             box-shadow: var(--shadow-soft);
             text-align: center;
         }
 
-        .consultation-box h3 {
-            margin-bottom: 14px;
+        .calculator-box h3 {
+            margin-bottom: 12px;
             font-size: 30px;
             letter-spacing: -.04em;
         }
 
-        .consultation-box > p {
+        .calculator-box > p {
             max-width: 720px;
             margin: 0 auto;
             color: var(--muted);
-            font-size: 17px;
+            font-size: 16px;
         }
 
-        .calculator {
+        .calculator-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 14px;
@@ -680,16 +681,13 @@
         .field label {
             display: block;
             margin-bottom: 7px;
-            color: var(--ink-soft);
+            color: var(--ink-light);
             font-size: 12px;
             font-weight: 700;
         }
 
         .field input,
-        .field select,
-        .request-form input,
-        .request-form textarea,
-        .request-form select {
+        .field select {
             width: 100%;
             min-height: 48px;
             padding: 0 14px;
@@ -700,28 +698,19 @@
             color: var(--ink);
         }
 
-        .field textarea,
-        .request-form textarea {
-            padding-top: 13px;
-            resize: vertical;
-        }
-
         .field input:focus,
-        .field select:focus,
-        .request-form input:focus,
-        .request-form textarea:focus,
-        .request-form select:focus {
+        .field select:focus {
             border-color: var(--blue);
             box-shadow: 0 0 0 4px rgba(49,91,234,.1);
         }
 
         .calculator-result {
             margin-top: 25px;
-            padding: 20px;
+            padding: 22px;
             border-radius: 17px;
             background: var(--soft);
-            color: var(--ink-soft);
-            font-size: 15px;
+            color: var(--ink-light);
+            font-size: 14px;
         }
 
         .calculator-result strong {
@@ -731,8 +720,15 @@
             font-size: 28px;
         }
 
+        .calculator-result small {
+            display: block;
+            margin-top: 7px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
         .calculator-note {
-            margin-top: 12px;
+            margin-top: 15px;
             color: var(--muted);
             font-size: 12px;
         }
@@ -751,11 +747,11 @@
         }
 
         .portfolio-note {
-            max-width: 660px;
+            max-width: 700px;
             margin: 20px auto 0;
-            padding: 14px 18px;
+            padding: 15px 18px;
             border-radius: 15px;
-            background: rgba(255,255,255,.76);
+            background: rgba(255,255,255,.78);
             color: var(--muted);
             font-size: 14px;
         }
@@ -864,15 +860,13 @@
             font-size: 10px;
         }
 
-        /* ===== АРХИВ ===== */
-
         .archive-box {
             max-width: 850px;
             margin: 45px auto 0;
             padding: 30px;
             border: 1px dashed #cbd4e2;
             border-radius: var(--radius);
-            background: rgba(255,255,255,.6);
+            background: rgba(255,255,255,.62);
             text-align: center;
         }
 
@@ -1005,7 +999,7 @@
 
         .faq {
             max-width: 850px;
-            margin: 52px auto 0;
+            margin: 50px auto 0;
         }
 
         .faq-item {
@@ -1020,7 +1014,6 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 20px;
             width: 100%;
             padding: 19px 21px;
             border: 0;
@@ -1034,7 +1027,7 @@
 
         .faq-question span {
             color: var(--blue);
-            font-size: 21px;
+            font-size: 22px;
             transition: .25s ease;
         }
 
@@ -1121,6 +1114,7 @@
             margin: 0 auto 30px;
             color: rgba(255,255,255,.84);
             font-size: 18px;
+            text-align: center;
         }
 
         .contact-links {
@@ -1152,15 +1146,9 @@
             font-size: 12px;
         }
 
-        /* ===== МОБИЛЬНАЯ КНОПКА ===== */
+        /* ===== МОДАЛЬНОЕ ОКНО СВЯЗИ ===== */
 
-        .mobile-contact {
-            display: none;
-        }
-
-        /* ===== МОДАЛЬНОЕ ОКНО ===== */
-
-        .modal {
+        .contact-modal {
             position: fixed;
             inset: 0;
             z-index: 90;
@@ -1168,29 +1156,41 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
-            background: rgba(23,32,51,.62);
+            background: rgba(23,32,51,.6);
             backdrop-filter: blur(8px);
         }
 
-        .modal.active {
+        .contact-modal.active {
             display: flex;
         }
 
-        .modal-content {
+        .contact-modal-box {
             position: relative;
-            width: min(560px, 100%);
-            max-height: 90vh;
-            overflow-y: auto;
+            width: min(470px, 100%);
             padding: 35px;
             border-radius: var(--radius);
             background: white;
             box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .contact-modal-box h2 {
+            margin-bottom: 9px;
+            color: var(--ink);
+            font-size: 30px;
+            letter-spacing: -.05em;
+        }
+
+        .contact-modal-box > p {
+            margin-bottom: 25px;
+            color: var(--muted);
+            font-size: 14px;
         }
 
         .modal-close {
             position: absolute;
-            top: 15px;
-            right: 18px;
+            top: 13px;
+            right: 17px;
             border: 0;
             background: transparent;
             color: var(--muted);
@@ -1198,25 +1198,87 @@
             cursor: pointer;
         }
 
-        .modal-content h2 {
-            margin-bottom: 8px;
-            font-size: 30px;
-            letter-spacing: -.05em;
+        .contact-options {
+            display: grid;
+            gap: 10px;
         }
 
-        .modal-content > p {
-            margin-bottom: 25px;
-            color: var(--muted);
+        .contact-option {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            width: 100%;
+            padding: 15px 17px;
+            border: 1px solid var(--line);
+            border-radius: 15px;
+            background: white;
+            color: var(--ink);
+            cursor: pointer;
+            text-align: left;
+            transition: .25s ease;
+        }
+
+        .contact-option:hover {
+            border-color: var(--blue);
+            background: #f4f7ff;
+            transform: translateY(-2px);
+        }
+
+        .contact-option-icon {
+            display: grid;
+            place-items: center;
+            width: 38px;
+            height: 38px;
+            flex: 0 0 auto;
+            border-radius: 12px;
+            background: #edf3ff;
+            color: var(--blue);
+            font-size: 18px;
+        }
+
+        .contact-option:nth-child(2) .contact-option-icon {
+            background: #eaf8f0;
+            color: var(--mint);
+        }
+
+        .contact-option:nth-child(3) .contact-option-icon {
+            background: #fff5ce;
+            color: #ae8500;
+        }
+
+        .contact-option:nth-child(4) .contact-option-icon {
+            background: #ffebea;
+            color: var(--coral);
+        }
+
+        .contact-option:nth-child(5) .contact-option-icon {
+            background: #eeeaff;
+            color: var(--violet);
+        }
+
+        .contact-option strong {
+            display: block;
             font-size: 14px;
         }
 
-        .request-form {
-            display: grid;
-            gap: 13px;
+        .contact-option small {
+            display: block;
+            margin-top: 2px;
+            color: var(--muted);
+            font-size: 11px;
         }
 
-        .request-form textarea {
-            min-height: 100px;
+        .copy-message {
+            min-height: 20px;
+            margin-top: 15px;
+            color: var(--mint);
+            font-size: 12px;
+        }
+
+        /* ===== МОБИЛЬНАЯ КНОПКА ===== */
+
+        .mobile-contact {
+            display: none;
         }
 
         /* ===== LIGHTBOX ===== */
@@ -1309,12 +1371,8 @@
                 min-height: auto;
             }
 
-            .hero-grid {
-                display: block;
-            }
-
             .hero-visual {
-                margin-top: 75px;
+                margin-top: 70px;
             }
 
             .case-grid {
@@ -1340,10 +1398,6 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .calculator {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
             .portfolio-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }
@@ -1361,6 +1415,10 @@
             .artwork:nth-child(10) {
                 grid-column: span 2;
                 height: 350px;
+            }
+
+            .calculator-grid {
+                grid-template-columns: repeat(3, 1fr);
             }
         }
 
@@ -1479,7 +1537,7 @@
 
             .services,
             .process,
-            .calculator,
+            .calculator-grid,
             .numbers {
                 grid-template-columns: 1fr;
             }
@@ -1489,41 +1547,16 @@
                 padding: 28px;
             }
 
-            .consultation-box {
+            .calculator-box {
                 padding: 27px 20px;
             }
 
-            .consultation-box h3 {
+            .calculator-box h3 {
                 font-size: 27px;
             }
 
-            .consultation-box > p {
-                font-size: 15px;
-            }
-
-            .calculator {
+            .calculator-grid {
                 text-align: left;
-            }
-
-            .portfolio-header {
-                margin-bottom: 28px;
-            }
-
-            .filters {
-                flex-wrap: nowrap;
-                justify-content: flex-start;
-                overflow-x: auto;
-                padding-bottom: 7px;
-                scrollbar-width: none;
-            }
-
-            .filters::-webkit-scrollbar {
-                display: none;
-            }
-
-            .filter {
-                flex: 0 0 auto;
-                white-space: nowrap;
             }
 
             .portfolio-grid {
@@ -1594,8 +1627,8 @@
                 font-size: 12px;
             }
 
-            .modal-content {
-                padding: 28px 20px;
+            .contact-modal-box {
+                padding: 30px 20px;
             }
 
             .mobile-contact {
@@ -1658,18 +1691,19 @@
                 <span></span><span></span><span></span>
                 <span></span><span></span><span></span>
             </span>
+
             ЕГОР ЧЕРНЯКОВ
         </a>
 
         <nav class="nav">
             <a href="#works">Картины</a>
             <a href="#services">Форматы</a>
-            <a href="#portfolio">Портфолио</a>
             <a href="#calculator">Расчёт</a>
-            <a href="#contacts">Контакты</a>
+            <a href="#portfolio">Портфолио</a>
+            <a href="#about">Обо мне</a>
         </nav>
 
-        <button class="header-button" id="openRequest">
+        <button class="header-button open-contact">
             Обсудить проект
         </button>
 
@@ -1678,12 +1712,13 @@
 
 <main id="top">
 
-    <!-- HERO -->
+    <!-- ПЕРВЫЙ ЭКРАН -->
 
     <section class="hero">
         <div class="container">
 
             <div class="hero-content reveal">
+
                 <div class="hero-kicker">
                     <i></i>
                     Авторские картины для компаний
@@ -1701,7 +1736,7 @@
                 </p>
 
                 <div class="hero-actions">
-                    <button class="btn" id="openHeroRequest">
+                    <button class="btn open-contact">
                         Обсудить проект ↗
                     </button>
 
@@ -1709,6 +1744,7 @@
                         Смотреть работы
                     </a>
                 </div>
+
             </div>
 
             <div class="hero-visual reveal">
@@ -1737,7 +1773,7 @@
         <span></span>
     </div>
 
-    <!-- КЕЙС -->
+    <!-- КЕЙС ДОДО -->
 
     <section class="section case-section" id="works">
         <div class="container">
@@ -1812,7 +1848,7 @@
                         </div>
                     </div>
 
-                    <button class="btn btn-yellow" id="openCaseRequest">
+                    <button class="btn btn-yellow open-contact">
                         Заказать картину
                     </button>
 
@@ -1845,7 +1881,11 @@
 
                 <article class="service reveal">
                     <div class="service-icon">▦</div>
-                    <h3>Картины для компаний</h3>
+
+                    <h3>
+                        Картины для компаний
+                    </h3>
+
                     <p>
                         Соберу логотип, фирменный образ, портрет
                         или тематическую композицию из кубиков Рубика.
@@ -1854,7 +1894,11 @@
 
                 <article class="service reveal">
                     <div class="service-icon">◈</div>
-                    <h3>Картины для интерьера</h3>
+
+                    <h3>
+                        Картины для интерьера
+                    </h3>
+
                     <p>
                         Создам арт-объект для ресторана, офиса,
                         библиотеки, холла или общественного пространства.
@@ -1863,7 +1907,11 @@
 
                 <article class="service reveal">
                     <div class="service-icon">✦</div>
-                    <h3>Мастер-классы</h3>
+
+                    <h3>
+                        Мастер-классы
+                    </h3>
+
                     <p>
                         Проведу интерактивное занятие для сотрудников,
                         гостей фестиваля, детей или семейной аудитории.
@@ -1874,9 +1922,9 @@
         </div>
     </section>
 
-    <!-- КАЛЬКУЛЯТОР -->
+    <!-- РАСЧЁТ -->
 
-    <section class="section consultation-section" id="calculator">
+    <section class="section calculator-section" id="calculator">
         <div class="container">
 
             <div class="section-label reveal">
@@ -1889,69 +1937,94 @@
             </h2>
 
             <p class="section-description reveal">
-                Не обязательно заранее знать, сколько кубиков понадобится.
-                Достаточно прислать логотип, фотографию или описание идеи.
+                Один кубик имеет размер 56 × 56 мм.
+                Чем больше кубиков будет использовано,
+                тем выше получится детализация картины.
             </p>
 
-            <div class="consultation-box reveal">
+            <div class="calculator-box reveal">
 
                 <h3>
-                    Предварительный расчёт проекта
+                    Предварительный расчёт картины
                 </h3>
 
                 <p>
-                    Укажите предполагаемый размер картины и уровень детализации.
-                    Сайт покажет ориентировочное количество кубиков.
+                    Для небольшого простого логотипа может подойти
+                    компактный формат. Для портрета или сложной иллюстрации
+                    потребуется больше кубиков.
                 </p>
 
-                <div class="calculator">
+                <div class="calculator-grid">
 
                     <div class="field">
-                        <label for="widthInput">Ширина, см</label>
+                        <label for="widthCubes">
+                            Кубики по ширине
+                        </label>
+
                         <input
-                            id="widthInput"
+                            id="widthCubes"
                             type="number"
-                            min="20"
-                            max="500"
-                            value="100"
+                            min="1"
+                            max="100"
+                            value="15"
                         >
                     </div>
 
                     <div class="field">
-                        <label for="heightInput">Высота, см</label>
+                        <label for="heightCubes">
+                            Кубики по высоте
+                        </label>
+
                         <input
-                            id="heightInput"
+                            id="heightCubes"
                             type="number"
-                            min="20"
-                            max="500"
-                            value="70"
+                            min="1"
+                            max="100"
+                            value="20"
                         >
                     </div>
 
                     <div class="field">
-                        <label for="detailInput">Детализация</label>
+                        <label for="detailLevel">
+                            Назначение
+                        </label>
 
-                        <select id="detailInput">
-                            <option value="0.55">Базовая</option>
-                            <option value="0.8" selected>Средняя</option>
-                            <option value="1.15">Высокая</option>
+                        <select id="detailLevel">
+                            <option value="small">
+                                Маленький логотип
+                            </option>
+
+                            <option value="medium" selected>
+                                Портрет или обычная картина
+                            </option>
+
+                            <option value="large">
+                                Сложная большая мозаика
+                            </option>
                         </select>
                     </div>
 
                 </div>
 
                 <div class="calculator-result">
-                    <strong id="cubeResult">0 кубиков</strong>
-                    Ориентировочное количество для выбранного формата
+                    <strong id="cubeCount">300 кубиков</strong>
+
+                    <span id="pictureSize">
+                        Размер полотна: 84 × 112 см
+                    </span>
+
+                    <small id="detailText">
+                        Подходит для портретов и обычных тематических картин.
+                    </small>
                 </div>
 
                 <p class="calculator-note">
-                    Итоговый расчёт будет выполнен после анализа изображения,
-                    композиции, количества цветов и требований к раме.
+                    Размер указан без учёта рамки. Точный расчёт будет зависеть
+                    от исходного изображения, количества цветов и желаемой детализации.
                 </p>
 
-                <button class="btn" id="openCalculatorRequest" style="margin-top: 25px;">
-                    Получить точный расчёт
+                <button class="btn open-contact" style="margin-top: 25px;">
+                    Получить консультацию
                 </button>
 
             </div>
@@ -2014,7 +2087,7 @@
                     В архиве находятся работы, которые сейчас отсутствуют
                     в основной подборке: картины, переданные заказчикам,
                     фотографии с мероприятий и проекты прошлых лет.
-                    <span>Новые работы будут добавляться сюда по мере появления материалов.</span>
+                    <span>Новые материалы будут добавляться постепенно.</span>
                 </p>
             </div>
 
@@ -2038,8 +2111,14 @@
             <div class="process">
 
                 <article class="process-item reveal">
-                    <div class="process-number">01 / ОБСУЖДЕНИЕ</div>
-                    <h3>Обсудим задачу</h3>
+                    <div class="process-number">
+                        01 / ОБСУЖДЕНИЕ
+                    </div>
+
+                    <h3>
+                        Обсудим задачу
+                    </h3>
+
                     <p>
                         Вы расскажете о компании, пространстве,
                         мероприятии и желаемом результате.
@@ -2047,8 +2126,14 @@
                 </article>
 
                 <article class="process-item reveal">
-                    <div class="process-number">02 / ИДЕЯ</div>
-                    <h3>Подберём образ</h3>
+                    <div class="process-number">
+                        02 / ИДЕЯ
+                    </div>
+
+                    <h3>
+                        Подберём образ
+                    </h3>
+
                     <p>
                         Выберем логотип, фотографию, портрет,
                         персонажа или авторский эскиз.
@@ -2056,8 +2141,14 @@
                 </article>
 
                 <article class="process-item reveal">
-                    <div class="process-number">03 / СОЗДАНИЕ</div>
-                    <h3>Соберу мозаику</h3>
+                    <div class="process-number">
+                        03 / СОЗДАНИЕ
+                    </div>
+
+                    <h3>
+                        Соберу мозаику
+                    </h3>
+
                     <p>
                         Подберу цвета, рассчитаю композицию
                         и соберу изображение из кубиков.
@@ -2065,8 +2156,14 @@
                 </article>
 
                 <article class="process-item reveal">
-                    <div class="process-number">04 / РЕЗУЛЬТАТ</div>
-                    <h3>Картина появится в пространстве</h3>
+                    <div class="process-number">
+                        04 / РЕЗУЛЬТАТ
+                    </div>
+
+                    <h3>
+                        Картина появится в пространстве
+                    </h3>
+
                     <p>
                         Готовая работа станет частью интерьера,
                         подарком или центром внимания на событии.
@@ -2166,10 +2263,10 @@
                     </button>
 
                     <div class="faq-answer">
-                        Количество будет зависеть от размера картины,
-                        сложности изображения, количества цветов и требуемой
-                        детализации. После получения исходного изображения
-                        будет подготовлен более точный расчёт.
+                        Небольшой простой логотип можно будет выполнить
+                        примерно из 120 кубиков. Для портрета или обычной картины
+                        чаще подойдёт формат около 300 кубиков. Чем больше кубиков,
+                        тем выше детализация изображения.
                     </div>
                 </div>
 
@@ -2187,14 +2284,14 @@
 
                 <div class="faq-item reveal">
                     <button class="faq-question">
-                        Где можно разместить такую работу?
+                        Можно ли подобрать размер картины?
                         <span>+</span>
                     </button>
 
                     <div class="faq-answer">
-                        Картина сможет украсить ресторан, офис, холл,
-                        библиотеку, выставочную площадку, фестиваль
-                        или другое общественное пространство.
+                        Да. Помогу выбрать размер с учётом помещения,
+                        расстояния просмотра, сложности изображения
+                        и необходимого уровня детализации.
                     </div>
                 </div>
 
@@ -2205,9 +2302,9 @@
                     </button>
 
                     <div class="faq-answer">
-                        Стоимость рассчитывается индивидуально после
-                        обсуждения размера, изображения, сложности,
-                        сроков, рамы, доставки и других деталей проекта.
+                        Стоимость рассчитывается индивидуально после обсуждения
+                        изображения, размера, количества кубиков, рамы,
+                        сроков и других особенностей проекта.
                     </div>
                 </div>
 
@@ -2215,7 +2312,7 @@
         </div>
     </section>
 
-    <!-- CTA -->
+    <!-- КОНТАКТЫ -->
 
     <section class="section" id="contacts">
         <div class="container">
@@ -2237,21 +2334,29 @@
                     мастер-класса или интерактивного проекта.
                 </p>
 
-                <button class="btn btn-yellow" id="openContactRequest">
-                    Написать по проекту ↗
+                <button class="btn btn-yellow open-contact">
+                    Выбрать способ связи ↗
                 </button>
 
                 <div class="contact-links">
                     <a class="contact-link" href="mailto:cherniakov-egor@yandex.ru">
-                        cherniakov-egor@yandex.ru
+                        Электронная почта
                     </a>
 
                     <a class="contact-link" href="tel:+79214089944">
-                        +7 921 408-99-44
+                        Телефон
                     </a>
 
                     <a class="contact-link" href="https://vk.com/che_egor" target="_blank">
                         ВКонтакте
+                    </a>
+
+                    <a class="contact-link" href="https://t.me/espeedcuber" target="_blank">
+                        Telegram
+                    </a>
+
+                    <a class="contact-link" href="https://max.ru/u/f9LHodD0cOKYeNDN_fK5W_vjtNJ2-1oHZKi_bjzNkFE8CbE98yosq2eLEsA" target="_blank">
+                        MAX
                     </a>
                 </div>
 
@@ -2267,67 +2372,110 @@
     </div>
 </footer>
 
-<a href="#contacts" class="mobile-contact">
-    Обсудить проект
+<a class="mobile-contact open-contact" href="#contacts">
+    Выбрать способ связи
 </a>
 
-<!-- МОДАЛЬНАЯ ФОРМА -->
+<!-- МОДАЛЬНОЕ ОКНО ВЫБОРА СВЯЗИ -->
 
-<div class="modal" id="requestModal">
-    <div class="modal-content">
+<div class="contact-modal" id="contactModal">
+    <div class="contact-modal-box">
 
         <button class="modal-close" id="modalClose">
             ×
         </button>
 
         <h2>
-            Обсудим Ваш проект
+            Выберите способ связи
         </h2>
 
         <p>
-            Заполните форму — откроется письмо с подготовленным обращением.
+            Сайт не собирает и не хранит персональные данные.
+            Вы сами выберете удобный канал общения.
         </p>
 
-        <form class="request-form" id="requestForm">
+        <div class="contact-options">
 
-            <input
-                id="formName"
-                type="text"
-                placeholder="Ваше имя"
-                required
+            <a
+                class="contact-option"
+                href="mailto:cherniakov-egor@yandex.ru"
             >
+                <span class="contact-option-icon">✉</span>
 
-            <input
-                id="formCompany"
-                type="text"
-                placeholder="Компания"
+                <span>
+                    <strong>Написать на почту</strong>
+                    <small>cherniakov-egor@yandex.ru</small>
+                </span>
+            </a>
+
+            <a
+                class="contact-option"
+                href="https://vk.com/che_egor"
+                target="_blank"
             >
+                <span class="contact-option-icon">ВК</span>
 
-            <select id="formType">
-                <option value="">Что необходимо создать?</option>
-                <option value="Картина для компании">Картина для компании</option>
-                <option value="Картина для интерьера">Картина для интерьера</option>
-                <option value="Мастер-класс">Мастер-класс</option>
-                <option value="Другое">Другое</option>
-            </select>
+                <span>
+                    <strong>Написать во ВКонтакте</strong>
+                    <small>Открыть страницу ВКонтакте</small>
+                </span>
+            </a>
 
-            <textarea
-                id="formMessage"
-                placeholder="Расскажите о задаче"
-            ></textarea>
-
-            <input
-                id="formContact"
-                type="text"
-                placeholder="Телефон или другой способ связи"
-                required
+            <a
+                class="contact-option"
+                href="https://t.me/espeedcuber"
+                target="_blank"
             >
+                <span class="contact-option-icon">➤</span>
 
-            <button class="btn" type="submit">
-                Подготовить письмо
+                <span>
+                    <strong>Написать в Telegram</strong>
+                    <small>@espeedcuber</small>
+                </span>
+            </a>
+
+            <a
+                class="contact-option"
+                href="https://max.ru/u/f9LHodD0cOKYeNDN_fK5W_vjtNJ2-1oHZKi_bjzNkFE8CbE98yosq2eLEsA"
+                target="_blank"
+            >
+                <span class="contact-option-icon">М</span>
+
+                <span>
+                    <strong>Написать в MAX</strong>
+                    <small>Открыть профиль MAX</small>
+                </span>
+            </a>
+
+            <a
+                class="contact-option"
+                href="tel:+79214089944"
+            >
+                <span class="contact-option-icon">☎</span>
+
+                <span>
+                    <strong>Позвонить</strong>
+                    <small>+7 921 408-99-44</small>
+                </span>
+            </a>
+
+            <button
+                class="contact-option"
+                id="copyContacts"
+                type="button"
+            >
+                <span class="contact-option-icon">⧉</span>
+
+                <span>
+                    <strong>Скопировать контакты</strong>
+                    <small>Телефон и электронная почта</small>
+                </span>
             </button>
 
-        </form>
+        </div>
+
+        <div class="copy-message" id="copyMessage"></div>
+
     </div>
 </div>
 
@@ -2355,6 +2503,7 @@
     </button>
 
     <div class="lightbox-caption" id="lightboxCaption"></div>
+
 </div>
 
 <script>
@@ -2386,6 +2535,8 @@
         ["kartina25.webp", "Масленица", "events", "Праздничная работа"],
         ["kartina26.webp", "Портрет в экспозиции", "portraits", "Портрет"]
     ];
+
+    /* ===== ПОРТФОЛИО ===== */
 
     const portfolioGrid = document.getElementById("portfolioGrid");
 
@@ -2429,8 +2580,6 @@
 
     renderPortfolio();
 
-    /* Фильтры */
-
     document.querySelectorAll(".filter").forEach(button => {
         button.addEventListener("click", () => {
             document.querySelectorAll(".filter").forEach(item => {
@@ -2442,31 +2591,54 @@
         });
     });
 
-    /* Калькулятор кубиков */
+    /* ===== КАЛЬКУЛЯТОР ===== */
 
-    const widthInput = document.getElementById("widthInput");
-    const heightInput = document.getElementById("heightInput");
-    const detailInput = document.getElementById("detailInput");
-    const cubeResult = document.getElementById("cubeResult");
+    const widthCubes = document.getElementById("widthCubes");
+    const heightCubes = document.getElementById("heightCubes");
+    const detailLevel = document.getElementById("detailLevel");
+    const cubeCount = document.getElementById("cubeCount");
+    const pictureSize = document.getElementById("pictureSize");
+    const detailText = document.getElementById("detailText");
 
-    function updateCubeEstimate() {
-        const width = Number(widthInput.value) || 0;
-        const height = Number(heightInput.value) || 0;
-        const detail = Number(detailInput.value) || .8;
+    const cubeSizeMm = 56;
 
-        const estimated = Math.round(width * height * detail);
+    function updateCalculator() {
+        const width = Math.max(1, Number(widthCubes.value) || 1);
+        const height = Math.max(1, Number(heightCubes.value) || 1);
 
-        cubeResult.textContent =
-            estimated.toLocaleString("ru-RU") + " кубиков";
+        const total = width * height;
+        const widthCm = (width * cubeSizeMm / 10).toFixed(1);
+        const heightCm = (height * cubeSizeMm / 10).toFixed(1);
+
+        cubeCount.textContent =
+            total.toLocaleString("ru-RU") + " кубиков";
+
+        pictureSize.textContent =
+            `Размер полотна: ${widthCm} × ${heightCm} см`;
+
+        if (detailLevel.value === "small") {
+            detailText.textContent =
+                "Формат для небольшого простого логотипа или символа.";
+        }
+
+        if (detailLevel.value === "medium") {
+            detailText.textContent =
+                "Подходит для портретов и обычных тематических картин.";
+        }
+
+        if (detailLevel.value === "large") {
+            detailText.textContent =
+                "Подходит для сложных изображений и больших мозаик.";
+        }
     }
 
-    widthInput.addEventListener("input", updateCubeEstimate);
-    heightInput.addEventListener("input", updateCubeEstimate);
-    detailInput.addEventListener("change", updateCubeEstimate);
+    widthCubes.addEventListener("input", updateCalculator);
+    heightCubes.addEventListener("input", updateCalculator);
+    detailLevel.addEventListener("change", updateCalculator);
 
-    updateCubeEstimate();
+    updateCalculator();
 
-    /* FAQ */
+    /* ===== FAQ ===== */
 
     document.querySelectorAll(".faq-question").forEach(button => {
         button.addEventListener("click", () => {
@@ -2475,71 +2647,60 @@
         });
     });
 
-    /* Модальная форма */
+    /* ===== МОДАЛЬНОЕ ОКНО СВЯЗИ ===== */
 
-    const modal = document.getElementById("requestModal");
+    const contactModal = document.getElementById("contactModal");
     const modalClose = document.getElementById("modalClose");
 
-    function openModal() {
-        modal.classList.add("active");
+    function openContactModal() {
+        contactModal.classList.add("active");
         document.body.classList.add("locked");
     }
 
-    function closeModal() {
-        modal.classList.remove("active");
+    function closeContactModal() {
+        contactModal.classList.remove("active");
         document.body.classList.remove("locked");
     }
 
-    document.getElementById("openRequest")
-        .addEventListener("click", openModal);
+    document.querySelectorAll(".open-contact").forEach(button => {
+        button.addEventListener("click", event => {
+            event.preventDefault();
+            openContactModal();
+        });
+    });
 
-    document.getElementById("openHeroRequest")
-        .addEventListener("click", openModal);
+    modalClose.addEventListener("click", closeContactModal);
 
-    document.getElementById("openCaseRequest")
-        .addEventListener("click", openModal);
-
-    document.getElementById("openCalculatorRequest")
-        .addEventListener("click", openModal);
-
-    document.getElementById("openContactRequest")
-        .addEventListener("click", openModal);
-
-    modalClose.addEventListener("click", closeModal);
-
-    modal.addEventListener("click", event => {
-        if (event.target === modal) {
-            closeModal();
+    contactModal.addEventListener("click", event => {
+        if (event.target === contactModal) {
+            closeContactModal();
         }
     });
 
-    document.getElementById("requestForm")
-        .addEventListener("submit", event => {
-            event.preventDefault();
+    /* ===== КОПИРОВАНИЕ КОНТАКТОВ ===== */
 
-            const name = document.getElementById("formName").value;
-            const company = document.getElementById("formCompany").value;
-            const type = document.getElementById("formType").value;
-            const message = document.getElementById("formMessage").value;
-            const contact = document.getElementById("formContact").value;
+    document.getElementById("copyContacts").addEventListener("click", async () => {
+        const contacts =
+            "Егор Черняков\n" +
+            "Телефон: +7 921 408-99-44\n" +
+            "Почта: cherniakov-egor@yandex.ru";
 
-            const subject = encodeURIComponent(
-                "Заявка на проект картины из кубиков Рубика"
-            );
+        const copyMessage = document.getElementById("copyMessage");
 
-            const body = encodeURIComponent(
-                `Имя: ${name}\n` +
-                `Компания: ${company}\n` +
-                `Формат проекта: ${type}\n` +
-                `Описание задачи: ${message}\n` +
-                `Контакт для связи: ${contact}`
-            );
+        try {
+            await navigator.clipboard.writeText(contacts);
+            copyMessage.textContent = "Контакты скопированы";
+        } catch {
+            copyMessage.textContent =
+                "Не удалось скопировать автоматически";
+        }
 
-            window.location.href =
-                `mailto:cherniakov-egor@yandex.ru?subject=${subject}&body=${body}`;
-        });
+        setTimeout(() => {
+            copyMessage.textContent = "";
+        }, 2500);
+    });
 
-    /* Лайтбокс */
+    /* ===== LIGHTBOX ===== */
 
     const lightbox = document.getElementById("lightbox");
     const lightboxImage = document.getElementById("lightboxImage");
@@ -2595,24 +2756,28 @@
     });
 
     document.addEventListener("keydown", event => {
-        if (!lightbox.classList.contains("active")) {
-            return;
+        if (lightbox.classList.contains("active")) {
+            if (event.key === "Escape") {
+                closeLightbox();
+            }
+
+            if (event.key === "ArrowLeft") {
+                changeArtwork(-1);
+            }
+
+            if (event.key === "ArrowRight") {
+                changeArtwork(1);
+            }
         }
 
-        if (event.key === "Escape") {
-            closeLightbox();
-        }
-
-        if (event.key === "ArrowLeft") {
-            changeArtwork(-1);
-        }
-
-        if (event.key === "ArrowRight") {
-            changeArtwork(1);
+        if (contactModal.classList.contains("active")) {
+            if (event.key === "Escape") {
+                closeContactModal();
+            }
         }
     });
 
-    /* Свайпы */
+    /* ===== СВАЙПЫ ===== */
 
     let touchStartX = 0;
     let touchEndX = 0;
@@ -2633,7 +2798,7 @@
         }
     }, { passive: true });
 
-    /* Шапка */
+    /* ===== ШАПКА ===== */
 
     const header = document.getElementById("header");
 
@@ -2641,7 +2806,7 @@
         header.classList.toggle("scrolled", window.scrollY > 30);
     });
 
-    /* Анимация появления */
+    /* ===== АНИМАЦИЯ ПОЯВЛЕНИЯ ===== */
 
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
@@ -2658,7 +2823,7 @@
         observer.observe(element);
     });
 
-    /* Год */
+    /* ===== ГОД ===== */
 
     document.getElementById("year").textContent =
         new Date().getFullYear();
