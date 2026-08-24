@@ -1,3 +1,13 @@
+Ниже — полный обновлённый index.html. В этой версии:
+
+заголовки и основные блоки выровнены по центру;
+текст написан единообразно;
+слово «я» используется умеренно;
+добавлен блок о подборе количества кубиков;
+цены не указаны, вместо них — индивидуальный расчёт;
+сайт светлый, красочный и адаптирован под мобильные устройства;
+подключены все 26 картин;
+есть фильтры, лайтбокс, стрелки и свайпы.
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -6,7 +16,7 @@
 
     <title>Картины из кубиков Рубика для компаний — Егор Черняков</title>
 
-    <meta name="description" content="Создание картин, логотипов и мозаик из кубиков Рубика для компаний, ресторанов, офисов, фестивалей и общественных пространств. Мастер-классы по сборке кубика Рубика.">
+    <meta name="description" content="Я создаю картины, логотипы и мозаики из кубиков Рубика для компаний, ресторанов, офисов, фестивалей и общественных пространств.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +25,9 @@
     <style>
         :root {
             --ink: #172033;
-            --muted: #758095;
+            --ink-soft: #344058;
+            --muted: #748096;
+
             --cream: #f7f4ee;
             --white: #ffffff;
             --soft: #eef2f8;
@@ -28,7 +40,7 @@
             --mint: #66b48c;
             --violet: #8068d8;
 
-            --shadow-small: 0 8px 25px rgba(35,45,70,.07);
+            --shadow-soft: 0 8px 25px rgba(35,45,70,.07);
             --shadow: 0 22px 65px rgba(35,45,70,.13);
 
             --radius: 24px;
@@ -88,13 +100,13 @@
             width: 18px;
             height: 18px;
             border-radius: 5px;
-            opacity: .23;
+            opacity: .22;
             transform: rotate(45deg);
             pointer-events: none;
         }
 
         .cube-1 {
-            top: 17%;
+            top: 18%;
             left: 5%;
             background: var(--blue);
         }
@@ -106,8 +118,8 @@
         }
 
         .cube-3 {
-            top: 73%;
-            left: 7%;
+            top: 70%;
+            left: 8%;
             background: var(--yellow);
         }
 
@@ -218,7 +230,7 @@
             transform: translateY(-2px);
         }
 
-        /* ===== ОБЩИЕ БЛОКИ ===== */
+        /* ===== ОБЩИЕ СТИЛИ ===== */
 
         .section {
             position: relative;
@@ -265,7 +277,7 @@
         }
 
         .section-description {
-            max-width: 670px;
+            max-width: 680px;
             margin: 22px auto 0;
             color: var(--muted);
             font-size: 18px;
@@ -313,7 +325,6 @@
         .btn-yellow {
             background: var(--yellow);
             color: var(--ink);
-            box-shadow: 0 9px 22px rgba(243,200,75,.22);
         }
 
         .btn-yellow:hover {
@@ -325,7 +336,7 @@
             background: white;
             color: var(--ink);
             border: 1px solid var(--line);
-            box-shadow: var(--shadow-small);
+            box-shadow: var(--shadow-soft);
         }
 
         .btn-outline:hover {
@@ -338,10 +349,10 @@
         /* ===== HERO ===== */
 
         .hero {
-            min-height: 930px;
+            min-height: 920px;
             display: flex;
             align-items: center;
-            padding: 150px 0 105px;
+            padding: 145px 0 105px;
         }
 
         .hero-content {
@@ -387,7 +398,7 @@
         }
 
         .hero-text {
-            max-width: 650px;
+            max-width: 670px;
             margin: 30px auto;
             color: var(--muted);
             font-size: 19px;
@@ -405,7 +416,7 @@
 
         .hero-visual {
             position: relative;
-            width: min(700px, 100%);
+            width: min(710px, 100%);
             margin: 75px auto 0;
         }
 
@@ -439,8 +450,8 @@
         .hero-tag {
             position: absolute;
             z-index: 3;
-            right: -20px;
-            bottom: 23px;
+            right: -18px;
+            bottom: 22px;
             padding: 17px;
             border-radius: 17px;
             background: var(--ink);
@@ -458,36 +469,22 @@
             margin-bottom: 6px;
         }
 
-        /* ===== ПОЛОСА ===== */
+        /* ===== ЦВЕТНАЯ ПОЛОСА ===== */
 
         .color-strip {
             display: flex;
-            height: 9px;
+            height: 8px;
         }
 
         .color-strip span {
             flex: 1;
         }
 
-        .color-strip span:nth-child(1) {
-            background: var(--blue);
-        }
-
-        .color-strip span:nth-child(2) {
-            background: var(--yellow);
-        }
-
-        .color-strip span:nth-child(3) {
-            background: var(--coral);
-        }
-
-        .color-strip span:nth-child(4) {
-            background: var(--mint);
-        }
-
-        .color-strip span:nth-child(5) {
-            background: var(--violet);
-        }
+        .color-strip span:nth-child(1) { background: var(--blue); }
+        .color-strip span:nth-child(2) { background: var(--yellow); }
+        .color-strip span:nth-child(3) { background: var(--coral); }
+        .color-strip span:nth-child(4) { background: var(--mint); }
+        .color-strip span:nth-child(5) { background: var(--violet); }
 
         /* ===== КЕЙС ===== */
 
@@ -506,7 +503,7 @@
 
         .case-image {
             position: relative;
-            min-height: 600px;
+            min-height: 610px;
             overflow: hidden;
             border-radius: var(--radius);
             background: #e8edf4;
@@ -535,7 +532,7 @@
             color: var(--ink);
             font-size: 12px;
             font-weight: 700;
-            box-shadow: var(--shadow-small);
+            box-shadow: var(--shadow-soft);
         }
 
         .case-info {
@@ -602,7 +599,7 @@
             border-top-width: 6px;
             border-radius: var(--radius);
             background: white;
-            box-shadow: var(--shadow-small);
+            box-shadow: var(--shadow-soft);
             text-align: center;
             transition: .3s ease;
         }
@@ -612,17 +609,9 @@
             box-shadow: var(--shadow);
         }
 
-        .service:nth-child(1) {
-            border-top-color: var(--blue);
-        }
-
-        .service:nth-child(2) {
-            border-top-color: var(--yellow);
-        }
-
-        .service:nth-child(3) {
-            border-top-color: var(--coral);
-        }
+        .service:nth-child(1) { border-top-color: var(--blue); }
+        .service:nth-child(2) { border-top-color: var(--yellow); }
+        .service:nth-child(3) { border-top-color: var(--coral); }
 
         .service-icon {
             display: grid;
@@ -658,6 +647,59 @@
             line-height: 1.75;
         }
 
+        /* ===== РАСЧЁТ КАРТИНЫ ===== */
+
+        .consultation-section {
+            background: #fffdf8;
+            border-top: 1px solid #f0eadb;
+            border-bottom: 1px solid #f0eadb;
+        }
+
+        .consultation-box {
+            max-width: 930px;
+            margin: 55px auto 0;
+            padding: 42px;
+            border-radius: var(--radius);
+            background: white;
+            box-shadow: var(--shadow-soft);
+            text-align: center;
+        }
+
+        .consultation-box h3 {
+            margin-bottom: 14px;
+            font-size: 30px;
+            letter-spacing: -.04em;
+        }
+
+        .consultation-box p {
+            max-width: 700px;
+            margin: 0 auto 25px;
+            color: var(--muted);
+            font-size: 17px;
+        }
+
+        .consultation-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .consultation-item {
+            padding: 18px 14px;
+            border-radius: 16px;
+            background: var(--soft);
+            color: var(--ink-soft);
+            font-size: 14px;
+        }
+
+        .consultation-item b {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--blue);
+            font-size: 20px;
+        }
+
         /* ===== ПОРТФОЛИО ===== */
 
         .portfolio-section {
@@ -667,8 +709,8 @@
         }
 
         .portfolio-header {
-            margin-bottom: 42px;
             text-align: center;
+            margin-bottom: 42px;
         }
 
         .filters {
@@ -700,7 +742,7 @@
 
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(12, 1fr);
+            grid-template-columns: repeat(12, minmax(0, 1fr));
             gap: 15px;
         }
 
@@ -712,7 +754,7 @@
             border: 5px solid white;
             border-radius: 20px;
             background: #dce2eb;
-            box-shadow: var(--shadow-small);
+            box-shadow: var(--shadow-soft);
             cursor: pointer;
             transition: .4s ease;
         }
@@ -752,7 +794,7 @@
             padding: 13px 15px;
             border-radius: 15px;
             background: rgba(255,255,255,.94);
-            box-shadow: var(--shadow-small);
+            box-shadow: var(--shadow-soft);
             opacity: 0;
             transform: translateY(9px);
             transition: .3s ease;
@@ -790,25 +832,14 @@
             border: 1px solid var(--line);
             border-radius: var(--radius);
             background: white;
-            box-shadow: var(--shadow-small);
+            box-shadow: var(--shadow-soft);
             text-align: center;
         }
 
-        .process-item:nth-child(1) {
-            border-top: 5px solid var(--blue);
-        }
-
-        .process-item:nth-child(2) {
-            border-top: 5px solid var(--yellow);
-        }
-
-        .process-item:nth-child(3) {
-            border-top: 5px solid var(--coral);
-        }
-
-        .process-item:nth-child(4) {
-            border-top: 5px solid var(--mint);
-        }
+        .process-item:nth-child(1) { border-top: 5px solid var(--blue); }
+        .process-item:nth-child(2) { border-top: 5px solid var(--yellow); }
+        .process-item:nth-child(3) { border-top: 5px solid var(--coral); }
+        .process-item:nth-child(4) { border-top: 5px solid var(--mint); }
 
         .process-number {
             margin-bottom: 32px;
@@ -1078,7 +1109,7 @@
             transform: translateX(-50%);
         }
 
-        /* ===== АДАПТИВНОСТЬ ===== */
+        /* ===== ПЛАНШЕТ ===== */
 
         @media (max-width: 1050px) {
             .hero {
@@ -1090,7 +1121,7 @@
             }
 
             .hero-visual {
-                margin-top: 75px;
+                margin-top: 70px;
             }
 
             .case-grid {
@@ -1101,6 +1132,8 @@
                 gap: 45px;
             }
         }
+
+        /* ===== МОБИЛЬНАЯ ВЕРСИЯ ===== */
 
         @media (max-width: 850px) {
             .container {
@@ -1119,8 +1152,12 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
+            .consultation-list {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
             .portfolio-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
 
             .artwork,
@@ -1175,7 +1212,7 @@
             }
 
             .hero h1 {
-                font-size: 56px;
+                font-size: 55px;
             }
 
             .hero-text {
@@ -1184,8 +1221,9 @@
             }
 
             .hero-actions {
-                flex-direction: column;
-                align-items: stretch;
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 11px;
             }
 
             .hero-actions .btn {
@@ -1193,20 +1231,27 @@
             }
 
             .hero-visual {
-                width: calc(100% - 10px);
-                margin: 65px auto 0;
+                width: calc(100% - 8px);
+                margin-top: 65px;
+                margin-left: auto;
+                margin-right: auto;
             }
 
             .hero-photo,
             .hero-photo img {
-                height: 340px;
-                min-height: 340px;
+                height: 350px;
+                border-radius: 25px;
+            }
+
+            .hero-photo::before {
+                inset: 10px -9px -10px 9px;
+                border-width: 2px;
                 border-radius: 25px;
             }
 
             .hero-tag {
                 right: 3px;
-                bottom: -30px;
+                bottom: -31px;
                 padding: 14px;
                 font-size: 11px;
             }
@@ -1216,7 +1261,7 @@
             }
 
             .case-image {
-                min-height: 355px;
+                min-height: 360px;
                 border-radius: 20px;
             }
 
@@ -1239,7 +1284,7 @@
 
             .fact {
                 padding: 12px;
-                font-size: 11px;
+                font-size: 10px;
             }
 
             .fact strong {
@@ -1255,6 +1300,22 @@
             .service {
                 min-height: auto;
                 padding: 28px;
+            }
+
+            .consultation-box {
+                padding: 27px 20px;
+            }
+
+            .consultation-box h3 {
+                font-size: 27px;
+            }
+
+            .consultation-box p {
+                font-size: 15px;
+            }
+
+            .consultation-list {
+                grid-template-columns: 1fr;
             }
 
             .filters {
@@ -1283,6 +1344,7 @@
             .artwork:nth-child(10) {
                 height: 220px;
                 border-width: 3px;
+                border-radius: 15px;
             }
 
             .artwork:nth-child(1),
@@ -1291,12 +1353,13 @@
             }
 
             .artwork-info {
-                left: 8px;
-                right: 8px;
-                bottom: 8px;
+                left: 7px;
+                right: 7px;
+                bottom: 7px;
                 padding: 9px;
                 opacity: 1;
                 transform: none;
+                border-radius: 11px;
             }
 
             .artwork-info strong {
@@ -1318,6 +1381,10 @@
 
             .about-text p {
                 font-size: 16px;
+            }
+
+            .numbers {
+                gap: 25px 15px;
             }
 
             .cta {
@@ -1385,6 +1452,7 @@
                 <span></span><span></span><span></span>
                 <span></span><span></span><span></span>
             </span>
+
             ЕГОР ЧЕРНЯКОВ
         </a>
 
@@ -1404,7 +1472,7 @@
 
 <main id="top">
 
-    <!-- Первый экран -->
+    <!-- ПЕРВЫЙ ЭКРАН -->
 
     <section class="hero">
         <div class="container">
@@ -1422,9 +1490,9 @@
                 </h1>
 
                 <p class="hero-text">
-                    Создам логотип, портрет или фирменную мозаику
-                    из кубиков Рубика для ресторана, офиса, фестиваля
-                    или общественного пространства.
+                    Я создаю логотипы, портреты и фирменные мозаики
+                    из кубиков Рубика для ресторанов, офисов,
+                    фестивалей и общественных пространств.
                 </p>
 
                 <div class="hero-actions">
@@ -1465,7 +1533,7 @@
         <span></span>
     </div>
 
-    <!-- Кейс -->
+    <!-- КЕЙС ДОДО -->
 
     <section class="section case-section" id="works">
         <div class="container">
@@ -1486,7 +1554,7 @@
 
             <div class="case-grid">
 
-                <div class="case-image reveal" data-index="3">
+                <div class="case-image reveal">
                     <img
                         src="images/kartini/kartina4.webp"
                         alt="Картина из кубиков Рубика для Додо"
@@ -1500,7 +1568,7 @@
                 <div class="case-info reveal">
 
                     <div class="section-label">
-                        Что будет создано
+                        Картина для бренда
                     </div>
 
                     <h3>
@@ -1550,7 +1618,7 @@
         </div>
     </section>
 
-    <!-- Направления -->
+    <!-- ФОРМАТЫ РАБОТЫ -->
 
     <section class="section" id="services">
         <div class="container">
@@ -1565,8 +1633,8 @@
             </h2>
 
             <p class="section-description reveal">
-                Подберу формат, который будет соответствовать пространству,
-                аудитории и цели проекта.
+                Подберу формат, который будет соответствовать
+                пространству, аудитории и цели проекта.
             </p>
 
             <div class="services">
@@ -1614,7 +1682,63 @@
         </div>
     </section>
 
-    <!-- Портфолио -->
+    <!-- КОНСУЛЬТАЦИЯ -->
+
+    <section class="section consultation-section">
+        <div class="container">
+
+            <div class="section-label reveal">
+                Индивидуальный расчёт
+            </div>
+
+            <h2 class="section-title reveal">
+                Подберу подходящий<br>
+                <em>размер картины.</em>
+            </h2>
+
+            <p class="section-description reveal">
+                Не обязательно заранее знать, сколько кубиков понадобится.
+                Достаточно прислать логотип, фотографию или описание идеи.
+            </p>
+
+            <div class="consultation-box reveal">
+
+                <h3>
+                    Рассчитаю количество кубиков под Ваш проект
+                </h3>
+
+                <p>
+                    Количество кубиков будет зависеть от размера картины,
+                    сложности изображения, количества цветов и расстояния,
+                    с которого её будут рассматривать.
+                </p>
+
+                <div class="consultation-list">
+                    <div class="consultation-item">
+                        <b>01</b>
+                        Подберу размер картины
+                    </div>
+
+                    <div class="consultation-item">
+                        <b>02</b>
+                        Рассчитаю количество кубиков
+                    </div>
+
+                    <div class="consultation-item">
+                        <b>03</b>
+                        Предложу подходящий формат
+                    </div>
+                </div>
+
+                <a class="btn" href="#contacts" style="margin-top: 28px;">
+                    Получить расчёт проекта
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ПОРТФОЛИО -->
 
     <section class="section portfolio-section" id="portfolio">
         <div class="container">
@@ -1629,6 +1753,11 @@
                     26 работ.<br>
                     <em>Тысячи кубиков.</em>
                 </h2>
+
+                <p class="section-description reveal">
+                    Портреты, логотипы, тематические композиции
+                    и масштабные мозаики для разных пространств и событий.
+                </p>
 
                 <div class="filters reveal">
                     <button class="filter active" data-filter="all">
@@ -1655,7 +1784,7 @@
         </div>
     </section>
 
-    <!-- Процесс -->
+    <!-- ПРОЦЕСС -->
 
     <section class="section">
         <div class="container">
@@ -1735,7 +1864,7 @@
         </div>
     </section>
 
-    <!-- Обо мне -->
+    <!-- ОБО МНЕ -->
 
     <section class="section about-section" id="about">
         <div class="container about-grid">
@@ -1766,8 +1895,8 @@
 
                 <p class="reveal">
                     В работе соединяются точность, цвет, логика
-                    и внимание к деталям. Благодаря этому обычная
-                    головоломка превращается в выразительную картину.
+                    и внимание к деталям. Благодаря этому головоломка
+                    превращается в выразительную картину.
                 </p>
 
                 <p class="reveal">
@@ -1802,7 +1931,7 @@
         </div>
     </section>
 
-    <!-- Контакты -->
+    <!-- КОНТАКТЫ -->
 
     <section class="section" id="contacts">
         <div class="container">
@@ -1820,24 +1949,37 @@
 
                 <p>
                     Расскажите о компании, пространстве или мероприятии.
-                    Будет предложен подходящий формат картины,
+                    Я предложу подходящий формат картины,
                     мастер-класса или интерактивного проекта.
                 </p>
 
-                <a class="btn btn-yellow" href="mailto:cherniakov-egor@yandex.ru">
+                <a
+                    class="btn btn-yellow"
+                    href="mailto:cherniakov-egor@yandex.ru"
+                >
                     Написать по проекту ↗
                 </a>
 
                 <div class="contact-links">
-                    <a class="contact-link" href="mailto:cherniakov-egor@yandex.ru">
+                    <a
+                        class="contact-link"
+                        href="mailto:cherniakov-egor@yandex.ru"
+                    >
                         cherniakov-egor@yandex.ru
                     </a>
 
-                    <a class="contact-link" href="tel:+79214089944">
+                    <a
+                        class="contact-link"
+                        href="tel:+79214089944"
+                    >
                         +7 921 408-99-44
                     </a>
 
-                    <a class="contact-link" href="https://vk.com/che_egor" target="_blank">
+                    <a
+                        class="contact-link"
+                        href="https://vk.com/che_egor"
+                        target="_blank"
+                    >
                         ВКонтакте
                     </a>
                 </div>
@@ -1854,13 +1996,21 @@
     </div>
 </footer>
 
+<!-- LIGHTBOX -->
+
 <div class="lightbox" id="lightbox">
     <button class="lightbox-close" id="lightboxClose">×</button>
     <button class="lightbox-prev" id="lightboxPrev">‹</button>
 
-    <img class="lightbox-image" id="lightboxImage" src="" alt="">
+    <img
+        class="lightbox-image"
+        id="lightboxImage"
+        src=""
+        alt=""
+    >
 
     <button class="lightbox-next" id="lightboxNext">›</button>
+
     <div class="lightbox-caption" id="lightboxCaption"></div>
 </div>
 
@@ -1935,6 +2085,8 @@
     }
 
     renderPortfolio();
+
+    /* Фильтры */
 
     document.querySelectorAll(".filter").forEach(button => {
         button.addEventListener("click", () => {
@@ -2024,7 +2176,7 @@
         }
     });
 
-    /* Свайпы */
+    /* Свайпы на мобильном */
 
     let touchStartX = 0;
     let touchEndX = 0;
@@ -2070,9 +2222,10 @@
         observer.observe(element);
     });
 
-    /* Год */
+    /* Текущий год */
 
-    document.getElementById("year").textContent = new Date().getFullYear();
+    document.getElementById("year").textContent =
+        new Date().getFullYear();
 </script>
 
 </body>
