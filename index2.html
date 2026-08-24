@@ -14,19 +14,27 @@
 
     <style>
         :root {
-            --ink: #151922;
-            --muted: #657084;
-            --paper: #f7f8fb;
-            --white: #ffffff;
-            --yellow: #f6c945;
-            --red: #ed5c55;
-            --blue: #3977ed;
-            --green: #49ad78;
-            --purple: #8b69dc;
-            --line: #e4e8ef;
-            --shadow: 0 18px 55px rgba(34, 45, 70, .12);
-            --radius: 26px;
-            --container: 1200px;
+            --ink: #172033;
+            --ink-light: #334056;
+            --muted: #727d90;
+
+            --cream: #f7f4ee;
+            --paper: #ffffff;
+            --soft: #eef2f8;
+            --line: #e0e5ed;
+
+            --blue: #315bea;
+            --blue-dark: #2144b8;
+            --yellow: #f3c84b;
+            --coral: #e96a5d;
+            --mint: #63b58b;
+            --violet: #8068d8;
+
+            --shadow-sm: 0 8px 25px rgba(35, 45, 70, .07);
+            --shadow: 0 22px 65px rgba(35, 45, 70, .13);
+
+            --radius: 25px;
+            --container: 1180px;
         }
 
         * {
@@ -40,14 +48,15 @@
         }
 
         body {
+            min-width: 320px;
             overflow-x: hidden;
             color: var(--ink);
             background:
-                radial-gradient(circle at 90% 0%, rgba(246,201,69,.18), transparent 24rem),
-                radial-gradient(circle at 0% 38%, rgba(57,119,237,.1), transparent 28rem),
-                var(--paper);
+                radial-gradient(circle at 95% 0%, rgba(243, 200, 75, .19), transparent 25rem),
+                radial-gradient(circle at 0% 42%, rgba(49, 91, 234, .09), transparent 28rem),
+                var(--cream);
             font-family: Inter, Arial, sans-serif;
-            line-height: 1.6;
+            line-height: 1.65;
         }
 
         body.locked {
@@ -64,24 +73,25 @@
         }
 
         img {
+            display: block;
             max-width: 100%;
         }
 
         .container {
-            width: min(var(--container), 90%);
+            width: min(var(--container), calc(100% - 64px));
             margin: 0 auto;
         }
 
-        /* ===== ДЕКОР ===== */
+        /* Декоративные элементы */
 
-        .cube-decor {
+        .cube {
             position: fixed;
             z-index: -1;
             width: 18px;
             height: 18px;
             border-radius: 5px;
+            opacity: .25;
             transform: rotate(45deg);
-            opacity: .35;
             pointer-events: none;
         }
 
@@ -93,47 +103,41 @@
 
         .cube-2 {
             top: 42%;
-            right: 6%;
-            background: var(--red);
+            right: 5%;
+            background: var(--coral);
         }
 
         .cube-3 {
-            top: 72%;
+            top: 70%;
             left: 8%;
             background: var(--yellow);
         }
 
         .cube-4 {
-            top: 86%;
-            right: 13%;
-            background: var(--green);
+            top: 85%;
+            right: 12%;
+            background: var(--mint);
         }
 
-        .color-line {
-            position: absolute;
-            height: 9px;
-            border-radius: 20px;
-            opacity: .8;
-        }
-
-        /* ===== HEADER ===== */
+        /* Шапка */
 
         .header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            z-index: 20;
+            z-index: 50;
             padding: 18px 0;
-            background: rgba(247,248,251,.78);
+            background: rgba(247, 244, 238, .78);
             border-bottom: 1px solid transparent;
-            backdrop-filter: blur(16px);
+            backdrop-filter: blur(18px);
             transition: .3s ease;
         }
 
         .header.scrolled {
+            background: rgba(255, 255, 255, .9);
             border-color: var(--line);
-            box-shadow: 0 5px 25px rgba(30,40,60,.06);
+            box-shadow: 0 5px 25px rgba(35, 45, 70, .06);
         }
 
         .header-inner {
@@ -141,15 +145,17 @@
             align-items: center;
             justify-content: space-between;
             gap: 25px;
+            min-height: 42px;
         }
 
         .brand {
             display: flex;
             align-items: center;
             gap: 12px;
-            font-size: 14px;
+            color: var(--ink);
+            font-size: 13px;
             font-weight: 800;
-            letter-spacing: .08em;
+            letter-spacing: .07em;
             white-space: nowrap;
         }
 
@@ -174,17 +180,17 @@
 
         .brand-cube span:nth-child(3),
         .brand-cube span:nth-child(8) {
-            background: var(--red);
+            background: var(--coral);
         }
 
         .brand-cube span:nth-child(6) {
-            background: var(--green);
+            background: var(--mint);
         }
 
         .nav {
             display: flex;
             align-items: center;
-            gap: 25px;
+            gap: 28px;
             color: var(--muted);
             font-size: 13px;
             font-weight: 600;
@@ -201,19 +207,20 @@
         .header-button {
             padding: 10px 17px;
             border-radius: 100px;
-            background: var(--ink);
+            background: var(--blue);
             color: white;
             font-size: 12px;
             font-weight: 700;
+            box-shadow: 0 7px 20px rgba(49, 91, 234, .18);
             transition: .25s ease;
         }
 
         .header-button:hover {
-            background: var(--blue);
+            background: var(--blue-dark);
             transform: translateY(-2px);
         }
 
-        /* ===== ОБЩИЕ ===== */
+        /* Общие стили */
 
         .section {
             position: relative;
@@ -227,24 +234,25 @@
             color: var(--blue);
             font-family: "DM Mono", monospace;
             font-size: 11px;
-            letter-spacing: .11em;
+            letter-spacing: .1em;
             text-transform: uppercase;
-            margin-bottom: 18px;
+            margin-bottom: 19px;
         }
 
         .section-label::before {
             content: "";
-            width: 34px;
-            height: 2px;
-            border-radius: 5px;
+            width: 32px;
+            height: 3px;
+            border-radius: 10px;
             background: var(--yellow);
         }
 
         .section-title {
             max-width: 850px;
             color: var(--ink);
-            font-size: clamp(38px, 6vw, 76px);
-            line-height: 1;
+            font-size: clamp(40px, 6vw, 76px);
+            font-weight: 800;
+            line-height: .98;
             letter-spacing: -.075em;
         }
 
@@ -255,15 +263,18 @@
 
         .section-description {
             max-width: 650px;
-            margin-top: 20px;
+            margin-top: 21px;
             color: var(--muted);
             font-size: 18px;
+            line-height: 1.75;
         }
 
         .reveal {
             opacity: 0;
-            transform: translateY(24px);
-            transition: opacity .7s ease, transform .7s ease;
+            transform: translateY(25px);
+            transition:
+                opacity .75s ease,
+                transform .75s cubic-bezier(.2, .8, .2, 1);
         }
 
         .reveal.visible {
@@ -275,65 +286,72 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            min-height: 54px;
-            padding: 0 24px;
+            gap: 9px;
+            min-height: 55px;
+            padding: 0 25px;
             border: 0;
-            border-radius: 100px;
+            border-radius: 15px;
             background: var(--blue);
             color: white;
             font-size: 14px;
             font-weight: 800;
             cursor: pointer;
+            box-shadow: 0 9px 22px rgba(49, 91, 234, .18);
             transition: .3s ease;
         }
 
         .btn:hover {
-            background: var(--ink);
+            background: var(--blue-dark);
             transform: translateY(-4px);
-            box-shadow: var(--shadow);
+            box-shadow: 0 15px 30px rgba(49, 91, 234, .25);
         }
 
         .btn-yellow {
             background: var(--yellow);
             color: var(--ink);
+            box-shadow: 0 9px 22px rgba(243, 200, 75, .22);
         }
 
-        .btn-outline {
-            border: 1px solid var(--line);
-            background: white;
+        .btn-yellow:hover {
+            background: #e9b72d;
             color: var(--ink);
         }
 
+        .btn-outline {
+            background: white;
+            color: var(--ink);
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow-sm);
+        }
+
         .btn-outline:hover {
-            border-color: var(--blue);
             background: white;
             color: var(--blue);
+            border-color: var(--blue);
             box-shadow: none;
         }
 
-        /* ===== HERO ===== */
+        /* Первый экран */
 
         .hero {
-            position: relative;
-            min-height: 850px;
+            min-height: 880px;
             display: flex;
             align-items: center;
-            padding: 160px 0 100px;
+            padding: 165px 0 120px;
         }
 
         .hero-grid {
             display: grid;
             grid-template-columns: .9fr 1.1fr;
             align-items: center;
-            gap: 70px;
+            gap: 85px;
         }
 
         .hero-kicker {
             display: inline-flex;
             align-items: center;
-            gap: 9px;
-            margin-bottom: 25px;
+            gap: 10px;
+            margin-bottom: 27px;
             color: var(--blue);
             font-family: "DM Mono", monospace;
             font-size: 12px;
@@ -345,15 +363,17 @@
             width: 9px;
             height: 9px;
             border-radius: 50%;
-            background: var(--red);
-            box-shadow: 0 0 0 5px rgba(237,92,85,.14);
+            background: var(--coral);
+            box-shadow: 0 0 0 6px rgba(233, 106, 93, .14);
         }
 
         .hero h1 {
             position: relative;
             z-index: 2;
-            max-width: 650px;
-            font-size: clamp(50px, 8vw, 110px);
+            max-width: 660px;
+            color: var(--ink);
+            font-size: clamp(53px, 8vw, 110px);
+            font-weight: 800;
             line-height: .91;
             letter-spacing: -.09em;
         }
@@ -363,10 +383,11 @@
         }
 
         .hero-text {
-            max-width: 540px;
+            max-width: 560px;
             margin: 30px 0;
             color: var(--muted);
             font-size: 19px;
+            line-height: 1.8;
         }
 
         .hero-actions {
@@ -377,23 +398,22 @@
 
         .hero-visual {
             position: relative;
-            z-index: 1;
         }
 
         .hero-photo {
             position: relative;
-            overflow: hidden;
             min-height: 610px;
+            overflow: visible;
             border-radius: 34px;
             background: white;
             box-shadow: var(--shadow);
-            transform: rotate(2deg);
+            transform: rotate(1.5deg);
         }
 
         .hero-photo::before {
             content: "";
             position: absolute;
-            inset: 16px -18px -18px 18px;
+            inset: 17px -18px -18px 18px;
             border: 3px solid var(--yellow);
             border-radius: 34px;
             transform: rotate(-5deg);
@@ -411,9 +431,9 @@
         .hero-tag {
             position: absolute;
             z-index: 3;
-            right: -25px;
-            bottom: 35px;
-            max-width: 210px;
+            right: -20px;
+            bottom: 25px;
+            max-width: 215px;
             padding: 18px;
             border-radius: 18px;
             background: var(--ink);
@@ -425,17 +445,16 @@
         .hero-tag strong {
             display: block;
             color: var(--yellow);
-            font-size: 25px;
+            font-size: 26px;
             line-height: 1;
             margin-bottom: 6px;
         }
 
-        /* ===== ЦВЕТНАЯ ПОЛОСА ===== */
+        /* Цветная полоса */
 
         .color-strip {
             display: flex;
-            height: 10px;
-            overflow: hidden;
+            height: 9px;
         }
 
         .color-strip span {
@@ -451,37 +470,40 @@
         }
 
         .color-strip span:nth-child(3) {
-            background: var(--red);
+            background: var(--coral);
         }
 
         .color-strip span:nth-child(4) {
-            background: var(--green);
+            background: var(--mint);
         }
 
         .color-strip span:nth-child(5) {
-            background: var(--purple);
+            background: var(--violet);
         }
 
-        /* ===== КЕЙС ===== */
+        /* Кейс */
 
         .case-section {
             background: white;
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
         }
 
         .case-grid {
             display: grid;
             grid-template-columns: 1.1fr .9fr;
-            gap: 35px;
-            margin-top: 55px;
+            gap: 38px;
+            margin-top: 58px;
         }
 
         .case-image {
             position: relative;
-            min-height: 610px;
+            min-height: 625px;
             overflow: hidden;
             border-radius: var(--radius);
-            background: #edf1f6;
+            background: #e7ebf1;
             box-shadow: var(--shadow);
+            cursor: pointer;
         }
 
         .case-image img {
@@ -501,33 +523,37 @@
             bottom: 22px;
             padding: 11px 16px;
             border-radius: 100px;
-            background: rgba(255,255,255,.9);
+            background: rgba(255,255,255,.94);
             color: var(--ink);
             font-size: 12px;
             font-weight: 700;
+            box-shadow: var(--shadow-sm);
         }
 
         .case-info {
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 42px;
+            padding: 50px;
+            border: 1px solid #f0df91;
             border-radius: var(--radius);
-            background: #fff7d9;
+            background: linear-gradient(145deg, #fff8d9, #fffdf3);
         }
 
         .case-info h3 {
             max-width: 470px;
-            font-size: clamp(32px, 4vw, 55px);
+            margin-bottom: 24px;
+            color: var(--ink);
+            font-size: clamp(34px, 4vw, 55px);
             line-height: 1;
             letter-spacing: -.07em;
-            margin-bottom: 23px;
         }
 
         .case-info p {
+            margin-bottom: 16px;
             color: var(--muted);
             font-size: 17px;
-            margin-bottom: 16px;
+            line-height: 1.8;
         }
 
         .case-facts {
@@ -539,8 +565,9 @@
 
         .fact {
             padding: 15px;
+            border: 1px solid rgba(222,202,111,.35);
             border-radius: 15px;
-            background: rgba(255,255,255,.65);
+            background: rgba(255,255,255,.72);
             color: var(--muted);
             font-size: 12px;
         }
@@ -548,25 +575,26 @@
         .fact strong {
             display: block;
             color: var(--ink);
-            font-size: 23px;
+            font-size: 22px;
         }
 
-        /* ===== УСЛУГИ ===== */
+        /* Услуги */
 
         .services {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-            margin-top: 55px;
+            gap: 22px;
+            margin-top: 58px;
         }
 
         .service {
-            min-height: 285px;
-            padding: 30px;
+            min-height: 295px;
+            padding: 34px;
             border: 1px solid var(--line);
+            border-top-width: 6px;
             border-radius: var(--radius);
             background: white;
-            box-shadow: 0 8px 35px rgba(40,55,85,.05);
+            box-shadow: var(--shadow-sm);
             transition: .3s ease;
         }
 
@@ -576,23 +604,23 @@
         }
 
         .service:nth-child(1) {
-            border-top: 7px solid var(--blue);
+            border-top-color: var(--blue);
         }
 
         .service:nth-child(2) {
-            border-top: 7px solid var(--yellow);
+            border-top-color: var(--yellow);
         }
 
         .service:nth-child(3) {
-            border-top: 7px solid var(--red);
+            border-top-color: var(--coral);
         }
 
         .service-icon {
             display: grid;
             place-items: center;
-            width: 52px;
-            height: 52px;
-            margin-bottom: 32px;
+            width: 54px;
+            height: 54px;
+            margin-bottom: 34px;
             border-radius: 16px;
             background: #edf3ff;
             color: var(--blue);
@@ -606,23 +634,27 @@
 
         .service:nth-child(3) .service-icon {
             background: #ffebea;
-            color: var(--red);
+            color: var(--coral);
         }
 
         .service h3 {
-            font-size: 22px;
             margin-bottom: 11px;
+            color: var(--ink);
+            font-size: 22px;
         }
 
         .service p {
             color: var(--muted);
             font-size: 15px;
+            line-height: 1.75;
         }
 
-        /* ===== ПОРТФОЛИО ===== */
+        /* Портфолио */
 
         .portfolio-section {
             background: #eef2f8;
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
         }
 
         .portfolio-header {
@@ -630,19 +662,20 @@
             align-items: end;
             justify-content: space-between;
             gap: 30px;
-            margin-bottom: 40px;
+            margin-bottom: 42px;
         }
 
         .filters {
             display: flex;
             flex-wrap: wrap;
             justify-content: flex-end;
-            gap: 8px;
+            gap: 9px;
         }
 
         .filter {
-            padding: 10px 15px;
-            border: 1px solid #dce2eb;
+            min-height: 40px;
+            padding: 0 16px;
+            border: 1px solid #d9e0ec;
             border-radius: 100px;
             background: white;
             color: var(--muted);
@@ -669,10 +702,12 @@
             grid-column: span 3;
             height: 280px;
             overflow: hidden;
+            border: 5px solid white;
             border-radius: 20px;
             background: #dce2eb;
+            box-shadow: var(--shadow-sm);
             cursor: pointer;
-            box-shadow: 0 7px 24px rgba(30,40,60,.08);
+            transition: .4s ease;
         }
 
         .artwork:nth-child(1),
@@ -685,6 +720,10 @@
         .artwork:nth-child(15) {
             grid-column: span 4;
             height: 340px;
+        }
+
+        .artwork:hover {
+            box-shadow: var(--shadow);
         }
 
         .artwork img {
@@ -700,15 +739,15 @@
 
         .artwork-info {
             position: absolute;
-            left: 14px;
-            right: 14px;
-            bottom: 14px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
             padding: 13px 15px;
             border-radius: 15px;
-            background: rgba(255,255,255,.92);
-            backdrop-filter: blur(12px);
+            background: rgba(255,255,255,.94);
+            box-shadow: var(--shadow-sm);
             opacity: 0;
-            transform: translateY(8px);
+            transform: translateY(9px);
             transition: .3s ease;
         }
 
@@ -719,6 +758,7 @@
 
         .artwork-info strong {
             display: block;
+            color: var(--ink);
             font-size: 14px;
         }
 
@@ -728,40 +768,60 @@
             font-size: 10px;
         }
 
-        /* ===== ПРОЦЕСС ===== */
+        /* Процесс */
 
         .process {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 18px;
-            margin-top: 55px;
+            margin-top: 58px;
         }
 
         .process-item {
-            padding: 26px;
+            min-height: 250px;
+            padding: 29px;
+            border: 1px solid var(--line);
             border-radius: var(--radius);
             background: white;
-            box-shadow: 0 8px 30px rgba(40,55,85,.07);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .process-item:nth-child(1) {
+            border-top: 5px solid var(--blue);
+        }
+
+        .process-item:nth-child(2) {
+            border-top: 5px solid var(--yellow);
+        }
+
+        .process-item:nth-child(3) {
+            border-top: 5px solid var(--coral);
+        }
+
+        .process-item:nth-child(4) {
+            border-top: 5px solid var(--mint);
         }
 
         .process-number {
+            margin-bottom: 35px;
             color: var(--blue);
             font-family: "DM Mono", monospace;
             font-size: 13px;
-            margin-bottom: 35px;
         }
 
         .process-item h3 {
-            font-size: 20px;
             margin-bottom: 10px;
+            color: var(--ink);
+            font-size: 20px;
         }
 
         .process-item p {
             color: var(--muted);
             font-size: 15px;
+            line-height: 1.75;
         }
 
-        /* ===== ОБО МНЕ ===== */
+        /* Обо мне */
 
         .about-section {
             background: white;
@@ -783,12 +843,11 @@
             position: absolute;
             inset: 18px -15px -15px 18px;
             border-radius: var(--radius);
-            background: var(--green);
+            background: var(--mint);
         }
 
         .about-image img {
             position: relative;
-            display: block;
             width: 100%;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
@@ -796,9 +855,10 @@
 
         .about-text p {
             max-width: 650px;
+            margin-top: 19px;
             color: var(--muted);
             font-size: 18px;
-            margin-top: 19px;
+            line-height: 1.8;
         }
 
         .numbers {
@@ -821,18 +881,17 @@
             display: block;
             color: var(--muted);
             font-size: 12px;
-            line-height: 1.3;
+            line-height: 1.35;
         }
 
-        /* ===== CTA ===== */
+        /* Финальный блок */
 
         .cta {
             position: relative;
             overflow: hidden;
-            padding: 90px 30px;
-            border-radius: 32px;
-            background:
-                linear-gradient(135deg, rgba(57,119,237,.94), rgba(139,105,220,.94));
+            padding: 105px 35px;
+            border-radius: var(--radius);
+            background: linear-gradient(135deg, #315bea, #596fe1 55%, #8068d8);
             color: white;
             text-align: center;
             box-shadow: var(--shadow);
@@ -842,20 +901,20 @@
         .cta::after {
             content: "";
             position: absolute;
-            width: 180px;
-            height: 180px;
-            border: 25px solid rgba(255,255,255,.12);
+            width: 190px;
+            height: 190px;
+            border: 26px solid rgba(255,255,255,.11);
             transform: rotate(45deg);
         }
 
         .cta::before {
-            top: -80px;
-            left: -40px;
+            top: -90px;
+            left: -50px;
         }
 
         .cta::after {
-            right: -50px;
-            bottom: -90px;
+            right: -55px;
+            bottom: -100px;
         }
 
         .cta > * {
@@ -875,7 +934,8 @@
         .cta h2 {
             max-width: 800px;
             margin: 0 auto 20px;
-            font-size: clamp(40px, 6vw, 75px);
+            color: white;
+            font-size: clamp(42px, 6vw, 76px);
             line-height: 1;
             letter-spacing: -.075em;
         }
@@ -888,7 +948,7 @@
         .cta p {
             max-width: 620px;
             margin: 0 auto 30px;
-            color: rgba(255,255,255,.8);
+            color: rgba(255,255,255,.84);
             font-size: 18px;
         }
 
@@ -897,12 +957,12 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 10px;
-            margin-top: 25px;
+            margin-top: 26px;
         }
 
         .contact-link {
-            padding: 11px 16px;
-            border: 1px solid rgba(255,255,255,.3);
+            padding: 11px 17px;
+            border: 1px solid rgba(255,255,255,.35);
             border-radius: 100px;
             color: white;
             font-size: 13px;
@@ -911,17 +971,17 @@
 
         .contact-link:hover {
             border-color: var(--yellow);
-            background: rgba(255,255,255,.15);
+            background: rgba(255,255,255,.13);
         }
 
         footer {
-            padding: 30px 0;
+            padding: 32px 0;
             color: var(--muted);
             text-align: center;
             font-size: 12px;
         }
 
-        /* ===== LIGHTBOX ===== */
+        /* Лайтбокс */
 
         .lightbox {
             position: fixed;
@@ -931,8 +991,8 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
-            background: rgba(21,25,34,.94);
-            backdrop-filter: blur(12px);
+            background: rgba(23, 32, 51, .94);
+            backdrop-filter: blur(13px);
         }
 
         .lightbox.active {
@@ -943,7 +1003,7 @@
             max-width: 93vw;
             max-height: 86vh;
             object-fit: contain;
-            border-radius: 15px;
+            border-radius: 14px;
         }
 
         .lightbox-close,
@@ -953,11 +1013,11 @@
             z-index: 2;
             display: grid;
             place-items: center;
-            width: 48px;
-            height: 48px;
+            width: 50px;
+            height: 50px;
             border: 0;
             border-radius: 50%;
-            background: rgba(255,255,255,.14);
+            background: rgba(255,255,255,.15);
             color: white;
             cursor: pointer;
             transition: .25s ease;
@@ -994,57 +1054,62 @@
             position: absolute;
             bottom: 24px;
             left: 50%;
-            transform: translateX(-50%);
             max-width: 75%;
-            padding: 10px 16px;
+            padding: 10px 17px;
             border-radius: 100px;
-            background: rgba(255,255,255,.13);
+            background: rgba(255,255,255,.14);
             color: white;
             font-size: 12px;
             text-align: center;
+            transform: translateX(-50%);
         }
 
-        /* ===== АДАПТИВ ===== */
+        /* Адаптивность */
 
         @media (max-width: 1050px) {
             .hero-grid {
                 grid-template-columns: 1fr;
+                gap: 70px;
             }
 
             .hero-visual {
-                max-width: 700px;
-                margin: 30px auto 0;
+                width: min(720px, 100%);
+                margin: 0 auto;
             }
 
-            .hero-photo {
-                min-height: 500px;
-            }
-
+            .hero-photo,
             .hero-photo img {
-                height: 500px;
+                min-height: 520px;
+                height: 520px;
             }
 
             .hero-text {
-                max-width: 650px;
+                max-width: 700px;
             }
         }
 
         @media (max-width: 850px) {
+            .container {
+                width: calc(100% - 40px);
+            }
+
             .nav {
                 display: none;
             }
 
             .hero {
-                padding-top: 130px;
+                min-height: auto;
+                padding-top: 125px;
             }
 
             .case-grid,
             .about-grid {
                 grid-template-columns: 1fr;
+                gap: 25px;
             }
 
             .case-image {
-                min-height: 450px;
+                min-height: 470px;
             }
 
             .services {
@@ -1085,49 +1150,43 @@
         }
 
         @media (max-width: 560px) {
+            .container {
+                width: calc(100% - 32px);
+            }
+
+            .header {
+                padding: 13px 0;
+            }
+
+            .brand {
+                font-size: 10px;
+            }
+
+            .header-button {
+                padding: 10px 12px;
+                font-size: 10px;
+            }
+
             .section {
                 padding: 78px 0;
             }
 
-            .header {
-                padding: 14px 0;
-            }
-
-            .brand {
-                font-size: 11px;
-            }
-
-            .header-button {
-                padding: 9px 12px;
-                font-size: 10px;
+            .section-title {
+                font-size: 44px;
             }
 
             .hero {
-                min-height: 800px;
-                padding-top: 120px;
+                padding-top: 112px;
             }
 
             .hero h1 {
-                font-size: 54px;
+                font-size: 57px;
             }
 
             .hero-text,
             .section-description {
                 font-size: 16px;
-            }
-
-            .hero-photo {
-                min-height: 360px;
-                transform: rotate(1deg);
-            }
-
-            .hero-photo img {
-                height: 360px;
-            }
-
-            .hero-tag {
-                right: 10px;
-                bottom: -35px;
+                line-height: 1.7;
             }
 
             .hero-actions {
@@ -1139,18 +1198,85 @@
                 width: 100%;
             }
 
+            .hero-visual {
+                width: calc(100% - 10px);
+                margin-right: 10px;
+            }
+
+            .hero-photo,
+            .hero-photo img {
+                min-height: 365px;
+                height: 365px;
+                border-radius: 25px;
+            }
+
+            .hero-tag {
+                right: 4px;
+                bottom: -30px;
+                padding: 14px;
+                font-size: 11px;
+            }
+
+            .hero-tag strong {
+                font-size: 22px;
+            }
+
+            .case-image {
+                min-height: 360px;
+                border-radius: 20px;
+            }
+
+            .case-info {
+                padding: 26px 20px;
+                border-radius: 20px;
+            }
+
+            .case-info h3 {
+                font-size: 39px;
+            }
+
+            .case-info p {
+                font-size: 15px;
+            }
+
+            .case-facts {
+                gap: 8px;
+            }
+
+            .fact {
+                padding: 12px;
+                font-size: 11px;
+            }
+
+            .fact strong {
+                font-size: 18px;
+            }
+
             .services,
             .process,
             .numbers {
                 grid-template-columns: 1fr;
             }
 
-            .case-info {
-                padding: 27px;
+            .service {
+                min-height: auto;
+                padding: 28px;
             }
 
-            .case-facts {
-                grid-template-columns: 1fr 1fr;
+            .filters {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                scrollbar-width: none;
+                padding-bottom: 7px;
+            }
+
+            .filters::-webkit-scrollbar {
+                display: none;
+            }
+
+            .filter {
+                flex: 0 0 auto;
+                white-space: nowrap;
             }
 
             .portfolio-grid {
@@ -1160,57 +1286,88 @@
             .artwork,
             .artwork:nth-child(1),
             .artwork:nth-child(10) {
-                height: 230px;
+                height: 225px;
+                border-width: 3px;
             }
 
             .artwork:nth-child(1),
             .artwork:nth-child(10) {
-                height: 300px;
+                height: 295px;
             }
 
             .artwork-info {
+                left: 8px;
+                right: 8px;
+                bottom: 8px;
+                padding: 9px;
                 opacity: 1;
                 transform: none;
-                padding: 9px;
             }
 
             .artwork-info strong {
-                font-size: 11px;
+                font-size: 10px;
+            }
+
+            .artwork-info span {
+                font-size: 8px;
+            }
+
+            .process-item {
+                min-height: auto;
             }
 
             .about-grid {
-                gap: 50px;
+                gap: 55px;
+            }
+
+            .about-text p {
+                font-size: 16px;
             }
 
             .cta {
-                padding: 70px 20px;
+                padding: 70px 18px;
+                border-radius: 24px;
+            }
+
+            .cta h2 {
+                font-size: 45px;
             }
 
             .cta p {
-                font-size: 16px;
+                font-size: 15px;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .contact-link {
+                text-align: center;
+                font-size: 12px;
             }
 
             .lightbox-prev,
             .lightbox-next {
                 top: auto;
-                bottom: 25px;
+                bottom: 22px;
             }
 
             .lightbox-prev {
-                left: 25px;
+                left: 22px;
             }
 
             .lightbox-next {
-                right: 25px;
+                right: 22px;
             }
 
             .lightbox-caption {
-                bottom: 38px;
-                max-width: 52%;
-                font-size: 10px;
-                white-space: nowrap;
+                bottom: 35px;
+                max-width: 50%;
                 overflow: hidden;
                 text-overflow: ellipsis;
+                white-space: nowrap;
+                font-size: 10px;
             }
         }
     </style>
@@ -1218,14 +1375,14 @@
 
 <body>
 
-<div class="cube-decor cube-1"></div>
-<div class="cube-decor cube-2"></div>
-<div class="cube-decor cube-3"></div>
-<div class="cube-decor cube-4"></div>
+<div class="cube cube-1"></div>
+<div class="cube cube-2"></div>
+<div class="cube cube-3"></div>
+<div class="cube cube-4"></div>
 
 <header class="header" id="header">
     <div class="container header-inner">
-        <a href="#top" class="brand">
+        <a class="brand" href="#top">
             <span class="brand-cube">
                 <span></span><span></span><span></span>
                 <span></span><span></span><span></span>
@@ -1241,15 +1398,19 @@
             <a href="#about">Обо мне</a>
         </nav>
 
-        <a href="#contacts" class="header-button">Обсудить проект</a>
+        <a class="header-button" href="#contacts">
+            Обсудить проект
+        </a>
     </div>
 </header>
 
 <main id="top">
 
-    <!-- ПЕРВЫЙ ЭКРАН -->
+    <!-- Первый экран -->
+
     <section class="hero">
         <div class="container hero-grid">
+
             <div class="reveal">
                 <div class="hero-kicker">
                     <i></i>
@@ -1268,11 +1429,11 @@
                 </p>
 
                 <div class="hero-actions">
-                    <a href="#contacts" class="btn">
+                    <a class="btn" href="#contacts">
                         Обсудить проект ↗
                     </a>
 
-                    <a href="#portfolio" class="btn btn-outline">
+                    <a class="btn btn-outline" href="#portfolio">
                         Смотреть работы
                     </a>
                 </div>
@@ -1280,15 +1441,19 @@
 
             <div class="hero-visual reveal">
                 <div class="hero-photo">
-                    <img src="images/kartini/kartina4.webp" alt="Авторская картина из кубиков Рубика для компании">
+                    <img
+                        src="images/kartini/kartina4.webp"
+                        alt="Авторская картина из кубиков Рубика"
+                    >
                 </div>
 
                 <div class="hero-tag">
                     <strong>26</strong>
-                    авторских работ<br>
-                    в портфолио
+                    картин и мозаик<br>
+                    в авторском портфолио
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -1300,10 +1465,14 @@
         <span></span>
     </div>
 
-    <!-- КЕЙС ДОДО -->
+    <!-- Кейс -->
+
     <section class="section case-section" id="works">
         <div class="container">
-            <div class="section-label reveal">Реализованный кейс / 001</div>
+
+            <div class="section-label reveal">
+                Реализованный кейс / 001
+            </div>
 
             <h2 class="section-title reveal">
                 Картина для <em>«Додо»</em>
@@ -1316,21 +1485,29 @@
             </p>
 
             <div class="case-grid">
-                <div class="case-image reveal">
-                    <img src="images/kartini/kartina4.webp" alt="Картина из кубиков Рубика для Додо">
-                    <div class="case-caption">Авторская работа · «Додо»</div>
+
+                <div class="case-image reveal" data-lightbox-index="3">
+                    <img
+                        src="images/kartini/kartina4.webp"
+                        alt="Картина из кубиков Рубика для Додо"
+                    >
+                    <div class="case-caption">
+                        Авторская работа · «Додо»
+                    </div>
                 </div>
 
                 <div class="case-info reveal">
-                    <div class="section-label">Что будет создано</div>
+                    <div class="section-label">
+                        Что будет создано
+                    </div>
 
                     <h3>
                         Ваш бренд получит собственный визуальный образ.
                     </h3>
 
                     <p>
-                        Создам картину по логотипу, фотографии, фирменному
-                        персонажу или индивидуальному эскизу.
+                        Создам картину по логотипу, фотографии,
+                        фирменному персонажу или индивидуальному эскизу.
                     </p>
 
                     <p>
@@ -1361,18 +1538,23 @@
                         </div>
                     </div>
 
-                    <a href="#contacts" class="btn btn-yellow">
+                    <a class="btn btn-yellow" href="#contacts">
                         Заказать картину
                     </a>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- ФОРМАТЫ -->
+    <!-- Форматы -->
+
     <section class="section" id="services">
         <div class="container">
-            <div class="section-label reveal">Направления работы</div>
+
+            <div class="section-label reveal">
+                Направления работы
+            </div>
 
             <h2 class="section-title reveal">
                 Создам решение<br>
@@ -1385,12 +1567,13 @@
             </p>
 
             <div class="services">
+
                 <article class="service reveal">
                     <div class="service-icon">▦</div>
                     <h3>Картины для компаний</h3>
                     <p>
-                        Соберу логотип, фирменный образ, портрет или
-                        тематическую композицию из кубиков Рубика.
+                        Соберу логотип, фирменный образ, портрет
+                        или тематическую композицию из кубиков Рубика.
                     </p>
                 </article>
 
@@ -1411,16 +1594,21 @@
                         гостей фестиваля, детей или семейной аудитории.
                     </p>
                 </article>
+
             </div>
         </div>
     </section>
 
-    <!-- ПОРТФОЛИО -->
+    <!-- Портфолио -->
+
     <section class="section portfolio-section" id="portfolio">
         <div class="container">
+
             <div class="portfolio-header">
                 <div>
-                    <div class="section-label reveal">Авторское портфолио</div>
+                    <div class="section-label reveal">
+                        Авторское портфолио
+                    </div>
 
                     <h2 class="section-title reveal">
                         26 работ.<br>
@@ -1429,21 +1617,37 @@
                 </div>
 
                 <div class="filters reveal">
-                    <button class="filter active" data-filter="all">Все</button>
-                    <button class="filter" data-filter="business">Компании</button>
-                    <button class="filter" data-filter="portraits">Портреты</button>
-                    <button class="filter" data-filter="events">События</button>
+                    <button class="filter active" data-filter="all">
+                        Все
+                    </button>
+
+                    <button class="filter" data-filter="business">
+                        Компании
+                    </button>
+
+                    <button class="filter" data-filter="portraits">
+                        Портреты
+                    </button>
+
+                    <button class="filter" data-filter="events">
+                        События
+                    </button>
                 </div>
             </div>
 
             <div class="portfolio-grid" id="portfolioGrid"></div>
+
         </div>
     </section>
 
-    <!-- ПРОЦЕСС -->
+    <!-- Процесс -->
+
     <section class="section">
         <div class="container">
-            <div class="section-label reveal">Как будет проходить работа</div>
+
+            <div class="section-label reveal">
+                Как будет проходить работа
+            </div>
 
             <h2 class="section-title reveal">
                 От идеи<br>
@@ -1451,6 +1655,7 @@
             </h2>
 
             <div class="process">
+
                 <article class="process-item reveal">
                     <div class="process-number">01 / ОБСУЖДЕНИЕ</div>
                     <h3>Обсудим задачу</h3>
@@ -1486,19 +1691,28 @@
                         подарком или центром внимания на событии.
                     </p>
                 </article>
+
             </div>
         </div>
     </section>
 
-    <!-- ОБО МНЕ -->
+    <!-- Обо мне -->
+
     <section class="section about-section" id="about">
         <div class="container about-grid">
+
             <div class="about-image reveal">
-                <img src="images/kartini/kartina10.webp" alt="Большая мозаика из кубиков Рубика">
+                <img
+                    src="images/kartini/kartina10.webp"
+                    alt="Большая мозаика из кубиков Рубика"
+                >
             </div>
 
             <div class="about-text">
-                <div class="section-label reveal">Опыт и авторский подход</div>
+
+                <div class="section-label reveal">
+                    Опыт и авторский подход
+                </div>
 
                 <h2 class="section-title reveal">
                     Кубик Рубика<br>
@@ -1544,15 +1758,21 @@
                         <span>библиотечных практик России</span>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- CTA -->
+    <!-- Контакты -->
+
     <section class="section" id="contacts">
         <div class="container">
+
             <div class="cta reveal">
-                <div class="section-label">Обсудим будущий проект</div>
+
+                <div class="section-label">
+                    Обсудим будущий проект
+                </div>
 
                 <h2>
                     Соберём идею<br>
@@ -1565,7 +1785,7 @@
                     мастер-класса или интерактивного проекта.
                 </p>
 
-                <a href="mailto:cherniakov-egor@yandex.ru" class="btn btn-yellow">
+                <a class="btn btn-yellow" href="mailto:cherniakov-egor@yandex.ru">
                     Написать по проекту ↗
                 </a>
 
@@ -1582,6 +1802,7 @@
                         ВКонтакте
                     </a>
                 </div>
+
             </div>
         </div>
     </section>
@@ -1594,11 +1815,14 @@
     </div>
 </footer>
 
-<!-- ПРОСМОТР КАРТИН -->
+<!-- Лайтбокс -->
+
 <div class="lightbox" id="lightbox">
     <button class="lightbox-close" id="lightboxClose">×</button>
     <button class="lightbox-prev" id="lightboxPrev">‹</button>
+
     <img class="lightbox-image" id="lightboxImage" src="" alt="">
+
     <button class="lightbox-next" id="lightboxNext">›</button>
     <div class="lightbox-caption" id="lightboxCaption"></div>
 </div>
@@ -1649,7 +1873,11 @@
             item.className = "artwork reveal";
 
             item.innerHTML = `
-                <img src="images/kartini/${file}" alt="${title}" loading="lazy">
+                <img
+                    src="images/kartini/${file}"
+                    alt="${title}"
+                    loading="lazy"
+                >
 
                 <div class="artwork-info">
                     <strong>${title}</strong>
@@ -1682,7 +1910,7 @@
         });
     });
 
-    /* ===== LIGHTBOX ===== */
+    /* Лайтбокс */
 
     const lightbox = document.getElementById("lightbox");
     const lightboxImage = document.getElementById("lightboxImage");
@@ -1722,6 +1950,10 @@
         openLightbox(currentIndex);
     }
 
+    document.querySelector(".case-image").addEventListener("click", () => {
+        openLightbox(3);
+    });
+
     document.getElementById("lightboxClose")
         .addEventListener("click", closeLightbox);
 
@@ -1738,39 +1970,24 @@
     });
 
     document.addEventListener("keydown", event => {
-        if (!lightbox.classList.contains("active")) return;
+        if (!lightbox.classList.contains("active")) {
+            return;
+        }
 
-        if (event.key === "Escape") closeLightbox();
-        if (event.key === "ArrowLeft") changeArtwork(-1);
-        if (event.key === "ArrowRight") changeArtwork(1);
+        if (event.key === "Escape") {
+            closeLightbox();
+        }
+
+        if (event.key === "ArrowLeft") {
+            changeArtwork(-1);
+        }
+
+        if (event.key === "ArrowRight") {
+            changeArtwork(1);
+        }
     });
 
-    /* ===== HEADER ===== */
-
-    const header = document.getElementById("header");
-
-    window.addEventListener("scroll", () => {
-        header.classList.toggle("scrolled", window.scrollY > 30);
-    });
-
-    /* ===== АНИМАЦИЯ ПОЯВЛЕНИЯ ===== */
-
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: .1
-    });
-
-    document.querySelectorAll(".reveal").forEach(element => {
-        observer.observe(element);
-    });
-
-    /* ===== СВАЙПЫ НА МОБИЛЬНОМ ===== */
+    /* Свайпы на телефоне */
 
     let touchStartX = 0;
     let touchEndX = 0;
@@ -1790,6 +2007,33 @@
             changeArtwork(-1);
         }
     }, { passive: true });
+
+    /* Изменение шапки при прокрутке */
+
+    const header = document.getElementById("header");
+
+    window.addEventListener("scroll", () => {
+        header.classList.toggle("scrolled", window.scrollY > 30);
+    });
+
+    /* Появление блоков */
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: .1
+    });
+
+    document.querySelectorAll(".reveal").forEach(element => {
+        observer.observe(element);
+    });
+
+    /* Текущий год */
 
     document.getElementById("year").textContent = new Date().getFullYear();
 </script>
