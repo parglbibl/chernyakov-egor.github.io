@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Картины из кубиков Рубика для компаний — Егор Черняков</title>
+    <title>Егор Черняков — картины из кубиков Рубика для компаний</title>
 
-    <meta name="description" content="Создание картин, логотипов и мозаик из кубиков Рубика для компаний, ресторанов, офисов, фестивалей и общественных пространств.">
+    <meta name="description" content="Егор Черняков — автор картин и мозаик из кубиков Рубика, спидкубер и педагог. Создание логотипов, портретов и арт-объектов для компаний, ресторанов, офисов и мероприятий.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,24 +14,25 @@
 
     <style>
         :root {
-            --ink: #172033;
-            --ink-light: #354158;
-            --muted: #748095;
+            --ink: #1c2638;
+            --ink-soft: #3d4b61;
+            --muted: #7b8493;
 
             --cream: #f7f4ee;
             --white: #ffffff;
-            --soft: #eef2f8;
-            --line: #dfe5ee;
+            --soft: #eef1f5;
+            --line: #dfe3e9;
 
-            --blue: #315bea;
-            --blue-dark: #2144b8;
-            --yellow: #f3c84b;
-            --coral: #e96a5d;
-            --mint: #66b48c;
-            --violet: #8068d8;
+            --primary: #526b9e;
+            --primary-dark: #3e547f;
+
+            --yellow: #e9be45;
+            --coral: #d9786d;
+            --mint: #73a98d;
+            --violet: #887bae;
 
             --shadow-soft: 0 8px 25px rgba(35, 45, 70, .07);
-            --shadow: 0 22px 65px rgba(35, 45, 70, .14);
+            --shadow: 0 22px 65px rgba(35, 45, 70, .13);
 
             --radius: 24px;
             --container: 1180px;
@@ -51,8 +52,8 @@
             min-width: 320px;
             overflow-x: hidden;
             background:
-                radial-gradient(circle at 95% 0%, rgba(243, 200, 75, .18), transparent 25rem),
-                radial-gradient(circle at 0% 40%, rgba(49, 91, 234, .09), transparent 28rem),
+                radial-gradient(circle at 95% 0%, rgba(233,190,69,.18), transparent 25rem),
+                radial-gradient(circle at 0% 40%, rgba(82,107,158,.10), transparent 28rem),
                 var(--cream);
             color: var(--ink);
             font-family: Inter, Arial, sans-serif;
@@ -100,7 +101,7 @@
         .cube-1 {
             top: 18%;
             left: 5%;
-            background: var(--blue);
+            background: var(--primary);
         }
 
         .cube-2 {
@@ -121,7 +122,7 @@
             background: var(--mint);
         }
 
-        /* ===== ШАПКА ===== */
+        /* ===== HEADER ===== */
 
         .header {
             position: fixed;
@@ -130,16 +131,16 @@
             right: 0;
             z-index: 50;
             padding: 18px 0;
-            background: rgba(247, 244, 238, .84);
+            background: rgba(247,244,238,.84);
             border-bottom: 1px solid transparent;
             backdrop-filter: blur(18px);
             transition: .3s ease;
         }
 
         .header.scrolled {
-            background: rgba(255, 255, 255, .95);
+            background: rgba(255,255,255,.95);
             border-color: var(--line);
-            box-shadow: 0 5px 25px rgba(35, 45, 70, .06);
+            box-shadow: 0 5px 25px rgba(35,45,70,.06);
         }
 
         .header-inner {
@@ -172,7 +173,7 @@
             width: 7px;
             height: 7px;
             border-radius: 2px;
-            background: var(--blue);
+            background: var(--primary);
         }
 
         .brand-cube span:nth-child(2),
@@ -203,24 +204,24 @@
         }
 
         .nav a:hover {
-            color: var(--blue);
+            color: var(--primary-dark);
         }
 
         .header-button {
             padding: 10px 17px;
             border: 0;
             border-radius: 100px;
-            background: var(--blue);
+            background: var(--primary);
             color: white;
             font-size: 12px;
             font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 7px 20px rgba(49, 91, 234, .18);
+            box-shadow: 0 7px 20px rgba(82,107,158,.2);
             transition: .25s ease;
         }
 
         .header-button:hover {
-            background: var(--blue-dark);
+            background: var(--primary-dark);
             transform: translateY(-2px);
         }
 
@@ -236,7 +237,7 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            color: var(--blue);
+            color: var(--primary);
             font-family: "DM Mono", monospace;
             font-size: 11px;
             letter-spacing: .1em;
@@ -266,7 +267,7 @@
         }
 
         .section-title em {
-            color: var(--blue);
+            color: var(--primary);
             font-style: normal;
         }
 
@@ -284,7 +285,7 @@
             transform: translateY(25px);
             transition:
                 opacity .75s ease,
-                transform .75s cubic-bezier(.2, .8, .2, 1);
+                transform .75s cubic-bezier(.2,.8,.2,1);
         }
 
         .reveal.visible {
@@ -301,28 +302,29 @@
             padding: 0 25px;
             border: 0;
             border-radius: 15px;
-            background: var(--blue);
+            background: var(--primary);
             color: white;
             font-size: 14px;
             font-weight: 800;
             cursor: pointer;
-            box-shadow: 0 9px 22px rgba(49, 91, 234, .18);
+            box-shadow: 0 9px 22px rgba(82,107,158,.2);
             transition: .3s ease;
         }
 
         .btn:hover {
-            background: var(--blue-dark);
+            background: var(--primary-dark);
             transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(49, 91, 234, .25);
+            box-shadow: 0 15px 30px rgba(82,107,158,.25);
         }
 
         .btn-yellow {
             background: var(--yellow);
             color: var(--ink);
+            box-shadow: 0 9px 22px rgba(233,190,69,.22);
         }
 
         .btn-yellow:hover {
-            background: #e8b62d;
+            background: #dcae2f;
             color: var(--ink);
         }
 
@@ -335,18 +337,18 @@
 
         .btn-outline:hover {
             background: white;
-            color: var(--blue);
-            border-color: var(--blue);
+            color: var(--primary-dark);
+            border-color: var(--primary);
             box-shadow: none;
         }
 
         /* ===== HERO ===== */
 
         .hero {
-            min-height: 910px;
+            min-height: 930px;
             display: flex;
             align-items: center;
-            padding: 145px 0 105px;
+            padding: 150px 0 105px;
         }
 
         .hero-content {
@@ -358,8 +360,8 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            margin-bottom: 27px;
-            color: var(--blue);
+            margin-bottom: 25px;
+            color: var(--primary);
             font-family: "DM Mono", monospace;
             font-size: 12px;
             letter-spacing: .08em;
@@ -371,26 +373,41 @@
             height: 9px;
             border-radius: 50%;
             background: var(--coral);
-            box-shadow: 0 0 0 6px rgba(233, 106, 93, .14);
+            box-shadow: 0 0 0 6px rgba(217,120,109,.14);
+        }
+
+        .hero-name {
+            margin-bottom: 12px;
+            color: var(--ink);
+            font-size: clamp(22px, 3vw, 34px);
+            font-weight: 800;
+            letter-spacing: -.04em;
+        }
+
+        .hero-role {
+            margin-bottom: 27px;
+            color: var(--primary);
+            font-size: clamp(15px, 2vw, 20px);
+            font-weight: 700;
         }
 
         .hero h1 {
-            max-width: 950px;
+            max-width: 900px;
             margin: 0 auto;
             color: var(--ink);
-            font-size: clamp(52px, 9vw, 112px);
+            font-size: clamp(48px, 8vw, 104px);
             font-weight: 800;
-            line-height: .9;
+            line-height: .91;
             letter-spacing: -.09em;
             text-align: center;
         }
 
         .hero h1 span {
-            color: var(--blue);
+            color: var(--primary);
         }
 
         .hero-text {
-            max-width: 680px;
+            max-width: 700px;
             margin: 30px auto;
             color: var(--muted);
             font-size: 19px;
@@ -472,7 +489,7 @@
             flex: 1;
         }
 
-        .color-strip span:nth-child(1) { background: var(--blue); }
+        .color-strip span:nth-child(1) { background: var(--primary); }
         .color-strip span:nth-child(2) { background: var(--yellow); }
         .color-strip span:nth-child(3) { background: var(--coral); }
         .color-strip span:nth-child(4) { background: var(--mint); }
@@ -575,7 +592,7 @@
             font-size: 22px;
         }
 
-        /* ===== УСЛУГИ ===== */
+        /* ===== ФОРМАТЫ ===== */
 
         .services {
             display: grid;
@@ -601,7 +618,7 @@
             box-shadow: var(--shadow);
         }
 
-        .service:nth-child(1) { border-top-color: var(--blue); }
+        .service:nth-child(1) { border-top-color: var(--primary); }
         .service:nth-child(2) { border-top-color: var(--yellow); }
         .service:nth-child(3) { border-top-color: var(--coral); }
 
@@ -613,13 +630,13 @@
             margin: 0 auto 30px;
             border-radius: 16px;
             background: #edf3ff;
-            color: var(--blue);
+            color: var(--primary);
             font-size: 25px;
         }
 
         .service:nth-child(2) .service-icon {
             background: #fff5ce;
-            color: #b88600;
+            color: #ad8300;
         }
 
         .service:nth-child(3) .service-icon {
@@ -681,7 +698,7 @@
         .field label {
             display: block;
             margin-bottom: 7px;
-            color: var(--ink-light);
+            color: var(--ink-soft);
             font-size: 12px;
             font-weight: 700;
         }
@@ -700,8 +717,8 @@
 
         .field input:focus,
         .field select:focus {
-            border-color: var(--blue);
-            box-shadow: 0 0 0 4px rgba(49,91,234,.1);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(82,107,158,.12);
         }
 
         .calculator-result {
@@ -709,14 +726,14 @@
             padding: 22px;
             border-radius: 17px;
             background: var(--soft);
-            color: var(--ink-light);
+            color: var(--ink-soft);
             font-size: 14px;
         }
 
         .calculator-result strong {
             display: block;
             margin-bottom: 5px;
-            color: var(--blue);
+            color: var(--primary);
             font-size: 28px;
         }
 
@@ -778,8 +795,8 @@
 
         .filter:hover,
         .filter.active {
-            border-color: var(--blue);
-            background: var(--blue);
+            border-color: var(--primary);
+            background: var(--primary);
             color: white;
         }
 
@@ -855,7 +872,7 @@
         }
 
         .artwork-info span {
-            color: var(--blue);
+            color: var(--primary);
             font-family: "DM Mono", monospace;
             font-size: 10px;
         }
@@ -881,7 +898,7 @@
         }
 
         .archive-box span {
-            color: var(--blue);
+            color: var(--primary);
             font-weight: 700;
         }
 
@@ -904,14 +921,14 @@
             text-align: center;
         }
 
-        .process-item:nth-child(1) { border-top: 5px solid var(--blue); }
+        .process-item:nth-child(1) { border-top: 5px solid var(--primary); }
         .process-item:nth-child(2) { border-top: 5px solid var(--yellow); }
         .process-item:nth-child(3) { border-top: 5px solid var(--coral); }
         .process-item:nth-child(4) { border-top: 5px solid var(--mint); }
 
         .process-number {
             margin-bottom: 32px;
-            color: var(--blue);
+            color: var(--primary);
             font-family: "DM Mono", monospace;
             font-size: 13px;
         }
@@ -983,7 +1000,7 @@
 
         .number strong {
             display: block;
-            color: var(--blue);
+            color: var(--primary);
             font-size: 31px;
             letter-spacing: -.06em;
         }
@@ -1026,7 +1043,7 @@
         }
 
         .faq-question span {
-            color: var(--blue);
+            color: var(--primary);
             font-size: 22px;
             transition: .25s ease;
         }
@@ -1054,7 +1071,7 @@
             overflow: hidden;
             padding: 105px 35px;
             border-radius: 32px;
-            background: linear-gradient(135deg, #315bea, #596fe1 55%, #8068d8);
+            background: linear-gradient(135deg, #526b9e, #667fae 55%, #887bae);
             color: white;
             text-align: center;
             box-shadow: var(--shadow);
@@ -1114,7 +1131,6 @@
             margin: 0 auto 30px;
             color: rgba(255,255,255,.84);
             font-size: 18px;
-            text-align: center;
         }
 
         .contact-links {
@@ -1146,7 +1162,7 @@
             font-size: 12px;
         }
 
-        /* ===== МОДАЛЬНОЕ ОКНО СВЯЗИ ===== */
+        /* ===== ВЫБОР СПОСОБА СВЯЗИ ===== */
 
         .contact-modal {
             position: fixed;
@@ -1156,7 +1172,7 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
-            background: rgba(23,32,51,.6);
+            background: rgba(23,32,51,.58);
             backdrop-filter: blur(8px);
         }
 
@@ -1219,8 +1235,8 @@
         }
 
         .contact-option:hover {
-            border-color: var(--blue);
-            background: #f4f7ff;
+            border-color: var(--primary);
+            background: #f4f6fb;
             transform: translateY(-2px);
         }
 
@@ -1232,8 +1248,9 @@
             flex: 0 0 auto;
             border-radius: 12px;
             background: #edf3ff;
-            color: var(--blue);
-            font-size: 18px;
+            color: var(--primary);
+            font-size: 17px;
+            font-weight: 700;
         }
 
         .contact-option:nth-child(2) .contact-option-icon {
@@ -1243,7 +1260,7 @@
 
         .contact-option:nth-child(3) .contact-option-icon {
             background: #fff5ce;
-            color: #ae8500;
+            color: #ad8300;
         }
 
         .contact-option:nth-child(4) .contact-option-icon {
@@ -1273,12 +1290,6 @@
             margin-top: 15px;
             color: var(--mint);
             font-size: 12px;
-        }
-
-        /* ===== МОБИЛЬНАЯ КНОПКА ===== */
-
-        .mobile-contact {
-            display: none;
         }
 
         /* ===== LIGHTBOX ===== */
@@ -1364,7 +1375,11 @@
             transform: translateX(-50%);
         }
 
-        /* ===== АДАПТИВ ===== */
+        /* ===== МОБИЛЬНАЯ ВЕРСИЯ ===== */
+
+        .mobile-contact {
+            display: none;
+        }
 
         @media (max-width: 1050px) {
             .hero {
@@ -1398,6 +1413,10 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
+            .calculator-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
             .portfolio-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }
@@ -1415,10 +1434,6 @@
             .artwork:nth-child(10) {
                 grid-column: span 2;
                 height: 350px;
-            }
-
-            .calculator-grid {
-                grid-template-columns: repeat(3, 1fr);
             }
         }
 
@@ -1455,6 +1470,14 @@
 
             .hero {
                 padding: 112px 0 85px;
+            }
+
+            .hero-name {
+                font-size: 23px;
+            }
+
+            .hero-role {
+                font-size: 15px;
             }
 
             .hero h1 {
@@ -1555,10 +1578,6 @@
                 font-size: 27px;
             }
 
-            .calculator-grid {
-                text-align: left;
-            }
-
             .portfolio-grid {
                 gap: 9px;
             }
@@ -1568,6 +1587,7 @@
             .artwork:nth-child(10) {
                 height: 220px;
                 border-width: 3px;
+                border-radius: 15px;
             }
 
             .artwork:nth-child(1),
@@ -1642,11 +1662,11 @@
                 justify-content: center;
                 min-height: 52px;
                 border-radius: 16px;
-                background: var(--blue);
+                background: var(--primary);
                 color: white;
                 font-size: 14px;
                 font-weight: 800;
-                box-shadow: 0 10px 30px rgba(49,91,234,.3);
+                box-shadow: 0 10px 30px rgba(82,107,158,.3);
             }
 
             .lightbox-prev,
@@ -1724,13 +1744,21 @@
                     Авторские картины для компаний
                 </div>
 
+                <div class="hero-name">
+                    Егор Черняков
+                </div>
+
+                <div class="hero-role">
+                    Автор картин из кубиков Рубика · спидкубер · педагог
+                </div>
+
                 <h1>
-                    Соберу Вашу<br>
-                    идею в <span>картину.</span>
+                    Вашу идею<br>
+                    соберу в <span>картину.</span>
                 </h1>
 
                 <p class="hero-text">
-                    Я создаю логотипы, портреты и фирменные мозаики
+                    Создаю логотипы, портреты и фирменные мозаики
                     из кубиков Рубика для ресторанов, офисов,
                     фестивалей и общественных пространств.
                 </p>
@@ -1751,7 +1779,7 @@
                 <div class="hero-photo">
                     <img
                         src="images/kartini/kartina4.webp"
-                        alt="Авторская картина из кубиков Рубика"
+                        alt="Авторская картина из кубиков Рубика для Додо"
                     >
                 </div>
 
@@ -1858,7 +1886,7 @@
         </div>
     </section>
 
-    <!-- ФОРМАТЫ -->
+    <!-- УСЛУГИ -->
 
     <section class="section" id="services">
         <div class="container">
@@ -1922,7 +1950,7 @@
         </div>
     </section>
 
-    <!-- РАСЧЁТ -->
+    <!-- РАСЧЁТ КУБИКОВ -->
 
     <section class="section calculator-section" id="calculator">
         <div class="container">
@@ -1938,8 +1966,8 @@
 
             <p class="section-description reveal">
                 Один кубик имеет размер 56 × 56 мм.
-                Чем больше кубиков будет использовано,
-                тем выше получится детализация картины.
+                Чем больше кубиков используется,
+                тем выше детализация картины.
             </p>
 
             <div class="calculator-box reveal">
@@ -1949,9 +1977,9 @@
                 </h3>
 
                 <p>
-                    Для небольшого простого логотипа может подойти
-                    компактный формат. Для портрета или сложной иллюстрации
-                    потребуется больше кубиков.
+                    Формат 15 × 20 кубиков, то есть 300 кубиков,
+                    подойдёт для большинства портретов и обычных картин.
+                    Для небольшого логотипа может быть достаточно 120 кубиков.
                 </p>
 
                 <div class="calculator-grid">
@@ -1999,7 +2027,7 @@
                             </option>
 
                             <option value="large">
-                                Сложная большая мозаика
+                                Большая сложная мозаика
                             </option>
                         </select>
                     </div>
@@ -2007,7 +2035,9 @@
                 </div>
 
                 <div class="calculator-result">
-                    <strong id="cubeCount">300 кубиков</strong>
+                    <strong id="cubeCount">
+                        300 кубиков
+                    </strong>
 
                     <span id="pictureSize">
                         Размер полотна: 84 × 112 см
@@ -2020,11 +2050,11 @@
 
                 <p class="calculator-note">
                     Размер указан без учёта рамки. Точный расчёт будет зависеть
-                    от исходного изображения, количества цветов и желаемой детализации.
+                    от исходного изображения, количества цветов и уровня детализации.
                 </p>
 
                 <button class="btn open-contact" style="margin-top: 25px;">
-                    Получить консультацию
+                    Обсудить размер картины
                 </button>
 
             </div>
@@ -2047,8 +2077,8 @@
                 </h2>
 
                 <p class="section-description reveal">
-                    Здесь представлена часть портфолио — картины,
-                    фотографии которых сейчас доступны для просмотра.
+                    Здесь представлена часть портфолио —
+                    картины, фотографии которых сейчас доступны для просмотра.
                 </p>
 
                 <div class="portfolio-note reveal">
@@ -2376,7 +2406,7 @@
     Выбрать способ связи
 </a>
 
-<!-- МОДАЛЬНОЕ ОКНО ВЫБОРА СВЯЗИ -->
+<!-- МОДАЛЬНОЕ ОКНО СВЯЗИ -->
 
 <div class="contact-modal" id="contactModal">
     <div class="contact-modal-box">
@@ -2412,6 +2442,7 @@
                 class="contact-option"
                 href="https://vk.com/che_egor"
                 target="_blank"
+                rel="noopener noreferrer"
             >
                 <span class="contact-option-icon">ВК</span>
 
@@ -2425,6 +2456,7 @@
                 class="contact-option"
                 href="https://t.me/espeedcuber"
                 target="_blank"
+                rel="noopener noreferrer"
             >
                 <span class="contact-option-icon">➤</span>
 
@@ -2438,6 +2470,7 @@
                 class="contact-option"
                 href="https://max.ru/u/f9LHodD0cOKYeNDN_fK5W_vjtNJ2-1oHZKi_bjzNkFE8CbE98yosq2eLEsA"
                 target="_blank"
+                rel="noopener noreferrer"
             >
                 <span class="contact-option-icon">М</span>
 
@@ -2596,6 +2629,7 @@
     const widthCubes = document.getElementById("widthCubes");
     const heightCubes = document.getElementById("heightCubes");
     const detailLevel = document.getElementById("detailLevel");
+
     const cubeCount = document.getElementById("cubeCount");
     const pictureSize = document.getElementById("pictureSize");
     const detailText = document.getElementById("detailText");
@@ -2647,7 +2681,7 @@
         });
     });
 
-    /* ===== МОДАЛЬНОЕ ОКНО СВЯЗИ ===== */
+    /* ===== ВЫБОР СПОСОБА СВЯЗИ ===== */
 
     const contactModal = document.getElementById("contactModal");
     const modalClose = document.getElementById("modalClose");
@@ -2692,7 +2726,7 @@
             copyMessage.textContent = "Контакты скопированы";
         } catch {
             copyMessage.textContent =
-                "Не удалось скопировать автоматически";
+                "Скопируйте контакты вручную";
         }
 
         setTimeout(() => {
@@ -2806,7 +2840,7 @@
         header.classList.toggle("scrolled", window.scrollY > 30);
     });
 
-    /* ===== АНИМАЦИЯ ПОЯВЛЕНИЯ ===== */
+    /* ===== АНИМАЦИЯ ===== */
 
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
